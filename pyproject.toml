@@ -1,8 +1,8 @@
 [project]
-name = "example_nodes_template"
+name = "griptape_nodes_library_fal"
 version = "0.1.0"
-description = "Template for Users to create Custom Libraries and Nodes"
-authors = [{ name = "Your Name", email = "you@example.com" }]
+description = "Griptape Nodes library for fal.ai models"
+authors = [{ name = "Griptape, Inc", email = "hello@griptape.ai" }]
 readme = "README.md"
 requires-python = "~=3.12.0"
 dependencies = ["griptape-nodes"]
