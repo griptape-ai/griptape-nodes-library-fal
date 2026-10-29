@@ -108,7 +108,7 @@ fix: ## Fix project.
 	@uv run ruff check --fix --unsafe-fixes
 
 .PHONY: check
-check: check/format check/lint check/types check/json check/changelog ## Run all checks.
+check: check/format check/lint check/types check/json check/changelog check/tests ## Run all checks.
 
 .PHONY: check/format
 check/format:
@@ -133,6 +133,10 @@ check/json: ## Validate JSON files.
 .PHONY: check/changelog
 check/changelog: ## Check CHANGELOG.md and the changelog.d entries follow Keep a Changelog.
 	@uv run --no-project python scripts/changelog.py check
+
+.PHONY: check/tests
+check/tests: ## Run unit tests.
+	@uv run pytest tests/unit
 
 .PHONY: changelog
 changelog: ## Print [Unreleased] as the next version will show it, changelog.d entries folded in.

@@ -17,7 +17,7 @@ from scripts.changelog import (
     roll,
 )
 
-REPO = "https://github.com/griptape-ai/griptape-nodes-library-standard"
+REPO = "https://github.com/griptape-ai/griptape-nodes-library-fal"
 
 PREAMBLE = """# Changelog
 
