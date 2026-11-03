@@ -5,7 +5,6 @@
    "endpoint_id": "fal-ai/ace-step",
    "display_name": "ACE Step",
    "description": "Generate music with lyrics from text using ACE-Step",
-   "status_base": "fal-ai/ace-step",
    "input": {
     "type": "object",
     "properties": {
@@ -146,102 +145,12 @@
      "lyric_guidance_scale"
     ],
     "title": "ACEStepTextToAudioRequest"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "lyrics": {
-      "description": "The lyrics used in the generation process.",
-      "type": "string",
-      "title": "Lyrics"
-     },
-     "tags": {
-      "description": "The genre tags used in the generation process.",
-      "type": "string",
-      "title": "Tags"
-     },
-     "audio": {
-      "type": "object",
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File"
-     },
-     "seed": {
-      "description": "The random seed used for the generation process.",
-      "type": "integer",
-      "title": "Seed"
-     }
-    },
-    "required": [
-     "audio",
-     "seed",
-     "tags",
-     "lyrics"
-    ],
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "tags",
-     "lyrics"
-    ],
-    "title": "ACEStepResponse"
    }
   },
   "fal-ai/ace-step/prompt-to-audio": {
    "endpoint_id": "fal-ai/ace-step/prompt-to-audio",
    "display_name": "ACE Step Prompt To Audio",
    "description": "Generate music from a simple prompt using ACE-Step",
-   "status_base": "fal-ai/ace-step/prompt-to-audio",
    "input": {
     "type": "object",
     "properties": {
@@ -382,102 +291,12 @@
      "lyric_guidance_scale"
     ],
     "title": "ACEStepPromptToAudioRequest"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "lyrics": {
-      "description": "The lyrics used in the generation process.",
-      "type": "string",
-      "title": "Lyrics"
-     },
-     "tags": {
-      "description": "The genre tags used in the generation process.",
-      "type": "string",
-      "title": "Tags"
-     },
-     "audio": {
-      "type": "object",
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File"
-     },
-     "seed": {
-      "description": "The random seed used for the generation process.",
-      "type": "integer",
-      "title": "Seed"
-     }
-    },
-    "required": [
-     "audio",
-     "seed",
-     "tags",
-     "lyrics"
-    ],
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "tags",
-     "lyrics"
-    ],
-    "title": "ACEStepResponse"
    }
   },
   "fal-ai/csm-1b": {
    "endpoint_id": "fal-ai/csm-1b",
    "display_name": "CSM-1B",
    "description": "CSM (Conversational Speech Model) is a speech generation model from Sesame that generates RVQ audio codes from text and audio inputs.",
-   "status_base": "fal-ai/csm-1b",
    "input": {
     "x-fal-order-properties": [
      "scene",
@@ -550,91 +369,12 @@
     ],
     "title": "Input",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "title": "Audio",
-      "anyOf": [
-       {
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size"
-        ],
-        "properties": {
-         "content_type": {
-          "title": "Content Type",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "description": "The mime type of the file."
-         },
-         "file_size": {
-          "title": "File Size",
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "description": "The size of the file in bytes."
-         },
-         "file_name": {
-          "title": "File Name",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "description": "The name of the file. It will be auto-generated if not provided."
-         },
-         "url": {
-          "title": "Url",
-          "type": "string",
-          "description": "The URL where the file can be downloaded from."
-         }
-        },
-        "required": [
-         "url"
-        ],
-        "title": "File",
-        "type": "object"
-       },
-       {
-        "format": "binary",
-        "type": "string"
-       }
-      ],
-      "description": "The generated audio."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "Output",
-    "type": "object"
    }
   },
   "fal-ai/diffrhythm": {
    "endpoint_id": "fal-ai/diffrhythm",
    "display_name": "DiffRhythm: Lyrics to Song",
    "description": "DiffRhythm is a blazing fast model for transforming lyrics into full songs. It boasts the capability to generate full songs in less than 30 seconds.",
-   "status_base": "fal-ai/diffrhythm",
    "input": {
     "properties": {
      "num_inference_steps": {
@@ -705,81 +445,12 @@
     "required": [
      "lyrics"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "Output",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/elevenlabs/text-to-dialogue/eleven-v3": {
    "endpoint_id": "fal-ai/elevenlabs/text-to-dialogue/eleven-v3",
    "display_name": "Elevenlabs",
    "description": "Generate realistic audio dialogues using Eleven-v3 from ElevenLabs.",
-   "status_base": "fal-ai/elevenlabs/text-to-dialogue/eleven-v3",
    "input": {
     "properties": {
      "use_speaker_boost": {
@@ -915,88 +586,12 @@
     "required": [
      "inputs"
     ]
-   },
-   "output": {
-    "properties": {
-     "seed": {
-      "title": "Seed",
-      "description": "Random seed for reproducibility.",
-      "type": "integer"
-     },
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "TextToDialogueOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio",
-     "seed"
-    ],
-    "required": [
-     "audio",
-     "seed"
-    ]
    }
   },
   "fal-ai/elevenlabs/music": {
    "endpoint_id": "fal-ai/elevenlabs/music",
    "display_name": "Elevenlabs Music",
    "description": "Generate high quality, realistic music with fine controls using Elevenlabs Music!",
-   "status_base": "fal-ai/elevenlabs/music",
    "input": {
     "properties": {
      "output_format": {
@@ -1180,81 +775,12 @@
      "respect_sections_durations",
      "output_format"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "MusicOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "elevenlabs/music/v2": {
    "endpoint_id": "elevenlabs/music/v2",
    "display_name": "Elevenlabs Music v2",
    "description": "Generate high quality, realistic music with fine controls using Elevenlabs Music v2!",
-   "status_base": "elevenlabs/music/v2",
    "input": {
     "properties": {
      "output_format": {
@@ -1512,74 +1038,6 @@
      "force_instrumental",
      "seed",
      "output_format"
-    ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "MusicOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
     ]
    }
   },
@@ -1587,7 +1045,6 @@
    "endpoint_id": "elevenlabs/music/v2.5",
    "display_name": "Elevenlabs Music v2.5",
    "description": "Generate high quality, realistic music with fine controls using Elevenlabs Music v2.5!",
-   "status_base": "elevenlabs/music/v2.5",
    "input": {
     "properties": {
      "output_format": {
@@ -1846,81 +1303,12 @@
      "seed",
      "output_format"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "MusicOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/elevenlabs/sound-effects/v2": {
    "endpoint_id": "fal-ai/elevenlabs/sound-effects/v2",
    "display_name": "Elevenlabs Sound Effects V2",
    "description": "Generate sound effects using ElevenLabs advanced sound effects model.",
-   "status_base": "fal-ai/elevenlabs/sound-effects/v2",
    "input": {
     "properties": {
      "output_format": {
@@ -1997,82 +1385,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "SoundEffectOutput",
-    "description": "Output format for generated sound effects",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "elevenlabs/sound-effects/v3": {
    "endpoint_id": "elevenlabs/sound-effects/v3",
    "display_name": "ElevenLabs Sound Effects V3",
    "description": "Generate sound effects up to 30 seconds from a text prompt with ElevenLabs SFX v3, with optional seamless looping.",
-   "status_base": "elevenlabs/sound-effects/v3",
    "input": {
     "properties": {
      "output_format": {
@@ -2149,82 +1467,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "SoundEffectOutput",
-    "description": "Output format for generated sound effects",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/elevenlabs/tts/eleven-v3": {
    "endpoint_id": "fal-ai/elevenlabs/tts/eleven-v3",
    "display_name": "Elevenlabs Tts Eleven V3",
    "description": "Generate text-to-speech audio using Eleven-v3 from ElevenLabs.",
-   "status_base": "fal-ai/elevenlabs/tts/eleven-v3",
    "input": {
     "properties": {
      "stability": {
@@ -2292,95 +1540,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "timestamps": {
-      "title": "Timestamps",
-      "description": "Timestamps for each word in the generated speech. Only returned if `timestamps` is set to True in the request.",
-      "anyOf": [
-       {
-        "type": "array",
-        "items": {}
-       },
-       {
-        "type": "null"
-       }
-      ]
-     },
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "TTSOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio",
-     "timestamps"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/elevenlabs/tts/multilingual-v2": {
    "endpoint_id": "fal-ai/elevenlabs/tts/multilingual-v2",
    "display_name": "ElevenLabs TTS Multilingual v2",
    "description": "Generate multilingual text-to-speech audio using ElevenLabs TTS Multilingual v2.",
-   "status_base": "fal-ai/elevenlabs/tts/multilingual-v2",
    "input": {
     "properties": {
      "speed": {
@@ -2499,95 +1664,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "timestamps": {
-      "title": "Timestamps",
-      "description": "Timestamps for each word in the generated speech. Only returned if `timestamps` is set to True in the request.",
-      "anyOf": [
-       {
-        "type": "array",
-        "items": {}
-       },
-       {
-        "type": "null"
-       }
-      ]
-     },
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "TTSOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio",
-     "timestamps"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/f5-tts": {
    "endpoint_id": "fal-ai/f5-tts",
    "display_name": "F5 TTS",
    "description": "F5 TTS",
-   "status_base": "fal-ai/f5-tts",
    "input": {
     "properties": {
      "ref_audio_url": {
@@ -2636,66 +1718,12 @@
      "ref_audio_url",
      "model_type"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio_url": {
-      "properties": {
-       "content_type": {
-        "default": "audio/wav",
-        "title": "Content Type",
-        "type": "string"
-       },
-       "url": {
-        "title": "Url",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "default": "8535dd59e911496a947daa35c07e67a3_tmplkcy6tut.wav",
-        "title": "File Name",
-        "type": "string"
-       }
-      },
-      "title": "AudioFile",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "TTSOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio_url"
-    ],
-    "required": [
-     "audio_url"
-    ]
    }
   },
   "fal-ai/gemini-tts": {
    "endpoint_id": "fal-ai/gemini-tts",
    "display_name": "Gemini TTS",
    "description": "Use Gemini TTS Models to convert your prompts to real audio.",
-   "status_base": "fal-ai/gemini-tts",
    "input": {
     "description": "Input for Gemini text-to-speech generation.",
     "type": "object",
@@ -2975,82 +2003,12 @@
      "prompt"
     ],
     "title": "GeminiTTSInput"
-   },
-   "output": {
-    "description": "Output for Gemini text-to-speech generation.",
-    "type": "object",
-    "properties": {
-     "audio": {
-      "type": "object",
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "title": "File"
-     }
-    },
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ],
-    "title": "GeminiTTSOutput"
    }
   },
   "fal-ai/kokoro/american-english": {
    "endpoint_id": "fal-ai/kokoro/american-english",
    "display_name": "Kokoro TTS",
    "description": "Kokoro is a lightweight text-to-speech model that delivers comparable quality to larger models while being significantly faster and more cost-efficient.",
-   "status_base": "fal-ai/kokoro/american-english",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -3109,81 +2067,12 @@
     },
     "title": "AmEnglishRequest",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "AmEngOutput",
-    "type": "object"
    }
   },
   "fal-ai/kokoro/brazilian-portuguese": {
    "endpoint_id": "fal-ai/kokoro/brazilian-portuguese",
    "display_name": "Kokoro TTS (Brazilian Portuguese)",
    "description": "A natural and expressive Brazilian Portuguese text-to-speech model optimized for clarity and fluency.",
-   "status_base": "fal-ai/kokoro/brazilian-portuguese",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -3227,81 +2116,12 @@
     ],
     "title": "BrPortugueseRequest",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "BrPortugeseOutput",
-    "type": "object"
    }
   },
   "fal-ai/kokoro/british-english": {
    "endpoint_id": "fal-ai/kokoro/british-english",
    "display_name": "Kokoro TTS (British English)",
    "description": "A high-quality British English text-to-speech model offering natural and expressive voice synthesis.",
-   "status_base": "fal-ai/kokoro/british-english",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -3350,81 +2170,12 @@
     ],
     "title": "BrEnglishRequest",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "BrEngOutput",
-    "type": "object"
    }
   },
   "fal-ai/kokoro/french": {
    "endpoint_id": "fal-ai/kokoro/french",
    "display_name": "Kokoro TTS (French)",
    "description": "An expressive and natural French text-to-speech model for both European and Canadian French.",
-   "status_base": "fal-ai/kokoro/french",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -3464,81 +2215,12 @@
     ],
     "title": "FrenchRequest",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "FrenchOutput",
-    "type": "object"
    }
   },
   "fal-ai/kokoro/hindi": {
    "endpoint_id": "fal-ai/kokoro/hindi",
    "display_name": "Kokoro TTS (Hindi)",
    "description": "A fast and expressive Hindi text-to-speech model with clear pronunciation and accurate intonation.",
-   "status_base": "fal-ai/kokoro/hindi",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -3583,81 +2265,12 @@
     ],
     "title": "HindiRequest",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "HindiOutput",
-    "type": "object"
    }
   },
   "fal-ai/kokoro/italian": {
    "endpoint_id": "fal-ai/kokoro/italian",
    "display_name": "Kokoro TTS (Italian)",
    "description": "A high-quality Italian text-to-speech model delivering smooth and expressive speech synthesis.",
-   "status_base": "fal-ai/kokoro/italian",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -3700,81 +2313,12 @@
     ],
     "title": "ItalianRequest",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "ItalianOutput",
-    "type": "object"
    }
   },
   "fal-ai/kokoro/japanese": {
    "endpoint_id": "fal-ai/kokoro/japanese",
    "display_name": "Kokoro TTS (Japanese)",
    "description": "A fast and natural-sounding Japanese text-to-speech model optimized for smooth pronunciation.",
-   "status_base": "fal-ai/kokoro/japanese",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -3820,81 +2364,12 @@
     ],
     "title": "JapaneseRequest",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "JapaneseOutput",
-    "type": "object"
    }
   },
   "fal-ai/kokoro/mandarin-chinese": {
    "endpoint_id": "fal-ai/kokoro/mandarin-chinese",
    "display_name": "Kokoro TTS (Mandarin Chinese)",
    "description": "A highly efficient Mandarin Chinese text-to-speech model that captures natural tones and prosody.",
-   "status_base": "fal-ai/kokoro/mandarin-chinese",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -3943,81 +2418,12 @@
     ],
     "title": "MandarinRequest",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "MandarinOutput",
-    "type": "object"
    }
   },
   "fal-ai/kokoro/spanish": {
    "endpoint_id": "fal-ai/kokoro/spanish",
    "display_name": "Kokoro TTS (Spanish)",
    "description": "A natural-sounding Spanish text-to-speech model optimized for Latin American and European Spanish.",
-   "status_base": "fal-ai/kokoro/spanish",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -4061,81 +2467,12 @@
     ],
     "title": "SpanishRequest",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "SpanishOutput",
-    "type": "object"
    }
   },
   "fal-ai/ltx-2.3-quality/text-to-audio": {
    "endpoint_id": "fal-ai/ltx-2.3-quality/text-to-audio",
    "display_name": "Ltx 2.3 Quality",
    "description": "Text to Audio high-quality using LTX-2.3 ",
-   "status_base": "fal-ai/ltx-2.3-quality/text-to-audio",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -4230,96 +2567,12 @@
     },
     "title": "LTX23QualityTextToAudioInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "description": "Audio-only output for text-to-audio generation.",
-    "properties": {
-     "seed": {
-      "description": "The seed actually used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation (after any expansion).",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "LTX23QualityTextToAudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/ltx-2.3-quality/text-to-audio/lora": {
    "endpoint_id": "fal-ai/ltx-2.3-quality/text-to-audio/lora",
    "display_name": "Ltx 2.3 Quality",
    "description": "Text to Audio high-quality using LTX-2.3 with Lora",
-   "status_base": "fal-ai/ltx-2.3-quality/text-to-audio/lora",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -4462,96 +2715,12 @@
     },
     "title": "LTX23QualityLoRATextToAudioInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "description": "Audio-only output for text-to-audio generation.",
-    "properties": {
-     "seed": {
-      "description": "The seed actually used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation (after any expansion).",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "LTX23QualityTextToAudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/lyria3/pro": {
    "endpoint_id": "fal-ai/lyria3/pro",
    "display_name": "Lyria 3 Pro",
    "description": "Lyria 3 Pro is the latest music model from Google",
-   "status_base": "fal-ai/lyria3/pro",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -4598,94 +2767,12 @@
     "required": [
      "prompt"
     ]
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "lyrics"
-    ],
-    "type": "object",
-    "title": "TextToMusicOutput",
-    "properties": {
-     "lyrics": {
-      "title": "Lyrics",
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "The generated or provided lyrics for the track, if applicable."
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "title": "File",
-      "properties": {
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "required": [
-     "audio"
-    ]
    }
   },
   "google/lyria-3.5": {
    "endpoint_id": "google/lyria-3.5",
    "display_name": "Lyria 3.5",
    "description": "Lyria 3.5 is Google DeepMind's latest music generation model, and you can generate almost any type of music with it",
-   "status_base": "google/lyria-3.5",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -4732,94 +2819,12 @@
       "default": ""
      }
     }
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "lyrics"
-    ],
-    "type": "object",
-    "required": [
-     "audio"
-    ],
-    "title": "TextToMusicOutput",
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "properties": {
-       "content_type": {
-        "description": "The mime type of the file.",
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      }
-     },
-     "lyrics": {
-      "description": "The generated or provided lyrics for the track, if applicable.",
-      "title": "Lyrics",
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ]
-     }
-    }
    }
   },
   "fal-ai/lyria2": {
    "endpoint_id": "fal-ai/lyria2",
    "display_name": "Lyria2",
    "description": "Lyria 2 is Google's latest music generation model, you can generate any type of music with this model.",
-   "status_base": "fal-ai/lyria2",
    "input": {
     "required": [
      "prompt"
@@ -4865,81 +2870,12 @@
       ]
      }
     }
-   },
-   "output": {
-    "required": [
-     "audio"
-    ],
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "type": "object",
-    "title": "TextToMusicOutput",
-    "properties": {
-     "audio": {
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "title": "File",
-      "properties": {
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      }
-     }
-    }
    }
   },
   "fal-ai/lyria3": {
    "endpoint_id": "fal-ai/lyria3",
    "display_name": "Lyria3",
    "description": "Lyria 3 is most recent music model from Google",
-   "status_base": "fal-ai/lyria3",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -4986,94 +2922,12 @@
     "required": [
      "prompt"
     ]
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "lyrics"
-    ],
-    "type": "object",
-    "title": "TextToMusicOutput",
-    "properties": {
-     "lyrics": {
-      "title": "Lyrics",
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "The generated or provided lyrics for the track, if applicable."
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "title": "File",
-      "properties": {
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/minimax-music": {
    "endpoint_id": "fal-ai/minimax-music",
    "display_name": "MiniMax (Hailuo AI) Music",
    "description": "Generate music from text prompts using the MiniMax model, which leverages advanced AI techniques to create high-quality, diverse musical compositions.",
-   "status_base": "fal-ai/minimax-music",
    "input": {
     "required": [
      "prompt",
@@ -5106,81 +2960,12 @@
     ],
     "title": "TextToMusicRequest",
     "type": "object"
-   },
-   "output": {
-    "required": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "title": "MusicOutput",
-    "type": "object"
    }
   },
   "fal-ai/minimax-music/v1.5": {
    "endpoint_id": "fal-ai/minimax-music/v1.5",
    "display_name": "MiniMax (Hailuo AI) Music v1.5",
    "description": "Generate music from text prompts using the MiniMax model, which leverages advanced AI techniques to create high-quality, diverse musical compositions.",
-   "status_base": "fal-ai/minimax-music/v1.5",
    "input": {
     "required": [
      "prompt",
@@ -5264,81 +3049,12 @@
     ],
     "title": "TextToMusic15Request",
     "type": "object"
-   },
-   "output": {
-    "required": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "title": "MusicV15Output",
-    "type": "object"
    }
   },
   "fal-ai/minimax-music/v2": {
    "endpoint_id": "fal-ai/minimax-music/v2",
    "display_name": "Minimax Music",
    "description": "Generate music from text prompts using the MiniMax Music 2.0 model, which leverages advanced AI techniques to create high-quality, diverse musical compositions.",
-   "status_base": "fal-ai/minimax-music/v2",
    "input": {
     "required": [
      "prompt",
@@ -5422,81 +3138,12 @@
     ],
     "title": "TextToMusic20Request",
     "type": "object"
-   },
-   "output": {
-    "required": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "title": "MusicV15Output",
-    "type": "object"
    }
   },
   "fal-ai/minimax-music/v2.5": {
    "endpoint_id": "fal-ai/minimax-music/v2.5",
    "display_name": "Minimax Music 2.5",
    "description": "MiniMax Music 2.5 creates complete tracks with singing, backing music, and detailed arrangements from lyrics and a style description.",
-   "status_base": "fal-ai/minimax-music/v2.5",
    "input": {
     "required": [
      "prompt"
@@ -5591,81 +3238,12 @@
     ],
     "title": "TextToMusic25PlusRequest",
     "type": "object"
-   },
-   "output": {
-    "required": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "title": "MusicV25Output",
-    "type": "object"
    }
   },
   "fal-ai/minimax-music/v2.6": {
    "endpoint_id": "fal-ai/minimax-music/v2.6",
    "display_name": "Minimax Music 2.6",
    "description": "MiniMax Music 2.6 creates complete tracks with singing, backing music, and detailed arrangements from lyrics and a style description.",
-   "status_base": "fal-ai/minimax-music/v2.6",
    "input": {
     "required": [
      "prompt"
@@ -5760,81 +3338,12 @@
     ],
     "title": "TextToMusic26Request",
     "type": "object"
-   },
-   "output": {
-    "required": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "title": "MusicV26Output",
-    "type": "object"
    }
   },
   "minimax/music-3": {
    "endpoint_id": "minimax/music-3",
    "display_name": "MiniMax Music 3",
    "description": "MiniMax Music 3 is a high-performance music generation model for creating complete songs up to five minutes long",
-   "status_base": "minimax/music-3",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -5905,95 +3414,12 @@
      "prompt",
      "lyrics"
     ]
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "duration"
-    ],
-    "type": "object",
-    "properties": {
-     "seed": {
-      "type": "integer",
-      "description": "The random seed used for the generation process.",
-      "title": "Seed"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "properties": {
-       "content_type": {
-        "description": "The mime type of the file.",
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "required": [
-       "url"
-      ]
-     },
-     "duration": {
-      "type": "number",
-      "description": "The actual duration of the generated audio in seconds (may be shorter than the requested duration).",
-      "title": "Duration"
-     }
-    },
-    "title": "MiniMaxMusic3Output",
-    "required": [
-     "audio",
-     "seed",
-     "duration"
-    ]
    }
   },
   "mirelo-ai/sfx2.0/text-to-audio": {
    "endpoint_id": "mirelo-ai/sfx2.0/text-to-audio",
    "display_name": "Mirelo SFX2.0",
    "description": "Generates sound effects and ambience from a text description, up to 600 seconds long, with up to 4 variations per request.",
-   "status_base": "mirelo-ai/sfx2.0/text-to-audio",
    "input": {
     "properties": {
      "prompt": {
@@ -6088,104 +3514,12 @@
      "upload_audio_bitrate_kbps"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "title": "Audio",
-      "description": "The generated sound effects, one per sample",
-      "items": {
-       "properties": {
-        "file_size": {
-         "anyOf": [
-          {
-           "type": "integer"
-          },
-          {
-           "type": "null"
-          }
-         ],
-         "description": "The size of the file in bytes.",
-         "title": "File Size"
-        },
-        "file_name": {
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ],
-         "description": "The name of the file. It will be auto-generated if not provided.",
-         "title": "File Name"
-        },
-        "content_type": {
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ],
-         "description": "The mime type of the file.",
-         "title": "Content Type"
-        },
-        "url": {
-         "title": "Url",
-         "description": "The URL where the file can be downloaded from.",
-         "type": "string"
-        }
-       },
-       "required": [
-        "url"
-       ],
-       "title": "Audio",
-       "x-fal-order-properties": [
-        "url",
-        "content_type",
-        "file_name",
-        "file_size"
-       ],
-       "type": "object"
-      },
-      "type": "array"
-     },
-     "seeds": {
-      "title": "Seeds",
-      "description": "Each sample's seed, in the same order",
-      "items": {
-       "type": "integer"
-      },
-      "type": "array"
-     },
-     "model": {
-      "title": "Model",
-      "description": "The SFX model release that made the output",
-      "pattern": "^sfx-[0-9]+\\.[0-9]+$",
-      "type": "string"
-     }
-    },
-    "required": [
-     "model",
-     "audio",
-     "seeds"
-    ],
-    "title": "TextToAudioOutput",
-    "x-fal-order-properties": [
-     "model",
-     "audio",
-     "seeds"
-    ],
-    "type": "object"
    }
   },
   "fal-ai/mmaudio-v2/text-to-audio": {
    "endpoint_id": "fal-ai/mmaudio-v2/text-to-audio",
    "display_name": "MMAudio V2 Text to Audio",
    "description": "MMAudio generates synchronized audio given text inputs. It can generate sounds described by a prompt.",
-   "status_base": "fal-ai/mmaudio-v2/text-to-audio",
    "input": {
     "properties": {
      "duration": {
@@ -6258,81 +3592,12 @@
      "cfg_strength",
      "mask_away_clip"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ]
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "AudioOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ]
    }
   },
   "mureka/v8/generate/instrumental": {
    "endpoint_id": "mureka/v8/generate/instrumental",
    "display_name": "Mureka 8 Instrumental Generation",
    "description": "Generates instrumental music from a text description or uploaded instrumental reference, with support for multiple variations.",
-   "status_base": "mureka/v8/generate/instrumental",
    "input": {
     "properties": {
      "prompt": {
@@ -6377,286 +3642,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/v8/generate/song": {
    "endpoint_id": "mureka/v8/generate/song",
    "display_name": "Mureka 8 Song Generation",
    "description": "Generates songs from a text prompt or supplied lyrics, with musical style, vocal, reference-audio, and melody controls, plus support for multiple variations.",
-   "status_base": "mureka/v8/generate/song",
    "input": {
     "properties": {
      "lyrics": {
@@ -6793,286 +3784,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/v8/generate/soundtrack": {
    "endpoint_id": "mureka/v8/generate/soundtrack",
    "display_name": "Mureka 8 Soundtrack Generation",
    "description": "Generates soundtracks from an uploaded image or video, with optional style and mood guidance, audio-range selection, and multiple variations.",
-   "status_base": "mureka/v8/generate/soundtrack",
    "input": {
     "properties": {
      "image_id": {
@@ -7157,286 +3874,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/v9/generate/instrumental": {
    "endpoint_id": "mureka/v9/generate/instrumental",
    "display_name": "Mureka 9 Instrumental Generation",
    "description": "Generates instrumental music from a text description or uploaded instrumental reference, with support for multiple variations.\n",
-   "status_base": "mureka/v9/generate/instrumental",
    "input": {
     "properties": {
      "prompt": {
@@ -7481,286 +3924,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/v9/generate/song": {
    "endpoint_id": "mureka/v9/generate/song",
    "display_name": "Mureka 9 Song Generation",
    "description": "Generates songs from a text prompt or supplied lyrics, with musical style, vocal, reference-audio, and melody controls, plus support for multiple variations.\n",
-   "status_base": "mureka/v9/generate/song",
    "input": {
     "properties": {
      "lyrics": {
@@ -7897,286 +4066,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/v9.5/generate/instrumental": {
    "endpoint_id": "mureka/v9.5/generate/instrumental",
    "display_name": "Mureka 9.5 Instrumental Generation",
    "description": "Generates instrumental music from a text description or uploaded instrumental reference, with support for multiple variations.",
-   "status_base": "mureka/v9.5/generate/instrumental",
    "input": {
     "properties": {
      "prompt": {
@@ -8221,286 +4116,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/v9.5/generate/song": {
    "endpoint_id": "mureka/v9.5/generate/song",
    "display_name": "Mureka 9.5 Song Generation",
    "description": "Generates songs from a text prompt or supplied lyrics, with musical style, vocal, reference-audio, and melody controls, plus support for multiple variations.",
-   "status_base": "mureka/v9.5/generate/song",
    "input": {
     "properties": {
      "lyrics": {
@@ -8652,286 +4273,12 @@
      "duration"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/api/generate/podcast": {
    "endpoint_id": "mureka/api/generate/podcast",
    "display_name": "Mureka Podcast Generation",
    "description": "Generates podcast audio from an ordered sequence of conversation turns, with text and a voice selection for each turn.",
-   "status_base": "mureka/api/generate/podcast",
    "input": {
     "properties": {
      "enable_safety_checker": {
@@ -8990,286 +4337,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/api/generate/speech": {
    "endpoint_id": "mureka/api/generate/speech",
    "display_name": "Mureka Speech Generation",
    "description": "Synthesizes speech from text using a built-in voice preset or an uploaded custom voice.",
-   "status_base": "mureka/api/generate/speech",
    "input": {
     "properties": {
      "voice_id": {
@@ -9329,286 +4402,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "cassetteai/music-generator": {
    "endpoint_id": "cassetteai/music-generator",
    "display_name": "music generator",
    "description": "CassetteAI\u2019s model generates a 30-second sample in under 2 seconds and a full 3-minute track in under 10 seconds. At 44.1 kHz stereo audio, expect a level of professional consistency with no breaks, no squeaks, and no random interruptions in your creations.\n\n",
-   "status_base": "cassetteai/music-generator",
    "input": {
     "properties": {
      "prompt": {
@@ -9630,90 +4429,12 @@
      "duration"
     ],
     "title": "Input"
-   },
-   "output": {
-    "properties": {
-     "audio_file": {
-      "properties": {
-       "url": {
-        "type": "string",
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url"
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "default": null
-       },
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "default": null
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "default": null
-       },
-       "file_data": {
-        "title": "File Data",
-        "description": "File data",
-        "anyOf": [
-         {
-          "type": "string",
-          "format": "binary"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "default": null
-       }
-      },
-      "type": "object",
-      "required": [
-       "url"
-      ],
-      "title": "File"
-     }
-    },
-    "type": "object",
-    "description": "Example Pydantic model showing how to include a File in the output.",
-    "required": [
-     "audio_file"
-    ],
-    "title": "AudioOutput"
    }
   },
   "bytedance/seed-audio-1.0": {
    "endpoint_id": "bytedance/seed-audio-1.0",
    "display_name": "Seed Audio 1.0",
    "description": "Seed Audio 1.0 is a new audio model from Bytedance that can generate high-quality, natural sounding audio using text, reference audios or an image.",
-   "status_base": "bytedance/seed-audio-1.0",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -9836,136 +4557,12 @@
     "required": [
      "prompt"
     ]
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "duration",
-       "channels",
-       "sample_rate",
-       "bitrate"
-      ],
-      "properties": {
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "bitrate": {
-        "title": "Bitrate",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The bitrate of the audio (e.g., '192k' or 192000)"
-       },
-       "sample_rate": {
-        "title": "Sample Rate",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The sample rate of the audio"
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "duration": {
-        "title": "Duration",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The duration of the audio"
-       },
-       "channels": {
-        "title": "Channels",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The number of channels in the audio"
-       }
-      },
-      "title": "AudioFile",
-      "type": "object",
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "SeedAudioOutput",
-    "type": "object",
-    "required": [
-     "audio"
-    ]
    }
   },
   "sonilo/v1.1/text-to-music": {
    "endpoint_id": "sonilo/v1.1/text-to-music",
    "display_name": "Sonilo V1.1 Text to Music",
    "description": "Generates licensed, commercial-use-safe music from a single text prompt, with full control over style, mood, instrumentation, and exact duration.",
-   "status_base": "sonilo/v1.1/text-to-music",
    "input": {
     "properties": {
      "prompt": {
@@ -10000,144 +4597,12 @@
      "num_samples"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "Audio",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "audios": {
-      "title": "Audios",
-      "description": "All generated music tracks (AAC/m4a), one per sample.",
-      "items": {
-       "properties": {
-        "file_size": {
-         "anyOf": [
-          {
-           "type": "integer"
-          },
-          {
-           "type": "null"
-          }
-         ],
-         "description": "The size of the file in bytes.",
-         "title": "File Size"
-        },
-        "file_name": {
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ],
-         "description": "The name of the file. It will be auto-generated if not provided.",
-         "title": "File Name"
-        },
-        "content_type": {
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ],
-         "description": "The mime type of the file.",
-         "title": "Content Type"
-        },
-        "url": {
-         "title": "Url",
-         "description": "The URL where the file can be downloaded from.",
-         "type": "string"
-        }
-       },
-       "required": [
-        "url"
-       ],
-       "title": "Audio",
-       "x-fal-order-properties": [
-        "url",
-        "content_type",
-        "file_name",
-        "file_size"
-       ],
-       "type": "object"
-      },
-      "type": "array"
-     }
-    },
-    "required": [
-     "audio",
-     "audios"
-    ],
-    "title": "TextToMusicOutput",
-    "x-fal-order-properties": [
-     "audio",
-     "audios"
-    ],
-    "type": "object"
    }
   },
   "cassetteai/sound-effects-generator": {
    "endpoint_id": "cassetteai/sound-effects-generator",
    "display_name": "Sound Effects Generator",
    "description": "Create stunningly realistic sound effects in seconds - CassetteAI's Sound Effects Model generates high-quality SFX up to 30 seconds long in just 1 second of processing time",
-   "status_base": "cassetteai/sound-effects-generator",
    "input": {
     "title": "Input",
     "type": "object",
@@ -10163,82 +4628,12 @@
      "prompt",
      "duration"
     ]
-   },
-   "output": {
-    "title": "AudioOutput",
-    "type": "object",
-    "properties": {
-     "audio_file": {
-      "title": "File",
-      "type": "object",
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size",
-        "description": "The size of the file in bytes."
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type",
-        "description": "The mime type of the file."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "description": "Example Pydantic model showing how to include a File in the output.",
-    "x-fal-order-properties": [
-     "audio_file"
-    ],
-    "required": [
-     "audio_file"
-    ]
    }
   },
   "fal-ai/stable-audio-25/text-to-audio": {
    "endpoint_id": "fal-ai/stable-audio-25/text-to-audio",
    "display_name": "Stable Audio 2.5",
    "description": "Generate high quality music and sound effects using Stable Audio 2.5 from StabilityAI",
-   "status_base": "fal-ai/stable-audio-25/text-to-audio",
    "input": {
     "title": "TextToAudioInput",
     "required": [
@@ -10308,88 +4703,12 @@
      "seed",
      "enable_safety_checker"
     ]
-   },
-   "output": {
-    "title": "TextToAudioOutput",
-    "required": [
-     "audio",
-     "seed"
-    ],
-    "properties": {
-     "audio": {
-      "title": "File",
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ]
-     },
-     "seed": {
-      "title": "Seed",
-      "description": "The random seed used for generation",
-      "type": "integer"
-     }
-    },
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio",
-     "seed"
-    ]
    }
   },
   "fal-ai/stable-audio-3/medium/text-to-audio": {
    "endpoint_id": "fal-ai/stable-audio-3/medium/text-to-audio",
    "display_name": "Stable Audio 3",
    "description": "Stable Audio 3 Medium is a 1.4 billion parameter latent diffusion model that generates high-quality stereo music up to 6 minutes from text prompts, trained on fully licensed data for safe commercial use.",
-   "status_base": "fal-ai/stable-audio-3/medium/text-to-audio",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -10497,95 +4816,12 @@
     },
     "title": "TextToAudioMediumInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/small/music/base/text-to-audio": {
    "endpoint_id": "fal-ai/stable-audio-3/small/music/base/text-to-audio",
    "display_name": "Stable Audio 3",
    "description": "Stable Audio 3 Small Music Base is the foundational 459 million parameter checkpoint generating full music compositions up to 2 minutes from text prompts, intended as the unmodified base for fine-tuning.",
-   "status_base": "fal-ai/stable-audio-3/small/music/base/text-to-audio",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -10693,95 +4929,12 @@
     },
     "title": "TextToAudioBaseInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/medium/base/text-to-audio": {
    "endpoint_id": "fal-ai/stable-audio-3/medium/base/text-to-audio",
    "display_name": "Stable Audio 3 Medium Base Text to Audio",
    "description": "Stable Audio 3 Medium Base is the foundational 1.4 billion parameter text-to-audio checkpoint generating stereo music up to 6 minutes, intended as the unmodified base for custom fine-tuning workflows.",
-   "status_base": "fal-ai/stable-audio-3/medium/base/text-to-audio",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -10889,95 +5042,12 @@
     },
     "title": "TextToAudioMediumBaseInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/small/music/text-to-audio": {
    "endpoint_id": "fal-ai/stable-audio-3/small/music/text-to-audio",
    "display_name": "Stable Audio 3 Small Music Text to Audio",
    "description": "Stable Audio 3 Small Music is a 459 million parameter latent diffusion model that generates full stereo music compositions up to 2 minutes from text prompts, lightweight enough for on-device deployment.",
-   "status_base": "fal-ai/stable-audio-3/small/music/text-to-audio",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -11085,95 +5155,12 @@
     },
     "title": "TextToAudioInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/small/sfx/base/text-to-audio": {
    "endpoint_id": "fal-ai/stable-audio-3/small/sfx/base/text-to-audio",
    "display_name": "Stable Audio 3 Small SFX Base Text to Audio",
    "description": "Stable Audio 3 Small SFX Base is the foundational 459 million parameter checkpoint generating sound effects from text prompts, intended as the unmodified base for fine-tuning.",
-   "status_base": "fal-ai/stable-audio-3/small/sfx/base/text-to-audio",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -11281,95 +5268,12 @@
     },
     "title": "TextToAudioBaseInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/small/sfx/text-to-audio": {
    "endpoint_id": "fal-ai/stable-audio-3/small/sfx/text-to-audio",
    "display_name": "Stable Audio 3 Small SFX Text to Audio",
    "description": "Stable Audio 3 Small SFX is a 459 million parameter latent diffusion model that generates high-quality sound effects from text prompts, designed for on-device deployment on mobile phones and consumer laptops.",
-   "status_base": "fal-ai/stable-audio-3/small/sfx/text-to-audio",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -11477,95 +5381,12 @@
     },
     "title": "TextToAudioInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio": {
    "endpoint_id": "fal-ai/stable-audio",
    "display_name": "Stable Audio Open",
    "description": "Open source text-to-audio model.",
-   "status_base": "fal-ai/stable-audio",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -11623,81 +5444,12 @@
     "required": [
      "prompt"
     ]
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio_file"
-    ],
-    "type": "object",
-    "title": "Output",
-    "properties": {
-     "audio_file": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "title": "File",
-      "properties": {
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "required": [
-     "audio_file"
-    ]
    }
   },
   "sonilo/v1.1/text-to-sound-effects": {
    "endpoint_id": "sonilo/v1.1/text-to-sound-effects",
    "display_name": "V1.1 Text to Sound Effects",
    "description": "Generates high-quality, commercial-use-safe sound effects from a text prompt, with full control over type, texture, intensity, and exact duration.",
-   "status_base": "sonilo/v1.1/text-to-sound-effects",
    "input": {
     "title": "Sfxv1TextToAudioInput",
     "description": "sfx-v1.0 /text-to-audio schema: plain-language field help for the product\nPlayground. Duration accepts fractional seconds; flash and seed are hidden.",
@@ -11737,144 +5489,12 @@
       "minimum": 0.5
      }
     }
-   },
-   "output": {
-    "title": "TrioAudioOutput",
-    "type": "object",
-    "required": [
-     "audio",
-     "audios"
-    ],
-    "x-fal-order-properties": [
-     "audio",
-     "audios"
-    ],
-    "properties": {
-     "audios": {
-      "title": "Audios",
-      "items": {
-       "properties": {
-        "file_size": {
-         "anyOf": [
-          {
-           "type": "integer"
-          },
-          {
-           "type": "null"
-          }
-         ],
-         "description": "The size of the file in bytes.",
-         "title": "File Size"
-        },
-        "file_name": {
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ],
-         "description": "The name of the file. It will be auto-generated if not provided.",
-         "title": "File Name"
-        },
-        "content_type": {
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ],
-         "description": "The mime type of the file.",
-         "title": "Content Type"
-        },
-        "url": {
-         "title": "Url",
-         "description": "The URL where the file can be downloaded from.",
-         "type": "string"
-        }
-       },
-       "required": [
-        "url"
-       ],
-       "title": "Audio",
-       "x-fal-order-properties": [
-        "url",
-        "content_type",
-        "file_name",
-        "file_size"
-       ],
-       "type": "object"
-      },
-      "description": "All generated sounds, one per sample.",
-      "type": "array"
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "Audio",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     }
-    }
    }
   },
   "fal-ai/zonos": {
    "endpoint_id": "fal-ai/zonos",
    "display_name": "Zonos-Audio-Clone",
    "description": "Clone voice of any person and speak anything in their voice using zonos' voice cloning.",
-   "status_base": "fal-ai/zonos",
    "input": {
     "properties": {
      "enable_safety_checker": {
@@ -11904,74 +5524,6 @@
     "required": [
      "reference_audio_url",
      "prompt"
-    ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "ZonosOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
     ]
    }
   }

@@ -348,7 +348,10 @@ class FalCategoryNode(FalQueueNode):
     def _signature(self, spec: FieldSpec) -> tuple[Any, ...]:
         """What must match for an existing parameter to be reused for a field in another model."""
         choices = tuple(self._enum_choices(spec)) if spec.kind == KIND_ENUM else ()
-        return (spec.kind, spec.required, self._is_primary(spec), choices, spec.minimum, spec.maximum)
+        # A numeric parameter cannot be set back to "no value": the engine turns None into 0. A field
+        # whose default changes between none and a number has to be rebuilt instead.
+        has_no_default = spec.kind in (KIND_INT, KIND_FLOAT) and spec.default is None
+        return (spec.kind, spec.required, self._is_primary(spec), choices, spec.minimum, spec.maximum, has_no_default)
 
     @staticmethod
     def _is_primary(spec: FieldSpec) -> bool:
@@ -653,6 +656,8 @@ class FalCategoryNode(FalQueueNode):
             return
 
         try:
+            if kind == OUTPUT_THREE_D:
+                self._match_output_suffix(first_url, extensions)
             destination = self._output_file.build_file()
             saved = await destination.awrite_bytes(file_bytes)
         except Exception as e:
@@ -667,6 +672,21 @@ class FalCategoryNode(FalQueueNode):
         self.parameter_output_values[kind] = artifact_class(value=saved.location, name=saved.name)
         extra = f" {len(urls) - 1} more are in the {kind}_list output." if len(urls) > 1 else ""
         self._set_status_results(was_successful=True, result_details=f"Saved {saved.name}.{extra}")
+
+    def _match_output_suffix(self, url: str, extensions: frozenset[str]) -> None:
+        """Make the saved filename's suffix match the file fal returned, for known 3D formats.
+
+        The engine corrects image, video and audio suffixes from the file's bytes. It has no 3D
+        detector, so a ply or fbx result would otherwise be saved under the default .glb name.
+        """
+        extension = self._extension(url)
+        if extension not in extensions:
+            return
+        current = self.get_parameter_value("output_file")
+        filename = current if isinstance(current, str) and current else _MEDIA_OUTPUTS[self.OUTPUT_KIND][2]
+        path = PurePosixPath(filename)
+        if path.suffix.lstrip(".").lower() != extension:
+            self.set_parameter_value("output_file", str(path.with_suffix(f".{extension}")))
 
     @classmethod
     def _find_file_urls(cls, result: Any, extensions: frozenset[str]) -> list[str]:

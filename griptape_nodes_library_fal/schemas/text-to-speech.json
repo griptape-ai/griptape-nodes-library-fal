@@ -5,7 +5,6 @@
    "endpoint_id": "async/tts-pro/v1.0",
    "display_name": "Async Text to Speech Pro V1.0",
    "description": "Generate professional-quality voiceovers in seconds with Async TTS Pro model text-based control over pauses, emphasis, and timing. Voice ids can be found at https://async.com/developer/voice-library",
-   "status_base": "async/tts-pro/v1.0",
    "input": {
     "properties": {
      "output_format": {
@@ -225,95 +224,12 @@
      "voice"
     ],
     "title": "TTSInput"
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "url": {
-        "type": "string",
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "required": [
-       "url"
-      ],
-      "title": "Audio"
-     },
-     "content_type": {
-      "type": "string",
-      "description": "MIME type of the audio.",
-      "title": "Content Type"
-     },
-     "size_bytes": {
-      "type": "integer",
-      "description": "Size of the audio in bytes.",
-      "title": "Size Bytes"
-     }
-    },
-    "x-fal-order-properties": [
-     "audio",
-     "content_type",
-     "size_bytes"
-    ],
-    "type": "object",
-    "required": [
-     "audio",
-     "content_type",
-     "size_bytes"
-    ],
-    "title": "TTSOutput"
    }
   },
   "fal-ai/bytedance/seed-speech/tts/v2": {
    "endpoint_id": "fal-ai/bytedance/seed-speech/tts/v2",
    "display_name": "Bytedance Seed Speech Text to Speech",
    "description": "Seed Speech developed by ByteDance, is a family of large-scale text-to-speech models capable of synthesizing speech that is virtually indistinguishable from human speech.",
-   "status_base": "fal-ai/bytedance/seed-speech/tts/v2",
    "input": {
     "x-fal-order-properties": [
      "text",
@@ -473,81 +389,12 @@
     },
     "title": "ByteDanceTTS2Input",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     }
-    },
-    "title": "ByteDanceTTS2Output",
-    "type": "object"
    }
   },
   "fal-ai/chatterbox/text-to-speech": {
    "endpoint_id": "fal-ai/chatterbox/text-to-speech",
    "display_name": "Chatterbox",
    "description": "Whether you're working on memes, videos, games, or AI agents, Chatterbox brings your content to life. Use the first tts from resemble ai.",
-   "status_base": "fal-ai/chatterbox/text-to-speech",
    "input": {
     "type": "object",
     "properties": {
@@ -617,81 +464,12 @@
      "seed"
     ],
     "title": "ChatterboxRequest"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "audio": {
-      "type": "object",
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File"
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "title": "ChatterboxOutput"
    }
   },
   "fal-ai/chatterbox/text-to-speech/multilingual": {
    "endpoint_id": "fal-ai/chatterbox/text-to-speech/multilingual",
    "display_name": "Chatterbox",
    "description": "Whether you're working on memes, videos, games, or AI agents, Chatterbox brings your content to life. Use the first tts from resemble ai.",
-   "status_base": "fal-ai/chatterbox/text-to-speech/multilingual",
    "input": {
     "type": "object",
     "properties": {
@@ -794,81 +572,12 @@
      "seed"
     ],
     "title": "ChatterboxMultilingualRequest"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "audio": {
-      "type": "object",
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File"
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "title": "ChatterboxMultilingualOutput"
    }
   },
   "resemble-ai/chatterboxhd/text-to-speech": {
    "endpoint_id": "resemble-ai/chatterboxhd/text-to-speech",
    "display_name": "Chatterboxhd",
    "description": "Generate expressive, natural speech with Resemble AI's Chatterbox. Features unique emotion control, instant voice cloning from short audio, and built-in watermarking.",
-   "status_base": "resemble-ai/chatterboxhd/text-to-speech",
    "input": {
     "description": "Input parameters for the TTS request.",
     "type": "object",
@@ -949,74 +658,12 @@
      "temperature"
     ],
     "title": "TTSInput"
-   },
-   "output": {
-    "description": "Output parameters for the TTS request.",
-    "type": "object",
-    "properties": {
-     "audio": {
-      "description": "The generated audio file.",
-      "title": "Audio",
-      "allOf": [
-       {
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size",
-         "file_data"
-        ],
-        "type": "object",
-        "properties": {
-         "file_size": {
-          "description": "The size of the file in bytes.",
-          "type": "integer",
-          "title": "File Size"
-         },
-         "file_name": {
-          "description": "The name of the file. It will be auto-generated if not provided.",
-          "type": "string",
-          "title": "File Name"
-         },
-         "content_type": {
-          "description": "The mime type of the file.",
-          "type": "string",
-          "title": "Content Type"
-         },
-         "url": {
-          "description": "The URL where the file can be downloaded from.",
-          "type": "string",
-          "title": "Url"
-         },
-         "file_data": {
-          "format": "binary",
-          "description": "File data",
-          "type": "string",
-          "title": "File Data"
-         }
-        },
-        "title": "Audio",
-        "required": [
-         "url"
-        ]
-       }
-      ]
-     }
-    },
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "title": "TTSOutput",
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/dia-tts": {
    "endpoint_id": "fal-ai/dia-tts",
    "display_name": "Dia",
    "description": "Dia directly generates realistic dialogue from transcripts. Audio conditioning enables emotion control. Produces natural nonverbals like laughter and throat clearing.",
-   "status_base": "fal-ai/dia-tts",
    "input": {
     "properties": {
      "text": {
@@ -1033,81 +680,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "DiaOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "elevenlabs/tts/eleven-v4": {
    "endpoint_id": "elevenlabs/tts/eleven-v4",
    "display_name": "Eleven v4",
    "description": "Generate expressive speech with Eleven v4 from ElevenLabs. Control delivery with audio tags, voice stability, similarity settings, and IPA pronunciation.",
-   "status_base": "elevenlabs/tts/eleven-v4",
    "input": {
     "properties": {
      "output_format": {
@@ -1225,88 +803,6 @@
     ],
     "required": [
      "text"
-    ]
-   },
-   "output": {
-    "properties": {
-     "timestamps": {
-      "title": "Timestamps",
-      "description": "Timestamps for each word in the generated speech. Only returned if `timestamps` is set to True in the request.",
-      "anyOf": [
-       {
-        "type": "array",
-        "items": {}
-       },
-       {
-        "type": "null"
-       }
-      ]
-     },
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "TTSOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio",
-     "timestamps"
-    ],
-    "required": [
-     "audio"
     ]
    }
   },
@@ -1314,7 +810,6 @@
    "endpoint_id": "elevenlabs/tts/eleven-v4-turbo",
    "display_name": "Eleven v4 Turbo",
    "description": "Generate speech with Eleven v4 Turbo from ElevenLabs. Choose a voice and control delivery with audio tags, stability, similarity settings, and IPA pronunciation.",
-   "status_base": "elevenlabs/tts/eleven-v4-turbo",
    "input": {
     "properties": {
      "output_format": {
@@ -1433,95 +928,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "timestamps": {
-      "title": "Timestamps",
-      "description": "Timestamps for each word in the generated speech. Only returned if `timestamps` is set to True in the request.",
-      "anyOf": [
-       {
-        "type": "array",
-        "items": {}
-       },
-       {
-        "type": "null"
-       }
-      ]
-     },
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "TTSOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio",
-     "timestamps"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/elevenlabs/tts/turbo-v2.5": {
    "endpoint_id": "fal-ai/elevenlabs/tts/turbo-v2.5",
    "display_name": "ElevenLabs TTS Turbo v2.5",
    "description": "Generate high-speed text-to-speech audio using ElevenLabs TTS Turbo v2.5.",
-   "status_base": "fal-ai/elevenlabs/tts/turbo-v2.5",
    "input": {
     "properties": {
      "speed": {
@@ -1640,95 +1052,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "timestamps": {
-      "title": "Timestamps",
-      "description": "Timestamps for each word in the generated speech. Only returned if `timestamps` is set to True in the request.",
-      "anyOf": [
-       {
-        "type": "array",
-        "items": {}
-       },
-       {
-        "type": "null"
-       }
-      ]
-     },
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "TTSOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio",
-     "timestamps"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/gemini-3.1-flash-tts": {
    "endpoint_id": "fal-ai/gemini-3.1-flash-tts",
    "display_name": "Gemini 3.1 Flash Tts",
    "description": "Newest audio model from Google introduces granular audio tags that give you precise control to direct AI speech for expressive audio generation.",
-   "status_base": "fal-ai/gemini-3.1-flash-tts",
    "input": {
     "title": "Gemini31FlashTTSInput",
     "properties": {
@@ -2002,82 +1331,12 @@
      "temperature",
      "output_format"
     ]
-   },
-   "output": {
-    "title": "GeminiTTSOutput",
-    "properties": {
-     "audio": {
-      "properties": {
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ]
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "description": "Output for Gemini text-to-speech generation.",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ]
    }
   },
   "google/gemini-3.8-flash-lite-tts": {
    "endpoint_id": "google/gemini-3.8-flash-lite-tts",
    "display_name": "Gemini 3.8 Flash Lite TTS",
    "description": "Generate expressive speech with Gemini 3.8 Flash Lite TTS. Choose from 30 voices, guide delivery with style instructions, and create single-speaker narration or two-speaker dialogue.",
-   "status_base": "google/gemini-3.8-flash-lite-tts",
    "input": {
     "type": "object",
     "x-fal-order-properties": [
@@ -2285,81 +1544,12 @@
      }
     },
     "additionalProperties": false
-   },
-   "output": {
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "title": "Gemini38TTSOutput",
-    "properties": {
-     "audio": {
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File",
-      "properties": {
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       }
-      },
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "required": [
-     "audio"
-    ]
    }
   },
   "google/gemini-3.8-flash-tts": {
    "endpoint_id": "google/gemini-3.8-flash-tts",
    "display_name": "Gemini 3.8 Flash TTS",
    "description": "Generate expressive speech with Gemini 3.8 Flash TTS. Choose from 30 voices, direct delivery with style instructions, and create single-speaker narration or two-speaker dialogue.",
-   "status_base": "google/gemini-3.8-flash-tts",
    "input": {
     "properties": {
      "speakers": {
@@ -2567,81 +1757,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       }
-      },
-      "title": "File",
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     }
-    },
-    "title": "Gemini38TTSOutput",
-    "required": [
-     "audio"
-    ],
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "type": "object"
    }
   },
   "heygen/heygen-voice": {
    "endpoint_id": "heygen/heygen-voice",
    "display_name": "HeyGen Voice",
    "description": "HeyGen Voice turns text into natural speech with a library voice or an instant clone from a reference clip.",
-   "status_base": "heygen/heygen-voice",
    "input": {
     "x-fal-order-properties": [
      "text",
@@ -2777,88 +1898,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "duration"
-    ],
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "properties": {
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object"
-     },
-     "duration": {
-      "title": "Duration",
-      "type": "number",
-      "description": "Duration of the audio in seconds."
-     }
-    },
-    "required": [
-     "audio",
-     "duration"
-    ],
-    "title": "HeyGenVoiceOutput",
-    "type": "object"
    }
   },
   "heygen/heygen-voice/turbo": {
    "endpoint_id": "heygen/heygen-voice/turbo",
    "display_name": "HeyGen Voice Turbo",
    "description": "HeyGen Voice Turbo is the fast, low-cost tier of HeyGen Voice, with library voices and instant cloning from a reference clip.",
-   "status_base": "heygen/heygen-voice/turbo",
    "input": {
     "x-fal-order-properties": [
      "text",
@@ -2994,88 +2039,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "duration"
-    ],
-    "properties": {
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "properties": {
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object"
-     },
-     "duration": {
-      "title": "Duration",
-      "type": "number",
-      "description": "Duration of the audio in seconds."
-     }
-    },
-    "required": [
-     "audio",
-     "duration"
-    ],
-    "title": "HeyGenVoiceOutput",
-    "type": "object"
    }
   },
   "fal-ai/index-tts-2/text-to-speech": {
    "endpoint_id": "fal-ai/index-tts-2/text-to-speech",
    "display_name": "Index TTS 2.0",
    "description": "Generate natural, clear speeches using Index TTS 2.0 from IndexTeam",
-   "status_base": "fal-ai/index-tts-2/text-to-speech",
    "input": {
     "required": [
      "audio_url",
@@ -3247,81 +2216,12 @@
       ]
      }
     }
-   },
-   "output": {
-    "required": [
-     "audio"
-    ],
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "type": "object",
-    "title": "IndexTTS2Output",
-    "properties": {
-     "audio": {
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "title": "File",
-      "properties": {
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      }
-     }
-    }
    }
   },
   "fal-ai/inworld-tts": {
    "endpoint_id": "fal-ai/inworld-tts",
    "display_name": "Inworld TTS-1.5 Max",
    "description": "Text to Speech Endpoint for Inworld's TTS-1.5 Max.",
-   "status_base": "fal-ai/inworld-tts",
    "input": {
     "properties": {
      "text": {
@@ -3483,81 +2383,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "title": "File",
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "type": "object",
-    "title": "Output",
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/kling-video/v1/tts": {
    "endpoint_id": "fal-ai/kling-video/v1/tts",
    "display_name": "Kling TTS",
    "description": "Generate speech from text prompts and different voices using the Kling TTS model, which leverages advanced AI techniques to create high-quality text-to-speech.",
-   "status_base": "fal-ai/kling-video/v1/tts",
    "input": {
     "properties": {
      "voice_speed": {
@@ -3646,81 +2477,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "TTSOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/maya/batch": {
    "endpoint_id": "fal-ai/maya/batch",
    "display_name": "Maya",
    "description": "Maya1 is a state-of-the-art speech model by Maya Research for expressive voice generation, built to capture real human emotion and precise voice design.",
-   "status_base": "fal-ai/maya/batch",
    "input": {
     "description": "Input schema for batch Maya-1-Voice TTS generation",
     "type": "object",
@@ -3820,118 +2582,12 @@
      "enable_safety_checker"
     ],
     "title": "MayaVoiceBatchInput"
-   },
-   "output": {
-    "description": "Output schema for batch Maya-1-Voice TTS generation",
-    "type": "object",
-    "properties": {
-     "audios": {
-      "description": "List of generated audio files",
-      "items": {
-       "type": "object",
-       "properties": {
-        "url": {
-         "description": "The URL where the file can be downloaded from.",
-         "type": "string",
-         "title": "Url"
-        },
-        "content_type": {
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ],
-         "description": "The mime type of the file.",
-         "title": "Content Type"
-        },
-        "file_size": {
-         "anyOf": [
-          {
-           "type": "integer"
-          },
-          {
-           "type": "null"
-          }
-         ],
-         "description": "The size of the file in bytes.",
-         "title": "File Size"
-        },
-        "file_name": {
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ],
-         "description": "The name of the file. It will be auto-generated if not provided.",
-         "title": "File Name"
-        }
-       },
-       "required": [
-        "url"
-       ],
-       "x-fal-order-properties": [
-        "url",
-        "content_type",
-        "file_name",
-        "file_size"
-       ],
-       "title": "File"
-      },
-      "type": "array",
-      "title": "Audios"
-     },
-     "sample_rate": {
-      "description": "Sample rate of all generated audio files",
-      "type": "string",
-      "title": "Sample Rate"
-     },
-     "total_generation_time": {
-      "description": "Total time taken to generate all audio files in seconds",
-      "type": "number",
-      "title": "Total Generation Time"
-     },
-     "durations": {
-      "description": "Duration of each generated audio in seconds",
-      "items": {
-       "type": "number"
-      },
-      "type": "array",
-      "title": "Durations"
-     },
-     "average_rtf": {
-      "description": "Average real-time factor across all generations",
-      "type": "number",
-      "title": "Average Rtf"
-     }
-    },
-    "required": [
-     "audios",
-     "durations",
-     "sample_rate",
-     "total_generation_time",
-     "average_rtf"
-    ],
-    "x-fal-order-properties": [
-     "audios",
-     "durations",
-     "sample_rate",
-     "total_generation_time",
-     "average_rtf"
-    ],
-    "title": "MayaVoiceBatchOutput"
    }
   },
   "fal-ai/maya/stream": {
    "endpoint_id": "fal-ai/maya/stream",
    "display_name": "Maya",
    "description": "Maya1 is a state-of-the-art speech model by Maya Research for expressive voice generation, built to capture real human emotion and precise voice design.",
-   "status_base": "fal-ai/maya/stream",
    "input": {
     "description": "Input schema for Maya-1-Voice streaming TTS generation",
     "type": "object",
@@ -4024,14 +2680,12 @@
      "enable_safety_checker"
     ],
     "title": "MayaVoiceStreamingInput"
-   },
-   "output": {}
+   }
   },
   "fal-ai/maya": {
    "endpoint_id": "fal-ai/maya",
    "display_name": "Maya1",
    "description": "Maya1 is a state-of-the-art speech model by Maya Research for expressive voice generation, built to capture real human emotion and precise voice design.",
-   "status_base": "fal-ai/maya",
    "input": {
     "description": "Input schema for Maya-1-Voice TTS generation",
     "type": "object",
@@ -4123,110 +2777,12 @@
      "enable_safety_checker"
     ],
     "title": "MayaVoiceInput"
-   },
-   "output": {
-    "description": "Output schema for Maya-1-Voice TTS generation",
-    "type": "object",
-    "properties": {
-     "sample_rate": {
-      "description": "Sample rate of the generated audio",
-      "type": "string",
-      "title": "Sample Rate"
-     },
-     "duration": {
-      "description": "Duration of the generated audio in seconds",
-      "type": "number",
-      "title": "Duration"
-     },
-     "rtf": {
-      "description": "Real-time factor (generation_time / audio_duration). Lower is better.",
-      "type": "number",
-      "title": "Rtf"
-     },
-     "generation_time": {
-      "description": "Time taken to generate the audio in seconds",
-      "type": "number",
-      "title": "Generation Time"
-     },
-     "audio": {
-      "type": "object",
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File"
-     }
-    },
-    "required": [
-     "audio",
-     "duration",
-     "sample_rate",
-     "generation_time",
-     "rtf"
-    ],
-    "x-fal-order-properties": [
-     "audio",
-     "duration",
-     "sample_rate",
-     "generation_time",
-     "rtf"
-    ],
-    "title": "MayaVoiceOutput"
    }
   },
   "fal-ai/minimax/preview/speech-2.5-hd": {
    "endpoint_id": "fal-ai/minimax/preview/speech-2.5-hd",
    "display_name": "Minimax",
    "description": "Generate speech from text prompts and different voices using the MiniMax Speech-02 HD model, which leverages advanced AI techniques to create high-quality text-to-speech.",
-   "status_base": "fal-ai/minimax/preview/speech-2.5-hd",
    "input": {
     "properties": {
      "audio_setting": {
@@ -4478,88 +3034,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "duration_ms": {
-      "type": "integer",
-      "title": "Duration Ms",
-      "description": "Duration of the audio in milliseconds"
-     },
-     "audio": {
-      "properties": {
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "type": "object",
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "type": "object",
-    "title": "TextToSpeechOutput",
-    "x-fal-order-properties": [
-     "audio",
-     "duration_ms"
-    ],
-    "required": [
-     "audio",
-     "duration_ms"
-    ]
    }
   },
   "fal-ai/minimax/preview/speech-2.5-turbo": {
    "endpoint_id": "fal-ai/minimax/preview/speech-2.5-turbo",
    "display_name": "Minimax",
    "description": "Generate fast speech from text prompts and different voices using the MiniMax Speech-02 Turbo model, which leverages advanced AI techniques to create high-quality text-to-speech.",
-   "status_base": "fal-ai/minimax/preview/speech-2.5-turbo",
    "input": {
     "properties": {
      "audio_setting": {
@@ -4811,88 +3291,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "duration_ms": {
-      "type": "integer",
-      "title": "Duration Ms",
-      "description": "Duration of the audio in milliseconds"
-     },
-     "audio": {
-      "properties": {
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "type": "object",
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "type": "object",
-    "title": "TextToSpeechOutput",
-    "x-fal-order-properties": [
-     "audio",
-     "duration_ms"
-    ],
-    "required": [
-     "audio",
-     "duration_ms"
-    ]
    }
   },
   "fal-ai/minimax/speech-2.6-hd": {
    "endpoint_id": "fal-ai/minimax/speech-2.6-hd",
    "display_name": "MiniMax Speech 2.6 [HD]",
    "description": "Generate speech from text prompts and different voices using the MiniMax Speech-2.6 HD model, which leverages advanced AI techniques to create high-quality text-to-speech.",
-   "status_base": "fal-ai/minimax/speech-2.6-hd",
    "input": {
     "properties": {
      "normalization_setting": {
@@ -5184,88 +3588,12 @@
     "required": [
      "prompt"
     ]
-   },
-   "output": {
-    "properties": {
-     "duration_ms": {
-      "type": "integer",
-      "title": "Duration Ms",
-      "description": "Duration of the audio in milliseconds"
-     },
-     "audio": {
-      "properties": {
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "type": "object",
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "type": "object",
-    "title": "TextToSpeechHD26Output",
-    "x-fal-order-properties": [
-     "audio",
-     "duration_ms"
-    ],
-    "required": [
-     "audio",
-     "duration_ms"
-    ]
    }
   },
   "fal-ai/minimax/speech-2.6-turbo": {
    "endpoint_id": "fal-ai/minimax/speech-2.6-turbo",
    "display_name": "MiniMax Speech 2.6 [Turbo]",
    "description": "Generate speech from text prompts and different voices using the MiniMax Speech-2.6 HD model, which leverages advanced AI techniques to create high-quality text-to-speech.",
-   "status_base": "fal-ai/minimax/speech-2.6-turbo",
    "input": {
     "properties": {
      "normalization_setting": {
@@ -5557,88 +3885,12 @@
     "required": [
      "prompt"
     ]
-   },
-   "output": {
-    "properties": {
-     "duration_ms": {
-      "type": "integer",
-      "title": "Duration Ms",
-      "description": "Duration of the audio in milliseconds"
-     },
-     "audio": {
-      "properties": {
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "type": "object",
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "type": "object",
-    "title": "TextToSpeechTurbo26Output",
-    "x-fal-order-properties": [
-     "audio",
-     "duration_ms"
-    ],
-    "required": [
-     "audio",
-     "duration_ms"
-    ]
    }
   },
   "fal-ai/minimax/speech-2.8-hd": {
    "endpoint_id": "fal-ai/minimax/speech-2.8-hd",
    "display_name": "MiniMax Speech 2.8 [HD]",
    "description": "Generate speech from text prompts and different voices using the MiniMax Speech-2.8 HD model, which leverages advanced AI techniques to create high-quality text-to-speech.",
-   "status_base": "fal-ai/minimax/speech-2.8-hd",
    "input": {
     "properties": {
      "normalization_setting": {
@@ -5976,89 +4228,12 @@
      "prompt"
     ],
     "description": "Request model for Speech 2.8 HD - highest quality speech synthesis."
-   },
-   "output": {
-    "properties": {
-     "duration_ms": {
-      "type": "integer",
-      "title": "Duration Ms",
-      "description": "Duration of the audio in milliseconds"
-     },
-     "audio": {
-      "properties": {
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "type": "object",
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "type": "object",
-    "title": "TextToSpeechHD28Output",
-    "x-fal-order-properties": [
-     "audio",
-     "duration_ms"
-    ],
-    "required": [
-     "audio",
-     "duration_ms"
-    ],
-    "description": "Output model for Speech 2.8 HD."
    }
   },
   "fal-ai/minimax/speech-2.8-turbo": {
    "endpoint_id": "fal-ai/minimax/speech-2.8-turbo",
    "display_name": "MiniMax Speech 2.8 [Turbo]",
    "description": "Generate speech from text prompts and different voices using the MiniMax Speech-2.8 Turbo model, which leverages advanced AI techniques to create high-quality text-to-speech.",
-   "status_base": "fal-ai/minimax/speech-2.8-turbo",
    "input": {
     "properties": {
      "normalization_setting": {
@@ -6396,89 +4571,12 @@
      "prompt"
     ],
     "description": "Request model for Speech 2.8 Turbo - faster speech synthesis with good quality."
-   },
-   "output": {
-    "properties": {
-     "duration_ms": {
-      "type": "integer",
-      "title": "Duration Ms",
-      "description": "Duration of the audio in milliseconds"
-     },
-     "audio": {
-      "properties": {
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "type": "object",
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "type": "object",
-    "title": "TextToSpeechTurbo28Output",
-    "x-fal-order-properties": [
-     "audio",
-     "duration_ms"
-    ],
-    "required": [
-     "audio",
-     "duration_ms"
-    ],
-    "description": "Output model for Speech 2.8 Turbo."
    }
   },
   "fal-ai/minimax/speech-02-hd": {
    "endpoint_id": "fal-ai/minimax/speech-02-hd",
    "display_name": "MiniMax Speech-02 HD",
    "description": "Generate speech from text prompts and different voices using the MiniMax Speech-02 HD model, which leverages advanced AI techniques to create high-quality text-to-speech.",
-   "status_base": "fal-ai/minimax/speech-02-hd",
    "input": {
     "properties": {
      "audio_setting": {
@@ -6727,88 +4825,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "duration_ms": {
-      "type": "integer",
-      "title": "Duration Ms",
-      "description": "Duration of the audio in milliseconds"
-     },
-     "audio": {
-      "properties": {
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "type": "object",
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "type": "object",
-    "title": "TextToSpeechOutput",
-    "x-fal-order-properties": [
-     "audio",
-     "duration_ms"
-    ],
-    "required": [
-     "audio",
-     "duration_ms"
-    ]
    }
   },
   "fal-ai/minimax/speech-02-turbo": {
    "endpoint_id": "fal-ai/minimax/speech-02-turbo",
    "display_name": "MiniMax Speech-02 Turbo",
    "description": "Generate fast speech from text prompts and different voices using the MiniMax Speech-02 Turbo model, which leverages advanced AI techniques to create high-quality text-to-speech.",
-   "status_base": "fal-ai/minimax/speech-02-turbo",
    "input": {
     "properties": {
      "audio_setting": {
@@ -7057,88 +5079,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "duration_ms": {
-      "type": "integer",
-      "title": "Duration Ms",
-      "description": "Duration of the audio in milliseconds"
-     },
-     "audio": {
-      "properties": {
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "type": "object",
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "type": "object",
-    "title": "TextToSpeechOutput",
-    "x-fal-order-properties": [
-     "audio",
-     "duration_ms"
-    ],
-    "required": [
-     "audio",
-     "duration_ms"
-    ]
    }
   },
   "fal-ai/minimax/voice-clone": {
    "endpoint_id": "fal-ai/minimax/voice-clone",
    "display_name": "MiniMax Voice Cloning",
    "description": "Clone a voice from a sample audio and generate speech from text prompts using the MiniMax model, which leverages advanced AI techniques to create high-quality text-to-speech.",
-   "status_base": "fal-ai/minimax/voice-clone",
    "input": {
     "properties": {
      "accuracy": {
@@ -7219,95 +5165,12 @@
     "required": [
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "custom_voice_id": {
-      "type": "string",
-      "title": "Custom Voice Id",
-      "description": "The cloned voice ID for use with TTS"
-     },
-     "audio": {
-      "anyOf": [
-       {
-        "properties": {
-         "url": {
-          "type": "string",
-          "title": "Url",
-          "description": "The URL where the file can be downloaded from."
-         },
-         "file_name": {
-          "title": "File Name",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "description": "The name of the file. It will be auto-generated if not provided."
-         },
-         "file_size": {
-          "title": "File Size",
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "description": "The size of the file in bytes."
-         },
-         "content_type": {
-          "title": "Content Type",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "description": "The mime type of the file."
-         }
-        },
-        "type": "object",
-        "title": "File",
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size"
-        ],
-        "required": [
-         "url"
-        ]
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "Preview audio generated with the cloned voice (if requested)"
-     }
-    },
-    "type": "object",
-    "title": "VoiceCloneOutput",
-    "x-fal-order-properties": [
-     "custom_voice_id",
-     "audio"
-    ],
-    "required": [
-     "custom_voice_id"
-    ]
    }
   },
   "fal-ai/minimax/voice-design": {
    "endpoint_id": "fal-ai/minimax/voice-design",
    "display_name": "MiniMax Voice Design",
    "description": "Design a personalized voice from a text description, and generate speech from text prompts using the MiniMax model, which leverages advanced AI techniques to create high-quality text-to-speech.",
-   "status_base": "fal-ai/minimax/voice-design",
    "input": {
     "properties": {
      "preview_text": {
@@ -7341,88 +5204,12 @@
      "prompt",
      "preview_text"
     ]
-   },
-   "output": {
-    "properties": {
-     "custom_voice_id": {
-      "type": "string",
-      "title": "Custom Voice Id",
-      "description": "The voice_id of the generated voice"
-     },
-     "audio": {
-      "properties": {
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "type": "object",
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "type": "object",
-    "title": "VoiceDesignOutput",
-    "x-fal-order-properties": [
-     "custom_voice_id",
-     "audio"
-    ],
-    "required": [
-     "custom_voice_id",
-     "audio"
-    ]
    }
   },
   "fal-ai/orpheus-tts": {
    "endpoint_id": "fal-ai/orpheus-tts",
    "display_name": "Orpheus TTS",
    "description": "Orpheus TTS is a state-of-the-art, Llama-based Speech-LLM designed for high-quality, empathetic text-to-speech generation. This model has been finetuned to deliver human-level speech synthesis, achieving exceptional clarity, expressiveness, and real-time performances.",
-   "status_base": "fal-ai/orpheus-tts",
    "input": {
     "properties": {
      "temperature": {
@@ -7481,81 +5268,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "title": "File",
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     }
-    },
-    "title": "OrpheusOutput",
-    "required": [
-     "audio"
-    ],
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "type": "object"
    }
   },
   "fal-ai/qwen-3-tts/text-to-speech/0.6b": {
    "endpoint_id": "fal-ai/qwen-3-tts/text-to-speech/0.6b",
    "display_name": "Qwen 3 TTS - Text to Speech [0.6B]",
    "description": "Bring speech to your texts using Qwen3-TTS Custom-Voice model with pre-trained voices or use your custom voice with Qwen3-TTS Clone Voice model",
-   "status_base": "fal-ai/qwen-3-tts/text-to-speech/0.6b",
    "input": {
     "properties": {
      "subtalker_temperature": {
@@ -7804,136 +5522,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "sample_rate": {
-        "title": "Sample Rate",
-        "description": "The sample rate of the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "duration": {
-        "title": "Duration",
-        "description": "The duration of the audio",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "bitrate": {
-        "title": "Bitrate",
-        "description": "The bitrate of the audio (e.g., '192k' or 192000)",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "channels": {
-        "title": "Channels",
-        "description": "The number of channels in the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "AudioFile",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "duration",
-       "channels",
-       "sample_rate",
-       "bitrate"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "Qwen3TTSOutput06b",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/qwen-3-tts/text-to-speech/1.7b": {
    "endpoint_id": "fal-ai/qwen-3-tts/text-to-speech/1.7b",
    "display_name": "Qwen 3 TTS - Text to Speech [1.7B]",
    "description": "Bring speech to your texts using Qwen3-TTS Custom-Voice model with pre-trained voices or use your custom voice with Qwen3-TTS Clone Voice model",
-   "status_base": "fal-ai/qwen-3-tts/text-to-speech/1.7b",
    "input": {
     "properties": {
      "subtalker_temperature": {
@@ -8182,136 +5776,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "sample_rate": {
-        "title": "Sample Rate",
-        "description": "The sample rate of the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "duration": {
-        "title": "Duration",
-        "description": "The duration of the audio",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "bitrate": {
-        "title": "Bitrate",
-        "description": "The bitrate of the audio (e.g., '192k' or 192000)",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "channels": {
-        "title": "Channels",
-        "description": "The number of channels in the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "AudioFile",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "duration",
-       "channels",
-       "sample_rate",
-       "bitrate"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "Qwen3TTSOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/qwen-3-tts/voice-design/1.7b": {
    "endpoint_id": "fal-ai/qwen-3-tts/voice-design/1.7b",
    "display_name": "Qwen 3 TTS - Voice Design [1.7B]",
    "description": "Create custom voices using Qwen3-TTS Voice Design model and later use Clone Voice model to create your own voices!",
-   "status_base": "fal-ai/qwen-3-tts/voice-design/1.7b",
    "input": {
     "properties": {
      "subtalker_temperature": {
@@ -8501,136 +5971,12 @@
      "text",
      "prompt"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "sample_rate": {
-        "title": "Sample Rate",
-        "description": "The sample rate of the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "duration": {
-        "title": "Duration",
-        "description": "The duration of the audio",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "bitrate": {
-        "title": "Bitrate",
-        "description": "The bitrate of the audio (e.g., '192k' or 192000)",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "channels": {
-        "title": "Channels",
-        "description": "The number of channels in the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "AudioFile",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "duration",
-       "channels",
-       "sample_rate",
-       "bitrate"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "Qwen3DesignVoiceOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "alibaba/qwen-audio-3-tts": {
    "endpoint_id": "alibaba/qwen-audio-3-tts",
    "display_name": "Qwen Audio 3.0 TTS (Flash)",
    "description": "Generate natural multilingual speech from text with fast voice and language control using Qwen Audio 3.0 TTS Flash.",
-   "status_base": "alibaba/qwen-audio-3-tts",
    "input": {
     "properties": {
      "enable_safety_checker": {
@@ -8730,136 +6076,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "sample_rate": {
-        "title": "Sample Rate",
-        "description": "The sample rate of the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "duration": {
-        "title": "Duration",
-        "description": "The duration of the audio",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "bitrate": {
-        "title": "Bitrate",
-        "description": "The bitrate of the audio (e.g., '192k' or 192000)",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "channels": {
-        "title": "Channels",
-        "description": "The number of channels in the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "AudioFile",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "duration",
-       "channels",
-       "sample_rate",
-       "bitrate"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "QwenAudio3TTSOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/vibevoice/0.5b": {
    "endpoint_id": "fal-ai/vibevoice/0.5b",
    "display_name": "Vibevoice",
    "description": "Generate long speech snippets fast using Microsoft's powerful TTS.",
-   "status_base": "fal-ai/vibevoice/0.5b",
    "input": {
     "x-fal-order-properties": [
      "script",
@@ -8922,110 +6144,12 @@
       "default": 1.3
      }
     }
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "duration",
-     "sample_rate",
-     "generation_time",
-     "rtf"
-    ],
-    "type": "object",
-    "required": [
-     "audio",
-     "duration",
-     "sample_rate",
-     "generation_time",
-     "rtf"
-    ],
-    "title": "VibeVoice_0_5BOutput",
-    "description": "Output schema for VibeVoice-0.5b TTS generation",
-    "properties": {
-     "sample_rate": {
-      "type": "integer",
-      "description": "Sample rate of the generated audio",
-      "title": "Sample Rate"
-     },
-     "rtf": {
-      "type": "number",
-      "description": "Real-time factor (generation_time / audio_duration). Lower is better.",
-      "title": "Rtf"
-     },
-     "generation_time": {
-      "type": "number",
-      "description": "Time taken to generate the audio in seconds",
-      "title": "Generation Time"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "properties": {
-       "content_type": {
-        "description": "The mime type of the file.",
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      }
-     },
-     "duration": {
-      "type": "number",
-      "description": "Duration of the generated audio in seconds",
-      "title": "Duration"
-     }
-    }
    }
   },
   "fal-ai/vibevoice": {
    "endpoint_id": "fal-ai/vibevoice",
    "display_name": "VibeVoice 1.5B",
    "description": "Generate long, expressive multi-voice speech using Microsoft's powerful TTS",
-   "status_base": "fal-ai/vibevoice",
    "input": {
     "x-fal-order-properties": [
      "script",
@@ -9118,110 +6242,12 @@
       "title": "Speakers"
      }
     }
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "duration",
-     "sample_rate",
-     "generation_time",
-     "rtf"
-    ],
-    "type": "object",
-    "required": [
-     "audio",
-     "duration",
-     "sample_rate",
-     "generation_time",
-     "rtf"
-    ],
-    "title": "VibeVoiceOutput",
-    "description": "Output schema for VibeVoice TTS generation",
-    "properties": {
-     "sample_rate": {
-      "type": "integer",
-      "description": "Sample rate of the generated audio",
-      "title": "Sample Rate"
-     },
-     "rtf": {
-      "type": "number",
-      "description": "Real-time factor (generation_time / audio_duration). Lower is better.",
-      "title": "Rtf"
-     },
-     "generation_time": {
-      "type": "number",
-      "description": "Time taken to generate the audio in seconds",
-      "title": "Generation Time"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "properties": {
-       "content_type": {
-        "description": "The mime type of the file.",
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      }
-     },
-     "duration": {
-      "type": "number",
-      "description": "Duration of the generated audio in seconds",
-      "title": "Duration"
-     }
-    }
    }
   },
   "fal-ai/vibevoice/7b": {
    "endpoint_id": "fal-ai/vibevoice/7b",
    "display_name": "VibeVoice 7B",
    "description": "Generate long, expressive multi-voice speech using Microsoft's powerful TTS",
-   "status_base": "fal-ai/vibevoice/7b",
    "input": {
     "x-fal-order-properties": [
      "script",
@@ -9314,110 +6340,12 @@
       "title": "Speakers"
      }
     }
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "duration",
-     "sample_rate",
-     "generation_time",
-     "rtf"
-    ],
-    "type": "object",
-    "required": [
-     "audio",
-     "duration",
-     "sample_rate",
-     "generation_time",
-     "rtf"
-    ],
-    "title": "VibeVoiceOutput",
-    "description": "Output schema for VibeVoice TTS generation",
-    "properties": {
-     "sample_rate": {
-      "type": "integer",
-      "description": "Sample rate of the generated audio",
-      "title": "Sample Rate"
-     },
-     "rtf": {
-      "type": "number",
-      "description": "Real-time factor (generation_time / audio_duration). Lower is better.",
-      "title": "Rtf"
-     },
-     "generation_time": {
-      "type": "number",
-      "description": "Time taken to generate the audio in seconds",
-      "title": "Generation Time"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "properties": {
-       "content_type": {
-        "description": "The mime type of the file.",
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      }
-     },
-     "duration": {
-      "type": "number",
-      "description": "Duration of the generated audio in seconds",
-      "title": "Duration"
-     }
-    }
    }
   },
   "xai/tts/v1": {
    "endpoint_id": "xai/tts/v1",
    "display_name": "xAI Text to Speech",
    "description": "Generate speech with expressive and realistic voices from xAI",
-   "status_base": "xai/tts/v1",
    "input": {
     "required": [
      "text"
@@ -9570,82 +6498,12 @@
      "output_format",
      "enable_safety_checker"
     ]
-   },
-   "output": {
-    "required": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "properties": {
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size",
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type",
-        "description": "The mime type of the file."
-       }
-      },
-      "title": "File",
-      "required": [
-       "url"
-      ],
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ]
-     }
-    },
-    "title": "XAITTSOutput",
-    "description": "Output for xAI text-to-speech generation.",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ]
    }
   },
   "fal-ai/zonos2": {
    "endpoint_id": "fal-ai/zonos2",
    "display_name": "Zonos2 Text to Speech",
    "description": "Zonos2 is a text-to-speech model that clones a voice from a short sample and speaks naturally across many languages.",
-   "status_base": "fal-ai/zonos2",
    "input": {
     "x-fal-order-properties": [
      "reference_audio_url",
@@ -9762,81 +6620,6 @@
     },
     "required": [
      "reference_audio_url"
-    ]
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed"
-    ],
-    "type": "object",
-    "title": "Zonos2Output",
-    "properties": {
-     "seed": {
-      "type": "integer",
-      "title": "Seed",
-      "description": "The seed used for generation."
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "title": "File",
-      "properties": {
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "required": [
-     "audio",
-     "seed"
     ]
    }
   }

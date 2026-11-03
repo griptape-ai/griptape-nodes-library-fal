@@ -5,7 +5,6 @@
    "endpoint_id": "veed/avatars/audio-to-video",
    "display_name": "Avatars",
    "description": "Generate high-quality videos with UGC-like avatars from audio",
-   "status_base": "veed/avatars/audio-to-video",
    "input": {
     "title": "Audio2VideoInput",
     "type": "object",
@@ -61,81 +60,12 @@
      "avatar_id",
      "audio_url"
     ]
-   },
-   "output": {
-    "title": "AvatarsAppOutput",
-    "type": "object",
-    "properties": {
-     "video": {
-      "title": "File",
-      "type": "object",
-      "properties": {
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "x-fal-order-properties": [
-     "video"
-    ],
-    "required": [
-     "video"
-    ]
    }
   },
   "argil/avatars/audio-to-video": {
    "endpoint_id": "argil/avatars/audio-to-video",
    "display_name": "Avatars Audio to Video",
    "description": "High-quality avatar videos that feel real, generated from your audio",
-   "status_base": "argil/avatars/audio-to-video",
    "input": {
     "title": "InferenceRequest",
     "type": "object",
@@ -194,115 +124,12 @@
      "avatar",
      "audio_url"
     ]
-   },
-   "output": {
-    "title": "InferenceResult",
-    "type": "object",
-    "properties": {
-     "moderation_transcription": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Moderation Transcription"
-     },
-     "moderation_error": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Moderation Error"
-     },
-     "moderation_flagged": {
-      "title": "Moderation Flagged",
-      "type": "boolean",
-      "default": false
-     },
-     "video": {
-      "anyOf": [
-       {
-        "title": "Video",
-        "type": "object",
-        "properties": {
-         "file_size": {
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "title": "File Size",
-          "description": "The size of the file in bytes."
-         },
-         "file_name": {
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "title": "File Name",
-          "description": "The name of the file. It will be auto-generated if not provided."
-         },
-         "content_type": {
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "title": "Content Type",
-          "description": "The mime type of the file."
-         },
-         "url": {
-          "title": "Url",
-          "type": "string",
-          "description": "The URL where the file can be downloaded from."
-         }
-        },
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size"
-        ],
-        "required": [
-         "url"
-        ]
-       },
-       {
-        "type": "null"
-       }
-      ]
-     }
-    },
-    "x-fal-order-properties": [
-     "video",
-     "moderation_flagged",
-     "moderation_transcription",
-     "moderation_error"
-    ]
    }
   },
   "fal-ai/echomimic-v3": {
    "endpoint_id": "fal-ai/echomimic-v3",
    "display_name": "EchoMimic V3",
    "description": "EchoMimic V3 generates a talking avatar model from a picture, audio and text prompt.",
-   "status_base": "fal-ai/echomimic-v3",
    "input": {
     "properties": {
      "audio_url": {
@@ -387,81 +214,12 @@
      "audio_url",
      "prompt"
     ]
-   },
-   "output": {
-    "properties": {
-     "video": {
-      "properties": {
-       "file_name": {
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided."
-       },
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_size": {
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file."
-       }
-      },
-      "type": "object",
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "type": "object",
-    "title": "EchoMimicResponse",
-    "x-fal-order-properties": [
-     "video"
-    ],
-    "required": [
-     "video"
-    ]
    }
   },
   "fal-ai/elevenlabs/dubbing": {
    "endpoint_id": "fal-ai/elevenlabs/dubbing",
    "display_name": "ElevenLabs Dubbing",
    "description": "Generate dubbed videos or audios using ElevenLabs Dubbing feature!",
-   "status_base": "fal-ai/elevenlabs/dubbing",
    "input": {
     "properties": {
      "highest_resolution": {
@@ -539,160 +297,12 @@
     "required": [
      "target_lang"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "description": "The dubbed audio file.",
-      "anyOf": [
-       {
-        "properties": {
-         "content_type": {
-          "title": "Content Type",
-          "description": "The mime type of the file.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "url": {
-          "title": "Url",
-          "description": "The URL where the file can be downloaded from.",
-          "type": "string"
-         },
-         "file_size": {
-          "title": "File Size",
-          "description": "The size of the file in bytes.",
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "file_name": {
-          "title": "File Name",
-          "description": "The name of the file. It will be auto-generated if not provided.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         }
-        },
-        "title": "File",
-        "type": "object",
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size"
-        ],
-        "required": [
-         "url"
-        ]
-       },
-       {
-        "type": "null"
-       }
-      ]
-     },
-     "video": {
-      "description": "The dubbed video file. Will be populated if video_url was provided in the request.",
-      "anyOf": [
-       {
-        "properties": {
-         "content_type": {
-          "title": "Content Type",
-          "description": "The mime type of the file.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "url": {
-          "title": "Url",
-          "description": "The URL where the file can be downloaded from.",
-          "type": "string"
-         },
-         "file_size": {
-          "title": "File Size",
-          "description": "The size of the file in bytes.",
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "file_name": {
-          "title": "File Name",
-          "description": "The name of the file. It will be auto-generated if not provided.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         }
-        },
-        "title": "File",
-        "type": "object",
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size"
-        ],
-        "required": [
-         "url"
-        ]
-       },
-       {
-        "type": "null"
-       }
-      ]
-     },
-     "target_lang": {
-      "title": "Target Lang",
-      "description": "The target language of the dubbed content",
-      "type": "string"
-     }
-    },
-    "title": "DubbingOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "video",
-     "audio",
-     "target_lang"
-    ],
-    "required": [
-     "target_lang"
-    ]
    }
   },
   "fal-ai/longcat-single-avatar/image-audio-to-video": {
    "endpoint_id": "fal-ai/longcat-single-avatar/image-audio-to-video",
    "display_name": "Longcat Single Avatar",
    "description": "LongCat-Video-Avatar is an audio-driven video generation model that can generates super-realistic, lip-synchronized long video generation with natural dynamics and consistent identity.",
-   "status_base": "fal-ai/longcat-single-avatar/image-audio-to-video",
    "input": {
     "properties": {
      "enable_prompt_expansion": {
@@ -805,89 +415,12 @@
      "image_url",
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "seed": {
-      "title": "Seed",
-      "description": "The seed used for generation.",
-      "type": "integer"
-     },
-     "video": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "ImageAudioToVideoResponse",
-    "type": "object",
-    "description": "Response model for image+audio to video generation.",
-    "x-fal-order-properties": [
-     "video",
-     "seed"
-    ],
-    "required": [
-     "video",
-     "seed"
-    ]
    }
   },
   "fal-ai/longcat-single-avatar/audio-to-video": {
    "endpoint_id": "fal-ai/longcat-single-avatar/audio-to-video",
    "display_name": "Longcat Single Avatar",
    "description": "LongCat-Video-Avatar is an audio-driven video generation model that can generates super-realistic, lip-synchronized long video generation with natural dynamics and consistent identity.",
-   "status_base": "fal-ai/longcat-single-avatar/audio-to-video",
    "input": {
     "properties": {
      "enable_prompt_expansion": {
@@ -993,89 +526,12 @@
     "required": [
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "seed": {
-      "title": "Seed",
-      "description": "The seed used for generation.",
-      "type": "integer"
-     },
-     "video": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "AudioToVideoResponse",
-    "type": "object",
-    "description": "Response model for audio-to-video generation (no reference image).",
-    "x-fal-order-properties": [
-     "video",
-     "seed"
-    ],
-    "required": [
-     "video",
-     "seed"
-    ]
    }
   },
   "fal-ai/ltx-2.3-quality/audio-to-video": {
    "endpoint_id": "fal-ai/ltx-2.3-quality/audio-to-video",
    "display_name": "Ltx 2.3 Quality",
    "description": "Generate high-quality video with audio from audio, text and images using LTX-2.3",
-   "status_base": "fal-ai/ltx-2.3-quality/audio-to-video",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -1284,96 +740,12 @@
     },
     "title": "LTX23QualityAudioToVideoInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "video",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "video",
-     "seed",
-     "prompt"
-    ],
-    "description": "Standard output for every endpoint on this app.",
-    "properties": {
-     "seed": {
-      "description": "The seed actually used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "video": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation (after any expansion).",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "LTX23QualityOutput",
-    "type": "object"
    }
   },
   "fal-ai/ltx-2.3-quality/audio-to-video/lora": {
    "endpoint_id": "fal-ai/ltx-2.3-quality/audio-to-video/lora",
    "display_name": "Ltx 2.3 Quality",
    "description": "Generate high-quality video with audio from audio, text and images using LTX-2.3 and custom LoRA",
-   "status_base": "fal-ai/ltx-2.3-quality/audio-to-video/lora",
    "input": {
     "x-fal-order-properties": [
      "prompt",
@@ -1630,96 +1002,12 @@
     },
     "title": "LTX23QualityLoRAAudioToVideoInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "video",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "video",
-     "seed",
-     "prompt"
-    ],
-    "description": "Standard output for every endpoint on this app.",
-    "properties": {
-     "seed": {
-      "description": "The seed actually used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "video": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation (after any expansion).",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "LTX23QualityOutput",
-    "type": "object"
    }
   },
   "fal-ai/ltx-2.3/audio-to-video": {
    "endpoint_id": "fal-ai/ltx-2.3/audio-to-video",
    "display_name": "LTX 2.3 Video Pro",
    "description": "LTX-2.3 is a high-quality, fast AI video model available in Pro and Fast variants for text-to-video, image-to-video, and audio-to-video.",
-   "status_base": "fal-ai/ltx-2.3/audio-to-video",
    "input": {
     "properties": {
      "prompt": {
@@ -1798,146 +1086,12 @@
      "enable_safety_checker"
     ],
     "title": "LTXV23AudioToVideoRequest"
-   },
-   "output": {
-    "properties": {
-     "video": {
-      "properties": {
-       "height": {
-        "description": "The height of the video",
-        "title": "Height",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "num_frames": {
-        "description": "The number of frames in the video",
-        "title": "Num Frames",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "fps": {
-        "description": "The FPS of the video",
-        "title": "Fps",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "duration": {
-        "description": "The duration of the video",
-        "title": "Duration",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "width": {
-        "description": "The width of the video",
-        "title": "Width",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "type": "object",
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "width",
-       "height",
-       "fps",
-       "duration",
-       "num_frames"
-      ],
-      "title": "VideoFile"
-     }
-    },
-    "type": "object",
-    "required": [
-     "video"
-    ],
-    "x-fal-order-properties": [
-     "video"
-    ],
-    "title": "LTXV23AudioToVideoResponse"
    }
   },
   "lightricks/ltx-2.5/audio-to-video/fast": {
    "endpoint_id": "lightricks/ltx-2.5/audio-to-video/fast",
    "display_name": "Ltx 2.5 Audio to Video Fast",
    "description": "LTX-2.5 is Lightricks' open-source audio-video model. This endpoint generates video timed to a supplied audio clip in a speed-optimized mode \u2014 useful for music-driven content, dialogue-led shorts, and ads keyed to a track.",
-   "status_base": "lightricks/ltx-2.5/audio-to-video/fast",
    "input": {
     "type": "object",
     "properties": {
@@ -2001,146 +1155,12 @@
      "enable_safety_checker"
     ],
     "title": "LTXV25AudioToVideoRequest"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "video": {
-      "type": "object",
-      "properties": {
-       "duration": {
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The duration of the video",
-        "title": "Duration"
-       },
-       "width": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The width of the video",
-        "title": "Width"
-       },
-       "fps": {
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The FPS of the video",
-        "title": "Fps"
-       },
-       "url": {
-        "type": "string",
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url"
-       },
-       "num_frames": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The number of frames in the video",
-        "title": "Num Frames"
-       },
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "height": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The height of the video",
-        "title": "Height"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "width",
-       "height",
-       "fps",
-       "duration",
-       "num_frames"
-      ],
-      "title": "VideoFile"
-     }
-    },
-    "required": [
-     "video"
-    ],
-    "x-fal-order-properties": [
-     "video"
-    ],
-    "title": "LTXV23AudioToVideoResponse"
    }
   },
   "lightricks/ltx-2.5/audio-to-video/pro": {
    "endpoint_id": "lightricks/ltx-2.5/audio-to-video/pro",
    "display_name": "Ltx 2.5 Audio to Video Pro",
    "description": "LTX-2.5 is Lightricks' open-source audio-video model. This endpoint generates video timed to a supplied audio clip in a quality-optimized mode, for final visuals synchronized to music, dialogue, or a soundtrack.",
-   "status_base": "lightricks/ltx-2.5/audio-to-video/pro",
    "input": {
     "type": "object",
     "properties": {
@@ -2204,146 +1224,12 @@
      "enable_safety_checker"
     ],
     "title": "LTXV25AudioToVideoRequest"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "video": {
-      "type": "object",
-      "properties": {
-       "duration": {
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The duration of the video",
-        "title": "Duration"
-       },
-       "width": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The width of the video",
-        "title": "Width"
-       },
-       "fps": {
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The FPS of the video",
-        "title": "Fps"
-       },
-       "url": {
-        "type": "string",
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url"
-       },
-       "num_frames": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The number of frames in the video",
-        "title": "Num Frames"
-       },
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "height": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The height of the video",
-        "title": "Height"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "width",
-       "height",
-       "fps",
-       "duration",
-       "num_frames"
-      ],
-      "title": "VideoFile"
-     }
-    },
-    "required": [
-     "video"
-    ],
-    "x-fal-order-properties": [
-     "video"
-    ],
-    "title": "LTXV23AudioToVideoResponse"
    }
   },
   "fal-ai/ltx-2.3-22b/audio-to-video": {
    "endpoint_id": "fal-ai/ltx-2.3-22b/audio-to-video",
    "display_name": "LTX-2.3 22B",
    "description": "Generate video with audio from audio, text and images using LTX-2",
-   "status_base": "fal-ai/ltx-2.3-22b/audio-to-video",
    "input": {
     "properties": {
      "audio_strength": {
@@ -2750,160 +1636,12 @@
      "prompt",
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "video": {
-      "properties": {
-       "height": {
-        "description": "The height of the video",
-        "title": "Height",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "num_frames": {
-        "description": "The number of frames in the video",
-        "title": "Num Frames",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "width": {
-        "description": "The width of the video",
-        "title": "Width",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "fps": {
-        "description": "The FPS of the video",
-        "title": "Fps",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "duration": {
-        "description": "The duration of the video",
-        "title": "Duration",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "width",
-       "height",
-       "fps",
-       "duration",
-       "num_frames"
-      ],
-      "type": "object",
-      "title": "VideoFile",
-      "required": [
-       "url"
-      ]
-     },
-     "prompt": {
-      "title": "Prompt",
-      "type": "string",
-      "description": "The prompt used for the generation."
-     },
-     "seed": {
-      "title": "Seed",
-      "type": "integer",
-      "description": "The seed used for the random number generator."
-     }
-    },
-    "x-fal-order-properties": [
-     "video",
-     "seed",
-     "prompt"
-    ],
-    "type": "object",
-    "title": "LTX23AudioToVideoOutput",
-    "required": [
-     "video",
-     "seed",
-     "prompt"
-    ]
    }
   },
   "fal-ai/ltx-2.3-22b/audio-to-video/lora": {
    "endpoint_id": "fal-ai/ltx-2.3-22b/audio-to-video/lora",
    "display_name": "LTX-2.3 22B",
    "description": "Generate video with audio from audio, text and images using LTX-2.3 and custom LoRA",
-   "status_base": "fal-ai/ltx-2.3-22b/audio-to-video/lora",
    "input": {
     "properties": {
      "audio_strength": {
@@ -3357,160 +2095,12 @@
      "prompt",
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "video": {
-      "properties": {
-       "height": {
-        "description": "The height of the video",
-        "title": "Height",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "num_frames": {
-        "description": "The number of frames in the video",
-        "title": "Num Frames",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "width": {
-        "description": "The width of the video",
-        "title": "Width",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "fps": {
-        "description": "The FPS of the video",
-        "title": "Fps",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "duration": {
-        "description": "The duration of the video",
-        "title": "Duration",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "width",
-       "height",
-       "fps",
-       "duration",
-       "num_frames"
-      ],
-      "type": "object",
-      "title": "VideoFile",
-      "required": [
-       "url"
-      ]
-     },
-     "prompt": {
-      "title": "Prompt",
-      "type": "string",
-      "description": "The prompt used for the generation."
-     },
-     "seed": {
-      "title": "Seed",
-      "type": "integer",
-      "description": "The seed used for the random number generator."
-     }
-    },
-    "x-fal-order-properties": [
-     "video",
-     "seed",
-     "prompt"
-    ],
-    "type": "object",
-    "title": "LTX23AudioToVideoOutput",
-    "required": [
-     "video",
-     "seed",
-     "prompt"
-    ]
    }
   },
   "fal-ai/ltx-2.3-22b/distilled/audio-to-video": {
    "endpoint_id": "fal-ai/ltx-2.3-22b/distilled/audio-to-video",
    "display_name": "LTX-2.3 22B Distilled",
    "description": "Generate video with audio from audio, text and images using LTX-2 Distilled",
-   "status_base": "fal-ai/ltx-2.3-22b/distilled/audio-to-video",
    "input": {
     "properties": {
      "scheduler": {
@@ -3811,160 +2401,12 @@
      "prompt",
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "video": {
-      "properties": {
-       "height": {
-        "description": "The height of the video",
-        "title": "Height",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "num_frames": {
-        "description": "The number of frames in the video",
-        "title": "Num Frames",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "width": {
-        "description": "The width of the video",
-        "title": "Width",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "fps": {
-        "description": "The FPS of the video",
-        "title": "Fps",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "duration": {
-        "description": "The duration of the video",
-        "title": "Duration",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "width",
-       "height",
-       "fps",
-       "duration",
-       "num_frames"
-      ],
-      "type": "object",
-      "title": "VideoFile",
-      "required": [
-       "url"
-      ]
-     },
-     "prompt": {
-      "title": "Prompt",
-      "type": "string",
-      "description": "The prompt used for the generation."
-     },
-     "seed": {
-      "title": "Seed",
-      "type": "integer",
-      "description": "The seed used for the random number generator."
-     }
-    },
-    "x-fal-order-properties": [
-     "video",
-     "seed",
-     "prompt"
-    ],
-    "type": "object",
-    "title": "LTX23AudioToVideoOutput",
-    "required": [
-     "video",
-     "seed",
-     "prompt"
-    ]
    }
   },
   "fal-ai/ltx-2.3-22b/distilled/audio-to-video/lora": {
    "endpoint_id": "fal-ai/ltx-2.3-22b/distilled/audio-to-video/lora",
    "display_name": "LTX-2.3 22B Distilled",
    "description": "Generate video with audio from audio, text and images using LTX-2.3 Distilled and custom LoRA",
-   "status_base": "fal-ai/ltx-2.3-22b/distilled/audio-to-video/lora",
    "input": {
     "properties": {
      "scheduler": {
@@ -4312,160 +2754,12 @@
      "prompt",
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "video": {
-      "properties": {
-       "height": {
-        "description": "The height of the video",
-        "title": "Height",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "num_frames": {
-        "description": "The number of frames in the video",
-        "title": "Num Frames",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "width": {
-        "description": "The width of the video",
-        "title": "Width",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "fps": {
-        "description": "The FPS of the video",
-        "title": "Fps",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "duration": {
-        "description": "The duration of the video",
-        "title": "Duration",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "width",
-       "height",
-       "fps",
-       "duration",
-       "num_frames"
-      ],
-      "type": "object",
-      "title": "VideoFile",
-      "required": [
-       "url"
-      ]
-     },
-     "prompt": {
-      "title": "Prompt",
-      "type": "string",
-      "description": "The prompt used for the generation."
-     },
-     "seed": {
-      "title": "Seed",
-      "type": "integer",
-      "description": "The seed used for the random number generator."
-     }
-    },
-    "x-fal-order-properties": [
-     "video",
-     "seed",
-     "prompt"
-    ],
-    "type": "object",
-    "title": "LTX23AudioToVideoOutput",
-    "required": [
-     "video",
-     "seed",
-     "prompt"
-    ]
    }
   },
   "mureka/api/generate/lyrics-video": {
    "endpoint_id": "mureka/api/generate/lyrics-video",
    "display_name": "Mureka Lyrics Video",
    "description": "Creates a lyrics video from generated or uploaded audio, with selectable layouts, aspect ratios, backgrounds, and lyric-row or time-range selection.",
-   "status_base": "mureka/api/generate/lyrics-video",
    "input": {
     "properties": {
      "lyrics_start_row": {
@@ -4638,81 +2932,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "video": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     }
-    },
-    "required": [
-     "video"
-    ],
-    "title": "GenerateLyricsVideoOutput",
-    "x-fal-order-properties": [
-     "video"
-    ],
-    "type": "object"
    }
   },
   "pixverse/music-video/vibemv": {
    "endpoint_id": "pixverse/music-video/vibemv",
    "display_name": "PixVerse VibeMV",
    "description": "PixVerse VibeMV generates music videos from audio, with optional character references and lyric subtitles. It supports visual style presets, custom style references, five aspect ratios, and output at 720p or 1080p.",
-   "status_base": "pixverse/music-video/vibemv",
    "input": {
     "type": "object",
     "properties": {
@@ -4863,81 +3088,12 @@
      "enable_safety_checker"
     ],
     "title": "MusicVideoRequest"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "video": {
-      "type": "object",
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File"
-     }
-    },
-    "required": [
-     "video"
-    ],
-    "x-fal-order-properties": [
-     "video"
-    ],
-    "title": "VideoOutput"
    }
   },
   "fal-ai/wan/v2.2-14b/speech-to-video": {
    "endpoint_id": "fal-ai/wan/v2.2-14b/speech-to-video",
    "display_name": "Wan-2.2 Speech-to-Video 14B",
    "description": "Wan-S2V is a video model that generates high-quality videos from static images and audio, with realistic facial expressions, body movements, and professional camera work for film and television applications",
-   "status_base": "fal-ai/wan/v2.2-14b/speech-to-video",
    "input": {
     "properties": {
      "frames_per_second": {
@@ -5090,74 +3246,6 @@
      "video_write_mode",
      "image_url",
      "audio_url"
-    ],
-    "type": "object"
-   },
-   "output": {
-    "properties": {
-     "video": {
-      "properties": {
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     }
-    },
-    "title": "WanS2VResponse",
-    "required": [
-     "video"
-    ],
-    "x-fal-order-properties": [
-     "video"
     ],
     "type": "object"
    }

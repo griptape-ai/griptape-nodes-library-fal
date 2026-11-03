@@ -77,28 +77,21 @@ def resolve_refs(node: Any, components: dict[str, Any], depth: int = 0) -> Any:
 
 
 def extract_entry(model: dict[str, Any], openapi: dict[str, Any]) -> dict[str, Any]:
-    """Reduce an OpenAPI document to what the nodes need: input, output, and queue paths."""
+    """Reduce an OpenAPI document to what the nodes read: the display name, description, and input schema.
+
+    The output schema and queue paths are left out on purpose. The nodes parse results by file type, and
+    fal serves status under the app id, which the OpenAPI paths do not always show.
+    """
     endpoint_id = model["endpoint_id"]
     components = openapi["components"]["schemas"]
-    submit_path = f"/{endpoint_id}"
-    post = openapi["paths"][submit_path]["post"]
+    post = openapi["paths"][f"/{endpoint_id}"]["post"]
     input_ref = post["requestBody"]["content"]["application/json"]["schema"]
-    status_base = next(
-        path.removesuffix("/requests/{request_id}/status").lstrip("/")
-        for path in openapi["paths"]
-        if path.endswith("/requests/{request_id}/status")
-    )
-    result_ref = openapi["paths"][f"/{status_base}/requests/{{request_id}}"]["get"]["responses"]["200"]["content"][
-        "application/json"
-    ]["schema"]
     metadata = model["metadata"]
     return {
         "endpoint_id": endpoint_id,
         "display_name": metadata.get("display_name", endpoint_id),
         "description": metadata.get("description", ""),
-        "status_base": status_base,
         "input": resolve_refs(input_ref, components),
-        "output": resolve_refs(result_ref, components),
     }
 
 

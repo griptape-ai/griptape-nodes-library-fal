@@ -5,7 +5,6 @@
    "endpoint_id": "mureka/api/song/recognize",
    "display_name": "Mureka Lyrics Recognition",
    "description": "Analyzes an uploaded song and returns its duration and recognized lyrics with timing information when available.",
-   "status_base": "mureka/api/song/recognize",
    "input": {
     "properties": {
      "upload_audio_id": {
@@ -23,185 +22,12 @@
      "upload_audio_id"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "RecognizeLyricsSection",
-         "x-fal-order-properties": [
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections"
-     },
-     "duration": {
-      "title": "Duration",
-      "type": "integer"
-     }
-    },
-    "required": [
-     "duration"
-    ],
-    "title": "RecognizeSongOutput",
-    "x-fal-order-properties": [
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/api/song/transcribe": {
    "endpoint_id": "mureka/api/song/transcribe",
    "display_name": "Mureka Music Transcription",
    "description": "Transcribes generated or uploaded music into a downloadable archive that can include MusicXML, PDF sheet music, and timestamped lyrics.",
-   "status_base": "mureka/api/song/transcribe",
    "input": {
     "properties": {
      "title": {
@@ -268,30 +94,12 @@
      "title"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "zip_url": {
-      "title": "Zip Url",
-      "description": "The generated transcription archive.",
-      "type": "string"
-     }
-    },
-    "required": [
-     "zip_url"
-    ],
-    "title": "TranscribeMusicOutput",
-    "x-fal-order-properties": [
-     "zip_url"
-    ],
-    "type": "object"
    }
   },
   "mureka/api/song/describe": {
    "endpoint_id": "mureka/api/song/describe",
    "display_name": "Mureka Song Description",
    "description": "Analyzes a song from an audio URL and returns a written description, identified instruments, genres, and descriptive tags.",
-   "status_base": "mureka/api/song/describe",
    "input": {
     "properties": {
      "enable_safety_checker": {
@@ -316,56 +124,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "description": {
-      "title": "Description",
-      "type": "string"
-     },
-     "instruments": {
-      "title": "Instruments",
-      "items": {
-       "type": "string"
-      },
-      "type": "array"
-     },
-     "tags": {
-      "title": "Tags",
-      "items": {
-       "type": "string"
-      },
-      "type": "array"
-     },
-     "genres": {
-      "title": "Genres",
-      "items": {
-       "type": "string"
-      },
-      "type": "array"
-     }
-    },
-    "required": [
-     "instruments",
-     "genres",
-     "tags",
-     "description"
-    ],
-    "title": "DescribeSongOutput",
-    "x-fal-order-properties": [
-     "instruments",
-     "genres",
-     "tags",
-     "description"
-    ],
-    "type": "object"
    }
   },
   "nvidia/nemotron-3-nano-omni/audio": {
    "endpoint_id": "nvidia/nemotron-3-nano-omni/audio",
    "display_name": "Nemotron 3 Nano Omni",
    "description": "Audio reasoning variant of NVIDIA's Nemotron 3 Nano Omni. 30B A3B hybrid Transformer-Mamba MoE - accepts audio plus a prompt and returns text.",
-   "status_base": "nvidia/nemotron-3-nano-omni/audio",
    "input": {
     "properties": {
      "prompt": {
@@ -448,63 +212,12 @@
      "enable_safety_checker",
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "finish_reason": {
-      "title": "Finish Reason",
-      "default": "stop",
-      "description": "Reason generation stopped.",
-      "type": "string"
-     },
-     "usage": {
-      "properties": {
-       "output_tokens": {
-        "title": "Output Tokens",
-        "description": "Number of output tokens generated.",
-        "type": "integer"
-       },
-       "input_tokens": {
-        "title": "Input Tokens",
-        "description": "Number of input tokens processed.",
-        "type": "integer"
-       }
-      },
-      "required": [
-       "input_tokens",
-       "output_tokens"
-      ],
-      "title": "UsageInfo",
-      "type": "object",
-      "x-fal-order-properties": [
-       "input_tokens",
-       "output_tokens"
-      ]
-     },
-     "output": {
-      "title": "Output",
-      "description": "Generated text response.",
-      "type": "string"
-     }
-    },
-    "required": [
-     "output",
-     "usage"
-    ],
-    "title": "BaseOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "output",
-     "finish_reason",
-     "usage"
-    ]
    }
   },
   "fal-ai/silero-vad": {
    "endpoint_id": "fal-ai/silero-vad",
    "display_name": "Silero VAD",
    "description": "Detect speech presence and timestamps with accuracy and speed using the ultra-lightweight Silero VAD model",
-   "status_base": "fal-ai/silero-vad",
    "input": {
     "properties": {
      "audio_url": {
@@ -520,54 +233,6 @@
     ],
     "required": [
      "audio_url"
-    ]
-   },
-   "output": {
-    "properties": {
-     "timestamps": {
-      "title": "Speech Timestamps",
-      "description": "The speech timestamps.",
-      "type": "array",
-      "items": {
-       "properties": {
-        "start": {
-         "title": "Start Time",
-         "description": "The start time of the speech in seconds.",
-         "type": "number"
-        },
-        "end": {
-         "title": "End Time",
-         "description": "The end time of the speech in seconds.",
-         "type": "number"
-        }
-       },
-       "title": "SpeechTimestamp",
-       "type": "object",
-       "x-fal-order-properties": [
-        "start",
-        "end"
-       ],
-       "required": [
-        "start",
-        "end"
-       ]
-      }
-     },
-     "has_speech": {
-      "title": "Has Speech",
-      "description": "Whether the audio has speech.",
-      "type": "boolean"
-     }
-    },
-    "title": "SileroVADOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "has_speech",
-     "timestamps"
-    ],
-    "required": [
-     "has_speech",
-     "timestamps"
     ]
    }
   }

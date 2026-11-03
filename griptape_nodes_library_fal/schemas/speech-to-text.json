@@ -5,7 +5,6 @@
    "endpoint_id": "fal-ai/cohere-transcribe",
    "display_name": "Cohere Transcribe",
    "description": "Cohere Transcribe turns your business audio into accurate text, ready for search, analytics, and automation",
-   "status_base": "fal-ai/cohere-transcribe",
    "input": {
     "properties": {
      "language": {
@@ -61,39 +60,12 @@
     "required": [
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "timings": {
-      "additionalProperties": {
-       "type": "number"
-      },
-      "title": "Timings",
-      "type": "object",
-      "description": "Performance timing breakdown in seconds."
-     },
-     "text": {
-      "title": "Text",
-      "type": "string",
-      "description": "Transcribed text from the audio file."
-     }
-    },
-    "title": "TranscribeOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "text",
-     "timings"
-    ],
-    "required": [
-     "text"
-    ]
    }
   },
   "fal-ai/elevenlabs/forced-alignment": {
    "endpoint_id": "fal-ai/elevenlabs/forced-alignment",
    "display_name": "Elevenlabs - Forced Alignment",
    "description": "Align the transcript and your audio recording using Elevenlab's forced alignment feature!",
-   "status_base": "fal-ai/elevenlabs/forced-alignment",
    "input": {
     "properties": {
      "audio_url": {
@@ -119,113 +91,12 @@
      "audio_url",
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "characters": {
-      "title": "Characters",
-      "description": "Character-level alignment details",
-      "type": "array",
-      "items": {
-       "properties": {
-        "start": {
-         "title": "Start",
-         "description": "Start time in seconds",
-         "type": "number"
-        },
-        "end": {
-         "title": "End",
-         "description": "End time in seconds",
-         "type": "number"
-        },
-        "text": {
-         "title": "Text",
-         "description": "The aligned character",
-         "type": "string"
-        }
-       },
-       "title": "ForcedAlignmentCharacter",
-       "type": "object",
-       "x-fal-order-properties": [
-        "text",
-        "start",
-        "end"
-       ],
-       "required": [
-        "text",
-        "start",
-        "end"
-       ]
-      }
-     },
-     "words": {
-      "title": "Words",
-      "description": "Word-level alignment details",
-      "type": "array",
-      "items": {
-       "properties": {
-        "start": {
-         "title": "Start",
-         "description": "Start time in seconds",
-         "type": "number"
-        },
-        "loss": {
-         "title": "Loss",
-         "description": "Average alignment loss for the word",
-         "type": "number"
-        },
-        "text": {
-         "title": "Text",
-         "description": "The aligned character",
-         "type": "string"
-        },
-        "end": {
-         "title": "End",
-         "description": "End time in seconds",
-         "type": "number"
-        }
-       },
-       "title": "ForcedAlignmentWord",
-       "type": "object",
-       "x-fal-order-properties": [
-        "text",
-        "start",
-        "end",
-        "loss"
-       ],
-       "required": [
-        "text",
-        "start",
-        "end",
-        "loss"
-       ]
-      }
-     },
-     "loss": {
-      "title": "Loss",
-      "description": "Average alignment loss for the transcript",
-      "type": "number"
-     }
-    },
-    "title": "ForcedAlignmentOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "characters",
-     "words",
-     "loss"
-    ],
-    "required": [
-     "characters",
-     "words",
-     "loss"
-    ]
    }
   },
   "fal-ai/elevenlabs/speech-to-text": {
    "endpoint_id": "fal-ai/elevenlabs/speech-to-text",
    "display_name": "ElevenLabs Speech to Text",
    "description": "Generate text from speech using ElevenLabs advanced speech-to-text model.",
-   "status_base": "fal-ai/elevenlabs/speech-to-text",
    "input": {
     "properties": {
      "audio_url": {
@@ -269,114 +140,12 @@
     "required": [
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "language_probability": {
-      "title": "Language Probability",
-      "description": "Confidence in language detection",
-      "type": "number"
-     },
-     "words": {
-      "title": "Words",
-      "description": "Word-level transcription details",
-      "type": "array",
-      "items": {
-       "properties": {
-        "start": {
-         "title": "Start",
-         "description": "Start time in seconds",
-         "anyOf": [
-          {
-           "type": "number"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "speaker_id": {
-         "title": "Speaker Id",
-         "description": "Speaker identifier if diarization was enabled",
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "type": {
-         "title": "Type",
-         "description": "Type of element (word, spacing, or audio_event)",
-         "type": "string"
-        },
-        "end": {
-         "title": "End",
-         "description": "End time in seconds",
-         "anyOf": [
-          {
-           "type": "number"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "text": {
-         "title": "Text",
-         "description": "The transcribed word or audio event",
-         "type": "string"
-        }
-       },
-       "title": "TranscriptionWord",
-       "type": "object",
-       "x-fal-order-properties": [
-        "text",
-        "start",
-        "end",
-        "type",
-        "speaker_id"
-       ],
-       "required": [
-        "text",
-        "type"
-       ]
-      }
-     },
-     "text": {
-      "title": "Text",
-      "description": "The full transcribed text",
-      "type": "string"
-     },
-     "language_code": {
-      "title": "Language Code",
-      "description": "Detected or specified language code",
-      "type": "string"
-     }
-    },
-    "title": "TranscriptionOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "text",
-     "language_code",
-     "language_probability",
-     "words"
-    ],
-    "required": [
-     "text",
-     "language_code",
-     "language_probability",
-     "words"
-    ]
    }
   },
   "fal-ai/elevenlabs/speech-to-text/scribe-v2": {
    "endpoint_id": "fal-ai/elevenlabs/speech-to-text/scribe-v2",
    "display_name": "ElevenLabs Speech to Text - Scribe V2",
    "description": "Use Scribe-V2 from ElevenLabs to do blazingly fast speech to text inferences!",
-   "status_base": "fal-ai/elevenlabs/speech-to-text/scribe-v2",
    "input": {
     "properties": {
      "audio_url": {
@@ -431,114 +200,12 @@
     "required": [
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "language_probability": {
-      "title": "Language Probability",
-      "description": "Confidence in language detection",
-      "type": "number"
-     },
-     "words": {
-      "title": "Words",
-      "description": "Word-level transcription details",
-      "type": "array",
-      "items": {
-       "properties": {
-        "start": {
-         "title": "Start",
-         "description": "Start time in seconds",
-         "anyOf": [
-          {
-           "type": "number"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "speaker_id": {
-         "title": "Speaker Id",
-         "description": "Speaker identifier if diarization was enabled",
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "type": {
-         "title": "Type",
-         "description": "Type of element (word, spacing, or audio_event)",
-         "type": "string"
-        },
-        "end": {
-         "title": "End",
-         "description": "End time in seconds",
-         "anyOf": [
-          {
-           "type": "number"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "text": {
-         "title": "Text",
-         "description": "The transcribed word or audio event",
-         "type": "string"
-        }
-       },
-       "title": "TranscriptionWord",
-       "type": "object",
-       "x-fal-order-properties": [
-        "text",
-        "start",
-        "end",
-        "type",
-        "speaker_id"
-       ],
-       "required": [
-        "text",
-        "type"
-       ]
-      }
-     },
-     "text": {
-      "title": "Text",
-      "description": "The full transcribed text",
-      "type": "string"
-     },
-     "language_code": {
-      "title": "Language Code",
-      "description": "Detected or specified language code",
-      "type": "string"
-     }
-    },
-    "title": "TranscriptionOutputV2",
-    "type": "object",
-    "x-fal-order-properties": [
-     "text",
-     "language_code",
-     "language_probability",
-     "words"
-    ],
-    "required": [
-     "text",
-     "language_code",
-     "language_probability",
-     "words"
-    ]
    }
   },
   "kotoba-technologies/kotoba-stt/v1/speech-to-text": {
    "endpoint_id": "kotoba-technologies/kotoba-stt/v1/speech-to-text",
    "display_name": "Kotoba Speech-to-Text",
    "description": "Accurate transcription of an audio clip in one request, with word timestamps, tuned for Japanese and East Asian languages.",
-   "status_base": "kotoba-technologies/kotoba-stt/v1/speech-to-text",
    "input": {
     "properties": {
      "audio_url": {
@@ -612,108 +279,12 @@
     ],
     "additionalProperties": false,
     "type": "object"
-   },
-   "output": {
-    "title": "SpeechToTextResponse",
-    "required": [
-     "language_code",
-     "language_probability",
-     "text",
-     "words"
-    ],
-    "type": "object",
-    "properties": {
-     "language_probability": {
-      "title": "Language Probability",
-      "type": "number"
-     },
-     "language_code": {
-      "title": "Language Code",
-      "type": "string"
-     },
-     "words": {
-      "items": {
-       "title": "SpeechToTextWord",
-       "required": [
-        "text"
-       ],
-       "type": "object",
-       "properties": {
-        "speaker_id": {
-         "title": "Speaker Id",
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "end": {
-         "title": "End",
-         "anyOf": [
-          {
-           "type": "number"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "start": {
-         "title": "Start",
-         "anyOf": [
-          {
-           "type": "number"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "type": {
-         "enum": [
-          "word",
-          "spacing",
-          "audio_event"
-         ],
-         "default": "word",
-         "title": "Type",
-         "type": "string"
-        },
-        "text": {
-         "title": "Text",
-         "type": "string"
-        }
-       }
-      },
-      "title": "Words",
-      "type": "array"
-     },
-     "text": {
-      "title": "Text",
-      "type": "string"
-     },
-     "audio_duration_secs": {
-      "title": "Audio Duration Secs",
-      "anyOf": [
-       {
-        "type": "number"
-       },
-       {
-        "type": "null"
-       }
-      ]
-     }
-    }
    }
   },
   "nvidia/nemotron-asr-multilingual/asr": {
    "endpoint_id": "nvidia/nemotron-asr-multilingual/asr",
    "display_name": "Nemotron Asr Multilingual",
    "description": "Nemotron-ASR-Streaming is a multi lingual, streaming Automatic Speech Recognition (ASR) engineered to deliver high-quality multi lingual transcription across both low-latency streaming and high-throughput batch workloads.",
-   "status_base": "nvidia/nemotron-asr-multilingual/asr",
    "input": {
     "properties": {
      "audio_url": {
@@ -793,37 +364,12 @@
     "required": [
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "partial": {
-      "default": false,
-      "title": "Partial Result",
-      "type": "boolean",
-      "description": "True if this is an intermediate result during streaming."
-     },
-     "output": {
-      "title": "Transcribed Text",
-      "type": "string",
-      "description": "The transcribed text from the audio."
-     }
-    },
-    "title": "SpeechOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "output",
-     "partial"
-    ],
-    "required": [
-     "output"
-    ]
    }
   },
   "fal-ai/speech-to-text": {
    "endpoint_id": "fal-ai/speech-to-text",
    "display_name": "Speech-to-Text",
    "description": "Leverage the rapid processing capabilities of AI models to enable accurate and efficient real-time speech-to-text transcription.",
-   "status_base": "fal-ai/speech-to-text",
    "input": {
     "properties": {
      "audio_url": {
@@ -845,30 +391,6 @@
     "x-fal-order-properties": [
      "audio_url",
      "use_pnc"
-    ],
-    "type": "object"
-   },
-   "output": {
-    "properties": {
-     "output": {
-      "title": "Transcribed Text",
-      "description": "The partial or final transcription output from Canary",
-      "type": "string"
-     },
-     "partial": {
-      "type": "boolean",
-      "title": "Partial",
-      "description": "Indicates if this is a partial (in-progress) transcript",
-      "default": false
-     }
-    },
-    "required": [
-     "output"
-    ],
-    "title": "SpeechOutput",
-    "x-fal-order-properties": [
-     "output",
-     "partial"
     ],
     "type": "object"
    }
@@ -877,7 +399,6 @@
    "endpoint_id": "fal-ai/speech-to-text/turbo",
    "display_name": "Speech-to-Text",
    "description": "Leverage the rapid processing capabilities of AI models to enable accurate and efficient real-time speech-to-text transcription.",
-   "status_base": "fal-ai/speech-to-text/turbo",
    "input": {
     "properties": {
      "audio_url": {
@@ -899,30 +420,6 @@
     "x-fal-order-properties": [
      "audio_url",
      "use_pnc"
-    ],
-    "type": "object"
-   },
-   "output": {
-    "properties": {
-     "output": {
-      "title": "Transcribed Text",
-      "description": "The partial or final transcription output from Canary",
-      "type": "string"
-     },
-     "partial": {
-      "type": "boolean",
-      "title": "Partial",
-      "description": "Indicates if this is a partial (in-progress) transcript",
-      "default": false
-     }
-    },
-    "required": [
-     "output"
-    ],
-    "title": "SpeechOutput",
-    "x-fal-order-properties": [
-     "output",
-     "partial"
     ],
     "type": "object"
    }
@@ -931,7 +428,6 @@
    "endpoint_id": "fal-ai/speech-to-text/stream",
    "display_name": "Speech-To-text",
    "description": "Leverage the rapid processing capabilities of AI models to enable accurate and efficient real-time speech-to-text transcription.",
-   "status_base": "fal-ai/speech-to-text/stream",
    "input": {
     "properties": {
      "audio_url": {
@@ -955,14 +451,12 @@
      "use_pnc"
     ],
     "type": "object"
-   },
-   "output": {}
+   }
   },
   "fal-ai/speech-to-text/turbo/stream": {
    "endpoint_id": "fal-ai/speech-to-text/turbo/stream",
    "display_name": "Speech-to-Text",
    "description": "Leverage the rapid processing capabilities of AI models to enable accurate and efficient real-time speech-to-text transcription.",
-   "status_base": "fal-ai/speech-to-text/turbo/stream",
    "input": {
     "properties": {
      "audio_url": {
@@ -986,14 +480,12 @@
      "use_pnc"
     ],
     "type": "object"
-   },
-   "output": {}
+   }
   },
   "fal-ai/wizper": {
    "endpoint_id": "fal-ai/wizper",
    "display_name": "Wizper (Whisper v3 -- fal.ai edition)",
    "description": "[Experimental] Whisper v3 Large -- but optimized by our inference wizards. Same WER, double the performance!",
-   "status_base": "fal-ai/wizper",
    "input": {
     "properties": {
      "max_segment_len": {
@@ -1166,189 +658,6 @@
      "max_segment_len",
      "merge_chunks",
      "version"
-    ],
-    "type": "object"
-   },
-   "output": {
-    "properties": {
-     "chunks": {
-      "title": "Chunks",
-      "description": "Timestamp chunks of the audio file",
-      "items": {
-       "properties": {
-        "timestamp": {
-         "maxItems": 2,
-         "title": "Timestamp",
-         "minItems": 2,
-         "description": "Start and end timestamp of the chunk",
-         "prefixItems": [
-          {
-           "anyOf": [
-            {
-             "type": "number"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          },
-          {
-           "anyOf": [
-            {
-             "type": "number"
-            },
-            {
-             "type": "null"
-            }
-           ]
-          }
-         ],
-         "type": "array"
-        },
-        "text": {
-         "title": "Text",
-         "description": "Transcription of the chunk",
-         "type": "string"
-        }
-       },
-       "title": "WhisperChunk",
-       "required": [
-        "timestamp",
-        "text"
-       ],
-       "x-fal-order-properties": [
-        "timestamp",
-        "text"
-       ],
-       "type": "object"
-      },
-      "type": "array"
-     },
-     "text": {
-      "title": "Text",
-      "description": "Transcription of the audio file",
-      "type": "string"
-     },
-     "languages": {
-      "title": "Languages",
-      "description": "List of languages that the audio file is inferred to be. Defaults to null.",
-      "items": {
-       "enum": [
-        "af",
-        "am",
-        "ar",
-        "as",
-        "az",
-        "ba",
-        "be",
-        "bg",
-        "bn",
-        "bo",
-        "br",
-        "bs",
-        "ca",
-        "cs",
-        "cy",
-        "da",
-        "de",
-        "el",
-        "en",
-        "es",
-        "et",
-        "eu",
-        "fa",
-        "fi",
-        "fo",
-        "fr",
-        "gl",
-        "gu",
-        "ha",
-        "haw",
-        "he",
-        "hi",
-        "hr",
-        "ht",
-        "hu",
-        "hy",
-        "id",
-        "is",
-        "it",
-        "ja",
-        "jw",
-        "ka",
-        "kk",
-        "km",
-        "kn",
-        "ko",
-        "la",
-        "lb",
-        "ln",
-        "lo",
-        "lt",
-        "lv",
-        "mg",
-        "mi",
-        "mk",
-        "ml",
-        "mn",
-        "mr",
-        "ms",
-        "mt",
-        "my",
-        "ne",
-        "nl",
-        "nn",
-        "no",
-        "oc",
-        "pa",
-        "pl",
-        "ps",
-        "pt",
-        "ro",
-        "ru",
-        "sa",
-        "sd",
-        "si",
-        "sk",
-        "sl",
-        "sn",
-        "so",
-        "sq",
-        "sr",
-        "su",
-        "sv",
-        "sw",
-        "ta",
-        "te",
-        "tg",
-        "th",
-        "tk",
-        "tl",
-        "tr",
-        "tt",
-        "uk",
-        "ur",
-        "uz",
-        "vi",
-        "yi",
-        "yo",
-        "zh"
-       ],
-       "type": "string"
-      },
-      "type": "array"
-     }
-    },
-    "title": "WhisperOutput",
-    "required": [
-     "text",
-     "chunks",
-     "languages"
-    ],
-    "x-fal-order-properties": [
-     "text",
-     "chunks",
-     "languages"
     ],
     "type": "object"
    }

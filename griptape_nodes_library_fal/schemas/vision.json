@@ -5,7 +5,6 @@
    "endpoint_id": "fal-ai/florence-2-large/caption",
    "display_name": "Florence 2 Large Caption",
    "description": "Florence-2 is an advanced vision foundation model that uses a prompt-based approach to handle a wide range of vision and vision-language tasks",
-   "status_base": "fal-ai/florence-2-large/caption",
    "input": {
     "properties": {
      "image_url": {
@@ -21,23 +20,6 @@
     ],
     "required": [
      "image_url"
-    ]
-   },
-   "output": {
-    "properties": {
-     "results": {
-      "title": "Results",
-      "description": "Results from the model",
-      "type": "string"
-     }
-    },
-    "title": "TextOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "results"
-    ],
-    "required": [
-     "results"
     ]
    }
   },
@@ -45,7 +27,6 @@
    "endpoint_id": "fal-ai/florence-2-large/detailed-caption",
    "display_name": "Florence 2 Large Detailed Caption",
    "description": "Florence-2 is an advanced vision foundation model that uses a prompt-based approach to handle a wide range of vision and vision-language tasks",
-   "status_base": "fal-ai/florence-2-large/detailed-caption",
    "input": {
     "properties": {
      "image_url": {
@@ -61,23 +42,6 @@
     ],
     "required": [
      "image_url"
-    ]
-   },
-   "output": {
-    "properties": {
-     "results": {
-      "title": "Results",
-      "description": "Results from the model",
-      "type": "string"
-     }
-    },
-    "title": "TextOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "results"
-    ],
-    "required": [
-     "results"
     ]
    }
   },
@@ -85,7 +49,6 @@
    "endpoint_id": "fal-ai/florence-2-large/ocr",
    "display_name": "Florence 2 Large OCR",
    "description": "Florence-2 is an advanced vision foundation model that uses a prompt-based approach to handle a wide range of vision and vision-language tasks",
-   "status_base": "fal-ai/florence-2-large/ocr",
    "input": {
     "properties": {
      "image_url": {
@@ -101,23 +64,6 @@
     ],
     "required": [
      "image_url"
-    ]
-   },
-   "output": {
-    "properties": {
-     "results": {
-      "title": "Results",
-      "description": "Results from the model",
-      "type": "string"
-     }
-    },
-    "title": "TextOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "results"
-    ],
-    "required": [
-     "results"
     ]
    }
   },
@@ -125,7 +71,6 @@
    "endpoint_id": "fal-ai/florence-2-large/region-to-category",
    "display_name": "Florence 2 Large Region To Category",
    "description": "Florence-2 is an advanced vision foundation model that uses a prompt-based approach to handle a wide range of vision and vision-language tasks",
-   "status_base": "fal-ai/florence-2-large/region-to-category",
    "input": {
     "properties": {
      "region": {
@@ -190,30 +135,12 @@
      "image_url",
      "region"
     ]
-   },
-   "output": {
-    "properties": {
-     "results": {
-      "title": "Results",
-      "description": "Results from the model",
-      "type": "string"
-     }
-    },
-    "title": "TextOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "results"
-    ],
-    "required": [
-     "results"
-    ]
    }
   },
   "fal-ai/florence-2-large/more-detailed-caption": {
    "endpoint_id": "fal-ai/florence-2-large/more-detailed-caption",
    "display_name": "Florence-2 Large",
    "description": "Florence-2 is an advanced vision foundation model that uses a prompt-based approach to handle a wide range of vision and vision-language tasks",
-   "status_base": "fal-ai/florence-2-large/more-detailed-caption",
    "input": {
     "properties": {
      "image_url": {
@@ -230,30 +157,12 @@
     "required": [
      "image_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "results": {
-      "title": "Results",
-      "description": "Results from the model",
-      "type": "string"
-     }
-    },
-    "title": "TextOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "results"
-    ],
-    "required": [
-     "results"
-    ]
    }
   },
   "fal-ai/florence-2-large/region-to-description": {
    "endpoint_id": "fal-ai/florence-2-large/region-to-description",
    "display_name": "Florence-2 Large",
    "description": "Florence-2 is an advanced vision foundation model that uses a prompt-based approach to handle a wide range of vision and vision-language tasks",
-   "status_base": "fal-ai/florence-2-large/region-to-description",
    "input": {
     "properties": {
      "region": {
@@ -318,30 +227,12 @@
      "image_url",
      "region"
     ]
-   },
-   "output": {
-    "properties": {
-     "results": {
-      "title": "Results",
-      "description": "Results from the model",
-      "type": "string"
-     }
-    },
-    "title": "TextOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "results"
-    ],
-    "required": [
-     "results"
-    ]
    }
   },
   "perceptron/isaac-01": {
    "endpoint_id": "perceptron/isaac-01",
    "display_name": "Isaac 0.1",
    "description": "Isaac-01 is a multimodal vision-language model from Perceptron for various vision language tasks.",
-   "status_base": "perceptron/isaac-01",
    "input": {
     "required": [
      "image_url",
@@ -378,98 +269,18 @@
      "response_style"
     ],
     "type": "object"
-   },
-   "output": {
-    "required": [
-     "output"
-    ],
-    "title": "ChatOutput",
-    "properties": {
-     "output": {
-      "title": "Output",
-      "description": "Generated output",
-      "type": "string"
-     },
-     "usage": {
-      "anyOf": [
-       {
-        "required": [
-         "completion_tokens",
-         "prompt_tokens",
-         "total_tokens"
-        ],
-        "title": "CompletionUsage",
-        "properties": {
-         "completion_tokens": {
-          "title": "Completion Tokens",
-          "description": "Number of tokens in the completion",
-          "type": "integer"
-         },
-         "total_tokens": {
-          "title": "Total Tokens",
-          "description": "Total tokens used",
-          "type": "integer"
-         },
-         "prompt_tokens": {
-          "title": "Prompt Tokens",
-          "description": "Number of tokens in the prompt",
-          "type": "integer"
-         }
-        },
-        "x-fal-order-properties": [
-         "completion_tokens",
-         "prompt_tokens",
-         "total_tokens"
-        ],
-        "type": "object"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "Usage information"
-     },
-     "error": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Error",
-      "description": "Error message if an error occurred"
-     },
-     "partial": {
-      "default": false,
-      "title": "Partial",
-      "description": "Whether the output is partial",
-      "type": "boolean"
-     }
-    },
-    "x-fal-order-properties": [
-     "output",
-     "partial",
-     "error",
-     "usage"
-    ],
-    "type": "object"
    }
   },
   "perceptron/isaac-01/openai/v1/chat/completions": {
    "endpoint_id": "perceptron/isaac-01/openai/v1/chat/completions",
    "display_name": "Isaac 0.1 [OpenAI Compatible Endpoint]",
    "description": "OpenAI spec compatible endpoint of Isaac-01 which is a multimodal vision-language model from Perceptron for various vision language tasks.",
-   "status_base": "perceptron/isaac-01/openai/v1/chat/completions",
-   "input": {},
-   "output": {}
+   "input": {}
   },
   "fal-ai/llava-next": {
    "endpoint_id": "fal-ai/llava-next",
    "display_name": "LLaVA v1.6 34B",
    "description": "Vision",
-   "status_base": "fal-ai/llava-next",
    "input": {
     "x-fal-order-properties": [
      "image_url",
@@ -520,37 +331,12 @@
      }
     },
     "title": "LLavaInput"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "output",
-     "partial"
-    ],
-    "required": [
-     "output"
-    ],
-    "type": "object",
-    "properties": {
-     "partial": {
-      "description": "Whether the output is partial",
-      "type": "boolean",
-      "default": false,
-      "title": "Partial"
-     },
-     "output": {
-      "description": "Generated output",
-      "type": "string",
-      "title": "Output"
-     }
-    },
-    "title": "LLavaOutput"
    }
   },
   "fal-ai/marlin": {
    "endpoint_id": "fal-ai/marlin",
    "display_name": "Marlin",
    "description": "Marlin is a 2B video VLM tuned for the two questions developers actually want to ask of their videos: what is happening, and when?",
-   "status_base": "fal-ai/marlin",
    "input": {
     "x-fal-order-properties": [
      "video_url",
@@ -611,81 +397,12 @@
     ],
     "title": "CaptionInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "scene",
-     "events",
-     "text"
-    ],
-    "properties": {
-     "text": {
-      "description": "Full post-thinking caption text (Scene + Events) as returned by the model.",
-      "type": "string",
-      "title": "Text"
-     },
-     "scene": {
-      "description": "Spatial description of the clip.",
-      "type": "string",
-      "title": "Scene"
-     },
-     "events": {
-      "description": "Time-ranged events parsed from the caption.",
-      "type": "array",
-      "title": "Events",
-      "items": {
-       "x-fal-order-properties": [
-        "start",
-        "end",
-        "text"
-       ],
-       "properties": {
-        "end": {
-         "description": "End time in seconds.",
-         "type": "number",
-         "title": "End"
-        },
-        "text": {
-         "title": "Text",
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ],
-         "description": "Short description of the event (caption mode only)."
-        },
-        "start": {
-         "description": "Start time in seconds.",
-         "type": "number",
-         "title": "Start"
-        }
-       },
-       "required": [
-        "start",
-        "end"
-       ],
-       "title": "EventSegment",
-       "type": "object"
-      }
-     }
-    },
-    "required": [
-     "scene",
-     "events",
-     "text"
-    ],
-    "title": "CaptionOutput",
-    "type": "object"
    }
   },
   "fal-ai/marlin/find": {
    "endpoint_id": "fal-ai/marlin/find",
    "display_name": "Marlin Find",
    "description": "Marlin is a 2B video VLM tuned for the two questions developers actually want to ask of their videos: what is happening, and when?",
-   "status_base": "fal-ai/marlin/find",
    "input": {
     "x-fal-order-properties": [
      "video_url",
@@ -737,83 +454,12 @@
     ],
     "title": "FindInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "span",
-     "text",
-     "format_ok"
-    ],
-    "properties": {
-     "text": {
-      "description": "Raw post-thinking model output (e.g. \"From 14.3 to 18.2.\").",
-      "type": "string",
-      "title": "Text"
-     },
-     "format_ok": {
-      "description": "True iff the output matched the trained \"From X to Y.\" format.",
-      "type": "boolean",
-      "title": "Format Ok"
-     },
-     "span": {
-      "description": "Detected (start, end) span in seconds, or null if the model could not locate the event.",
-      "anyOf": [
-       {
-        "x-fal-order-properties": [
-         "start",
-         "end",
-         "text"
-        ],
-        "properties": {
-         "end": {
-          "description": "End time in seconds.",
-          "type": "number",
-          "title": "End"
-         },
-         "text": {
-          "title": "Text",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "description": "Short description of the event (caption mode only)."
-         },
-         "start": {
-          "description": "Start time in seconds.",
-          "type": "number",
-          "title": "Start"
-         }
-        },
-        "required": [
-         "start",
-         "end"
-        ],
-        "title": "EventSegment",
-        "type": "object"
-       },
-       {
-        "type": "null"
-       }
-      ]
-     }
-    },
-    "required": [
-     "text",
-     "format_ok"
-    ],
-    "title": "FindOutput",
-    "type": "object"
    }
   },
   "fal-ai/moondream3-preview/query": {
    "endpoint_id": "fal-ai/moondream3-preview/query",
    "display_name": "Moondream 3 Preview [Query]",
    "description": "Moondream 3 is a vision language model that brings frontier-level visual reasoning with native object detection, pointing, and OCR capabilities to real-world applications requiring fast, inexpensive inference at scale.",
-   "status_base": "fal-ai/moondream3-preview/query",
    "input": {
     "properties": {
      "image_url": {
@@ -877,97 +523,12 @@
      "top_p"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "reasoning": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "Detailed reasoning behind the answer, if enabled",
-      "title": "Reasoning"
-     },
-     "output": {
-      "title": "Output",
-      "description": "Answer to the query about the image",
-      "type": "string"
-     },
-     "finish_reason": {
-      "title": "Finish Reason",
-      "description": "Reason for finishing the output generation",
-      "type": "string"
-     },
-     "usage_info": {
-      "properties": {
-       "decode_time_ms": {
-        "title": "Decode Time Ms",
-        "description": "Time taken for decoding in milliseconds",
-        "type": "number"
-       },
-       "prefill_time_ms": {
-        "title": "Prefill Time Ms",
-        "description": "Time taken for prefill in milliseconds",
-        "type": "number"
-       },
-       "output_tokens": {
-        "title": "Output Tokens",
-        "description": "Number of output tokens generated",
-        "type": "integer"
-       },
-       "input_tokens": {
-        "title": "Input Tokens",
-        "description": "Number of input tokens processed",
-        "type": "integer"
-       },
-       "ttft_ms": {
-        "title": "Ttft Ms",
-        "description": "Time to first token in milliseconds",
-        "type": "number"
-       }
-      },
-      "required": [
-       "input_tokens",
-       "output_tokens",
-       "prefill_time_ms",
-       "decode_time_ms",
-       "ttft_ms"
-      ],
-      "title": "UsageInfo",
-      "x-fal-order-properties": [
-       "input_tokens",
-       "output_tokens",
-       "prefill_time_ms",
-       "decode_time_ms",
-       "ttft_ms"
-      ],
-      "type": "object"
-     }
-    },
-    "required": [
-     "finish_reason",
-     "usage_info",
-     "output"
-    ],
-    "title": "MoondreamQueryOutput",
-    "x-fal-order-properties": [
-     "finish_reason",
-     "usage_info",
-     "output",
-     "reasoning"
-    ],
-    "type": "object"
    }
   },
   "fal-ai/moondream2/object-detection": {
    "endpoint_id": "fal-ai/moondream2/object-detection",
    "display_name": "Moondream2",
    "description": "Moondream2 is a highly efficient open-source vision language model that combines powerful image understanding capabilities with a remarkably small footprint.",
-   "status_base": "fal-ai/moondream2/object-detection",
    "input": {
     "type": "object",
     "properties": {
@@ -991,118 +552,12 @@
      "object"
     ],
     "title": "MoondreamObjectInput"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "objects": {
-      "description": "Objects detected in the image",
-      "items": {
-       "type": "object"
-      },
-      "type": "array",
-      "title": "Objects"
-     },
-     "image": {
-      "description": "Represents an image file.",
-      "type": "object",
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "height": {
-        "description": "The height of the image in pixels.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Height"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "width": {
-        "description": "The width of the image in pixels.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Width"
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "width",
-       "height"
-      ],
-      "required": [
-       "url"
-      ],
-      "title": "Image"
-     }
-    },
-    "x-fal-order-properties": [
-     "objects",
-     "image"
-    ],
-    "required": [
-     "objects",
-     "image"
-    ],
-    "title": "MoondreamObjectOutput"
    }
   },
   "fal-ai/moondream2/visual-query": {
    "endpoint_id": "fal-ai/moondream2/visual-query",
    "display_name": "Moondream2",
    "description": "Moondream2 is a highly efficient open-source vision language model that combines powerful image understanding capabilities with a remarkably small footprint.",
-   "status_base": "fal-ai/moondream2/visual-query",
    "input": {
     "type": "object",
     "properties": {
@@ -1126,30 +581,12 @@
      "prompt"
     ],
     "title": "MoondreamQueryInput"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "output": {
-      "description": "Output for the given query",
-      "type": "string",
-      "title": "Output"
-     }
-    },
-    "x-fal-order-properties": [
-     "output"
-    ],
-    "required": [
-     "output"
-    ],
-    "title": "MoondreamOutput"
    }
   },
   "fal-ai/moondream2": {
    "endpoint_id": "fal-ai/moondream2",
    "display_name": "Moondream2",
    "description": "Moondream2 is a highly efficient open-source vision language model that combines powerful image understanding capabilities with a remarkably small footprint. ",
-   "status_base": "fal-ai/moondream2",
    "input": {
     "type": "object",
     "properties": {
@@ -1166,30 +603,12 @@
      "image_url"
     ],
     "title": "MoondreamInput"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "output": {
-      "description": "Output for the given query",
-      "type": "string",
-      "title": "Output"
-     }
-    },
-    "x-fal-order-properties": [
-     "output"
-    ],
-    "required": [
-     "output"
-    ],
-    "title": "MoondreamOutput"
    }
   },
   "fal-ai/moondream2/point-object-detection": {
    "endpoint_id": "fal-ai/moondream2/point-object-detection",
    "display_name": "Moondream2",
    "description": "Moondream2 is a highly efficient open-source vision language model that combines powerful image understanding capabilities with a remarkably small footprint.",
-   "status_base": "fal-ai/moondream2/point-object-detection",
    "input": {
     "type": "object",
     "properties": {
@@ -1213,118 +632,12 @@
      "object"
     ],
     "title": "MoondreamObjectInput"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "objects": {
-      "description": "Objects detected in the image",
-      "items": {
-       "type": "object"
-      },
-      "type": "array",
-      "title": "Objects"
-     },
-     "image": {
-      "description": "Represents an image file.",
-      "type": "object",
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "height": {
-        "description": "The height of the image in pixels.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Height"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "width": {
-        "description": "The width of the image in pixels.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Width"
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "width",
-       "height"
-      ],
-      "required": [
-       "url"
-      ],
-      "title": "Image"
-     }
-    },
-    "x-fal-order-properties": [
-     "objects",
-     "image"
-    ],
-    "required": [
-     "objects",
-     "image"
-    ],
-    "title": "MoondreamObjectOutput"
    }
   },
   "fal-ai/moondream3-preview/caption": {
    "endpoint_id": "fal-ai/moondream3-preview/caption",
    "display_name": "Moondream3 Preview [Caption]",
    "description": "Moondream 3 is a vision language model that brings frontier-level visual reasoning with native object detection, pointing, and OCR capabilities to real-world applications requiring fast, inexpensive inference at scale.",
-   "status_base": "fal-ai/moondream3-preview/caption",
    "input": {
     "properties": {
      "image_url": {
@@ -1385,84 +698,12 @@
      "top_p"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "output": {
-      "title": "Output",
-      "description": "Generated caption for the image",
-      "type": "string"
-     },
-     "finish_reason": {
-      "title": "Finish Reason",
-      "description": "Reason for finishing the output generation",
-      "type": "string"
-     },
-     "usage_info": {
-      "properties": {
-       "decode_time_ms": {
-        "title": "Decode Time Ms",
-        "description": "Time taken for decoding in milliseconds",
-        "type": "number"
-       },
-       "prefill_time_ms": {
-        "title": "Prefill Time Ms",
-        "description": "Time taken for prefill in milliseconds",
-        "type": "number"
-       },
-       "output_tokens": {
-        "title": "Output Tokens",
-        "description": "Number of output tokens generated",
-        "type": "integer"
-       },
-       "input_tokens": {
-        "title": "Input Tokens",
-        "description": "Number of input tokens processed",
-        "type": "integer"
-       },
-       "ttft_ms": {
-        "title": "Ttft Ms",
-        "description": "Time to first token in milliseconds",
-        "type": "number"
-       }
-      },
-      "required": [
-       "input_tokens",
-       "output_tokens",
-       "prefill_time_ms",
-       "decode_time_ms",
-       "ttft_ms"
-      ],
-      "title": "UsageInfo",
-      "x-fal-order-properties": [
-       "input_tokens",
-       "output_tokens",
-       "prefill_time_ms",
-       "decode_time_ms",
-       "ttft_ms"
-      ],
-      "type": "object"
-     }
-    },
-    "required": [
-     "finish_reason",
-     "usage_info",
-     "output"
-    ],
-    "title": "MoondreamCaptionOutput",
-    "x-fal-order-properties": [
-     "finish_reason",
-     "usage_info",
-     "output"
-    ],
-    "type": "object"
    }
   },
   "fal-ai/moondream3-preview/detect": {
    "endpoint_id": "fal-ai/moondream3-preview/detect",
    "display_name": "Moondream3 Preview [Detect]",
    "description": "Moondream 3 is a vision language model that brings frontier-level visual reasoning with native object detection, pointing, and OCR capabilities to real-world applications requiring fast, inexpensive inference at scale.",
-   "status_base": "fal-ai/moondream3-preview/detect",
    "input": {
     "properties": {
      "image_url": {
@@ -1496,213 +737,12 @@
      "preview"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "objects": {
-      "title": "Objects",
-      "description": "List of detected objects with their bounding boxes",
-      "items": {
-       "properties": {
-        "x_min": {
-         "title": "X Min",
-         "description": "Left boundary of detection box in normalized format (0 to 1)",
-         "type": "number"
-        },
-        "x_max": {
-         "title": "X Max",
-         "description": "Right boundary of detection box in normalized format (0 to 1)",
-         "type": "number"
-        },
-        "y_min": {
-         "title": "Y Min",
-         "description": "Top boundary of detection box in normalized format (0 to 1)",
-         "type": "number"
-        },
-        "y_max": {
-         "title": "Y Max",
-         "description": "Bottom boundary of detection box in normalized format (0 to 1)",
-         "type": "number"
-        }
-       },
-       "required": [
-        "x_min",
-        "y_min",
-        "x_max",
-        "y_max"
-       ],
-       "title": "Object",
-       "x-fal-order-properties": [
-        "x_min",
-        "y_min",
-        "x_max",
-        "y_max"
-       ],
-       "type": "object"
-      },
-      "type": "array"
-     },
-     "image": {
-      "anyOf": [
-       {
-        "properties": {
-         "file_size": {
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "description": "The size of the file in bytes.",
-          "title": "File Size"
-         },
-         "width": {
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "title": "Width",
-          "description": "The width of the image"
-         },
-         "content_type": {
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "description": "The mime type of the file.",
-          "title": "Content Type"
-         },
-         "file_name": {
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "description": "The name of the file. It will be auto-generated if not provided.",
-          "title": "File Name"
-         },
-         "url": {
-          "title": "Url",
-          "description": "The URL where the file can be downloaded from.",
-          "type": "string"
-         },
-         "height": {
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "title": "Height",
-          "description": "The height of the image"
-         }
-        },
-        "required": [
-         "url"
-        ],
-        "title": "ImageFile",
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size",
-         "width",
-         "height"
-        ],
-        "type": "object"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "Image with bounding boxes drawn around detected objects"
-     },
-     "finish_reason": {
-      "title": "Finish Reason",
-      "description": "Reason for finishing the output generation",
-      "type": "string"
-     },
-     "usage_info": {
-      "properties": {
-       "decode_time_ms": {
-        "title": "Decode Time Ms",
-        "description": "Time taken for decoding in milliseconds",
-        "type": "number"
-       },
-       "prefill_time_ms": {
-        "title": "Prefill Time Ms",
-        "description": "Time taken for prefill in milliseconds",
-        "type": "number"
-       },
-       "output_tokens": {
-        "title": "Output Tokens",
-        "description": "Number of output tokens generated",
-        "type": "integer"
-       },
-       "input_tokens": {
-        "title": "Input Tokens",
-        "description": "Number of input tokens processed",
-        "type": "integer"
-       },
-       "ttft_ms": {
-        "title": "Ttft Ms",
-        "description": "Time to first token in milliseconds",
-        "type": "number"
-       }
-      },
-      "required": [
-       "input_tokens",
-       "output_tokens",
-       "prefill_time_ms",
-       "decode_time_ms",
-       "ttft_ms"
-      ],
-      "title": "UsageInfo",
-      "x-fal-order-properties": [
-       "input_tokens",
-       "output_tokens",
-       "prefill_time_ms",
-       "decode_time_ms",
-       "ttft_ms"
-      ],
-      "type": "object"
-     }
-    },
-    "required": [
-     "finish_reason",
-     "usage_info",
-     "objects"
-    ],
-    "title": "MoondreamDetectOutput",
-    "x-fal-order-properties": [
-     "finish_reason",
-     "usage_info",
-     "objects",
-     "image"
-    ],
-    "type": "object"
    }
   },
   "fal-ai/moondream3-preview/point": {
    "endpoint_id": "fal-ai/moondream3-preview/point",
    "display_name": "Moondream3 Preview [Point]",
    "description": "Moondream 3 is a vision language model that brings frontier-level visual reasoning with native object detection, pointing, and OCR capabilities to real-world applications requiring fast, inexpensive inference at scale.",
-   "status_base": "fal-ai/moondream3-preview/point",
    "input": {
     "properties": {
      "image_url": {
@@ -1736,199 +776,12 @@
      "preview"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "image": {
-      "anyOf": [
-       {
-        "properties": {
-         "file_size": {
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "description": "The size of the file in bytes.",
-          "title": "File Size"
-         },
-         "width": {
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "title": "Width",
-          "description": "The width of the image"
-         },
-         "content_type": {
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "description": "The mime type of the file.",
-          "title": "Content Type"
-         },
-         "file_name": {
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "description": "The name of the file. It will be auto-generated if not provided.",
-          "title": "File Name"
-         },
-         "url": {
-          "title": "Url",
-          "description": "The URL where the file can be downloaded from.",
-          "type": "string"
-         },
-         "height": {
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "title": "Height",
-          "description": "The height of the image"
-         }
-        },
-        "required": [
-         "url"
-        ],
-        "title": "ImageFile",
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size",
-         "width",
-         "height"
-        ],
-        "type": "object"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "Image with points drawn on detected objects"
-     },
-     "points": {
-      "title": "Points",
-      "description": "List of points marking the detected objects",
-      "items": {
-       "properties": {
-        "x": {
-         "title": "X",
-         "description": "X coordinate of the point in normalized format (0 to 1)",
-         "type": "number"
-        },
-        "y": {
-         "title": "Y",
-         "description": "Y coordinate of the point in normalized format (0 to 1)",
-         "type": "number"
-        }
-       },
-       "required": [
-        "x",
-        "y"
-       ],
-       "title": "Point",
-       "x-fal-order-properties": [
-        "x",
-        "y"
-       ],
-       "type": "object"
-      },
-      "type": "array"
-     },
-     "finish_reason": {
-      "title": "Finish Reason",
-      "description": "Reason for finishing the output generation",
-      "type": "string"
-     },
-     "usage_info": {
-      "properties": {
-       "decode_time_ms": {
-        "title": "Decode Time Ms",
-        "description": "Time taken for decoding in milliseconds",
-        "type": "number"
-       },
-       "prefill_time_ms": {
-        "title": "Prefill Time Ms",
-        "description": "Time taken for prefill in milliseconds",
-        "type": "number"
-       },
-       "output_tokens": {
-        "title": "Output Tokens",
-        "description": "Number of output tokens generated",
-        "type": "integer"
-       },
-       "input_tokens": {
-        "title": "Input Tokens",
-        "description": "Number of input tokens processed",
-        "type": "integer"
-       },
-       "ttft_ms": {
-        "title": "Ttft Ms",
-        "description": "Time to first token in milliseconds",
-        "type": "number"
-       }
-      },
-      "required": [
-       "input_tokens",
-       "output_tokens",
-       "prefill_time_ms",
-       "decode_time_ms",
-       "ttft_ms"
-      ],
-      "title": "UsageInfo",
-      "x-fal-order-properties": [
-       "input_tokens",
-       "output_tokens",
-       "prefill_time_ms",
-       "decode_time_ms",
-       "ttft_ms"
-      ],
-      "type": "object"
-     }
-    },
-    "required": [
-     "finish_reason",
-     "usage_info",
-     "points"
-    ],
-    "title": "MoondreamPointOutput",
-    "x-fal-order-properties": [
-     "finish_reason",
-     "usage_info",
-     "points",
-     "image"
-    ],
-    "type": "object"
    }
   },
   "fal-ai/moondream-next": {
    "endpoint_id": "fal-ai/moondream-next",
    "display_name": "MoonDreamNext",
    "description": "MoonDreamNext is a multimodal vision-language model for captioning, gaze detection, bbox detection, point detection, and more.",
-   "status_base": "fal-ai/moondream-next",
    "input": {
     "properties": {
      "prompt": {
@@ -1972,30 +825,12 @@
      "prompt",
      "max_tokens"
     ]
-   },
-   "output": {
-    "properties": {
-     "output": {
-      "title": "Output",
-      "description": "Response from the model",
-      "type": "string"
-     }
-    },
-    "required": [
-     "output"
-    ],
-    "title": "MoonDreamOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "output"
-    ]
    }
   },
   "fal-ai/moondream-next/batch": {
    "endpoint_id": "fal-ai/moondream-next/batch",
    "display_name": "MoonDreamNext Batch",
    "description": "MoonDreamNext Batch is a multimodal vision-language model for batch captioning.",
-   "status_base": "fal-ai/moondream-next/batch",
    "input": {
     "properties": {
      "images_data_url": {
@@ -2028,91 +863,12 @@
      "prompt",
      "max_tokens"
     ]
-   },
-   "output": {
-    "properties": {
-     "outputs": {
-      "items": {
-       "type": "string"
-      },
-      "title": "Outputs",
-      "description": "List of generated captions",
-      "type": "array"
-     },
-     "captions_file": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ]
-     }
-    },
-    "required": [
-     "captions_file",
-     "outputs"
-    ],
-    "title": "BatchMoonDreamOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "captions_file",
-     "outputs"
-    ]
    }
   },
   "fal-ai/x-ailab/nsfw": {
    "endpoint_id": "fal-ai/x-ailab/nsfw",
    "display_name": "NSFW Checker",
    "description": "Predict whether an image is NSFW or SFW.",
-   "status_base": "fal-ai/x-ailab/nsfw",
    "input": {
     "required": [
      "image_urls"
@@ -2133,33 +889,12 @@
       "description": "List of image URLs to check. If more than 10 images are provided, only the first 10 will be checked."
      }
     }
-   },
-   "output": {
-    "required": [
-     "has_nsfw_concepts"
-    ],
-    "x-fal-order-properties": [
-     "has_nsfw_concepts"
-    ],
-    "type": "object",
-    "title": "NSFWOutput",
-    "properties": {
-     "has_nsfw_concepts": {
-      "type": "array",
-      "title": "Has Nsfw Concepts",
-      "items": {
-       "type": "boolean"
-      },
-      "description": "List of booleans indicating if the image has an NSFW concept"
-     }
-    }
    }
   },
   "fal-ai/imageutils/nsfw": {
    "endpoint_id": "fal-ai/imageutils/nsfw",
    "display_name": "NSFW Filter",
    "description": "Predict the probability of an image being NSFW.",
-   "status_base": "fal-ai/imageutils/nsfw",
    "input": {
     "x-fal-order-properties": [
      "image_url"
@@ -2176,30 +911,12 @@
     "required": [
      "image_url"
     ]
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "nsfw_probability"
-    ],
-    "type": "object",
-    "properties": {
-     "nsfw_probability": {
-      "type": "number",
-      "description": "The probability of the image being NSFW.",
-      "title": "Nsfw Probability"
-     }
-    },
-    "title": "NSFWImageDetectionOutput",
-    "required": [
-     "nsfw_probability"
-    ]
    }
   },
   "openrouter/router/vision": {
    "endpoint_id": "openrouter/router/vision",
    "display_name": "OpenRouter [Vision]",
    "description": "Run any Vision Language Model with fal. Analyze and understand images using Claude (Anthropic), GPT-5 / GPT-4o (OpenAI), Gemini (Google), Grok (xAI), Llama (Meta), Qwen, Pixtral (Mistral), and more. Send one or multiple images for captioning, analysis, OCR, or visual Q&A. Powered by OpenRouter. ",
-   "status_base": "openrouter/router/vision",
    "input": {
     "properties": {
      "max_tokens": {
@@ -2521,114 +1238,12 @@
      "web_search_options"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "usage": {
-      "anyOf": [
-       {
-        "properties": {
-         "total_tokens": {
-          "default": 0,
-          "title": "Total Tokens",
-          "type": "integer"
-         },
-         "cost": {
-          "title": "Cost",
-          "type": "number"
-         },
-         "prompt_tokens": {
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "title": "Prompt Tokens"
-         },
-         "completion_tokens": {
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ],
-          "title": "Completion Tokens"
-         },
-         "prompt_tokens_details": {
-          "anyOf": [
-           {
-            "properties": {
-             "cache_write_tokens": {
-              "default": 0,
-              "title": "Cache Write Tokens",
-              "type": "integer"
-             },
-             "cached_tokens": {
-              "default": 0,
-              "title": "Cached Tokens",
-              "type": "integer"
-             }
-            },
-            "title": "PromptTokensDetails",
-            "x-fal-order-properties": [
-             "cached_tokens",
-             "cache_write_tokens"
-            ],
-            "type": "object"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         }
-        },
-        "required": [
-         "cost"
-        ],
-        "title": "UsageInfo",
-        "x-fal-order-properties": [
-         "prompt_tokens",
-         "completion_tokens",
-         "total_tokens",
-         "cost",
-         "prompt_tokens_details"
-        ],
-        "type": "object"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "Token usage information"
-     },
-     "output": {
-      "title": "Output",
-      "description": "Generated output",
-      "type": "string"
-     }
-    },
-    "required": [
-     "output",
-     "usage"
-    ],
-    "title": "VisionOutput",
-    "x-fal-order-properties": [
-     "output",
-     "usage"
-    ],
-    "type": "object"
    }
   },
   "fal-ai/sa2va/4b/image": {
    "endpoint_id": "fal-ai/sa2va/4b/image",
    "display_name": "Sa2VA 4B Image",
    "description": "Sa2VA is an MLLM capable of question answering, visual prompt understanding, and dense object segmentation at both image and video levels",
-   "status_base": "fal-ai/sa2va/4b/image",
    "input": {
     "properties": {
      "image_url": {
@@ -2657,113 +1272,6 @@
     "required": [
      "prompt",
      "image_url"
-    ]
-   },
-   "output": {
-    "properties": {
-     "masks": {
-      "title": "Masks",
-      "type": "array",
-      "description": "Dictionary of label: mask image",
-      "items": {
-       "properties": {
-        "content_type": {
-         "title": "Content Type",
-         "description": "The mime type of the file.",
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "url": {
-         "title": "Url",
-         "type": "string",
-         "description": "The URL where the file can be downloaded from."
-        },
-        "width": {
-         "title": "Width",
-         "description": "The width of the image in pixels.",
-         "anyOf": [
-          {
-           "type": "integer"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "height": {
-         "title": "Height",
-         "description": "The height of the image in pixels.",
-         "anyOf": [
-          {
-           "type": "integer"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "file_size": {
-         "title": "File Size",
-         "description": "The size of the file in bytes.",
-         "anyOf": [
-          {
-           "type": "integer"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "file_name": {
-         "title": "File Name",
-         "description": "The name of the file. It will be auto-generated if not provided.",
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        }
-       },
-       "title": "Image",
-       "type": "object",
-       "description": "Represents an image file.",
-       "x-fal-order-properties": [
-        "url",
-        "content_type",
-        "file_name",
-        "file_size",
-        "width",
-        "height"
-       ],
-       "required": [
-        "url"
-       ]
-      }
-     },
-     "output": {
-      "title": "Output",
-      "type": "string",
-      "description": "Generated output"
-     }
-    },
-    "title": "ImageChatOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "output",
-     "masks"
-    ],
-    "required": [
-     "output",
-     "masks"
     ]
    }
   },
@@ -2771,7 +1279,6 @@
    "endpoint_id": "fal-ai/sa2va/4b/video",
    "display_name": "Sa2VA 4B Video",
    "description": "Sa2VA is an MLLM capable of question answering, visual prompt understanding, and dense object segmentation at both image and video levels",
-   "status_base": "fal-ai/sa2va/4b/video",
    "input": {
     "properties": {
      "num_frames_to_sample": {
@@ -2816,93 +1323,12 @@
      "prompt",
      "video_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "masks": {
-      "title": "Masks",
-      "type": "array",
-      "description": "Dictionary of label: mask video",
-      "items": {
-       "properties": {
-        "content_type": {
-         "title": "Content Type",
-         "description": "The mime type of the file.",
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "url": {
-         "title": "Url",
-         "type": "string",
-         "description": "The URL where the file can be downloaded from."
-        },
-        "file_size": {
-         "title": "File Size",
-         "description": "The size of the file in bytes.",
-         "anyOf": [
-          {
-           "type": "integer"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "file_name": {
-         "title": "File Name",
-         "description": "The name of the file. It will be auto-generated if not provided.",
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        }
-       },
-       "title": "File",
-       "type": "object",
-       "x-fal-order-properties": [
-        "url",
-        "content_type",
-        "file_name",
-        "file_size"
-       ],
-       "required": [
-        "url"
-       ]
-      }
-     },
-     "output": {
-      "title": "Output",
-      "type": "string",
-      "description": "Generated output"
-     }
-    },
-    "title": "VideoChatOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "output",
-     "masks"
-    ],
-    "required": [
-     "output",
-     "masks"
-    ]
    }
   },
   "fal-ai/sa2va/8b/image": {
    "endpoint_id": "fal-ai/sa2va/8b/image",
    "display_name": "Sa2VA 8B Image",
    "description": "Sa2VA is an MLLM capable of question answering, visual prompt understanding, and dense object segmentation at both image and video levels",
-   "status_base": "fal-ai/sa2va/8b/image",
    "input": {
     "properties": {
      "image_url": {
@@ -2932,120 +1358,12 @@
      "prompt",
      "image_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "masks": {
-      "title": "Masks",
-      "type": "array",
-      "description": "Dictionary of label: mask image",
-      "items": {
-       "properties": {
-        "content_type": {
-         "title": "Content Type",
-         "description": "The mime type of the file.",
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "url": {
-         "title": "Url",
-         "type": "string",
-         "description": "The URL where the file can be downloaded from."
-        },
-        "width": {
-         "title": "Width",
-         "description": "The width of the image in pixels.",
-         "anyOf": [
-          {
-           "type": "integer"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "height": {
-         "title": "Height",
-         "description": "The height of the image in pixels.",
-         "anyOf": [
-          {
-           "type": "integer"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "file_size": {
-         "title": "File Size",
-         "description": "The size of the file in bytes.",
-         "anyOf": [
-          {
-           "type": "integer"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "file_name": {
-         "title": "File Name",
-         "description": "The name of the file. It will be auto-generated if not provided.",
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        }
-       },
-       "title": "Image",
-       "type": "object",
-       "description": "Represents an image file.",
-       "x-fal-order-properties": [
-        "url",
-        "content_type",
-        "file_name",
-        "file_size",
-        "width",
-        "height"
-       ],
-       "required": [
-        "url"
-       ]
-      }
-     },
-     "output": {
-      "title": "Output",
-      "type": "string",
-      "description": "Generated output"
-     }
-    },
-    "title": "ImageChatOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "output",
-     "masks"
-    ],
-    "required": [
-     "output",
-     "masks"
-    ]
    }
   },
   "fal-ai/sa2va/8b/video": {
    "endpoint_id": "fal-ai/sa2va/8b/video",
    "display_name": "Sa2VA 8B Video",
    "description": "Sa2VA is an MLLM capable of question answering, visual prompt understanding, and dense object segmentation at both image and video levels",
-   "status_base": "fal-ai/sa2va/8b/video",
    "input": {
     "properties": {
      "num_frames_to_sample": {
@@ -3090,93 +1408,12 @@
      "prompt",
      "video_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "masks": {
-      "title": "Masks",
-      "type": "array",
-      "description": "Dictionary of label: mask video",
-      "items": {
-       "properties": {
-        "content_type": {
-         "title": "Content Type",
-         "description": "The mime type of the file.",
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "url": {
-         "title": "Url",
-         "type": "string",
-         "description": "The URL where the file can be downloaded from."
-        },
-        "file_size": {
-         "title": "File Size",
-         "description": "The size of the file in bytes.",
-         "anyOf": [
-          {
-           "type": "integer"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        },
-        "file_name": {
-         "title": "File Name",
-         "description": "The name of the file. It will be auto-generated if not provided.",
-         "anyOf": [
-          {
-           "type": "string"
-          },
-          {
-           "type": "null"
-          }
-         ]
-        }
-       },
-       "title": "File",
-       "type": "object",
-       "x-fal-order-properties": [
-        "url",
-        "content_type",
-        "file_name",
-        "file_size"
-       ],
-       "required": [
-        "url"
-       ]
-      }
-     },
-     "output": {
-      "title": "Output",
-      "type": "string",
-      "description": "Generated output"
-     }
-    },
-    "title": "VideoChatOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "output",
-     "masks"
-    ],
-    "required": [
-     "output",
-     "masks"
-    ]
    }
   },
   "fal-ai/sam-3/image/embed": {
    "endpoint_id": "fal-ai/sam-3/image/embed",
    "display_name": "Sam 3",
    "description": "SAM 3 is a unified foundation model for promptable segmentation in images and videos. It can detect, segment, and track objects using text or visual prompts such as points, boxes, and masks. ",
-   "status_base": "fal-ai/sam-3/image/embed",
    "input": {
     "properties": {
      "image_url": {
@@ -3193,30 +1430,12 @@
      "image_url"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "embedding_b64": {
-      "title": "Embedding B64",
-      "description": "Embedding of the image",
-      "type": "string"
-     }
-    },
-    "title": "SAM3EmbeddingOutput",
-    "required": [
-     "embedding_b64"
-    ],
-    "x-fal-order-properties": [
-     "embedding_b64"
-    ],
-    "type": "object"
    }
   },
   "fal-ai/video-understanding": {
    "endpoint_id": "fal-ai/video-understanding",
    "display_name": "Video Understanding",
    "description": "A video understanding model to analyze video content and answer questions about what's happening in the video based on user prompts.",
-   "status_base": "fal-ai/video-understanding",
    "input": {
     "required": [
      "video_url",
@@ -3247,23 +1466,6 @@
       "type": "boolean",
       "title": "Detailed Analysis",
       "description": "Whether to request a more detailed analysis of the video"
-     }
-    }
-   },
-   "output": {
-    "required": [
-     "output"
-    ],
-    "x-fal-order-properties": [
-     "output"
-    ],
-    "type": "object",
-    "title": "VideoUnderstandingOutput",
-    "properties": {
-     "output": {
-      "type": "string",
-      "title": "Output",
-      "description": "The analysis of the video content based on the prompt"
      }
     }
    }

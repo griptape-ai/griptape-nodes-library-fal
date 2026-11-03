@@ -5,7 +5,6 @@
    "endpoint_id": "fal-ai/ace-step/audio-inpaint",
    "display_name": "ACE Step Audio Inpaint",
    "description": "Modify a portion of provided audio with lyrics and/or style using ACE-Step",
-   "status_base": "fal-ai/ace-step/audio-inpaint",
    "input": {
     "type": "object",
     "properties": {
@@ -193,102 +192,12 @@
      "lyric_guidance_scale"
     ],
     "title": "ACEStepAudioInpaintRequest"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "lyrics": {
-      "description": "The lyrics used in the generation process.",
-      "type": "string",
-      "title": "Lyrics"
-     },
-     "tags": {
-      "description": "The genre tags used in the generation process.",
-      "type": "string",
-      "title": "Tags"
-     },
-     "audio": {
-      "type": "object",
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File"
-     },
-     "seed": {
-      "description": "The random seed used for the generation process.",
-      "type": "integer",
-      "title": "Seed"
-     }
-    },
-    "required": [
-     "audio",
-     "seed",
-     "tags",
-     "lyrics"
-    ],
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "tags",
-     "lyrics"
-    ],
-    "title": "ACEStepAudioInpaintResponse"
    }
   },
   "fal-ai/ace-step/audio-outpaint": {
    "endpoint_id": "fal-ai/ace-step/audio-outpaint",
    "display_name": "ACE Step Audio Outpaint",
    "description": "Extend the beginning or end of provided audio with lyrics and/or style using ACE-Step",
-   "status_base": "fal-ai/ace-step/audio-outpaint",
    "input": {
     "type": "object",
     "properties": {
@@ -445,102 +354,12 @@
      "lyric_guidance_scale"
     ],
     "title": "ACEStepAudioOutpaintRequest"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "lyrics": {
-      "description": "The lyrics used in the generation process.",
-      "type": "string",
-      "title": "Lyrics"
-     },
-     "tags": {
-      "description": "The genre tags used in the generation process.",
-      "type": "string",
-      "title": "Tags"
-     },
-     "audio": {
-      "type": "object",
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File"
-     },
-     "seed": {
-      "description": "The random seed used for the generation process.",
-      "type": "integer",
-      "title": "Seed"
-     }
-    },
-    "required": [
-     "audio",
-     "seed",
-     "tags",
-     "lyrics"
-    ],
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "tags",
-     "lyrics"
-    ],
-    "title": "ACEStepResponse"
    }
   },
   "fal-ai/ace-step/audio-to-audio": {
    "endpoint_id": "fal-ai/ace-step/audio-to-audio",
    "display_name": "ACE Step Audio To Audio",
    "description": "Generate music from a lyrics and example audio using ACE-Step",
-   "status_base": "fal-ai/ace-step/audio-to-audio",
    "input": {
     "type": "object",
     "properties": {
@@ -717,102 +536,12 @@
      "original_seed"
     ],
     "title": "ACEStepAudioToAudioRequest"
-   },
-   "output": {
-    "type": "object",
-    "properties": {
-     "lyrics": {
-      "description": "The lyrics used in the generation process.",
-      "type": "string",
-      "title": "Lyrics"
-     },
-     "tags": {
-      "description": "The genre tags used in the generation process.",
-      "type": "string",
-      "title": "Tags"
-     },
-     "audio": {
-      "type": "object",
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string",
-        "title": "Url"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "title": "File"
-     },
-     "seed": {
-      "description": "The random seed used for the generation process.",
-      "type": "integer",
-      "title": "Seed"
-     }
-    },
-    "required": [
-     "audio",
-     "seed",
-     "tags",
-     "lyrics"
-    ],
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "tags",
-     "lyrics"
-    ],
-    "title": "ACEStepAudioToAudioResponse"
    }
   },
   "fal-ai/audio-understanding": {
    "endpoint_id": "fal-ai/audio-understanding",
    "display_name": "Audio Understanding",
    "description": "A audio understanding model to analyze audio content and answer questions about what's happening in the audio based on user prompts.",
-   "status_base": "fal-ai/audio-understanding",
    "input": {
     "properties": {
      "detailed_analysis": {
@@ -845,30 +574,12 @@
      "audio_url",
      "prompt"
     ]
-   },
-   "output": {
-    "properties": {
-     "output": {
-      "title": "Output",
-      "type": "string",
-      "description": "The analysis of the audio content based on the prompt"
-     }
-    },
-    "type": "object",
-    "title": "AudioUnderstandingOutput",
-    "x-fal-order-properties": [
-     "output"
-    ],
-    "required": [
-     "output"
-    ]
    }
   },
   "fal-ai/deepfilternet3": {
    "endpoint_id": "fal-ai/deepfilternet3",
    "display_name": "DeepFilterNet 3",
    "description": "Enhance speech audio by removing background noise and upsampling to 48KHz",
-   "status_base": "fal-ai/deepfilternet3",
    "input": {
     "properties": {
      "bitrate": {
@@ -915,169 +626,12 @@
     "required": [
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "timings": {
-      "properties": {
-       "postprocess": {
-        "title": "Postprocess",
-        "description": "Postprocessing time.",
-        "type": "number"
-       },
-       "preprocess": {
-        "title": "Preprocess",
-        "description": "Preprocessing time.",
-        "type": "number"
-       },
-       "inference": {
-        "title": "Inference",
-        "description": "Inference time.",
-        "type": "number"
-       }
-      },
-      "title": "DeepFilterNetTimings",
-      "type": "object",
-      "x-fal-order-properties": [
-       "preprocess",
-       "inference",
-       "postprocess"
-      ],
-      "required": [
-       "preprocess",
-       "inference",
-       "postprocess"
-      ]
-     },
-     "audio_file": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "sample_rate": {
-        "title": "Sample Rate",
-        "description": "The sample rate of the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "duration": {
-        "title": "Duration",
-        "description": "The duration of the audio",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "bitrate": {
-        "title": "Bitrate",
-        "description": "The bitrate of the audio (e.g., '192k' or 192000)",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "channels": {
-        "title": "Channels",
-        "description": "The number of channels in the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "AudioFile",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "duration",
-       "channels",
-       "sample_rate",
-       "bitrate"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "DeepFilterNet3Output",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio_file",
-     "timings"
-    ],
-    "required": [
-     "audio_file",
-     "timings"
-    ]
    }
   },
   "fal-ai/demucs": {
    "endpoint_id": "fal-ai/demucs",
    "display_name": "Demucs",
    "description": "SOTA stemming model for voice, drums, bass, guitar and more.",
-   "status_base": "fal-ai/demucs",
    "input": {
     "properties": {
      "shifts": {
@@ -1186,411 +740,12 @@
      "output_format"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "bass": {
-      "anyOf": [
-       {
-        "properties": {
-         "file_size": {
-          "title": "File Size",
-          "description": "The size of the file in bytes.",
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "file_name": {
-          "title": "File Name",
-          "description": "The name of the file. It will be auto-generated if not provided.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "content_type": {
-          "title": "Content Type",
-          "description": "The mime type of the file.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "url": {
-          "title": "Url",
-          "description": "The URL where the file can be downloaded from.",
-          "type": "string"
-         }
-        },
-        "required": [
-         "url"
-        ],
-        "title": "File",
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size"
-        ],
-        "type": "object"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "Separated bass audio file"
-     },
-     "guitar": {
-      "anyOf": [
-       {
-        "properties": {
-         "file_size": {
-          "title": "File Size",
-          "description": "The size of the file in bytes.",
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "file_name": {
-          "title": "File Name",
-          "description": "The name of the file. It will be auto-generated if not provided.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "content_type": {
-          "title": "Content Type",
-          "description": "The mime type of the file.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "url": {
-          "title": "Url",
-          "description": "The URL where the file can be downloaded from.",
-          "type": "string"
-         }
-        },
-        "required": [
-         "url"
-        ],
-        "title": "File",
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size"
-        ],
-        "type": "object"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "Separated guitar audio file (only available for 6s models)"
-     },
-     "drums": {
-      "anyOf": [
-       {
-        "properties": {
-         "file_size": {
-          "title": "File Size",
-          "description": "The size of the file in bytes.",
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "file_name": {
-          "title": "File Name",
-          "description": "The name of the file. It will be auto-generated if not provided.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "content_type": {
-          "title": "Content Type",
-          "description": "The mime type of the file.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "url": {
-          "title": "Url",
-          "description": "The URL where the file can be downloaded from.",
-          "type": "string"
-         }
-        },
-        "required": [
-         "url"
-        ],
-        "title": "File",
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size"
-        ],
-        "type": "object"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "Separated drums audio file"
-     },
-     "other": {
-      "anyOf": [
-       {
-        "properties": {
-         "file_size": {
-          "title": "File Size",
-          "description": "The size of the file in bytes.",
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "file_name": {
-          "title": "File Name",
-          "description": "The name of the file. It will be auto-generated if not provided.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "content_type": {
-          "title": "Content Type",
-          "description": "The mime type of the file.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "url": {
-          "title": "Url",
-          "description": "The URL where the file can be downloaded from.",
-          "type": "string"
-         }
-        },
-        "required": [
-         "url"
-        ],
-        "title": "File",
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size"
-        ],
-        "type": "object"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "Separated other instruments audio file"
-     },
-     "piano": {
-      "anyOf": [
-       {
-        "properties": {
-         "file_size": {
-          "title": "File Size",
-          "description": "The size of the file in bytes.",
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "file_name": {
-          "title": "File Name",
-          "description": "The name of the file. It will be auto-generated if not provided.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "content_type": {
-          "title": "Content Type",
-          "description": "The mime type of the file.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "url": {
-          "title": "Url",
-          "description": "The URL where the file can be downloaded from.",
-          "type": "string"
-         }
-        },
-        "required": [
-         "url"
-        ],
-        "title": "File",
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size"
-        ],
-        "type": "object"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "Separated piano audio file (only available for 6s models)"
-     },
-     "vocals": {
-      "anyOf": [
-       {
-        "properties": {
-         "file_size": {
-          "title": "File Size",
-          "description": "The size of the file in bytes.",
-          "anyOf": [
-           {
-            "type": "integer"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "file_name": {
-          "title": "File Name",
-          "description": "The name of the file. It will be auto-generated if not provided.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "content_type": {
-          "title": "Content Type",
-          "description": "The mime type of the file.",
-          "anyOf": [
-           {
-            "type": "string"
-           },
-           {
-            "type": "null"
-           }
-          ]
-         },
-         "url": {
-          "title": "Url",
-          "description": "The URL where the file can be downloaded from.",
-          "type": "string"
-         }
-        },
-        "required": [
-         "url"
-        ],
-        "title": "File",
-        "x-fal-order-properties": [
-         "url",
-         "content_type",
-         "file_name",
-         "file_size"
-        ],
-        "type": "object"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "description": "Separated vocals audio file"
-     }
-    },
-    "title": "DemucsOutput",
-    "x-fal-order-properties": [
-     "vocals",
-     "drums",
-     "bass",
-     "other",
-     "guitar",
-     "piano"
-    ],
-    "type": "object"
    }
   },
   "fal-ai/dia-tts/voice-clone": {
    "endpoint_id": "fal-ai/dia-tts/voice-clone",
    "display_name": "Dia Tts",
    "description": "Clone dialog voices from a sample audio and generate dialogs from text prompts using the Dia TTS which leverages advanced AI techniques to create high-quality text-to-speech.",
-   "status_base": "fal-ai/dia-tts/voice-clone",
    "input": {
     "properties": {
      "text": {
@@ -1607,81 +762,12 @@
     "required": [
      "text"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "DiaCloneOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/elevenlabs/audio-isolation": {
    "endpoint_id": "fal-ai/elevenlabs/audio-isolation",
    "display_name": "ElevenLabs Audio Isolation",
    "description": "Isolate audio tracks using ElevenLabs advanced audio isolation technology.",
-   "status_base": "fal-ai/elevenlabs/audio-isolation",
    "input": {
     "properties": {
      "audio_url": {
@@ -1715,95 +801,12 @@
      "audio_url",
      "video_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "timestamps": {
-      "title": "Timestamps",
-      "description": "Timestamps for each word in the generated speech. Only returned if `timestamps` is set to True in the request.",
-      "anyOf": [
-       {
-        "type": "array",
-        "items": {}
-       },
-       {
-        "type": "null"
-       }
-      ]
-     },
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "TTSOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio",
-     "timestamps"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/elevenlabs/voice-changer": {
    "endpoint_id": "fal-ai/elevenlabs/voice-changer",
    "display_name": "ElevenLabs Voice Changer",
    "description": "Change the voices in your audios with voices in ElevenLabs!",
-   "status_base": "fal-ai/elevenlabs/voice-changer",
    "input": {
     "properties": {
      "output_format": {
@@ -1868,88 +871,12 @@
     "required": [
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "seed": {
-      "title": "Seed",
-      "description": "Random seed for reproducibility.",
-      "type": "integer"
-     },
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "VoiceChangerOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio",
-     "seed"
-    ],
-    "required": [
-     "audio",
-     "seed"
-    ]
    }
   },
   "fal-ai/ffmpeg-api/merge-audios": {
    "endpoint_id": "fal-ai/ffmpeg-api/merge-audios",
    "display_name": "FFmpeg API [Merge Audios]",
    "description": "Merge audios into a single audio using FFmpeg API!",
-   "status_base": "fal-ai/ffmpeg-api/merge-audios",
    "input": {
     "title": "MergeAudiosInput",
     "required": [
@@ -2005,81 +932,12 @@
      "output_format"
     ],
     "type": "object"
-   },
-   "output": {
-    "title": "MergeAudiosOutput",
-    "required": [
-     "audio"
-    ],
-    "properties": {
-     "audio": {
-      "title": "File",
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     }
-    },
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "type": "object"
    }
   },
   "fal-ai/kling-video/create-voice": {
    "endpoint_id": "fal-ai/kling-video/create-voice",
    "display_name": "Kling Video Create Voice",
    "description": "Create Voices to be used with Kling Models Voice Control",
-   "status_base": "fal-ai/kling-video/create-voice",
    "input": {
     "properties": {
      "voice_url": {
@@ -2105,31 +963,12 @@
     "required": [
      "voice_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "voice_id": {
-      "title": "Voice Id",
-      "type": "string",
-      "description": "Unique identifier for the created voice"
-     }
-    },
-    "title": "CreateVoiceOutput",
-    "type": "object",
-    "description": "Response model for creating a custom voice.",
-    "x-fal-order-properties": [
-     "voice_id"
-    ],
-    "required": [
-     "voice_id"
-    ]
    }
   },
   "mureka/v8/song/extend": {
    "endpoint_id": "mureka/v8/song/extend",
    "display_name": "Mureka 8 Song Extension",
    "description": "Extends a generated song or uploaded audio from a specified timestamp using supplied lyrics, with head or tail extension depending on the selected model.",
-   "status_base": "mureka/v8/song/extend",
    "input": {
     "properties": {
      "lyrics": {
@@ -2203,286 +1042,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/v8/song/remix": {
    "endpoint_id": "mureka/v8/song/remix",
    "display_name": "Mureka 8 Song Remix",
    "description": "Remixes a generated song or uploaded audio with Mureka 8, using complete lyrics and a prompt that controls genre, mood, instrumentation, and arrangement. Accepts source audio from 10 to 350 seconds; vocal-only, accompaniment-only, and instrumental tracks are not supported.",
-   "status_base": "mureka/v8/song/remix",
    "input": {
     "properties": {
      "lyrics": {
@@ -2546,286 +1111,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/v8/generate/track": {
    "endpoint_id": "mureka/v8/generate/track",
    "display_name": "Mureka 8 Track Generation",
    "description": "Generates vocal or instrumental tracks for an existing song or uploaded audio, with controls for track type, musical style, generation region, and optional vocal lyrics.",
-   "status_base": "mureka/v8/generate/track",
    "input": {
     "properties": {
      "lyrics": {
@@ -2961,286 +1252,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/v9/generate/soundtrack": {
    "endpoint_id": "mureka/v9/generate/soundtrack",
    "display_name": "Mureka 9 Soundtrack Generation",
    "description": "Generates soundtracks from an uploaded image or video, with optional style and mood guidance, audio-range selection, and multiple variations.",
-   "status_base": "mureka/v9/generate/soundtrack",
    "input": {
     "properties": {
      "image_id": {
@@ -3325,286 +1342,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/api/song/edit": {
    "endpoint_id": "mureka/api/song/edit",
    "display_name": "Mureka Song Editing",
    "description": "Rewrites a selected time region of a generated song or uploaded audio using replacement lyrics.",
-   "status_base": "mureka/api/song/edit",
    "input": {
     "properties": {
      "lyrics": {
@@ -3674,286 +1417,12 @@
      "enable_safety_checker"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "lyrics_sections": {
-      "anyOf": [
-       {
-        "items": {
-         "properties": {
-          "start": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Start"
-          },
-          "section_type": {
-           "anyOf": [
-            {
-             "enum": [
-              "intro",
-              "verse",
-              "pre-chorus",
-              "chorus",
-              "bridge",
-              "break",
-              "outro"
-             ],
-             "type": "string"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Section Type"
-          },
-          "lines": {
-           "anyOf": [
-            {
-             "items": {
-              "properties": {
-               "start": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Start"
-               },
-               "text": {
-                "anyOf": [
-                 {
-                  "type": "string"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Text"
-               },
-               "end": {
-                "anyOf": [
-                 {
-                  "type": "integer"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "End"
-               },
-               "words": {
-                "anyOf": [
-                 {
-                  "items": {
-                   "properties": {
-                    "start": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Start"
-                    },
-                    "text": {
-                     "anyOf": [
-                      {
-                       "type": "string"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "Text"
-                    },
-                    "end": {
-                     "anyOf": [
-                      {
-                       "type": "integer"
-                      },
-                      {
-                       "type": "null"
-                      }
-                     ],
-                     "title": "End"
-                    }
-                   },
-                   "title": "LyricsWord",
-                   "x-fal-order-properties": [
-                    "start",
-                    "end",
-                    "text"
-                   ],
-                   "type": "object"
-                  },
-                  "type": "array"
-                 },
-                 {
-                  "type": "null"
-                 }
-                ],
-                "title": "Words"
-               }
-              },
-              "title": "LyricsLine",
-              "x-fal-order-properties": [
-               "start",
-               "end",
-               "text",
-               "words"
-              ],
-              "type": "object"
-             },
-             "type": "array"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "Lines"
-          },
-          "end": {
-           "anyOf": [
-            {
-             "type": "integer"
-            },
-            {
-             "type": "null"
-            }
-           ],
-           "title": "End"
-          }
-         },
-         "title": "LyricsSection",
-         "x-fal-order-properties": [
-          "section_type",
-          "start",
-          "end",
-          "lines"
-         ],
-         "type": "object"
-        },
-        "type": "array"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Lyrics Sections",
-      "description": "Timed lyric sections for the generated audio, when available."
-     },
-     "duration": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Duration",
-      "description": "Duration of the generated audio in milliseconds, when available."
-     },
-     "audio": {
-      "properties": {
-       "file_size": {
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The size of the file in bytes.",
-        "title": "File Size"
-       },
-       "file_name": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name"
-       },
-       "content_type": {
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "description": "The mime type of the file.",
-        "title": "Content Type"
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       }
-      },
-      "required": [
-       "url"
-      ],
-      "title": "File",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object"
-     },
-     "song_id": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Song Id",
-      "description": "Reusable identifier for this audio. Pass it to endpoints that accept song_id."
-     }
-    },
-    "required": [
-     "audio"
-    ],
-    "title": "GeneratedAudioOutput",
-    "description": "A generated audio file and its reusable song identifier.",
-    "x-fal-order-properties": [
-     "song_id",
-     "audio",
-     "duration",
-     "lyrics_sections"
-    ],
-    "type": "object"
    }
   },
   "mureka/api/song/stem": {
    "endpoint_id": "mureka/api/song/stem",
    "display_name": "Mureka Stem Separation",
    "description": "Separates a song into downloadable audio stems, with available stem types and optional MIDI output determined by the selected separation model.",
-   "status_base": "mureka/api/song/stem",
    "input": {
     "properties": {
      "audio_url": {
@@ -3983,43 +1452,12 @@
      "audio_url"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "midi_zip_url": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Midi Zip Url",
-      "description": "The generated archive of separated MIDI stems, when available."
-     },
-     "zip_url": {
-      "title": "Zip Url",
-      "description": "The generated archive of separated audio stems.",
-      "type": "string"
-     }
-    },
-    "required": [
-     "zip_url"
-    ],
-    "title": "StemSongOutput",
-    "x-fal-order-properties": [
-     "zip_url",
-     "midi_zip_url"
-    ],
-    "type": "object"
    }
   },
   "mureka/api/voice/clone": {
    "endpoint_id": "mureka/api/voice/clone",
    "display_name": "Mureka Voice Cloning",
    "description": "Creates a reusable custom voice from a short vocal recording and returns a voice identifier for supported generation workflows.",
-   "status_base": "mureka/api/voice/clone",
    "input": {
     "properties": {
      "description": {
@@ -4051,53 +1489,12 @@
      "description"
     ],
     "type": "object"
-   },
-   "output": {
-    "properties": {
-     "vocal_id": {
-      "title": "Vocal Id",
-      "type": "string"
-     },
-     "description": {
-      "anyOf": [
-       {
-        "type": "string"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Description"
-     },
-     "created_at": {
-      "anyOf": [
-       {
-        "type": "integer"
-       },
-       {
-        "type": "null"
-       }
-      ],
-      "title": "Created At"
-     }
-    },
-    "required": [
-     "vocal_id"
-    ],
-    "title": "VocalCloneOutput",
-    "x-fal-order-properties": [
-     "vocal_id",
-     "description",
-     "created_at"
-    ],
-    "type": "object"
    }
   },
   "fal-ai/qwen-3-tts/clone-voice/0.6b": {
    "endpoint_id": "fal-ai/qwen-3-tts/clone-voice/0.6b",
    "display_name": "Qwen 3 TTS - Clone Voice [0.6B]",
    "description": "Clone your voices using Qwen3-TTS Clone-Voice model with zero shot cloning capabilities and use it on text-to-speech models to create speeches of yours!",
-   "status_base": "fal-ai/qwen-3-tts/clone-voice/0.6b",
    "input": {
     "properties": {
      "audio_url": {
@@ -4134,74 +1531,6 @@
     ],
     "required": [
      "audio_url"
-    ]
-   },
-   "output": {
-    "properties": {
-     "speaker_embedding": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "Qwen3CloneVoiceOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "speaker_embedding"
-    ],
-    "required": [
-     "speaker_embedding"
     ]
    }
   },
@@ -4209,7 +1538,6 @@
    "endpoint_id": "fal-ai/qwen-3-tts/clone-voice/1.7b",
    "display_name": "Qwen 3 TTS - Clone Voice [1.7B]",
    "description": "Clone your voices using Qwen3-TTS Clone-Voice model with zero shot cloning capabilities and use it on text-to-speech models to create speeches of yours!",
-   "status_base": "fal-ai/qwen-3-tts/clone-voice/1.7b",
    "input": {
     "properties": {
      "audio_url": {
@@ -4247,81 +1575,12 @@
     "required": [
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "speaker_embedding": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "Qwen3CloneVoiceOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "speaker_embedding"
-    ],
-    "required": [
-     "speaker_embedding"
-    ]
    }
   },
   "fal-ai/sam-audio/separate": {
    "endpoint_id": "fal-ai/sam-audio/separate",
    "display_name": "Sam Audio",
    "description": "Audio separation with SAM Audio. Isolate any sound using natural language\u2014professional-grade audio editing made simple for creators, researchers, and accessibility applications.",
-   "status_base": "fal-ai/sam-audio/separate",
    "input": {
     "x-fal-order-properties": [
      "audio_url",
@@ -4403,154 +1662,12 @@
      "audio_url",
      "prompt"
     ]
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "target",
-     "residual",
-     "duration",
-     "sample_rate"
-    ],
-    "type": "object",
-    "description": "Output for text-based audio separation.",
-    "title": "SAMAudioSeparateOutput",
-    "properties": {
-     "sample_rate": {
-      "type": "integer",
-      "description": "Sample rate of the output audio in Hz.",
-      "title": "Sample Rate",
-      "default": 48000
-     },
-     "target": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "properties": {
-       "content_type": {
-        "description": "The mime type of the file.",
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "required": [
-       "url"
-      ]
-     },
-     "duration": {
-      "type": "number",
-      "description": "Duration of the output audio in seconds.",
-      "title": "Duration"
-     },
-     "residual": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "properties": {
-       "content_type": {
-        "description": "The mime type of the file.",
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "required": [
-     "target",
-     "residual",
-     "duration"
-    ]
    }
   },
   "fal-ai/sam-audio/span-separate": {
    "endpoint_id": "fal-ai/sam-audio/span-separate",
    "display_name": "Sam Audio",
    "description": "Audio separation with SAM Audio. Isolate any sound using natural language\u2014professional-grade audio editing made simple for creators, researchers, and accessibility applications.",
-   "status_base": "fal-ai/sam-audio/span-separate",
    "input": {
     "x-fal-order-properties": [
      "audio_url",
@@ -4686,154 +1803,12 @@
      "audio_url",
      "spans"
     ]
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "target",
-     "residual",
-     "duration",
-     "sample_rate"
-    ],
-    "type": "object",
-    "description": "Output for span-based audio separation.",
-    "title": "SAMAudioSpanSeparateOutput",
-    "properties": {
-     "sample_rate": {
-      "type": "integer",
-      "description": "Sample rate of the output audio in Hz.",
-      "title": "Sample Rate",
-      "default": 48000
-     },
-     "target": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "properties": {
-       "content_type": {
-        "description": "The mime type of the file.",
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "required": [
-       "url"
-      ]
-     },
-     "duration": {
-      "type": "number",
-      "description": "Duration of the output audio in seconds.",
-      "title": "Duration"
-     },
-     "residual": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "type": "object",
-      "properties": {
-       "content_type": {
-        "description": "The mime type of the file.",
-        "title": "Content Type",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "type": "string",
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "title": "File Name",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "title": "File Size",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "File",
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "required": [
-     "target",
-     "residual",
-     "duration"
-    ]
    }
   },
   "fal-ai/stable-audio-25/audio-to-audio": {
    "endpoint_id": "fal-ai/stable-audio-25/audio-to-audio",
    "display_name": "Stable Audio 2.5",
    "description": "Generate high quality music and sound effects using Stable Audio 2.5 from StabilityAI",
-   "status_base": "fal-ai/stable-audio-25/audio-to-audio",
    "input": {
     "title": "AudioToAudioInput",
     "required": [
@@ -4925,88 +1900,12 @@
      "seed",
      "enable_safety_checker"
     ]
-   },
-   "output": {
-    "title": "AudioToAudioOutput",
-    "required": [
-     "audio",
-     "seed"
-    ],
-    "properties": {
-     "audio": {
-      "title": "File",
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ]
-     },
-     "seed": {
-      "title": "Seed",
-      "description": "The random seed used for generation",
-      "type": "integer"
-     }
-    },
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio",
-     "seed"
-    ]
    }
   },
   "fal-ai/stable-audio-25/inpaint": {
    "endpoint_id": "fal-ai/stable-audio-25/inpaint",
    "display_name": "Stable Audio 25",
    "description": "Generate high quality music and sound effects using Stable Audio 2.5 from StabilityAI",
-   "status_base": "fal-ai/stable-audio-25/inpaint",
    "input": {
     "title": "InpaintInput",
     "required": [
@@ -5108,88 +2007,12 @@
      "seed",
      "enable_safety_checker"
     ]
-   },
-   "output": {
-    "title": "InpaintOutput",
-    "required": [
-     "audio",
-     "seed"
-    ],
-    "properties": {
-     "audio": {
-      "title": "File",
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from.",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ]
-     },
-     "seed": {
-      "title": "Seed",
-      "description": "The random seed used for generation",
-      "type": "integer"
-     }
-    },
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio",
-     "seed"
-    ]
    }
   },
   "fal-ai/stable-audio-3/small/music/audio-to-audio": {
    "endpoint_id": "fal-ai/stable-audio-3/small/music/audio-to-audio",
    "display_name": "Stable Audio 3",
    "description": "Stable Audio 3 Small Music audio-to-audio is a 459 million parameter latent diffusion model that transforms input music into new variations up to 2 minutes guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/small/music/audio-to-audio",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -5312,88 +2135,6 @@
      }
     },
     "title": "AudioToAudioInput",
-    "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
     "type": "object"
    }
   },
@@ -5401,7 +2142,6 @@
    "endpoint_id": "fal-ai/stable-audio-3/small/sfx/audio-to-audio",
    "display_name": "Stable Audio 3",
    "description": "Stable Audio 3 Small SFX audio-to-audio is a 459 million parameter latent diffusion model that transforms input audio into new sound-effect variations guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/small/sfx/audio-to-audio",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -5525,95 +2265,12 @@
     },
     "title": "AudioToAudioInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/medium/audio-inpainting": {
    "endpoint_id": "fal-ai/stable-audio-3/medium/audio-inpainting",
    "display_name": "Stable Audio 3 Medium Audio Inpainting",
    "description": "Stable Audio 3 Medium audio inpainting is a 1.4 billion parameter latent diffusion model that fills in or reworks selected segments of a stereo track guided by text prompts, supporting single- and multi-segment editing.",
-   "status_base": "fal-ai/stable-audio-3/medium/audio-inpainting",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -5737,95 +2394,12 @@
     },
     "title": "AudioInpaintingMediumInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/medium/audio-outpainting": {
    "endpoint_id": "fal-ai/stable-audio-3/medium/audio-outpainting",
    "display_name": "Stable Audio 3 Medium Audio Outpainting",
    "description": "Stable Audio 3 Medium audio outpainting is a 1.4 billion parameter latent diffusion model that extends existing stereo audio beyond its original endpoint via causal continuation guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/medium/audio-outpainting",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -5949,95 +2523,12 @@
     },
     "title": "AudioOutpaintingMediumInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/medium/audio-to-audio": {
    "endpoint_id": "fal-ai/stable-audio-3/medium/audio-to-audio",
    "display_name": "Stable Audio 3 Medium Audio to Audio",
    "description": "Stable Audio 3 Medium audio-to-audio is a 1.4 billion parameter latent diffusion model that transforms an input audio clip into new stereo variations up to 6 minutes guided by a text prompt.",
-   "status_base": "fal-ai/stable-audio-3/medium/audio-to-audio",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -6161,95 +2652,12 @@
     },
     "title": "AudioToAudioMediumInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/medium/base/audio-inpainting": {
    "endpoint_id": "fal-ai/stable-audio-3/medium/base/audio-inpainting",
    "display_name": "Stable Audio 3 Medium Base Audio Inpainting",
    "description": "Stable Audio 3 Medium Base audio inpainting is the foundational 1.4 billion parameter checkpoint for editing or filling selected stereo audio segments guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/medium/base/audio-inpainting",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -6373,95 +2781,12 @@
     },
     "title": "AudioInpaintingMediumBaseInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/medium/base/audio-outpainting": {
    "endpoint_id": "fal-ai/stable-audio-3/medium/base/audio-outpainting",
    "display_name": "Stable Audio 3 Medium Base Audio Outpainting",
    "description": "Stable Audio 3 Medium Base audio outpainting is the foundational 1.4 billion parameter checkpoint that extends existing stereo audio with causal continuation guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/medium/base/audio-outpainting",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -6585,95 +2910,12 @@
     },
     "title": "AudioOutpaintingMediumBaseInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/medium/base/audio-to-audio": {
    "endpoint_id": "fal-ai/stable-audio-3/medium/base/audio-to-audio",
    "display_name": "Stable Audio 3 Medium Base Audio to Audio",
    "description": "Stable Audio 3 Medium Base audio-to-audio is the foundational 1.4 billion parameter checkpoint that transforms input audio into new stereo variations up to 6 minutes guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/medium/base/audio-to-audio",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -6797,95 +3039,12 @@
     },
     "title": "AudioToAudioMediumBaseInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/small/music/audio-inpainting": {
    "endpoint_id": "fal-ai/stable-audio-3/small/music/audio-inpainting",
    "display_name": "Stable Audio 3 Small Music Audio Inpainting",
    "description": "Stable Audio 3 Small Music audio inpainting is a 459 million parameter latent diffusion model that fills in or reworks selected segments of a music track guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/small/music/audio-inpainting",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -7008,88 +3167,6 @@
      }
     },
     "title": "AudioInpaintingInput",
-    "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
     "type": "object"
    }
   },
@@ -7097,7 +3174,6 @@
    "endpoint_id": "fal-ai/stable-audio-3/small/music/audio-outpainting",
    "display_name": "Stable Audio 3 Small Music Audio Outpainting",
    "description": "Stable Audio 3 Small Music audio outpainting is a 459 million parameter latent diffusion model that extends music compositions beyond their original endpoint via causal continuation.",
-   "status_base": "fal-ai/stable-audio-3/small/music/audio-outpainting",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -7221,95 +3297,12 @@
     },
     "title": "AudioOutpaintingInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/small/music/base/audio-inpainting": {
    "endpoint_id": "fal-ai/stable-audio-3/small/music/base/audio-inpainting",
    "display_name": "Stable Audio 3 Small Music Base Audio Inpainting",
    "description": "Stable Audio 3 Small Music Base audio inpainting is the foundational 459 million parameter checkpoint for editing or filling selected music segments guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/small/music/base/audio-inpainting",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -7433,95 +3426,12 @@
     },
     "title": "AudioInpaintingBaseInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/small/music/base/audio-outpainting": {
    "endpoint_id": "fal-ai/stable-audio-3/small/music/base/audio-outpainting",
    "display_name": "Stable Audio 3 Small Music Base Audio Outpainting",
    "description": "Stable Audio 3 Small Music Base audio outpainting is the foundational 459 million parameter checkpoint that extends music tracks via causal continuation guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/small/music/base/audio-outpainting",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -7645,95 +3555,12 @@
     },
     "title": "AudioOutpaintingBaseInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/small/music/base/audio-to-audio": {
    "endpoint_id": "fal-ai/stable-audio-3/small/music/base/audio-to-audio",
    "display_name": "Stable Audio 3 Small Music Base Audio to Audio",
    "description": "Stable Audio 3 Small Music Base audio-to-audio is the foundational 459 million parameter checkpoint that transforms input music into new variations up to 2 minutes guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/small/music/base/audio-to-audio",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -7857,95 +3684,12 @@
     },
     "title": "AudioToAudioBaseInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/small/sfx/audio-inpainting": {
    "endpoint_id": "fal-ai/stable-audio-3/small/sfx/audio-inpainting",
    "display_name": "Stable Audio 3 Small SFX Audio Inpainting",
    "description": "Stable Audio 3 Small SFX audio inpainting is a 459 million parameter latent diffusion model that fills in or reworks selected segments of a sound-effect track guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/small/sfx/audio-inpainting",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -8069,95 +3813,12 @@
     },
     "title": "AudioInpaintingInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/small/sfx/audio-outpainting": {
    "endpoint_id": "fal-ai/stable-audio-3/small/sfx/audio-outpainting",
    "display_name": "Stable Audio 3 Small SFX Audio Outpainting",
    "description": "Stable Audio 3 Small SFX audio outpainting is a 459 million parameter latent diffusion model that extends sound-effect tracks beyond their original endpoint via causal continuation.",
-   "status_base": "fal-ai/stable-audio-3/small/sfx/audio-outpainting",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -8281,95 +3942,12 @@
     },
     "title": "AudioOutpaintingInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/small/sfx/base/audio-inpainting": {
    "endpoint_id": "fal-ai/stable-audio-3/small/sfx/base/audio-inpainting",
    "display_name": "Stable Audio 3 Small SFX Base Audio Inpainting",
    "description": "Stable Audio 3 Small SFX Base audio inpainting is the foundational 459 million parameter checkpoint for editing or filling selected sound-effect segments guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/small/sfx/base/audio-inpainting",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -8493,95 +4071,12 @@
     },
     "title": "AudioInpaintingBaseInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/small/sfx/base/audio-outpainting": {
    "endpoint_id": "fal-ai/stable-audio-3/small/sfx/base/audio-outpainting",
    "display_name": "Stable Audio 3 Small SFX Base Audio Outpainting",
    "description": "Stable Audio 3 Small SFX Base audio outpainting is the foundational 459 million parameter checkpoint that extends sound-effect tracks via causal continuation guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/small/sfx/base/audio-outpainting",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -8705,95 +4200,12 @@
     },
     "title": "AudioOutpaintingBaseInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/stable-audio-3/small/sfx/base/audio-to-audio": {
    "endpoint_id": "fal-ai/stable-audio-3/small/sfx/base/audio-to-audio",
    "display_name": "Stable Audio 3 Small SFX Base Audio to Audio",
    "description": "Stable Audio 3 Small SFX Base audio-to-audio is the foundational 459 million parameter checkpoint that transforms input audio into new sound-effect variations guided by text prompts.",
-   "status_base": "fal-ai/stable-audio-3/small/sfx/base/audio-to-audio",
    "input": {
     "x-fal-order-properties": [
      "negative_prompt",
@@ -8917,95 +4329,12 @@
     },
     "title": "AudioToAudioBaseInput",
     "type": "object"
-   },
-   "output": {
-    "x-fal-order-properties": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "required": [
-     "audio",
-     "seed",
-     "prompt"
-    ],
-    "properties": {
-     "seed": {
-      "description": "The random seed used for generation.",
-      "title": "Seed",
-      "type": "integer"
-     },
-     "audio": {
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url"
-      ],
-      "properties": {
-       "url": {
-        "description": "The URL where the file can be downloaded from.",
-        "title": "Url",
-        "type": "string"
-       },
-       "content_type": {
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "Content Type"
-       },
-       "file_name": {
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Name"
-       },
-       "file_size": {
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ],
-        "title": "File Size"
-       }
-      },
-      "title": "File",
-      "type": "object"
-     },
-     "prompt": {
-      "description": "The prompt used for generation.",
-      "title": "Prompt",
-      "type": "string"
-     }
-    },
-    "title": "AudioOutput",
-    "type": "object"
    }
   },
   "fal-ai/tada/3b/text-to-speech": {
    "endpoint_id": "fal-ai/tada/3b/text-to-speech",
    "display_name": "Tada",
    "description": "A unified speech-language model that synchronizes speech and text into a single, cohesive stream via 1:1 alignment.",
-   "status_base": "fal-ai/tada/3b/text-to-speech",
    "input": {
     "properties": {
      "acoustic_cfg_scale": {
@@ -9144,129 +4473,6 @@
     "required": [
      "audio_url",
      "prompt"
-    ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "sample_rate": {
-        "title": "Sample Rate",
-        "description": "The sample rate of the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "duration": {
-        "title": "Duration",
-        "description": "The duration of the audio",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "bitrate": {
-        "title": "Bitrate",
-        "description": "The bitrate of the audio (e.g., '192k' or 192000)",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "channels": {
-        "title": "Channels",
-        "description": "The number of channels in the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "AudioFile",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "duration",
-       "channels",
-       "sample_rate",
-       "bitrate"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "Output",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
     ]
    }
   },
@@ -9274,7 +4480,6 @@
    "endpoint_id": "fal-ai/tada/1b/text-to-speech",
    "display_name": "Tada TTS 1B",
    "description": "A unified speech-language model that synchronizes speech and text into a single, cohesive stream via 1:1 alignment. Lighter 1B variant",
-   "status_base": "fal-ai/tada/1b/text-to-speech",
    "input": {
     "properties": {
      "acoustic_cfg_scale": {
@@ -9414,136 +4619,12 @@
      "audio_url",
      "prompt"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "url": {
-        "title": "Url",
-        "type": "string",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "sample_rate": {
-        "title": "Sample Rate",
-        "description": "The sample rate of the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "duration": {
-        "title": "Duration",
-        "description": "The duration of the audio",
-        "anyOf": [
-         {
-          "type": "number"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "bitrate": {
-        "title": "Bitrate",
-        "description": "The bitrate of the audio (e.g., '192k' or 192000)",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "channels": {
-        "title": "Channels",
-        "description": "The number of channels in the audio",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      },
-      "title": "AudioFile",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size",
-       "duration",
-       "channels",
-       "sample_rate",
-       "bitrate"
-      ],
-      "required": [
-       "url"
-      ]
-     }
-    },
-    "title": "MiniOutput",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "veed/clean-audio": {
    "endpoint_id": "veed/clean-audio",
    "display_name": "VEED Clean Audio",
    "description": "Studio-quality speech from noisy recordings",
-   "status_base": "veed/clean-audio",
    "input": {
     "required": [
      "audio_url"
@@ -9596,88 +4677,12 @@
       "description": "How much of the original is allowed to remain under speech: the suppression floor is 1 - strength (the default 0.874 is the validated -18 dB). Lower keeps more room tone behind the voice; silence between words is always fully cleaned."
      }
     }
-   },
-   "output": {
-    "required": [
-     "audio",
-     "audio_duration"
-    ],
-    "type": "object",
-    "title": "DenoiseOutput",
-    "x-fal-order-properties": [
-     "audio",
-     "audio_duration"
-    ],
-    "properties": {
-     "audio": {
-      "required": [
-       "url"
-      ],
-      "type": "object",
-      "title": "Audio",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "properties": {
-       "url": {
-        "type": "string",
-        "title": "Url",
-        "description": "The URL where the file can be downloaded from."
-       },
-       "content_type": {
-        "title": "Content Type",
-        "description": "The mime type of the file.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "The name of the file. It will be auto-generated if not provided.",
-        "anyOf": [
-         {
-          "type": "string"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "The size of the file in bytes.",
-        "anyOf": [
-         {
-          "type": "integer"
-         },
-         {
-          "type": "null"
-         }
-        ]
-       }
-      }
-     },
-     "audio_duration": {
-      "type": "number",
-      "title": "Audio duration",
-      "description": "Input duration in seconds. Billing: whole seconds rounded up to full minutes, minimum 1 unit."
-     }
-    }
    }
   },
   "fal-ai/workflow-utilities/audio-compressor": {
    "endpoint_id": "fal-ai/workflow-utilities/audio-compressor",
    "display_name": "Workflow Utilities Audio Compressor",
    "description": "FFMPEG Utility for Audio Compression",
-   "status_base": "fal-ai/workflow-utilities/audio-compressor",
    "input": {
     "properties": {
      "makeup": {
@@ -9763,65 +4768,12 @@
     "required": [
      "audio_url"
     ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "Content type of the audio file",
-        "type": "string"
-       },
-       "url": {
-        "title": "Url",
-        "description": "URL of the audio file",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "Size of the audio file in bytes",
-        "type": "integer"
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "Name of the audio file",
-        "type": "string"
-       }
-      },
-      "title": "AudioFile",
-      "description": "Audio file with url field",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ]
-     }
-    },
-    "title": "AudioCompressorOutput",
-    "description": "Output model for compressed audio",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
-    ]
    }
   },
   "fal-ai/workflow-utilities/impulse-response": {
    "endpoint_id": "fal-ai/workflow-utilities/impulse-response",
    "display_name": "Workflow Utilities Impulse Response",
    "description": "FFMPEG Utility for Impulse Response",
-   "status_base": "fal-ai/workflow-utilities/impulse-response",
    "input": {
     "properties": {
      "loudness_i": {
@@ -9905,58 +4857,6 @@
     "required": [
      "audio_url",
      "impulse_response_url"
-    ]
-   },
-   "output": {
-    "properties": {
-     "audio": {
-      "properties": {
-       "content_type": {
-        "title": "Content Type",
-        "description": "Content type of the audio file",
-        "type": "string"
-       },
-       "url": {
-        "title": "Url",
-        "description": "URL of the audio file",
-        "type": "string"
-       },
-       "file_size": {
-        "title": "File Size",
-        "description": "Size of the audio file in bytes",
-        "type": "integer"
-       },
-       "file_name": {
-        "title": "File Name",
-        "description": "Name of the audio file",
-        "type": "string"
-       }
-      },
-      "title": "AudioFile",
-      "description": "Audio file with url field",
-      "type": "object",
-      "x-fal-order-properties": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ],
-      "required": [
-       "url",
-       "content_type",
-       "file_name",
-       "file_size"
-      ]
-     }
-    },
-    "title": "ImpulseResponseOutput",
-    "description": "Output model for impulse response processed audio",
-    "type": "object",
-    "x-fal-order-properties": [
-     "audio"
-    ],
-    "required": [
-     "audio"
     ]
    }
   }
