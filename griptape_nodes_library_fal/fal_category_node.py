@@ -29,7 +29,7 @@ from griptape_nodes.retained_mode.events.parameter_events import RemoveParameter
 from griptape_nodes.retained_mode.griptape_nodes import GriptapeNodes
 from griptape_nodes.traits.options import Options
 from griptape_nodes.utils.artifact_normalization import normalize_artifact_input
-from griptape_nodes_library.three_d.three_d_artifact import ThreeDUrlArtifact
+from griptape_nodes_library.three_d.three_d_artifact import ThreeDUrlArtifact  # pyright: ignore[reportMissingImports]
 
 from griptape_nodes_library_fal.fal_queue_node import FalQueueNode
 from griptape_nodes_library_fal.fal_schema import (
@@ -57,6 +57,17 @@ logger = logging.getLogger("griptape_nodes")
 __all__ = ["FalCategoryNode"]
 
 EMPTY_CHOICE_LABEL = "(none)"
+
+
+async def _get_public_url(helper: PublicArtifactUrlParameter) -> str:
+    """Publish a helper's artifact, using the async method when the installed engine has it.
+
+    Older engines only have the sync method, which is what the SeedVR nodes call.
+    """
+    aget_public_url = getattr(helper, "aget_public_url_for_parameter", None)
+    if aget_public_url is not None:
+        return await aget_public_url()
+    return helper.get_public_url_for_parameter()
 
 
 def _enum_label(choice: Any) -> str:
@@ -575,19 +586,22 @@ class FalCategoryNode(FalQueueNode):
         if normalized != value:
             self.parameter_values[param_name] = normalized
         parameter = self.get_parameter_by_name(param_name)
+        if parameter is None:
+            return None
         helper = PublicArtifactUrlParameter(node=self, artifact_url_parameter=parameter)
         self._upload_helpers.append(helper)
-        return await helper.aget_public_url_for_parameter()
+        return await _get_public_url(helper)
 
     async def _upload_list(self, param_name: str, spec: FieldSpec) -> list[str] | None:
         container = self.get_parameter_by_name(param_name)
         urls: list[str] = []
-        for child in container.find_elements_by_type(Parameter):
+        children = container.find_elements_by_type(Parameter) if container is not None else []
+        for child in children:
             if not self.get_parameter_value(child.name):
                 continue
             helper = PublicArtifactUrlParameter(node=self, artifact_url_parameter=child)
             self._upload_helpers.append(helper)
-            urls.append(await helper.aget_public_url_for_parameter())
+            urls.append(await _get_public_url(helper))
         if not urls and spec.required:
             msg = f"{spec.name} requires at least one item"
             raise ValueError(msg)
