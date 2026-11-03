@@ -43,6 +43,30 @@
                 "description": "fal.ai image nodes",
                 "icon": "Image"
             }
+        },
+        {
+            "audio": {
+                "color": "border-green-500",
+                "title": "Audio",
+                "description": "fal.ai audio and speech nodes",
+                "icon": "AudioLines"
+            }
+        },
+        {
+            "vision": {
+                "color": "border-orange-500",
+                "title": "Vision",
+                "description": "fal.ai vision and captioning nodes",
+                "icon": "Eye"
+            }
+        },
+        {
+            "three_d": {
+                "color": "border-teal-500",
+                "title": "3D",
+                "description": "fal.ai 3D nodes",
+                "icon": "Box"
+            }
         }
     ],
     "nodes": [
@@ -62,6 +86,177 @@
                 "category": "image",
                 "description": "Upscale an image using SeedVR2 via fal.ai.",
                 "display_name": "FAL SeedVR Image Upscale"
+            }
+        },
+        {
+            "class_name": "FalTextToImage",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "image",
+                "description": "Run any fal.ai text-to-image model. Pick the model from the dropdown.",
+                "display_name": "FAL Text To Image"
+            }
+        },
+        {
+            "class_name": "FalImageToImage",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "image",
+                "description": "Run any fal.ai image-to-image model. Pick the model from the dropdown.",
+                "display_name": "FAL Image To Image"
+            }
+        },
+        {
+            "class_name": "FalTextToVideo",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "video",
+                "description": "Run any fal.ai text-to-video model. Pick the model from the dropdown.",
+                "display_name": "FAL Text To Video"
+            }
+        },
+        {
+            "class_name": "FalImageToVideo",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "video",
+                "description": "Run any fal.ai image-to-video model. Pick the model from the dropdown.",
+                "display_name": "FAL Image To Video"
+            }
+        },
+        {
+            "class_name": "FalVideoToVideo",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "video",
+                "description": "Run any fal.ai video-to-video model. Pick the model from the dropdown.",
+                "display_name": "FAL Video To Video"
+            }
+        },
+        {
+            "class_name": "FalAudioToVideo",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "video",
+                "description": "Run any fal.ai audio-to-video model. Pick the model from the dropdown.",
+                "display_name": "FAL Audio To Video"
+            }
+        },
+        {
+            "class_name": "FalTextToAudio",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "audio",
+                "description": "Run any fal.ai text-to-audio model. Pick the model from the dropdown.",
+                "display_name": "FAL Text To Audio"
+            }
+        },
+        {
+            "class_name": "FalAudioToAudio",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "audio",
+                "description": "Run any fal.ai audio-to-audio model. Pick the model from the dropdown.",
+                "display_name": "FAL Audio To Audio"
+            }
+        },
+        {
+            "class_name": "FalTextToSpeech",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "audio",
+                "description": "Run any fal.ai text-to-speech model. Pick the model from the dropdown.",
+                "display_name": "FAL Text To Speech"
+            }
+        },
+        {
+            "class_name": "FalSpeechToSpeech",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "audio",
+                "description": "Run any fal.ai speech-to-speech model. Pick the model from the dropdown.",
+                "display_name": "FAL Speech To Speech"
+            }
+        },
+        {
+            "class_name": "FalVideoToAudio",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "audio",
+                "description": "Run any fal.ai video-to-audio model. Pick the model from the dropdown.",
+                "display_name": "FAL Video To Audio"
+            }
+        },
+        {
+            "class_name": "FalSpeechToText",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "audio",
+                "description": "Run any fal.ai speech-to-text model. Pick the model from the dropdown.",
+                "display_name": "FAL Speech To Text"
+            }
+        },
+        {
+            "class_name": "FalAudioToText",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "audio",
+                "description": "Run any fal.ai audio-to-text model. Pick the model from the dropdown.",
+                "display_name": "FAL Audio To Text"
+            }
+        },
+        {
+            "class_name": "FalVideoToText",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "vision",
+                "description": "Run any fal.ai video-to-text model. Pick the model from the dropdown.",
+                "display_name": "FAL Video To Text"
+            }
+        },
+        {
+            "class_name": "FalImageToText",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "vision",
+                "description": "Run any fal.ai image-to-text model. Pick the model from the dropdown.",
+                "display_name": "FAL Image To Text"
+            }
+        },
+        {
+            "class_name": "FalVision",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "vision",
+                "description": "Run any fal.ai vision model. Pick the model from the dropdown.",
+                "display_name": "FAL Vision"
+            }
+        },
+        {
+            "class_name": "FalImageTo3D",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "three_d",
+                "description": "Run any fal.ai image-to-3d model. Pick the model from the dropdown.",
+                "display_name": "FAL Image To 3D"
+            }
+        },
+        {
+            "class_name": "FalTextTo3D",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "three_d",
+                "description": "Run any fal.ai text-to-3d model. Pick the model from the dropdown.",
+                "display_name": "FAL Text To 3D"
+            }
+        },
+        {
+            "class_name": "FalThreeDTo3D",
+            "file_path": "griptape_nodes_library_fal/fal_categories.py",
+            "metadata": {
+                "category": "three_d",
+                "description": "Run any fal.ai 3d-to-3d model. Pick the model from the dropdown.",
+                "display_name": "FAL 3D To 3D"
             }
         }
     ]

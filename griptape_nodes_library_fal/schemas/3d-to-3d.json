@@ -1,0 +1,7018 @@
+{
+ "category": "3d-to-3d",
+ "models": {
+  "hitem3d/hi3d/split": {
+   "endpoint_id": "hitem3d/hi3d/split",
+   "display_name": "Hi3D 3D Part Splitter",
+   "description": "Split a 3D model into parts with Hi3D.",
+   "status_base": "hitem3d/hi3d/split",
+   "input": {
+    "properties": {
+     "mesh_url": {
+      "title": "Mesh Url",
+      "description": "URL of the input model to split. GLB, STL and OBJ formats are supported, up to 200MB.",
+      "type": "string"
+     },
+     "export_format": {
+      "default": "glb",
+      "enum": [
+       "glb",
+       "obj",
+       "stl",
+       "fbx",
+       "usdz"
+      ],
+      "title": "Export Format",
+      "description": "File format of the generated model. Character split currently supports only 'glb'.",
+      "type": "string"
+     },
+     "model": {
+      "default": "character",
+      "enum": [
+       "character",
+       "general"
+      ],
+      "title": "Model",
+      "description": "Split model type: 'character' splits humanoid models using a template with optional joints; 'general' splits any model by granularity level.",
+      "type": "string"
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "If set to true, inputs are checked for safety before processing.",
+      "type": "boolean"
+     },
+     "joint": {
+      "default": "ball",
+      "enum": [
+       "none",
+       "ball",
+       "dovetail"
+      ],
+      "title": "Joint",
+      "description": "Joint type added between character parts (used when model is 'character').",
+      "type": "string"
+     },
+     "level": {
+      "default": "medium",
+      "enum": [
+       "low",
+       "medium",
+       "high"
+      ],
+      "title": "Level",
+      "description": "Split granularity (used when model is 'general').",
+      "type": "string"
+     },
+     "part": {
+      "default": "a",
+      "enum": [
+       "a",
+       "b",
+       "c",
+       "d",
+       "e",
+       "f"
+      ],
+      "title": "Part",
+      "description": "Character split template (used when model is 'character'): 'a' 6 parts, 'b' 5 parts, 'c' 4 parts excluding head, 'd' 4 parts including head, 'e' 3 parts, 'f' 2 parts.",
+      "type": "string"
+     }
+    },
+    "title": "SplitInput",
+    "description": "Input for splitting a 3D model into parts.",
+    "type": "object",
+    "x-fal-order-properties": [
+     "mesh_url",
+     "model",
+     "part",
+     "joint",
+     "level",
+     "export_format",
+     "enable_safety_checker"
+    ],
+    "required": [
+     "mesh_url"
+    ]
+   },
+   "output": {
+    "properties": {
+     "model_mesh": {
+      "properties": {
+       "content_type": {
+        "title": "Content Type",
+        "description": "The mime type of the file.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "url": {
+        "title": "Url",
+        "description": "The URL where the file can be downloaded from.",
+        "type": "string"
+       },
+       "file_size": {
+        "title": "File Size",
+        "description": "The size of the file in bytes.",
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "file_name": {
+        "title": "File Name",
+        "description": "The name of the file. It will be auto-generated if not provided.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "title": "File",
+      "type": "object",
+      "x-fal-order-properties": [
+       "url",
+       "content_type",
+       "file_name",
+       "file_size"
+      ],
+      "required": [
+       "url"
+      ]
+     },
+     "thumbnail": {
+      "description": "Preview image of the generated model, when available.",
+      "anyOf": [
+       {
+        "properties": {
+         "content_type": {
+          "title": "Content Type",
+          "description": "The mime type of the file.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "url": {
+          "title": "Url",
+          "description": "The URL where the file can be downloaded from.",
+          "type": "string"
+         },
+         "file_size": {
+          "title": "File Size",
+          "description": "The size of the file in bytes.",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "file_name": {
+          "title": "File Name",
+          "description": "The name of the file. It will be auto-generated if not provided.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         }
+        },
+        "title": "File",
+        "type": "object",
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "required": [
+         "url"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "title": "Hitem3DOutput",
+    "description": "Output of the 3D model generation endpoints.",
+    "type": "object",
+    "x-fal-order-properties": [
+     "model_mesh",
+     "thumbnail"
+    ],
+    "required": [
+     "model_mesh"
+    ]
+   }
+  },
+  "hitem3d/hi3d/multicolor": {
+   "endpoint_id": "hitem3d/hi3d/multicolor",
+   "display_name": "Hi3D 3D to Multicolor",
+   "description": "Convert a textured 3D model into a multicolor model suited for multicolor 3D printing with Hi3D.",
+   "status_base": "hitem3d/hi3d/multicolor",
+   "input": {
+    "properties": {
+     "mesh_url": {
+      "title": "Mesh Url",
+      "description": "URL of the input textured model. Only GLB format is supported, up to 200MB.",
+      "type": "string"
+     },
+     "export_format": {
+      "default": "glb",
+      "enum": [
+       "glb",
+       "obj",
+       "fbx"
+      ],
+      "title": "Export Format",
+      "description": "File format of the generated model. STL, USDZ and 3MF are not currently supported by the partner.",
+      "type": "string"
+     },
+     "number_of_colors": {
+      "default": 4,
+      "title": "Number Of Colors",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8,
+      "description": "Number of colors in the generated model (1-8), or 0 for the maximum. Use 0 if you plan to edit the colors later."
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "If set to true, inputs are checked for safety before processing.",
+      "type": "boolean"
+     }
+    },
+    "title": "MulticolorInput",
+    "description": "Input for converting a textured model into a multicolor model.",
+    "type": "object",
+    "x-fal-order-properties": [
+     "mesh_url",
+     "number_of_colors",
+     "export_format",
+     "enable_safety_checker"
+    ],
+    "required": [
+     "mesh_url"
+    ]
+   },
+   "output": {
+    "properties": {
+     "model_mesh": {
+      "properties": {
+       "content_type": {
+        "title": "Content Type",
+        "description": "The mime type of the file.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "url": {
+        "title": "Url",
+        "description": "The URL where the file can be downloaded from.",
+        "type": "string"
+       },
+       "file_size": {
+        "title": "File Size",
+        "description": "The size of the file in bytes.",
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "file_name": {
+        "title": "File Name",
+        "description": "The name of the file. It will be auto-generated if not provided.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "title": "File",
+      "type": "object",
+      "x-fal-order-properties": [
+       "url",
+       "content_type",
+       "file_name",
+       "file_size"
+      ],
+      "required": [
+       "url"
+      ]
+     },
+     "thumbnail": {
+      "description": "Preview image of the generated model, when available.",
+      "anyOf": [
+       {
+        "properties": {
+         "content_type": {
+          "title": "Content Type",
+          "description": "The mime type of the file.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "url": {
+          "title": "Url",
+          "description": "The URL where the file can be downloaded from.",
+          "type": "string"
+         },
+         "file_size": {
+          "title": "File Size",
+          "description": "The size of the file in bytes.",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "file_name": {
+          "title": "File Name",
+          "description": "The name of the file. It will be auto-generated if not provided.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         }
+        },
+        "title": "File",
+        "type": "object",
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "required": [
+         "url"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "title": "Hitem3DOutput",
+    "description": "Output of the 3D model generation endpoints.",
+    "type": "object",
+    "x-fal-order-properties": [
+     "model_mesh",
+     "thumbnail"
+    ],
+    "required": [
+     "model_mesh"
+    ]
+   }
+  },
+  "hitem3d/hi3d/texture": {
+   "endpoint_id": "hitem3d/hi3d/texture",
+   "display_name": "Hi3D Texture",
+   "description": "Texture an existing geometry mesh using a reference image with Hi3D.",
+   "status_base": "hitem3d/hi3d/texture",
+   "input": {
+    "properties": {
+     "mesh_url": {
+      "title": "Mesh Url",
+      "description": "URL of the geometry model to texture. Only GLB format is supported (e.g. the geometry output of the image-to-3d endpoint with enable_texture=false).",
+      "type": "string"
+     },
+     "export_format": {
+      "default": "glb",
+      "enum": [
+       "glb",
+       "obj",
+       "stl",
+       "fbx",
+       "usdz"
+      ],
+      "title": "Export Format",
+      "description": "File format of the generated model.",
+      "type": "string"
+     },
+     "model": {
+      "default": "hitem3dv1.5",
+      "enum": [
+       "hitem3dv1.5",
+       "scene-portraitv1.5"
+      ],
+      "title": "Model",
+      "description": "Model version used for texturing. Only v1.5 models support the staged texture task.",
+      "type": "string"
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "If set to true, input images are checked for safety before processing.",
+      "type": "boolean"
+     },
+     "image_url": {
+      "title": "Image Url",
+      "description": "URL of the reference image used to texture the model. PNG, JPEG and WebP formats are supported, up to 20MB.",
+      "type": "string"
+     },
+     "resolution": {
+      "title": "Resolution",
+      "description": "Texture generation resolution. hitem3dv1.5 accepts 512, 1024, 1536 and 1536pro; scene-portraitv1.5 accepts 1536. Defaults to the model's recommended resolution.",
+      "anyOf": [
+       {
+        "enum": [
+         "512",
+         "1024",
+         "1536",
+         "1536pro"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "title": "TextureInput",
+    "description": "Input for the staged texture task (texture an existing geometry mesh).",
+    "type": "object",
+    "x-fal-order-properties": [
+     "image_url",
+     "mesh_url",
+     "model",
+     "resolution",
+     "export_format",
+     "enable_safety_checker"
+    ],
+    "required": [
+     "image_url",
+     "mesh_url"
+    ]
+   },
+   "output": {
+    "properties": {
+     "model_mesh": {
+      "properties": {
+       "content_type": {
+        "title": "Content Type",
+        "description": "The mime type of the file.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "url": {
+        "title": "Url",
+        "description": "The URL where the file can be downloaded from.",
+        "type": "string"
+       },
+       "file_size": {
+        "title": "File Size",
+        "description": "The size of the file in bytes.",
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "file_name": {
+        "title": "File Name",
+        "description": "The name of the file. It will be auto-generated if not provided.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "title": "File",
+      "type": "object",
+      "x-fal-order-properties": [
+       "url",
+       "content_type",
+       "file_name",
+       "file_size"
+      ],
+      "required": [
+       "url"
+      ]
+     },
+     "thumbnail": {
+      "description": "Preview image of the generated model, when available.",
+      "anyOf": [
+       {
+        "properties": {
+         "content_type": {
+          "title": "Content Type",
+          "description": "The mime type of the file.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "url": {
+          "title": "Url",
+          "description": "The URL where the file can be downloaded from.",
+          "type": "string"
+         },
+         "file_size": {
+          "title": "File Size",
+          "description": "The size of the file in bytes.",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "file_name": {
+          "title": "File Name",
+          "description": "The name of the file. It will be auto-generated if not provided.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         }
+        },
+        "title": "File",
+        "type": "object",
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "required": [
+         "url"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "title": "Hitem3DOutput",
+    "description": "Output of the 3D model generation endpoints.",
+    "type": "object",
+    "x-fal-order-properties": [
+     "model_mesh",
+     "thumbnail"
+    ],
+    "required": [
+     "model_mesh"
+    ]
+   }
+  },
+  "fal-ai/hunyuan-3d/v3.1/part": {
+   "endpoint_id": "fal-ai/hunyuan-3d/v3.1/part",
+   "display_name": "Hunyuan 3D Part Splitter",
+   "description": "Split 3D models into parts with Hunyuan 3D",
+   "status_base": "fal-ai/hunyuan-3d/v3.1/part",
+   "input": {
+    "type": "object",
+    "properties": {
+     "input_file_url": {
+      "description": "URL of FBX file to split into parts. ONLY FBX format supported. Max size: 100MB, face count \u226430,000. Recommended: AIGC-generated models.",
+      "type": "string",
+      "title": "Input File Url"
+     }
+    },
+    "x-fal-order-properties": [
+     "input_file_url"
+    ],
+    "required": [
+     "input_file_url"
+    ],
+    "title": "PartInput"
+   },
+   "output": {
+    "type": "object",
+    "properties": {
+     "result_files": {
+      "description": "List of generated part files in FBX format",
+      "title": "Result Files",
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "url": {
+         "description": "The URL where the file can be downloaded from.",
+         "type": "string",
+         "title": "Url"
+        },
+        "content_type": {
+         "description": "The mime type of the file.",
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "title": "Content Type"
+        },
+        "file_size": {
+         "description": "The size of the file in bytes.",
+         "anyOf": [
+          {
+           "type": "integer"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "title": "File Size"
+        },
+        "file_name": {
+         "description": "The name of the file. It will be auto-generated if not provided.",
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "title": "File Name"
+        }
+       },
+       "x-fal-order-properties": [
+        "url",
+        "content_type",
+        "file_name",
+        "file_size"
+       ],
+       "required": [
+        "url"
+       ],
+       "title": "File"
+      }
+     }
+    },
+    "x-fal-order-properties": [
+     "result_files"
+    ],
+    "required": [
+     "result_files"
+    ],
+    "title": "PartOutput"
+   }
+  },
+  "fal-ai/hunyuan-3d/v3.1/smart-topology": {
+   "endpoint_id": "fal-ai/hunyuan-3d/v3.1/smart-topology",
+   "display_name": "Hunyuan 3D Smart Topology",
+   "description": "Optimize 3D mesh topology with Hunyuan 3D Smart Topology.",
+   "status_base": "fal-ai/hunyuan-3d/v3.1/smart-topology",
+   "input": {
+    "type": "object",
+    "properties": {
+     "face_level": {
+      "description": "Target polygon density. high: more detail/polygons, medium: balanced, low: fewer polygons.",
+      "title": "Face Level",
+      "type": "string",
+      "default": "medium",
+      "enum": [
+       "high",
+       "medium",
+       "low"
+      ]
+     },
+     "input_file_type": {
+      "description": "Input 3D file format.",
+      "title": "Input File Type",
+      "type": "string",
+      "default": "glb",
+      "enum": [
+       "glb",
+       "obj"
+      ]
+     },
+     "polygon_type": {
+      "description": "Output polygon type. triangle: triangular faces only. quadrilateral: mixed quad and triangle faces.",
+      "title": "Polygon Type",
+      "type": "string",
+      "default": "triangle",
+      "enum": [
+       "triangle",
+       "quadrilateral"
+      ]
+     },
+     "input_file_url": {
+      "description": "URL of GLB or OBJ file to optimize topology. Max size: 200MB.",
+      "type": "string",
+      "default": "https://v3b.fal.media/files/b/0a8c09c0/VYDiCTcDGK55qY2-idGbX_model.glb",
+      "title": "Input File Url"
+     }
+    },
+    "x-fal-order-properties": [
+     "input_file_url",
+     "input_file_type",
+     "polygon_type",
+     "face_level"
+    ],
+    "title": "SmartTopologyInput"
+   },
+   "output": {
+    "type": "object",
+    "properties": {
+     "model_glb": {
+      "type": "object",
+      "properties": {
+       "url": {
+        "description": "The URL where the file can be downloaded from.",
+        "type": "string",
+        "title": "Url"
+       },
+       "content_type": {
+        "description": "The mime type of the file.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Content Type"
+       },
+       "file_size": {
+        "description": "The size of the file in bytes.",
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "File Size"
+       },
+       "file_name": {
+        "description": "The name of the file. It will be auto-generated if not provided.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "File Name"
+       }
+      },
+      "x-fal-order-properties": [
+       "url",
+       "content_type",
+       "file_name",
+       "file_size"
+      ],
+      "required": [
+       "url"
+      ],
+      "title": "File"
+     },
+     "model_urls": {
+      "type": "object",
+      "properties": {
+       "fbx": {
+        "description": "FBX format 3D model",
+        "anyOf": [
+         {
+          "type": "object",
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string",
+            "title": "Url"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "texture": {
+        "description": "Texture image for the 3D model",
+        "anyOf": [
+         {
+          "type": "object",
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string",
+            "title": "Url"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "glb": {
+        "description": "GLB format 3D model",
+        "anyOf": [
+         {
+          "type": "object",
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string",
+            "title": "Url"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "usdz": {
+        "description": "USDZ format 3D model",
+        "anyOf": [
+         {
+          "type": "object",
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string",
+            "title": "Url"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "mtl": {
+        "description": "MTL material file for OBJ model",
+        "anyOf": [
+         {
+          "type": "object",
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string",
+            "title": "Url"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "obj": {
+        "description": "OBJ format 3D model",
+        "anyOf": [
+         {
+          "type": "object",
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string",
+            "title": "Url"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "x-fal-order-properties": [
+       "glb",
+       "fbx",
+       "obj",
+       "mtl",
+       "texture",
+       "usdz"
+      ],
+      "title": "ModelUrls"
+     }
+    },
+    "x-fal-order-properties": [
+     "model_glb",
+     "model_urls"
+    ],
+    "required": [
+     "model_glb",
+     "model_urls"
+    ],
+    "title": "SmartTopologyOutput"
+   }
+  },
+  "meshy/v6-lite/retexture": {
+   "endpoint_id": "meshy/v6-lite/retexture",
+   "display_name": "Meshy 6 Lite Retexture",
+   "description": "Meshy 6 Lite retexture applies new textures to an existing 3D model from a text prompt or a reference image, with optional PBR maps.",
+   "status_base": "meshy/v6-lite/retexture",
+   "input": {
+    "properties": {
+     "texture_resolution": {
+      "enum": [
+       "2k",
+       "4k",
+       "8k"
+      ],
+      "description": "Base color resolution: 2k (2048), 4k (4096), or 8k (8192). 4k and 8k require Meshy 6 or 7. At 8k, PBR maps are 4k and no emission map is generated.",
+      "default": "2k",
+      "title": "Texture Resolution",
+      "type": "string"
+     },
+     "text_style_prompt": {
+      "description": "Describe your desired texture style using text. Maximum 600 characters. Required if image_style_url is not provided.",
+      "anyOf": [
+       {
+        "maxLength": 600,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text Style Prompt"
+     },
+     "enable_original_uv": {
+      "description": "Use the original UV mapping of the model instead of generating new UVs. If the model has no original UV, output quality may be reduced.",
+      "default": true,
+      "title": "Enable Original Uv",
+      "type": "boolean"
+     },
+     "enable_safety_checker": {
+      "description": "If set to true, input data will be checked for safety before processing.",
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean"
+     },
+     "image_style_url": {
+      "description": "2D image to guide the texturing process. Supports .jpg, .jpeg, and .png formats. Required if text_style_prompt is not provided. If both are provided, image_style_url takes precedence.",
+      "anyOf": [
+       {
+        "ui": {
+         "field": "image"
+        },
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "max_pixels": 178956970,
+      "title": "Image Style Url",
+      "max_file_size": 20971520
+     },
+     "enable_pbr": {
+      "description": "Generate PBR Maps (metallic, roughness, normal) in addition to base color.",
+      "default": false,
+      "title": "Enable Pbr",
+      "type": "boolean"
+     },
+     "model_url": {
+      "description": "URL or base64 data URI of a 3D model to texture. Supports .glb, .gltf, .obj, .fbx, .stl formats. Can be a publicly accessible URL or data URI with MIME type application/octet-stream.",
+      "title": "Model Url",
+      "type": "string"
+     }
+    },
+    "required": [
+     "model_url"
+    ],
+    "description": "Input for 3D Model Retexturing",
+    "x-fal-order-properties": [
+     "model_url",
+     "text_style_prompt",
+     "image_style_url",
+     "texture_resolution",
+     "enable_original_uv",
+     "enable_pbr",
+     "enable_safety_checker"
+    ],
+    "title": "RetextureInput",
+    "type": "object"
+   },
+   "output": {
+    "properties": {
+     "thumbnail": {
+      "description": "Preview thumbnail of the retextured model",
+      "anyOf": [
+       {
+        "properties": {
+         "url": {
+          "description": "The URL where the file can be downloaded from.",
+          "title": "Url",
+          "type": "string"
+         },
+         "content_type": {
+          "description": "The mime type of the file.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "Content Type"
+         },
+         "file_size": {
+          "description": "The size of the file in bytes.",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Size"
+         },
+         "file_name": {
+          "description": "The name of the file. It will be auto-generated if not provided.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Name"
+         }
+        },
+        "required": [
+         "url"
+        ],
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "title": "File",
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "model_glb": {
+      "properties": {
+       "url": {
+        "description": "The URL where the file can be downloaded from.",
+        "title": "Url",
+        "type": "string"
+       },
+       "content_type": {
+        "description": "The mime type of the file.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Content Type"
+       },
+       "file_size": {
+        "description": "The size of the file in bytes.",
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "File Size"
+       },
+       "file_name": {
+        "description": "The name of the file. It will be auto-generated if not provided.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "File Name"
+       }
+      },
+      "required": [
+       "url"
+      ],
+      "x-fal-order-properties": [
+       "url",
+       "content_type",
+       "file_name",
+       "file_size"
+      ],
+      "title": "File",
+      "type": "object"
+     },
+     "text_style_prompt": {
+      "description": "The text prompt used for texturing (if provided)",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text Style Prompt"
+     },
+     "model_urls": {
+      "properties": {
+       "blend": {
+        "description": "Blender format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "obj": {
+        "description": "OBJ format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "stl": {
+        "description": "STL format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "fbx": {
+        "description": "FBX format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "glb": {
+        "description": "GLB format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "usdz": {
+        "description": "USDZ format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "x-fal-order-properties": [
+       "glb",
+       "fbx",
+       "obj",
+       "usdz",
+       "blend",
+       "stl"
+      ],
+      "description": "3D model files in various formats",
+      "title": "ModelUrls",
+      "type": "object"
+     },
+     "image_style_url": {
+      "description": "The image URL used for texturing (if provided)",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Image Style Url"
+     },
+     "texture_urls": {
+      "items": {
+       "properties": {
+        "metallic": {
+         "description": "Metallic texture (PBR)",
+         "anyOf": [
+          {
+           "properties": {
+            "url": {
+             "description": "The URL where the file can be downloaded from.",
+             "title": "Url",
+             "type": "string"
+            },
+            "content_type": {
+             "description": "The mime type of the file.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "Content Type"
+            },
+            "file_size": {
+             "description": "The size of the file in bytes.",
+             "anyOf": [
+              {
+               "type": "integer"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Size"
+            },
+            "file_name": {
+             "description": "The name of the file. It will be auto-generated if not provided.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Name"
+            }
+           },
+           "required": [
+            "url"
+           ],
+           "x-fal-order-properties": [
+            "url",
+            "content_type",
+            "file_name",
+            "file_size"
+           ],
+           "title": "File",
+           "type": "object"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "roughness": {
+         "description": "Roughness texture (PBR)",
+         "anyOf": [
+          {
+           "properties": {
+            "url": {
+             "description": "The URL where the file can be downloaded from.",
+             "title": "Url",
+             "type": "string"
+            },
+            "content_type": {
+             "description": "The mime type of the file.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "Content Type"
+            },
+            "file_size": {
+             "description": "The size of the file in bytes.",
+             "anyOf": [
+              {
+               "type": "integer"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Size"
+            },
+            "file_name": {
+             "description": "The name of the file. It will be auto-generated if not provided.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Name"
+            }
+           },
+           "required": [
+            "url"
+           ],
+           "x-fal-order-properties": [
+            "url",
+            "content_type",
+            "file_name",
+            "file_size"
+           ],
+           "title": "File",
+           "type": "object"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "base_color": {
+         "properties": {
+          "url": {
+           "description": "The URL where the file can be downloaded from.",
+           "title": "Url",
+           "type": "string"
+          },
+          "content_type": {
+           "description": "The mime type of the file.",
+           "anyOf": [
+            {
+             "type": "string"
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "title": "Content Type"
+          },
+          "file_size": {
+           "description": "The size of the file in bytes.",
+           "anyOf": [
+            {
+             "type": "integer"
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "title": "File Size"
+          },
+          "file_name": {
+           "description": "The name of the file. It will be auto-generated if not provided.",
+           "anyOf": [
+            {
+             "type": "string"
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "title": "File Name"
+          }
+         },
+         "required": [
+          "url"
+         ],
+         "x-fal-order-properties": [
+          "url",
+          "content_type",
+          "file_name",
+          "file_size"
+         ],
+         "title": "File",
+         "type": "object"
+        },
+        "normal": {
+         "description": "Normal texture (PBR)",
+         "anyOf": [
+          {
+           "properties": {
+            "url": {
+             "description": "The URL where the file can be downloaded from.",
+             "title": "Url",
+             "type": "string"
+            },
+            "content_type": {
+             "description": "The mime type of the file.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "Content Type"
+            },
+            "file_size": {
+             "description": "The size of the file in bytes.",
+             "anyOf": [
+              {
+               "type": "integer"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Size"
+            },
+            "file_name": {
+             "description": "The name of the file. It will be auto-generated if not provided.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Name"
+            }
+           },
+           "required": [
+            "url"
+           ],
+           "x-fal-order-properties": [
+            "url",
+            "content_type",
+            "file_name",
+            "file_size"
+           ],
+           "title": "File",
+           "type": "object"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        }
+       },
+       "required": [
+        "base_color"
+       ],
+       "description": "Texture files downloaded and uploaded to CDN",
+       "x-fal-order-properties": [
+        "base_color",
+        "metallic",
+        "normal",
+        "roughness"
+       ],
+       "title": "TextureFiles",
+       "type": "object"
+      },
+      "description": "Array of texture file objects",
+      "title": "Texture Urls",
+      "type": "array"
+     }
+    },
+    "required": [
+     "model_glb",
+     "model_urls"
+    ],
+    "description": "Output for 3D Model Retexturing",
+    "x-fal-order-properties": [
+     "model_glb",
+     "thumbnail",
+     "model_urls",
+     "texture_urls",
+     "text_style_prompt",
+     "image_style_url"
+    ],
+    "title": "RetextureOutput",
+    "type": "object"
+   }
+  },
+  "meshy/v6/retexture": {
+   "endpoint_id": "meshy/v6/retexture",
+   "display_name": "Meshy 6 Retexture",
+   "description": "Meshy 6 retexture applies new textures to an existing 3D model from a text prompt or a reference image, with optional PBR maps.",
+   "status_base": "meshy/v6/retexture",
+   "input": {
+    "properties": {
+     "texture_resolution": {
+      "enum": [
+       "2k",
+       "4k",
+       "8k"
+      ],
+      "description": "Base color resolution: 2k (2048), 4k (4096), or 8k (8192). 4k and 8k require Meshy 6 or 7. At 8k, PBR maps are 4k and no emission map is generated.",
+      "default": "2k",
+      "title": "Texture Resolution",
+      "type": "string"
+     },
+     "text_style_prompt": {
+      "description": "Describe your desired texture style using text. Maximum 600 characters. Required if image_style_url is not provided.",
+      "anyOf": [
+       {
+        "maxLength": 600,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text Style Prompt"
+     },
+     "enable_original_uv": {
+      "description": "Use the original UV mapping of the model instead of generating new UVs. If the model has no original UV, output quality may be reduced.",
+      "default": true,
+      "title": "Enable Original Uv",
+      "type": "boolean"
+     },
+     "enable_safety_checker": {
+      "description": "If set to true, input data will be checked for safety before processing.",
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean"
+     },
+     "image_style_url": {
+      "description": "2D image to guide the texturing process. Supports .jpg, .jpeg, and .png formats. Required if text_style_prompt is not provided. If both are provided, image_style_url takes precedence.",
+      "anyOf": [
+       {
+        "ui": {
+         "field": "image"
+        },
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "max_pixels": 178956970,
+      "title": "Image Style Url",
+      "max_file_size": 20971520
+     },
+     "enable_pbr": {
+      "description": "Generate PBR Maps (metallic, roughness, normal) in addition to base color.",
+      "default": false,
+      "title": "Enable Pbr",
+      "type": "boolean"
+     },
+     "model_url": {
+      "description": "URL or base64 data URI of a 3D model to texture. Supports .glb, .gltf, .obj, .fbx, .stl formats. Can be a publicly accessible URL or data URI with MIME type application/octet-stream.",
+      "title": "Model Url",
+      "type": "string"
+     }
+    },
+    "required": [
+     "model_url"
+    ],
+    "description": "Input for 3D Model Retexturing",
+    "x-fal-order-properties": [
+     "model_url",
+     "text_style_prompt",
+     "image_style_url",
+     "texture_resolution",
+     "enable_original_uv",
+     "enable_pbr",
+     "enable_safety_checker"
+    ],
+    "title": "RetextureInput",
+    "type": "object"
+   },
+   "output": {
+    "properties": {
+     "thumbnail": {
+      "description": "Preview thumbnail of the retextured model",
+      "anyOf": [
+       {
+        "properties": {
+         "url": {
+          "description": "The URL where the file can be downloaded from.",
+          "title": "Url",
+          "type": "string"
+         },
+         "content_type": {
+          "description": "The mime type of the file.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "Content Type"
+         },
+         "file_size": {
+          "description": "The size of the file in bytes.",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Size"
+         },
+         "file_name": {
+          "description": "The name of the file. It will be auto-generated if not provided.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Name"
+         }
+        },
+        "required": [
+         "url"
+        ],
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "title": "File",
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "model_glb": {
+      "properties": {
+       "url": {
+        "description": "The URL where the file can be downloaded from.",
+        "title": "Url",
+        "type": "string"
+       },
+       "content_type": {
+        "description": "The mime type of the file.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Content Type"
+       },
+       "file_size": {
+        "description": "The size of the file in bytes.",
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "File Size"
+       },
+       "file_name": {
+        "description": "The name of the file. It will be auto-generated if not provided.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "File Name"
+       }
+      },
+      "required": [
+       "url"
+      ],
+      "x-fal-order-properties": [
+       "url",
+       "content_type",
+       "file_name",
+       "file_size"
+      ],
+      "title": "File",
+      "type": "object"
+     },
+     "text_style_prompt": {
+      "description": "The text prompt used for texturing (if provided)",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text Style Prompt"
+     },
+     "model_urls": {
+      "properties": {
+       "blend": {
+        "description": "Blender format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "obj": {
+        "description": "OBJ format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "stl": {
+        "description": "STL format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "fbx": {
+        "description": "FBX format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "glb": {
+        "description": "GLB format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "usdz": {
+        "description": "USDZ format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "x-fal-order-properties": [
+       "glb",
+       "fbx",
+       "obj",
+       "usdz",
+       "blend",
+       "stl"
+      ],
+      "description": "3D model files in various formats",
+      "title": "ModelUrls",
+      "type": "object"
+     },
+     "image_style_url": {
+      "description": "The image URL used for texturing (if provided)",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Image Style Url"
+     },
+     "texture_urls": {
+      "items": {
+       "properties": {
+        "metallic": {
+         "description": "Metallic texture (PBR)",
+         "anyOf": [
+          {
+           "properties": {
+            "url": {
+             "description": "The URL where the file can be downloaded from.",
+             "title": "Url",
+             "type": "string"
+            },
+            "content_type": {
+             "description": "The mime type of the file.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "Content Type"
+            },
+            "file_size": {
+             "description": "The size of the file in bytes.",
+             "anyOf": [
+              {
+               "type": "integer"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Size"
+            },
+            "file_name": {
+             "description": "The name of the file. It will be auto-generated if not provided.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Name"
+            }
+           },
+           "required": [
+            "url"
+           ],
+           "x-fal-order-properties": [
+            "url",
+            "content_type",
+            "file_name",
+            "file_size"
+           ],
+           "title": "File",
+           "type": "object"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "roughness": {
+         "description": "Roughness texture (PBR)",
+         "anyOf": [
+          {
+           "properties": {
+            "url": {
+             "description": "The URL where the file can be downloaded from.",
+             "title": "Url",
+             "type": "string"
+            },
+            "content_type": {
+             "description": "The mime type of the file.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "Content Type"
+            },
+            "file_size": {
+             "description": "The size of the file in bytes.",
+             "anyOf": [
+              {
+               "type": "integer"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Size"
+            },
+            "file_name": {
+             "description": "The name of the file. It will be auto-generated if not provided.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Name"
+            }
+           },
+           "required": [
+            "url"
+           ],
+           "x-fal-order-properties": [
+            "url",
+            "content_type",
+            "file_name",
+            "file_size"
+           ],
+           "title": "File",
+           "type": "object"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "base_color": {
+         "properties": {
+          "url": {
+           "description": "The URL where the file can be downloaded from.",
+           "title": "Url",
+           "type": "string"
+          },
+          "content_type": {
+           "description": "The mime type of the file.",
+           "anyOf": [
+            {
+             "type": "string"
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "title": "Content Type"
+          },
+          "file_size": {
+           "description": "The size of the file in bytes.",
+           "anyOf": [
+            {
+             "type": "integer"
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "title": "File Size"
+          },
+          "file_name": {
+           "description": "The name of the file. It will be auto-generated if not provided.",
+           "anyOf": [
+            {
+             "type": "string"
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "title": "File Name"
+          }
+         },
+         "required": [
+          "url"
+         ],
+         "x-fal-order-properties": [
+          "url",
+          "content_type",
+          "file_name",
+          "file_size"
+         ],
+         "title": "File",
+         "type": "object"
+        },
+        "normal": {
+         "description": "Normal texture (PBR)",
+         "anyOf": [
+          {
+           "properties": {
+            "url": {
+             "description": "The URL where the file can be downloaded from.",
+             "title": "Url",
+             "type": "string"
+            },
+            "content_type": {
+             "description": "The mime type of the file.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "Content Type"
+            },
+            "file_size": {
+             "description": "The size of the file in bytes.",
+             "anyOf": [
+              {
+               "type": "integer"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Size"
+            },
+            "file_name": {
+             "description": "The name of the file. It will be auto-generated if not provided.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Name"
+            }
+           },
+           "required": [
+            "url"
+           ],
+           "x-fal-order-properties": [
+            "url",
+            "content_type",
+            "file_name",
+            "file_size"
+           ],
+           "title": "File",
+           "type": "object"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        }
+       },
+       "required": [
+        "base_color"
+       ],
+       "description": "Texture files downloaded and uploaded to CDN",
+       "x-fal-order-properties": [
+        "base_color",
+        "metallic",
+        "normal",
+        "roughness"
+       ],
+       "title": "TextureFiles",
+       "type": "object"
+      },
+      "description": "Array of texture file objects",
+      "title": "Texture Urls",
+      "type": "array"
+     }
+    },
+    "required": [
+     "model_glb",
+     "model_urls"
+    ],
+    "description": "Output for 3D Model Retexturing",
+    "x-fal-order-properties": [
+     "model_glb",
+     "thumbnail",
+     "model_urls",
+     "texture_urls",
+     "text_style_prompt",
+     "image_style_url"
+    ],
+    "title": "RetextureOutput",
+    "type": "object"
+   }
+  },
+  "meshy/v7/retexture": {
+   "endpoint_id": "meshy/v7/retexture",
+   "display_name": "Meshy 7 Retexture",
+   "description": "Meshy 7 retexture applies new textures to an existing 3D model from a text prompt or a reference image, with optional PBR maps.",
+   "status_base": "meshy/v7/retexture",
+   "input": {
+    "properties": {
+     "texture_resolution": {
+      "enum": [
+       "2k",
+       "4k",
+       "8k"
+      ],
+      "description": "Base color resolution: 2k (2048), 4k (4096), or 8k (8192). 4k and 8k require Meshy 6 or 7. At 8k, PBR maps are 4k and no emission map is generated.",
+      "default": "2k",
+      "title": "Texture Resolution",
+      "type": "string"
+     },
+     "text_style_prompt": {
+      "description": "Describe your desired texture style using text. Maximum 600 characters. Required if image_style_url is not provided.",
+      "anyOf": [
+       {
+        "maxLength": 600,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text Style Prompt"
+     },
+     "enable_original_uv": {
+      "description": "Use the original UV mapping of the model instead of generating new UVs. If the model has no original UV, output quality may be reduced.",
+      "default": true,
+      "title": "Enable Original Uv",
+      "type": "boolean"
+     },
+     "enable_safety_checker": {
+      "description": "If set to true, input data will be checked for safety before processing.",
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean"
+     },
+     "image_style_url": {
+      "description": "2D image to guide the texturing process. Supports .jpg, .jpeg, and .png formats. Required if text_style_prompt is not provided. If both are provided, image_style_url takes precedence.",
+      "anyOf": [
+       {
+        "ui": {
+         "field": "image"
+        },
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "max_pixels": 178956970,
+      "title": "Image Style Url",
+      "max_file_size": 20971520
+     },
+     "enable_pbr": {
+      "description": "Generate PBR Maps (metallic, roughness, normal) in addition to base color.",
+      "default": false,
+      "title": "Enable Pbr",
+      "type": "boolean"
+     },
+     "model_url": {
+      "description": "URL or base64 data URI of a 3D model to texture. Supports .glb, .gltf, .obj, .fbx, .stl formats. Can be a publicly accessible URL or data URI with MIME type application/octet-stream.",
+      "title": "Model Url",
+      "type": "string"
+     }
+    },
+    "required": [
+     "model_url"
+    ],
+    "description": "Input for 3D Model Retexturing",
+    "x-fal-order-properties": [
+     "model_url",
+     "text_style_prompt",
+     "image_style_url",
+     "texture_resolution",
+     "enable_original_uv",
+     "enable_pbr",
+     "enable_safety_checker"
+    ],
+    "title": "RetextureInput",
+    "type": "object"
+   },
+   "output": {
+    "properties": {
+     "thumbnail": {
+      "description": "Preview thumbnail of the retextured model",
+      "anyOf": [
+       {
+        "properties": {
+         "url": {
+          "description": "The URL where the file can be downloaded from.",
+          "title": "Url",
+          "type": "string"
+         },
+         "content_type": {
+          "description": "The mime type of the file.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "Content Type"
+         },
+         "file_size": {
+          "description": "The size of the file in bytes.",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Size"
+         },
+         "file_name": {
+          "description": "The name of the file. It will be auto-generated if not provided.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Name"
+         }
+        },
+        "required": [
+         "url"
+        ],
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "title": "File",
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "model_glb": {
+      "properties": {
+       "url": {
+        "description": "The URL where the file can be downloaded from.",
+        "title": "Url",
+        "type": "string"
+       },
+       "content_type": {
+        "description": "The mime type of the file.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Content Type"
+       },
+       "file_size": {
+        "description": "The size of the file in bytes.",
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "File Size"
+       },
+       "file_name": {
+        "description": "The name of the file. It will be auto-generated if not provided.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "File Name"
+       }
+      },
+      "required": [
+       "url"
+      ],
+      "x-fal-order-properties": [
+       "url",
+       "content_type",
+       "file_name",
+       "file_size"
+      ],
+      "title": "File",
+      "type": "object"
+     },
+     "text_style_prompt": {
+      "description": "The text prompt used for texturing (if provided)",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text Style Prompt"
+     },
+     "model_urls": {
+      "properties": {
+       "blend": {
+        "description": "Blender format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "obj": {
+        "description": "OBJ format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "stl": {
+        "description": "STL format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "fbx": {
+        "description": "FBX format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "glb": {
+        "description": "GLB format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "usdz": {
+        "description": "USDZ format 3D model",
+        "anyOf": [
+         {
+          "properties": {
+           "url": {
+            "description": "The URL where the file can be downloaded from.",
+            "title": "Url",
+            "type": "string"
+           },
+           "content_type": {
+            "description": "The mime type of the file.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "Content Type"
+           },
+           "file_size": {
+            "description": "The size of the file in bytes.",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Size"
+           },
+           "file_name": {
+            "description": "The name of the file. It will be auto-generated if not provided.",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "title": "File Name"
+           }
+          },
+          "required": [
+           "url"
+          ],
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "title": "File",
+          "type": "object"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "x-fal-order-properties": [
+       "glb",
+       "fbx",
+       "obj",
+       "usdz",
+       "blend",
+       "stl"
+      ],
+      "description": "3D model files in various formats",
+      "title": "ModelUrls",
+      "type": "object"
+     },
+     "image_style_url": {
+      "description": "The image URL used for texturing (if provided)",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Image Style Url"
+     },
+     "texture_urls": {
+      "items": {
+       "properties": {
+        "metallic": {
+         "description": "Metallic texture (PBR)",
+         "anyOf": [
+          {
+           "properties": {
+            "url": {
+             "description": "The URL where the file can be downloaded from.",
+             "title": "Url",
+             "type": "string"
+            },
+            "content_type": {
+             "description": "The mime type of the file.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "Content Type"
+            },
+            "file_size": {
+             "description": "The size of the file in bytes.",
+             "anyOf": [
+              {
+               "type": "integer"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Size"
+            },
+            "file_name": {
+             "description": "The name of the file. It will be auto-generated if not provided.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Name"
+            }
+           },
+           "required": [
+            "url"
+           ],
+           "x-fal-order-properties": [
+            "url",
+            "content_type",
+            "file_name",
+            "file_size"
+           ],
+           "title": "File",
+           "type": "object"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "roughness": {
+         "description": "Roughness texture (PBR)",
+         "anyOf": [
+          {
+           "properties": {
+            "url": {
+             "description": "The URL where the file can be downloaded from.",
+             "title": "Url",
+             "type": "string"
+            },
+            "content_type": {
+             "description": "The mime type of the file.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "Content Type"
+            },
+            "file_size": {
+             "description": "The size of the file in bytes.",
+             "anyOf": [
+              {
+               "type": "integer"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Size"
+            },
+            "file_name": {
+             "description": "The name of the file. It will be auto-generated if not provided.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Name"
+            }
+           },
+           "required": [
+            "url"
+           ],
+           "x-fal-order-properties": [
+            "url",
+            "content_type",
+            "file_name",
+            "file_size"
+           ],
+           "title": "File",
+           "type": "object"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "base_color": {
+         "properties": {
+          "url": {
+           "description": "The URL where the file can be downloaded from.",
+           "title": "Url",
+           "type": "string"
+          },
+          "content_type": {
+           "description": "The mime type of the file.",
+           "anyOf": [
+            {
+             "type": "string"
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "title": "Content Type"
+          },
+          "file_size": {
+           "description": "The size of the file in bytes.",
+           "anyOf": [
+            {
+             "type": "integer"
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "title": "File Size"
+          },
+          "file_name": {
+           "description": "The name of the file. It will be auto-generated if not provided.",
+           "anyOf": [
+            {
+             "type": "string"
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "title": "File Name"
+          }
+         },
+         "required": [
+          "url"
+         ],
+         "x-fal-order-properties": [
+          "url",
+          "content_type",
+          "file_name",
+          "file_size"
+         ],
+         "title": "File",
+         "type": "object"
+        },
+        "normal": {
+         "description": "Normal texture (PBR)",
+         "anyOf": [
+          {
+           "properties": {
+            "url": {
+             "description": "The URL where the file can be downloaded from.",
+             "title": "Url",
+             "type": "string"
+            },
+            "content_type": {
+             "description": "The mime type of the file.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "Content Type"
+            },
+            "file_size": {
+             "description": "The size of the file in bytes.",
+             "anyOf": [
+              {
+               "type": "integer"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Size"
+            },
+            "file_name": {
+             "description": "The name of the file. It will be auto-generated if not provided.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Name"
+            }
+           },
+           "required": [
+            "url"
+           ],
+           "x-fal-order-properties": [
+            "url",
+            "content_type",
+            "file_name",
+            "file_size"
+           ],
+           "title": "File",
+           "type": "object"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        }
+       },
+       "required": [
+        "base_color"
+       ],
+       "description": "Texture files downloaded and uploaded to CDN",
+       "x-fal-order-properties": [
+        "base_color",
+        "metallic",
+        "normal",
+        "roughness"
+       ],
+       "title": "TextureFiles",
+       "type": "object"
+      },
+      "description": "Array of texture file objects",
+      "title": "Texture Urls",
+      "type": "array"
+     }
+    },
+    "required": [
+     "model_glb",
+     "model_urls"
+    ],
+    "description": "Output for 3D Model Retexturing",
+    "x-fal-order-properties": [
+     "model_glb",
+     "thumbnail",
+     "model_urls",
+     "texture_urls",
+     "text_style_prompt",
+     "image_style_url"
+    ],
+    "title": "RetextureOutput",
+    "type": "object"
+   }
+  },
+  "fal-ai/meshy/rigging": {
+   "endpoint_id": "fal-ai/meshy/rigging",
+   "display_name": "Meshy Rigging",
+   "description": "Rig humanoid 3D models from GLB URLs with Meshy, returning rigged GLB/FBX files plus basic   animations.",
+   "status_base": "fal-ai/meshy/rigging",
+   "input": {
+    "properties": {
+     "enable_animation": {
+      "description": "Apply an animation preset to the rigged model.",
+      "default": false,
+      "title": "Enable Animation",
+      "type": "boolean"
+     },
+     "enable_safety_checker": {
+      "description": "If set to true, input data will be checked for safety before processing.",
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean"
+     },
+     "height_meters": {
+      "exclusiveMinimum": 0,
+      "description": "Approximate height of the character in meters.",
+      "default": 1.7,
+      "title": "Height Meters",
+      "type": "number"
+     },
+     "animation_action_id": {
+      "description": "Animation preset ID from Meshy's library. Only used when enable_animation is true; in that case it must be in [0, 696] (``0`` is the \"Idle\" preset) and is otherwise rejected with a 422. See https://docs.meshy.ai/en/api/animation-library for available action IDs.",
+      "default": 92,
+      "title": "Animation Action Id",
+      "type": "integer"
+     },
+     "model_url": {
+      "description": "URL of a 3D model in GLB format to rig. Can be any publicly accessible URL \u2014 works with models generated by Hunyuan, Trellis, Meshy, or any other 3D generation tool. The model must be a humanoid character with clearly defined limbs.",
+      "minLength": 1,
+      "title": "Model Url",
+      "type": "string"
+     }
+    },
+    "required": [
+     "model_url"
+    ],
+    "description": "Input for standalone auto-rigging and animation of a 3D model",
+    "x-fal-order-properties": [
+     "model_url",
+     "height_meters",
+     "enable_animation",
+     "animation_action_id",
+     "enable_safety_checker"
+    ],
+    "title": "RiggingInput",
+    "type": "object"
+   },
+   "output": {
+    "properties": {
+     "animation_glb": {
+      "description": "Animated 3D model in GLB format. Only present when enable_animation is true.",
+      "anyOf": [
+       {
+        "properties": {
+         "url": {
+          "description": "The URL where the file can be downloaded from.",
+          "title": "Url",
+          "type": "string"
+         },
+         "content_type": {
+          "description": "The mime type of the file.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "Content Type"
+         },
+         "file_size": {
+          "description": "The size of the file in bytes.",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Size"
+         },
+         "file_name": {
+          "description": "The name of the file. It will be auto-generated if not provided.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Name"
+         }
+        },
+        "required": [
+         "url"
+        ],
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "title": "File",
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "animation_fbx": {
+      "description": "Animated 3D model in FBX format. Only present when enable_animation is true.",
+      "anyOf": [
+       {
+        "properties": {
+         "url": {
+          "description": "The URL where the file can be downloaded from.",
+          "title": "Url",
+          "type": "string"
+         },
+         "content_type": {
+          "description": "The mime type of the file.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "Content Type"
+         },
+         "file_size": {
+          "description": "The size of the file in bytes.",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Size"
+         },
+         "file_name": {
+          "description": "The name of the file. It will be auto-generated if not provided.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Name"
+         }
+        },
+        "required": [
+         "url"
+        ],
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "title": "File",
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "rig_task_id": {
+      "description": "Meshy rigging task ID.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Rig Task Id"
+     },
+     "rigged_character_fbx": {
+      "description": "Rigged character in FBX format.",
+      "anyOf": [
+       {
+        "properties": {
+         "url": {
+          "description": "The URL where the file can be downloaded from.",
+          "title": "Url",
+          "type": "string"
+         },
+         "content_type": {
+          "description": "The mime type of the file.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "Content Type"
+         },
+         "file_size": {
+          "description": "The size of the file in bytes.",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Size"
+         },
+         "file_name": {
+          "description": "The name of the file. It will be auto-generated if not provided.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Name"
+         }
+        },
+        "required": [
+         "url"
+        ],
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "title": "File",
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "basic_animations": {
+      "description": "Basic walking and running animations included with rigging.",
+      "anyOf": [
+       {
+        "properties": {
+         "running_glb": {
+          "description": "Running animation in GLB format",
+          "anyOf": [
+           {
+            "properties": {
+             "url": {
+              "description": "The URL where the file can be downloaded from.",
+              "title": "Url",
+              "type": "string"
+             },
+             "content_type": {
+              "description": "The mime type of the file.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "Content Type"
+             },
+             "file_size": {
+              "description": "The size of the file in bytes.",
+              "anyOf": [
+               {
+                "type": "integer"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Size"
+             },
+             "file_name": {
+              "description": "The name of the file. It will be auto-generated if not provided.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Name"
+             }
+            },
+            "required": [
+             "url"
+            ],
+            "x-fal-order-properties": [
+             "url",
+             "content_type",
+             "file_name",
+             "file_size"
+            ],
+            "title": "File",
+            "type": "object"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "running_fbx": {
+          "description": "Running animation in FBX format",
+          "anyOf": [
+           {
+            "properties": {
+             "url": {
+              "description": "The URL where the file can be downloaded from.",
+              "title": "Url",
+              "type": "string"
+             },
+             "content_type": {
+              "description": "The mime type of the file.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "Content Type"
+             },
+             "file_size": {
+              "description": "The size of the file in bytes.",
+              "anyOf": [
+               {
+                "type": "integer"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Size"
+             },
+             "file_name": {
+              "description": "The name of the file. It will be auto-generated if not provided.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Name"
+             }
+            },
+            "required": [
+             "url"
+            ],
+            "x-fal-order-properties": [
+             "url",
+             "content_type",
+             "file_name",
+             "file_size"
+            ],
+            "title": "File",
+            "type": "object"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "running_armature_glb": {
+          "description": "Running armature only in GLB format",
+          "anyOf": [
+           {
+            "properties": {
+             "url": {
+              "description": "The URL where the file can be downloaded from.",
+              "title": "Url",
+              "type": "string"
+             },
+             "content_type": {
+              "description": "The mime type of the file.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "Content Type"
+             },
+             "file_size": {
+              "description": "The size of the file in bytes.",
+              "anyOf": [
+               {
+                "type": "integer"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Size"
+             },
+             "file_name": {
+              "description": "The name of the file. It will be auto-generated if not provided.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Name"
+             }
+            },
+            "required": [
+             "url"
+            ],
+            "x-fal-order-properties": [
+             "url",
+             "content_type",
+             "file_name",
+             "file_size"
+            ],
+            "title": "File",
+            "type": "object"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "walking_armature_glb": {
+          "description": "Walking armature only in GLB format",
+          "anyOf": [
+           {
+            "properties": {
+             "url": {
+              "description": "The URL where the file can be downloaded from.",
+              "title": "Url",
+              "type": "string"
+             },
+             "content_type": {
+              "description": "The mime type of the file.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "Content Type"
+             },
+             "file_size": {
+              "description": "The size of the file in bytes.",
+              "anyOf": [
+               {
+                "type": "integer"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Size"
+             },
+             "file_name": {
+              "description": "The name of the file. It will be auto-generated if not provided.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Name"
+             }
+            },
+            "required": [
+             "url"
+            ],
+            "x-fal-order-properties": [
+             "url",
+             "content_type",
+             "file_name",
+             "file_size"
+            ],
+            "title": "File",
+            "type": "object"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "walking_glb": {
+          "description": "Walking animation in GLB format",
+          "anyOf": [
+           {
+            "properties": {
+             "url": {
+              "description": "The URL where the file can be downloaded from.",
+              "title": "Url",
+              "type": "string"
+             },
+             "content_type": {
+              "description": "The mime type of the file.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "Content Type"
+             },
+             "file_size": {
+              "description": "The size of the file in bytes.",
+              "anyOf": [
+               {
+                "type": "integer"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Size"
+             },
+             "file_name": {
+              "description": "The name of the file. It will be auto-generated if not provided.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Name"
+             }
+            },
+            "required": [
+             "url"
+            ],
+            "x-fal-order-properties": [
+             "url",
+             "content_type",
+             "file_name",
+             "file_size"
+            ],
+            "title": "File",
+            "type": "object"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "walking_fbx": {
+          "description": "Walking animation in FBX format",
+          "anyOf": [
+           {
+            "properties": {
+             "url": {
+              "description": "The URL where the file can be downloaded from.",
+              "title": "Url",
+              "type": "string"
+             },
+             "content_type": {
+              "description": "The mime type of the file.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "Content Type"
+             },
+             "file_size": {
+              "description": "The size of the file in bytes.",
+              "anyOf": [
+               {
+                "type": "integer"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Size"
+             },
+             "file_name": {
+              "description": "The name of the file. It will be auto-generated if not provided.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Name"
+             }
+            },
+            "required": [
+             "url"
+            ],
+            "x-fal-order-properties": [
+             "url",
+             "content_type",
+             "file_name",
+             "file_size"
+            ],
+            "title": "File",
+            "type": "object"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         }
+        },
+        "x-fal-order-properties": [
+         "walking_glb",
+         "walking_fbx",
+         "walking_armature_glb",
+         "running_glb",
+         "running_fbx",
+         "running_armature_glb"
+        ],
+        "description": "Basic animation files included with the rigging result",
+        "title": "BasicAnimations",
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "rigged_character_glb": {
+      "description": "Rigged character in GLB format.",
+      "anyOf": [
+       {
+        "properties": {
+         "url": {
+          "description": "The URL where the file can be downloaded from.",
+          "title": "Url",
+          "type": "string"
+         },
+         "content_type": {
+          "description": "The mime type of the file.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "Content Type"
+         },
+         "file_size": {
+          "description": "The size of the file in bytes.",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Size"
+         },
+         "file_name": {
+          "description": "The name of the file. It will be auto-generated if not provided.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Name"
+         }
+        },
+        "required": [
+         "url"
+        ],
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "title": "File",
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "x-fal-order-properties": [
+     "rigged_character_glb",
+     "rigged_character_fbx",
+     "basic_animations",
+     "animation_glb",
+     "animation_fbx",
+     "rig_task_id"
+    ],
+    "description": "Output for standalone auto-rigging and animation",
+    "title": "RiggingOutput",
+    "type": "object"
+   }
+  },
+  "fal-ai/meshy/rigging/multi-animation": {
+   "endpoint_id": "fal-ai/meshy/rigging/multi-animation",
+   "display_name": "Meshy Rigging Multi Animation",
+   "description": "Meshy auto-rigs a humanoid 3D model fitting a skeleton and binding the mesh, then applies several motion presets from its animation library",
+   "status_base": "fal-ai/meshy/rigging/multi-animation",
+   "input": {
+    "properties": {
+     "animation_action_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "description": "Animation preset IDs from Meshy's library. One animation clip is generated per ID against the same rig and returned in the 'animations' output array, in request order. Must contain at least one ID. Each ID must be in [0, 696], at most 10 distinct clips may be requested, and duplicate IDs are de-duplicated. See https://docs.meshy.ai/en/api/animation-library for available IDs.",
+      "title": "Animation Action Ids",
+      "type": "array"
+     },
+     "enable_safety_checker": {
+      "description": "If set to true, input data will be checked for safety before processing.",
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean"
+     },
+     "height_meters": {
+      "exclusiveMinimum": 0,
+      "description": "Approximate height of the character in meters.",
+      "default": 1.7,
+      "title": "Height Meters",
+      "type": "number"
+     },
+     "model_url": {
+      "description": "URL of a 3D model in GLB format to rig and animate. Can be any publicly accessible URL \u2014 works with models generated by Hunyuan, Trellis, Meshy, or any other 3D generation tool. The model must be a humanoid character with clearly defined limbs.",
+      "minLength": 1,
+      "title": "Model Url",
+      "type": "string"
+     }
+    },
+    "required": [
+     "model_url",
+     "animation_action_ids"
+    ],
+    "description": "Input for the standalone multi-clip animation endpoint.\n\nAuto-rigs a humanoid GLB model and generates multiple animation clips\nagainst that single rig \u2014 one clip per ID in ``animation_action_ids``.\nUnlike the per-generator endpoints (which apply a single optional\nanimation), this endpoint is dedicated to producing several clips at once.",
+    "x-fal-order-properties": [
+     "model_url",
+     "height_meters",
+     "animation_action_ids",
+     "enable_safety_checker"
+    ],
+    "title": "MultiAnimationInput",
+    "type": "object"
+   },
+   "output": {
+    "properties": {
+     "animations": {
+      "description": "Animation clips generated against the rig \u2014 one entry per requested animation action ID, in request order.",
+      "title": "Animations",
+      "items": {
+       "properties": {
+        "animation_fbx": {
+         "description": "Animated 3D model in FBX format for this clip.",
+         "anyOf": [
+          {
+           "properties": {
+            "url": {
+             "description": "The URL where the file can be downloaded from.",
+             "title": "Url",
+             "type": "string"
+            },
+            "content_type": {
+             "description": "The mime type of the file.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "Content Type"
+            },
+            "file_size": {
+             "description": "The size of the file in bytes.",
+             "anyOf": [
+              {
+               "type": "integer"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Size"
+            },
+            "file_name": {
+             "description": "The name of the file. It will be auto-generated if not provided.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Name"
+            }
+           },
+           "required": [
+            "url"
+           ],
+           "x-fal-order-properties": [
+            "url",
+            "content_type",
+            "file_name",
+            "file_size"
+           ],
+           "title": "File",
+           "type": "object"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "action_id": {
+         "description": "The Meshy animation preset action ID applied to this clip.",
+         "title": "Action Id",
+         "type": "integer"
+        },
+        "animation_glb": {
+         "description": "Animated 3D model in GLB format for this clip.",
+         "anyOf": [
+          {
+           "properties": {
+            "url": {
+             "description": "The URL where the file can be downloaded from.",
+             "title": "Url",
+             "type": "string"
+            },
+            "content_type": {
+             "description": "The mime type of the file.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "Content Type"
+            },
+            "file_size": {
+             "description": "The size of the file in bytes.",
+             "anyOf": [
+              {
+               "type": "integer"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Size"
+            },
+            "file_name": {
+             "description": "The name of the file. It will be auto-generated if not provided.",
+             "anyOf": [
+              {
+               "type": "string"
+              },
+              {
+               "type": "null"
+              }
+             ],
+             "title": "File Name"
+            }
+           },
+           "required": [
+            "url"
+           ],
+           "x-fal-order-properties": [
+            "url",
+            "content_type",
+            "file_name",
+            "file_size"
+           ],
+           "title": "File",
+           "type": "object"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        }
+       },
+       "required": [
+        "action_id"
+       ],
+       "description": "A single animation clip generated against a rigged character.",
+       "x-fal-order-properties": [
+        "action_id",
+        "animation_glb",
+        "animation_fbx"
+       ],
+       "title": "AnimationClip",
+       "type": "object"
+      },
+      "type": "array"
+     },
+     "rig_task_id": {
+      "description": "Meshy rigging task ID.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Rig Task Id"
+     },
+     "rigged_character_fbx": {
+      "description": "Rigged character in FBX format.",
+      "anyOf": [
+       {
+        "properties": {
+         "url": {
+          "description": "The URL where the file can be downloaded from.",
+          "title": "Url",
+          "type": "string"
+         },
+         "content_type": {
+          "description": "The mime type of the file.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "Content Type"
+         },
+         "file_size": {
+          "description": "The size of the file in bytes.",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Size"
+         },
+         "file_name": {
+          "description": "The name of the file. It will be auto-generated if not provided.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Name"
+         }
+        },
+        "required": [
+         "url"
+        ],
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "title": "File",
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "basic_animations": {
+      "description": "Basic walking and running animations included with rigging.",
+      "anyOf": [
+       {
+        "properties": {
+         "running_glb": {
+          "description": "Running animation in GLB format",
+          "anyOf": [
+           {
+            "properties": {
+             "url": {
+              "description": "The URL where the file can be downloaded from.",
+              "title": "Url",
+              "type": "string"
+             },
+             "content_type": {
+              "description": "The mime type of the file.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "Content Type"
+             },
+             "file_size": {
+              "description": "The size of the file in bytes.",
+              "anyOf": [
+               {
+                "type": "integer"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Size"
+             },
+             "file_name": {
+              "description": "The name of the file. It will be auto-generated if not provided.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Name"
+             }
+            },
+            "required": [
+             "url"
+            ],
+            "x-fal-order-properties": [
+             "url",
+             "content_type",
+             "file_name",
+             "file_size"
+            ],
+            "title": "File",
+            "type": "object"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "running_fbx": {
+          "description": "Running animation in FBX format",
+          "anyOf": [
+           {
+            "properties": {
+             "url": {
+              "description": "The URL where the file can be downloaded from.",
+              "title": "Url",
+              "type": "string"
+             },
+             "content_type": {
+              "description": "The mime type of the file.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "Content Type"
+             },
+             "file_size": {
+              "description": "The size of the file in bytes.",
+              "anyOf": [
+               {
+                "type": "integer"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Size"
+             },
+             "file_name": {
+              "description": "The name of the file. It will be auto-generated if not provided.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Name"
+             }
+            },
+            "required": [
+             "url"
+            ],
+            "x-fal-order-properties": [
+             "url",
+             "content_type",
+             "file_name",
+             "file_size"
+            ],
+            "title": "File",
+            "type": "object"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "running_armature_glb": {
+          "description": "Running armature only in GLB format",
+          "anyOf": [
+           {
+            "properties": {
+             "url": {
+              "description": "The URL where the file can be downloaded from.",
+              "title": "Url",
+              "type": "string"
+             },
+             "content_type": {
+              "description": "The mime type of the file.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "Content Type"
+             },
+             "file_size": {
+              "description": "The size of the file in bytes.",
+              "anyOf": [
+               {
+                "type": "integer"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Size"
+             },
+             "file_name": {
+              "description": "The name of the file. It will be auto-generated if not provided.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Name"
+             }
+            },
+            "required": [
+             "url"
+            ],
+            "x-fal-order-properties": [
+             "url",
+             "content_type",
+             "file_name",
+             "file_size"
+            ],
+            "title": "File",
+            "type": "object"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "walking_armature_glb": {
+          "description": "Walking armature only in GLB format",
+          "anyOf": [
+           {
+            "properties": {
+             "url": {
+              "description": "The URL where the file can be downloaded from.",
+              "title": "Url",
+              "type": "string"
+             },
+             "content_type": {
+              "description": "The mime type of the file.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "Content Type"
+             },
+             "file_size": {
+              "description": "The size of the file in bytes.",
+              "anyOf": [
+               {
+                "type": "integer"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Size"
+             },
+             "file_name": {
+              "description": "The name of the file. It will be auto-generated if not provided.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Name"
+             }
+            },
+            "required": [
+             "url"
+            ],
+            "x-fal-order-properties": [
+             "url",
+             "content_type",
+             "file_name",
+             "file_size"
+            ],
+            "title": "File",
+            "type": "object"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "walking_glb": {
+          "description": "Walking animation in GLB format",
+          "anyOf": [
+           {
+            "properties": {
+             "url": {
+              "description": "The URL where the file can be downloaded from.",
+              "title": "Url",
+              "type": "string"
+             },
+             "content_type": {
+              "description": "The mime type of the file.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "Content Type"
+             },
+             "file_size": {
+              "description": "The size of the file in bytes.",
+              "anyOf": [
+               {
+                "type": "integer"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Size"
+             },
+             "file_name": {
+              "description": "The name of the file. It will be auto-generated if not provided.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Name"
+             }
+            },
+            "required": [
+             "url"
+            ],
+            "x-fal-order-properties": [
+             "url",
+             "content_type",
+             "file_name",
+             "file_size"
+            ],
+            "title": "File",
+            "type": "object"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         },
+         "walking_fbx": {
+          "description": "Walking animation in FBX format",
+          "anyOf": [
+           {
+            "properties": {
+             "url": {
+              "description": "The URL where the file can be downloaded from.",
+              "title": "Url",
+              "type": "string"
+             },
+             "content_type": {
+              "description": "The mime type of the file.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "Content Type"
+             },
+             "file_size": {
+              "description": "The size of the file in bytes.",
+              "anyOf": [
+               {
+                "type": "integer"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Size"
+             },
+             "file_name": {
+              "description": "The name of the file. It will be auto-generated if not provided.",
+              "anyOf": [
+               {
+                "type": "string"
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "title": "File Name"
+             }
+            },
+            "required": [
+             "url"
+            ],
+            "x-fal-order-properties": [
+             "url",
+             "content_type",
+             "file_name",
+             "file_size"
+            ],
+            "title": "File",
+            "type": "object"
+           },
+           {
+            "type": "null"
+           }
+          ]
+         }
+        },
+        "x-fal-order-properties": [
+         "walking_glb",
+         "walking_fbx",
+         "walking_armature_glb",
+         "running_glb",
+         "running_fbx",
+         "running_armature_glb"
+        ],
+        "description": "Basic animation files included with the rigging result",
+        "title": "BasicAnimations",
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "rigged_character_glb": {
+      "description": "Rigged character in GLB format.",
+      "anyOf": [
+       {
+        "properties": {
+         "url": {
+          "description": "The URL where the file can be downloaded from.",
+          "title": "Url",
+          "type": "string"
+         },
+         "content_type": {
+          "description": "The mime type of the file.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "Content Type"
+         },
+         "file_size": {
+          "description": "The size of the file in bytes.",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Size"
+         },
+         "file_name": {
+          "description": "The name of the file. It will be auto-generated if not provided.",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "title": "File Name"
+         }
+        },
+        "required": [
+         "url"
+        ],
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "title": "File",
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "x-fal-order-properties": [
+     "rigged_character_glb",
+     "rigged_character_fbx",
+     "basic_animations",
+     "animations",
+     "rig_task_id"
+    ],
+    "description": "Output for the standalone multi-clip animation endpoint.",
+    "title": "MultiAnimationOutput",
+    "type": "object"
+   }
+  },
+  "fal-ai/sam-3/3d-align": {
+   "endpoint_id": "fal-ai/sam-3/3d-align",
+   "display_name": "Sam 3",
+   "description": "SAM 3D enables full scene reconstructions, placing objects and humans in a shared context together.",
+   "status_base": "fal-ai/sam-3/3d-align",
+   "input": {
+    "properties": {
+     "image_url": {
+      "title": "Image Url",
+      "description": "URL of the original image used for MoGe depth estimation",
+      "type": "string"
+     },
+     "body_mask_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Body Mask Url",
+      "description": "URL of the human mask image. If not provided, uses full image."
+     },
+     "body_mesh_url": {
+      "title": "Body Mesh Url",
+      "description": "URL of the SAM-3D Body mesh file (.ply or .glb) to align",
+      "type": "string"
+     },
+     "focal_length": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Focal Length",
+      "description": "Focal length from SAM-3D Body metadata. If not provided, estimated from MoGe."
+     },
+     "object_mesh_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Object Mesh Url",
+      "description": "Optional URL of SAM-3D Object mesh (.glb) to create combined scene"
+     }
+    },
+    "title": "SAM3DAlignmentInput",
+    "required": [
+     "image_url",
+     "body_mesh_url"
+    ],
+    "x-fal-order-properties": [
+     "image_url",
+     "body_mesh_url",
+     "body_mask_url",
+     "object_mesh_url",
+     "focal_length"
+    ],
+    "type": "object"
+   },
+   "output": {
+    "properties": {
+     "scene_glb": {
+      "anyOf": [
+       {
+        "properties": {
+         "file_size": {
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "The size of the file in bytes.",
+          "title": "File Size"
+         },
+         "file_name": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "The name of the file. It will be auto-generated if not provided.",
+          "title": "File Name"
+         },
+         "content_type": {
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "The mime type of the file.",
+          "title": "Content Type"
+         },
+         "url": {
+          "title": "Url",
+          "description": "The URL where the file can be downloaded from.",
+          "type": "string"
+         }
+        },
+        "title": "File",
+        "required": [
+         "url"
+        ],
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Combined scene with body + object meshes in GLB format (only when object_mesh_url provided)"
+     },
+     "metadata": {
+      "properties": {
+       "person_id": {
+        "title": "Person Id",
+        "description": "Index of the person",
+        "type": "integer"
+       },
+       "translation": {
+        "title": "Translation",
+        "description": "Translation [tx, ty, tz]",
+        "items": {
+         "type": "number"
+        },
+        "type": "array"
+       },
+       "cropped_vertices_count": {
+        "title": "Cropped Vertices Count",
+        "description": "Number of cropped vertices",
+        "type": "integer"
+       },
+       "scale_factor": {
+        "title": "Scale Factor",
+        "description": "Scale factor applied for alignment",
+        "type": "number"
+       },
+       "focal_length": {
+        "title": "Focal Length",
+        "description": "Focal length used",
+        "type": "number"
+       },
+       "target_points_count": {
+        "title": "Target Points Count",
+        "description": "Number of target points for alignment",
+        "type": "integer"
+       }
+      },
+      "title": "SAM3DBodyAlignmentInfo",
+      "required": [
+       "person_id",
+       "scale_factor",
+       "translation",
+       "focal_length",
+       "target_points_count",
+       "cropped_vertices_count"
+      ],
+      "description": "Per-person alignment metadata.",
+      "x-fal-order-properties": [
+       "person_id",
+       "scale_factor",
+       "translation",
+       "focal_length",
+       "target_points_count",
+       "cropped_vertices_count"
+      ],
+      "type": "object"
+     },
+     "body_mesh_ply": {
+      "properties": {
+       "file_size": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The size of the file in bytes.",
+        "title": "File Size"
+       },
+       "file_name": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The name of the file. It will be auto-generated if not provided.",
+        "title": "File Name"
+       },
+       "content_type": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The mime type of the file.",
+        "title": "Content Type"
+       },
+       "url": {
+        "title": "Url",
+        "description": "The URL where the file can be downloaded from.",
+        "type": "string"
+       }
+      },
+      "title": "File",
+      "required": [
+       "url"
+      ],
+      "x-fal-order-properties": [
+       "url",
+       "content_type",
+       "file_name",
+       "file_size"
+      ],
+      "type": "object"
+     },
+     "model_glb": {
+      "properties": {
+       "file_size": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The size of the file in bytes.",
+        "title": "File Size"
+       },
+       "file_name": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The name of the file. It will be auto-generated if not provided.",
+        "title": "File Name"
+       },
+       "content_type": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The mime type of the file.",
+        "title": "Content Type"
+       },
+       "url": {
+        "title": "Url",
+        "description": "The URL where the file can be downloaded from.",
+        "type": "string"
+       }
+      },
+      "title": "File",
+      "required": [
+       "url"
+      ],
+      "x-fal-order-properties": [
+       "url",
+       "content_type",
+       "file_name",
+       "file_size"
+      ],
+      "type": "object"
+     },
+     "visualization": {
+      "properties": {
+       "file_size": {
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The size of the file in bytes.",
+        "title": "File Size"
+       },
+       "file_name": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The name of the file. It will be auto-generated if not provided.",
+        "title": "File Name"
+       },
+       "content_type": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The mime type of the file.",
+        "title": "Content Type"
+       },
+       "url": {
+        "title": "Url",
+        "description": "The URL where the file can be downloaded from.",
+        "type": "string"
+       }
+      },
+      "title": "File",
+      "required": [
+       "url"
+      ],
+      "x-fal-order-properties": [
+       "url",
+       "content_type",
+       "file_name",
+       "file_size"
+      ],
+      "type": "object"
+     }
+    },
+    "title": "SAM3DAlignmentOutput",
+    "required": [
+     "body_mesh_ply",
+     "model_glb",
+     "visualization",
+     "metadata"
+    ],
+    "x-fal-order-properties": [
+     "body_mesh_ply",
+     "model_glb",
+     "visualization",
+     "metadata",
+     "scene_glb"
+    ],
+    "type": "object"
+   }
+  },
+  "fal-ai/trellis-2/retexture": {
+   "endpoint_id": "fal-ai/trellis-2/retexture",
+   "display_name": "Trellis 2",
+   "description": "Retexture existing 3D models using images with Trellis 2",
+   "status_base": "fal-ai/trellis-2/retexture",
+   "input": {
+    "type": "object",
+    "properties": {
+     "resolution": {
+      "description": "Internal resolution for texture generation. Higher produces finer texture details but is slower.",
+      "title": "Resolution",
+      "type": "integer",
+      "default": 1024,
+      "enum": [
+       512,
+       1024
+      ]
+     },
+     "tex_slat_guidance_interval_start": {
+      "description": "Fraction of the denoising process at which classifier-free guidance starts for the texture stage. Guidance is only applied between interval_start and interval_end.",
+      "minimum": 0,
+      "type": "number",
+      "default": 0.6,
+      "maximum": 1,
+      "title": "Tex Slat Guidance Interval Start"
+     },
+     "tex_slat_guidance_strength": {
+      "description": "How closely the texture follows the input image colors. Higher values produce more vivid but potentially oversaturated textures.",
+      "minimum": 0,
+      "type": "number",
+      "default": 1,
+      "maximum": 10,
+      "title": "Tex Slat Guidance Strength"
+     },
+     "seed": {
+      "description": "Random seed for reproducibility",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Seed"
+     },
+     "tex_slat_rescale_t": {
+      "description": "Controls noise schedule sharpness for texture generation. Higher values produce sharper texture details.",
+      "minimum": 1,
+      "type": "number",
+      "default": 3,
+      "maximum": 6,
+      "title": "Tex Slat Rescale T"
+     },
+     "tex_slat_sampling_steps": {
+      "description": "Number of denoising steps for texture generation. More steps = slower but potentially cleaner textures.",
+      "minimum": 1,
+      "type": "integer",
+      "default": 12,
+      "maximum": 50,
+      "title": "Tex Slat Sampling Steps"
+     },
+     "mesh_url": {
+      "description": "URL of the untextured 3D mesh to retexture. Supports GLB, OBJ, PLY, and STL formats.",
+      "type": "string",
+      "title": "Mesh Url"
+     },
+     "tex_slat_guidance_rescale": {
+      "description": "Dampens artifacts from high guidance in the texture stage. Increase if textures look noisy or have color banding.",
+      "minimum": 0,
+      "type": "number",
+      "default": 0,
+      "maximum": 1,
+      "title": "Tex Slat Guidance Rescale"
+     },
+     "texture_size": {
+      "description": "Resolution of the texture image baked onto the mesh. Higher values capture finer surface details but produce larger files.",
+      "title": "Texture Size",
+      "type": "integer",
+      "default": 2048,
+      "enum": [
+       1024,
+       2048,
+       4096
+      ]
+     },
+     "tex_slat_guidance_interval_end": {
+      "description": "Fraction of the denoising process at which classifier-free guidance ends for the texture stage. Must be >= tex_slat_guidance_interval_start.",
+      "minimum": 0,
+      "type": "number",
+      "default": 0.9,
+      "maximum": 1,
+      "title": "Tex Slat Guidance Interval End"
+     },
+     "image_url": {
+      "description": "URL of the reference image for texturing",
+      "type": "string",
+      "title": "Image Url"
+     }
+    },
+    "x-fal-order-properties": [
+     "image_url",
+     "mesh_url",
+     "seed",
+     "resolution",
+     "tex_slat_guidance_strength",
+     "tex_slat_guidance_rescale",
+     "tex_slat_guidance_interval_start",
+     "tex_slat_guidance_interval_end",
+     "tex_slat_sampling_steps",
+     "tex_slat_rescale_t",
+     "texture_size"
+    ],
+    "required": [
+     "image_url",
+     "mesh_url"
+    ],
+    "title": "RetextureInputModel"
+   },
+   "output": {
+    "type": "object",
+    "properties": {
+     "model_glb": {
+      "type": "object",
+      "properties": {
+       "url": {
+        "description": "The URL where the file can be downloaded from.",
+        "type": "string",
+        "title": "Url"
+       },
+       "file_size": {
+        "description": "The size of the file in bytes.",
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "File Size"
+       },
+       "content_type": {
+        "description": "The mime type of the file.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "Content Type"
+       },
+       "file_name": {
+        "description": "The name of the file. It will be auto-generated if not provided.",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "title": "File Name"
+       }
+      },
+      "x-fal-order-properties": [
+       "url",
+       "content_type",
+       "file_name",
+       "file_size"
+      ],
+      "required": [
+       "url"
+      ],
+      "title": "File"
+     }
+    },
+    "x-fal-order-properties": [
+     "model_glb"
+    ],
+    "required": [
+     "model_glb"
+    ],
+    "title": "ObjectOutput"
+   }
+  },
+  "tripo3d/tripo/remesh": {
+   "endpoint_id": "tripo3d/tripo/remesh",
+   "display_name": "Tripo3D Remesh",
+   "description": "Converts triangle meshes into clean quad topology at a target polygon count, animation-ready with no manual retopology.",
+   "status_base": "tripo3d/tripo/remesh",
+   "input": {
+    "title": "RemeshInput",
+    "description": "Input for the Smart low poly / remesh (``highpoly_to_lowpoly``) task.\n\nRetopologises a high-poly 3D model into a clean, lower-poly mesh. The input\nmodel is imported into Tripo first (``import_model``), then remeshed.",
+    "required": [
+     "mesh_url"
+    ],
+    "x-fal-order-properties": [
+     "mesh_url",
+     "quad",
+     "face_limit",
+     "bake",
+     "part_names"
+    ],
+    "type": "object",
+    "properties": {
+     "mesh_url": {
+      "title": "Mesh URL",
+      "description": "URL of the input 3D model to remesh. Supported formats: GLB, OBJ, FBX, STL (max 150MB).",
+      "type": "string"
+     },
+     "face_limit": {
+      "title": "Face Limit",
+      "description": "Target face count of the remeshed model. Range 500-20000 (500-10000 when 'quad' is true). If unset, the model determines the count adaptively.",
+      "anyOf": [
+       {
+        "minimum": 500,
+        "type": "integer",
+        "maximum": 20000
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "quad": {
+      "title": "Quad",
+      "default": false,
+      "description": "Generate quad (4-sided) mesh topology instead of triangles. Forces FBX output. When enabled and 'face_limit' is unset, 'face_limit' defaults to 10000.",
+      "type": "boolean"
+     },
+     "part_names": {
+      "title": "Part Names",
+      "description": "Optional list of part names (as returned by a prior mesh segmentation) to preserve as separate parts while remeshing.",
+      "anyOf": [
+       {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "bake": {
+      "title": "Bake",
+      "default": true,
+      "description": "Bake textures onto the remeshed model during generation.",
+      "type": "boolean"
+     }
+    }
+   },
+   "output": {
+    "title": "Tripo3DOutput",
+    "description": "Output for Tripo3D generation",
+    "required": [
+     "model_mesh",
+     "model_urls"
+    ],
+    "x-fal-order-properties": [
+     "model_mesh",
+     "model_urls",
+     "rendered_image",
+     "task_id"
+    ],
+    "type": "object",
+    "properties": {
+     "rendered_image": {
+      "description": "Preview render of the generated 3D model.",
+      "anyOf": [
+       {
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "required": [
+         "url"
+        ],
+        "title": "File",
+        "type": "object",
+        "properties": {
+         "url": {
+          "title": "Url",
+          "description": "The URL where the file can be downloaded from.",
+          "type": "string"
+         },
+         "file_name": {
+          "title": "File Name",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "The name of the file. It will be auto-generated if not provided."
+         },
+         "file_size": {
+          "title": "File Size",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "The size of the file in bytes."
+         },
+         "content_type": {
+          "title": "Content Type",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "The mime type of the file."
+         }
+        }
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "task_id": {
+      "title": "Task Id",
+      "description": "Tripo task ID for a generated model. Pass this to rig or rig-check to use the model without uploading it again.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "model_mesh": {
+      "x-fal-order-properties": [
+       "url",
+       "content_type",
+       "file_name",
+       "file_size"
+      ],
+      "required": [
+       "url"
+      ],
+      "title": "File",
+      "type": "object",
+      "properties": {
+       "url": {
+        "title": "Url",
+        "description": "The URL where the file can be downloaded from.",
+        "type": "string"
+       },
+       "file_name": {
+        "title": "File Name",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The name of the file. It will be auto-generated if not provided."
+       },
+       "file_size": {
+        "title": "File Size",
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The size of the file in bytes."
+       },
+       "content_type": {
+        "title": "Content Type",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The mime type of the file."
+       }
+      }
+     },
+     "model_urls": {
+      "title": "ModelUrls",
+      "description": "3D model download URLs",
+      "x-fal-order-properties": [
+       "glb",
+       "fbx",
+       "base_model",
+       "pbr_model"
+      ],
+      "type": "object",
+      "properties": {
+       "base_model": {
+        "description": "Base (untextured) model",
+        "anyOf": [
+         {
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File",
+          "type": "object",
+          "properties": {
+           "url": {
+            "title": "Url",
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string"
+           },
+           "file_name": {
+            "title": "File Name",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The name of the file. It will be auto-generated if not provided."
+           },
+           "file_size": {
+            "title": "File Size",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The size of the file in bytes."
+           },
+           "content_type": {
+            "title": "Content Type",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The mime type of the file."
+           }
+          }
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "pbr_model": {
+        "title": "PBR Model",
+        "description": "PBR-textured model",
+        "anyOf": [
+         {
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File",
+          "type": "object",
+          "properties": {
+           "url": {
+            "title": "Url",
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string"
+           },
+           "file_name": {
+            "title": "File Name",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The name of the file. It will be auto-generated if not provided."
+           },
+           "file_size": {
+            "title": "File Size",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The size of the file in bytes."
+           },
+           "content_type": {
+            "title": "Content Type",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The mime type of the file."
+           }
+          }
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "glb": {
+        "title": "GLB",
+        "description": "GLB format 3D model",
+        "anyOf": [
+         {
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File",
+          "type": "object",
+          "properties": {
+           "url": {
+            "title": "Url",
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string"
+           },
+           "file_name": {
+            "title": "File Name",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The name of the file. It will be auto-generated if not provided."
+           },
+           "file_size": {
+            "title": "File Size",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The size of the file in bytes."
+           },
+           "content_type": {
+            "title": "Content Type",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The mime type of the file."
+           }
+          }
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "fbx": {
+        "title": "FBX",
+        "description": "FBX format 3D model",
+        "anyOf": [
+         {
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File",
+          "type": "object",
+          "properties": {
+           "url": {
+            "title": "Url",
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string"
+           },
+           "file_name": {
+            "title": "File Name",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The name of the file. It will be auto-generated if not provided."
+           },
+           "file_size": {
+            "title": "File Size",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The size of the file in bytes."
+           },
+           "content_type": {
+            "title": "Content Type",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The mime type of the file."
+           }
+          }
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      }
+     }
+    }
+   }
+  },
+  "tripo3d/tripo/segment": {
+   "endpoint_id": "tripo3d/tripo/segment",
+   "display_name": "Tripo3D Segment",
+   "description": "Automatically splits a 3D model into semantic parts for editing, texturing, and rigging.",
+   "status_base": "tripo3d/tripo/segment",
+   "input": {
+    "title": "SegmentationInput",
+    "description": "Input for the Mesh segmentation (``mesh_segmentation``) task.\n\nSegments a 3D model into semantic parts. The input model is imported into\nTripo first (``import_model``), then segmented.",
+    "required": [
+     "mesh_url"
+    ],
+    "x-fal-order-properties": [
+     "mesh_url"
+    ],
+    "type": "object",
+    "properties": {
+     "mesh_url": {
+      "title": "Mesh URL",
+      "description": "URL of the input 3D model to segment. Supported formats: GLB, OBJ, FBX, STL (max 150MB).",
+      "type": "string"
+     }
+    }
+   },
+   "output": {
+    "title": "Tripo3DSegmentationOutput",
+    "description": "Output for Tripo3D mesh segmentation.",
+    "required": [
+     "model_mesh",
+     "model_urls"
+    ],
+    "x-fal-order-properties": [
+     "model_mesh",
+     "model_urls",
+     "part_names",
+     "rendered_image"
+    ],
+    "type": "object",
+    "properties": {
+     "rendered_image": {
+      "description": "Preview render of the segmented 3D model.",
+      "anyOf": [
+       {
+        "x-fal-order-properties": [
+         "url",
+         "content_type",
+         "file_name",
+         "file_size"
+        ],
+        "required": [
+         "url"
+        ],
+        "title": "File",
+        "type": "object",
+        "properties": {
+         "url": {
+          "title": "Url",
+          "description": "The URL where the file can be downloaded from.",
+          "type": "string"
+         },
+         "file_name": {
+          "title": "File Name",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "The name of the file. It will be auto-generated if not provided."
+         },
+         "file_size": {
+          "title": "File Size",
+          "anyOf": [
+           {
+            "type": "integer"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "The size of the file in bytes."
+         },
+         "content_type": {
+          "title": "Content Type",
+          "anyOf": [
+           {
+            "type": "string"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "The mime type of the file."
+         }
+        }
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "model_mesh": {
+      "x-fal-order-properties": [
+       "url",
+       "content_type",
+       "file_name",
+       "file_size"
+      ],
+      "required": [
+       "url"
+      ],
+      "title": "File",
+      "type": "object",
+      "properties": {
+       "url": {
+        "title": "Url",
+        "description": "The URL where the file can be downloaded from.",
+        "type": "string"
+       },
+       "file_name": {
+        "title": "File Name",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The name of the file. It will be auto-generated if not provided."
+       },
+       "file_size": {
+        "title": "File Size",
+        "anyOf": [
+         {
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The size of the file in bytes."
+       },
+       "content_type": {
+        "title": "Content Type",
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "The mime type of the file."
+       }
+      }
+     },
+     "part_names": {
+      "title": "Part Names",
+      "description": "Names of the segmented parts, when reported by Tripo. Pass these to the remesh endpoint's 'part_names' to preserve parts.",
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "model_urls": {
+      "title": "ModelUrls",
+      "description": "3D model download URLs",
+      "x-fal-order-properties": [
+       "glb",
+       "fbx",
+       "base_model",
+       "pbr_model"
+      ],
+      "type": "object",
+      "properties": {
+       "base_model": {
+        "description": "Base (untextured) model",
+        "anyOf": [
+         {
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File",
+          "type": "object",
+          "properties": {
+           "url": {
+            "title": "Url",
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string"
+           },
+           "file_name": {
+            "title": "File Name",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The name of the file. It will be auto-generated if not provided."
+           },
+           "file_size": {
+            "title": "File Size",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The size of the file in bytes."
+           },
+           "content_type": {
+            "title": "Content Type",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The mime type of the file."
+           }
+          }
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "pbr_model": {
+        "title": "PBR Model",
+        "description": "PBR-textured model",
+        "anyOf": [
+         {
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File",
+          "type": "object",
+          "properties": {
+           "url": {
+            "title": "Url",
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string"
+           },
+           "file_name": {
+            "title": "File Name",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The name of the file. It will be auto-generated if not provided."
+           },
+           "file_size": {
+            "title": "File Size",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The size of the file in bytes."
+           },
+           "content_type": {
+            "title": "Content Type",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The mime type of the file."
+           }
+          }
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "glb": {
+        "title": "GLB",
+        "description": "GLB format 3D model",
+        "anyOf": [
+         {
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File",
+          "type": "object",
+          "properties": {
+           "url": {
+            "title": "Url",
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string"
+           },
+           "file_name": {
+            "title": "File Name",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The name of the file. It will be auto-generated if not provided."
+           },
+           "file_size": {
+            "title": "File Size",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The size of the file in bytes."
+           },
+           "content_type": {
+            "title": "Content Type",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The mime type of the file."
+           }
+          }
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "fbx": {
+        "title": "FBX",
+        "description": "FBX format 3D model",
+        "anyOf": [
+         {
+          "x-fal-order-properties": [
+           "url",
+           "content_type",
+           "file_name",
+           "file_size"
+          ],
+          "required": [
+           "url"
+          ],
+          "title": "File",
+          "type": "object",
+          "properties": {
+           "url": {
+            "title": "Url",
+            "description": "The URL where the file can be downloaded from.",
+            "type": "string"
+           },
+           "file_name": {
+            "title": "File Name",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The name of the file. It will be auto-generated if not provided."
+           },
+           "file_size": {
+            "title": "File Size",
+            "anyOf": [
+             {
+              "type": "integer"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The size of the file in bytes."
+           },
+           "content_type": {
+            "title": "Content Type",
+            "anyOf": [
+             {
+              "type": "string"
+             },
+             {
+              "type": "null"
+             }
+            ],
+            "description": "The mime type of the file."
+           }
+          }
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

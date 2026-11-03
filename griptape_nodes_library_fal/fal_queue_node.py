@@ -7,6 +7,7 @@ import threading
 from abc import ABC, abstractmethod
 from contextlib import suppress
 from typing import Any
+from urllib.parse import urlparse
 
 import httpx
 from griptape_nodes.exe_types.core_types import ParameterMode
@@ -29,6 +30,11 @@ STATUS_ERROR = "ERROR"
 STATUS_TIMED_OUT = "TIMED_OUT"
 
 TERMINAL_FAILURE_STATUSES = (STATUS_FAILED, STATUS_ERROR)
+
+# Polling gives up after this many failed polls in a row, instead of waiting out the whole timeout.
+MAX_CONSECUTIVE_POLL_ERRORS = 5
+# Client errors that retrying cannot fix. 408 and 429 are excluded because they are transient.
+NON_RETRYABLE_HTTP_STATUSES = frozenset(code for code in range(400, 500) if code not in (408, 425, 429))
 
 
 class FalQueueNode(SuccessFailureNode, ABC):
@@ -67,6 +73,8 @@ class FalQueueNode(SuccessFailureNode, ABC):
 
         base = os.getenv("FAL_BASE_URL", "https://queue.fal.run")
         self._base_url = base.rstrip("/")
+        # request_id -> {"status_url", "response_url"} as returned by fal on submit.
+        self._queue_urls: dict[str, dict[str, str]] = {}
 
         default_timeout = self.DEFAULT_MAX_ATTEMPTS * self.DEFAULT_POLL_INTERVAL
         self.add_parameter(
@@ -103,6 +111,7 @@ class FalQueueNode(SuccessFailureNode, ABC):
                 tooltip="fal request id. Preserved across timeouts and failures so the result can be recovered via the Refresh button.",
                 allowed_modes={ParameterMode.OUTPUT},
                 settable=False,
+                placeholder_text="The fal request id will appear here.",
                 hide=True,
                 hide_property=True,
             )
@@ -114,6 +123,7 @@ class FalQueueNode(SuccessFailureNode, ABC):
                 tooltip="Latest known status of the generation (e.g., IN_PROGRESS, COMPLETED, TIMED_OUT).",
                 allowed_modes={ParameterMode.OUTPUT},
                 settable=False,
+                placeholder_text="The generation status will appear here.",
             )
         )
         status_group.add_child(
@@ -172,11 +182,36 @@ class FalQueueNode(SuccessFailureNode, ABC):
             return self.DEFAULT_MAX_ATTEMPTS * self.DEFAULT_POLL_INTERVAL
         return max(0, int(value))
 
+    def _submit_url(self) -> str:
+        return f"{self._base_url}/{self.QUEUE_MODEL_ID}"
+
+    def _status_base(self) -> str:
+        """Path segment fal serves status and results under, used when fal's own URLs are not on hand."""
+        return self.QUEUE_STATUS_BASE
+
     def _status_url(self, request_id: str) -> str:
-        return f"{self._base_url}/{self.QUEUE_STATUS_BASE}/requests/{request_id}/status"
+        recorded = self._queue_urls.get(request_id, {}).get("status_url")
+        return recorded or f"{self._base_url}/{self._status_base()}/requests/{request_id}/status"
 
     def _result_url(self, request_id: str) -> str:
-        return f"{self._base_url}/{self.QUEUE_STATUS_BASE}/requests/{request_id}"
+        recorded = self._queue_urls.get(request_id, {}).get("response_url")
+        return recorded or f"{self._base_url}/{self._status_base()}/requests/{request_id}"
+
+    def _record_queue_urls(self, request_id: str, response_json: dict[str, Any]) -> None:
+        """Remember the status and result URLs fal returned on submit.
+
+        fal's own URLs are authoritative: for endpoints with a sub-path (such as
+        fal-ai/florence-2-large/caption) status is served under the app id only. They are used
+        only when they point at the configured queue host, because requests to them carry the API key.
+        """
+        queue_host = urlparse(self._base_url).netloc
+        urls = {
+            key: value
+            for key in ("status_url", "response_url")
+            if isinstance(value := response_json.get(key), str) and urlparse(value).netloc == queue_host
+        }
+        if urls:
+            self._queue_urls[request_id] = urls
 
     def _log(self, message: str) -> None:
         with suppress(Exception):
@@ -204,10 +239,10 @@ class FalQueueNode(SuccessFailureNode, ABC):
             error_json = response.json()
         except Exception:
             return f"{self.name}: fal error: {response.status_code} - {response.text}"
-        return f"{self.name}: {self._extract_error_message(error_json)}"
+        return self._extract_error_message(error_json)
 
     async def _submit_generation(self, payload: dict[str, Any], headers: dict[str, str]) -> str | None:
-        submit_url = f"{self._base_url}/{self.QUEUE_MODEL_ID}"
+        submit_url = self._submit_url()
         self._log(f"Submitting request to {submit_url}")
 
         try:
@@ -226,6 +261,7 @@ class FalQueueNode(SuccessFailureNode, ABC):
         request_id = response_json.get("request_id")
         if request_id:
             self._log(f"Submitted. request_id={request_id}")
+            self._record_queue_urls(str(request_id), response_json)
             return str(request_id)
 
         self._log("No request_id returned from POST response")
@@ -256,6 +292,7 @@ class FalQueueNode(SuccessFailureNode, ABC):
         max_attempts = max(1, (timeout_s + poll_interval - 1) // poll_interval) if timeout_s > 0 else None
 
         attempt = 0
+        consecutive_errors = 0
         async with httpx.AsyncClient() as client:
             while True:
                 try:
@@ -263,6 +300,7 @@ class FalQueueNode(SuccessFailureNode, ABC):
                     response = await client.get(status_url, headers=headers, timeout=60)
                     response.raise_for_status()
                     status_json = response.json()
+                    consecutive_errors = 0
 
                     status = status_json.get("status", "unknown")
                     self._log(f"Status: {status}")
@@ -276,25 +314,29 @@ class FalQueueNode(SuccessFailureNode, ABC):
                         break
                     await asyncio.sleep(poll_interval)
                 except httpx.HTTPStatusError as e:
-                    self._log(f"HTTP error while polling: {e.response.status_code} - {e.response.text}")
-                    attempt += 1
-                    if max_attempts is not None and attempt >= max_attempts:
-                        self._set_safe_defaults()
-                        self._set_status_results(
-                            was_successful=False,
-                            result_details=f"Failed to poll generation status: HTTP {e.response.status_code}",
+                    status_code = e.response.status_code
+                    self._log(f"HTTP error while polling: {status_code} - {e.response.text}")
+                    consecutive_errors += 1
+                    # A client error such as 400, 401, 403 or 404 cannot succeed on retry.
+                    if status_code in NON_RETRYABLE_HTTP_STATUSES or consecutive_errors >= MAX_CONSECUTIVE_POLL_ERRORS:
+                        self._fail_polling(
+                            request_id,
+                            f"{self._extract_http_error_message(e.response)}\n\nStatus URL: {status_url}",
                         )
                         return None
+                    attempt += 1
+                    if max_attempts is not None and attempt >= max_attempts:
+                        break
                     await asyncio.sleep(poll_interval)
                 except Exception as e:
                     self._log(f"Error while polling: {e}")
+                    consecutive_errors += 1
+                    if consecutive_errors >= MAX_CONSECUTIVE_POLL_ERRORS:
+                        self._fail_polling(request_id, f"Failed to poll generation status: {e}")
+                        return None
                     attempt += 1
                     if max_attempts is not None and attempt >= max_attempts:
-                        self._set_safe_defaults()
-                        self._set_status_results(
-                            was_successful=False, result_details=f"Failed to poll generation status: {e}"
-                        )
-                        return None
+                        break
                     await asyncio.sleep(poll_interval)
 
         # Timeout reached. Preserve generation_id so the user can recover via Refresh.
@@ -311,6 +353,13 @@ class FalQueueNode(SuccessFailureNode, ABC):
             ),
         )
         return None
+
+    def _fail_polling(self, request_id: str, message: str) -> None:
+        """Stop polling with an error. The request id is kept so Refresh can still recover the result."""
+        self._set_safe_defaults()
+        self.parameter_output_values["generation_id"] = request_id
+        self.parameter_output_values["generation_status"] = STATUS_ERROR
+        self._set_status_results(was_successful=False, result_details=message)
 
     async def _fetch_generation_result(self, request_id: str, headers: dict[str, str]) -> dict[str, Any] | None:
         result_url = self._result_url(request_id)

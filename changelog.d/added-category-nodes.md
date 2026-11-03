@@ -1,0 +1,1 @@
+- Added one node per fal category (`FAL Text To Image`, `FAL Image To Video`, `FAL Text To Speech`, `FAL Image To 3D`, and 15 more). Each has a `model` dropdown listing every fal endpoint in that category. Picking a model loads that model's own parameters, and `extra_payload` accepts any field the node does not show.

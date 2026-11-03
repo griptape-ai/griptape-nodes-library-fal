@@ -1,0 +1,1357 @@
+{
+ "category": "speech-to-text",
+ "models": {
+  "fal-ai/cohere-transcribe": {
+   "endpoint_id": "fal-ai/cohere-transcribe",
+   "display_name": "Cohere Transcribe",
+   "description": "Cohere Transcribe turns your business audio into accurate text, ready for search, analytics, and automation",
+   "status_base": "fal-ai/cohere-transcribe",
+   "input": {
+    "properties": {
+     "language": {
+      "default": "en",
+      "enum": [
+       "en",
+       "fr",
+       "de",
+       "it",
+       "es",
+       "pt",
+       "el",
+       "nl",
+       "pl",
+       "zh",
+       "ja",
+       "ko",
+       "vi",
+       "ar"
+      ],
+      "title": "Language",
+      "type": "string",
+      "description": "Language of the audio (ISO 639-1 code). Supported: en, fr, de, it, es, pt, el, nl, pl, zh, ja, ko, vi, ar."
+     },
+     "audio_url": {
+      "title": "Audio Url",
+      "type": "string",
+      "description": "URL of the audio file to transcribe. Supported formats: mp3, mp4, mpeg, mpga, m4a, wav, webm, ogg, flac."
+     },
+     "max_new_tokens": {
+      "default": 256,
+      "title": "Max New Tokens",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1014,
+      "description": "Maximum number of tokens to generate per audio chunk."
+     },
+     "punctuation": {
+      "default": true,
+      "title": "Punctuation",
+      "type": "boolean",
+      "description": "Whether to include punctuation and capitalization in the output."
+     }
+    },
+    "title": "TranscribeInput",
+    "type": "object",
+    "x-fal-order-properties": [
+     "audio_url",
+     "language",
+     "punctuation",
+     "max_new_tokens"
+    ],
+    "required": [
+     "audio_url"
+    ]
+   },
+   "output": {
+    "properties": {
+     "timings": {
+      "additionalProperties": {
+       "type": "number"
+      },
+      "title": "Timings",
+      "type": "object",
+      "description": "Performance timing breakdown in seconds."
+     },
+     "text": {
+      "title": "Text",
+      "type": "string",
+      "description": "Transcribed text from the audio file."
+     }
+    },
+    "title": "TranscribeOutput",
+    "type": "object",
+    "x-fal-order-properties": [
+     "text",
+     "timings"
+    ],
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "fal-ai/elevenlabs/forced-alignment": {
+   "endpoint_id": "fal-ai/elevenlabs/forced-alignment",
+   "display_name": "Elevenlabs - Forced Alignment",
+   "description": "Align the transcript and your audio recording using Elevenlab's forced alignment feature!",
+   "status_base": "fal-ai/elevenlabs/forced-alignment",
+   "input": {
+    "properties": {
+     "audio_url": {
+      "title": "Audio Url",
+      "description": "URL of the audio file to align. The file can be up to 3 GB and the audio can be up to 10 hours long.",
+      "type": "string"
+     },
+     "text": {
+      "maxLength": 675000,
+      "minLength": 1,
+      "description": "Transcript to align with the audio",
+      "title": "Text",
+      "type": "string"
+     }
+    },
+    "title": "ForcedAlignmentRequest",
+    "type": "object",
+    "x-fal-order-properties": [
+     "audio_url",
+     "text"
+    ],
+    "required": [
+     "audio_url",
+     "text"
+    ]
+   },
+   "output": {
+    "properties": {
+     "characters": {
+      "title": "Characters",
+      "description": "Character-level alignment details",
+      "type": "array",
+      "items": {
+       "properties": {
+        "start": {
+         "title": "Start",
+         "description": "Start time in seconds",
+         "type": "number"
+        },
+        "end": {
+         "title": "End",
+         "description": "End time in seconds",
+         "type": "number"
+        },
+        "text": {
+         "title": "Text",
+         "description": "The aligned character",
+         "type": "string"
+        }
+       },
+       "title": "ForcedAlignmentCharacter",
+       "type": "object",
+       "x-fal-order-properties": [
+        "text",
+        "start",
+        "end"
+       ],
+       "required": [
+        "text",
+        "start",
+        "end"
+       ]
+      }
+     },
+     "words": {
+      "title": "Words",
+      "description": "Word-level alignment details",
+      "type": "array",
+      "items": {
+       "properties": {
+        "start": {
+         "title": "Start",
+         "description": "Start time in seconds",
+         "type": "number"
+        },
+        "loss": {
+         "title": "Loss",
+         "description": "Average alignment loss for the word",
+         "type": "number"
+        },
+        "text": {
+         "title": "Text",
+         "description": "The aligned character",
+         "type": "string"
+        },
+        "end": {
+         "title": "End",
+         "description": "End time in seconds",
+         "type": "number"
+        }
+       },
+       "title": "ForcedAlignmentWord",
+       "type": "object",
+       "x-fal-order-properties": [
+        "text",
+        "start",
+        "end",
+        "loss"
+       ],
+       "required": [
+        "text",
+        "start",
+        "end",
+        "loss"
+       ]
+      }
+     },
+     "loss": {
+      "title": "Loss",
+      "description": "Average alignment loss for the transcript",
+      "type": "number"
+     }
+    },
+    "title": "ForcedAlignmentOutput",
+    "type": "object",
+    "x-fal-order-properties": [
+     "characters",
+     "words",
+     "loss"
+    ],
+    "required": [
+     "characters",
+     "words",
+     "loss"
+    ]
+   }
+  },
+  "fal-ai/elevenlabs/speech-to-text": {
+   "endpoint_id": "fal-ai/elevenlabs/speech-to-text",
+   "display_name": "ElevenLabs Speech to Text",
+   "description": "Generate text from speech using ElevenLabs advanced speech-to-text model.",
+   "status_base": "fal-ai/elevenlabs/speech-to-text",
+   "input": {
+    "properties": {
+     "audio_url": {
+      "title": "Audio Url",
+      "description": "URL of the audio file to transcribe",
+      "type": "string"
+     },
+     "tag_audio_events": {
+      "default": true,
+      "title": "Tag Audio Events",
+      "description": "Tag audio events like laughter, applause, etc.",
+      "type": "boolean"
+     },
+     "language_code": {
+      "title": "Language Code",
+      "description": "Language code of the audio",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "diarize": {
+      "default": true,
+      "title": "Diarize",
+      "description": "Whether to annotate who is speaking",
+      "type": "boolean"
+     }
+    },
+    "title": "SpeechToTextRequest",
+    "type": "object",
+    "x-fal-order-properties": [
+     "audio_url",
+     "language_code",
+     "tag_audio_events",
+     "diarize"
+    ],
+    "required": [
+     "audio_url"
+    ]
+   },
+   "output": {
+    "properties": {
+     "language_probability": {
+      "title": "Language Probability",
+      "description": "Confidence in language detection",
+      "type": "number"
+     },
+     "words": {
+      "title": "Words",
+      "description": "Word-level transcription details",
+      "type": "array",
+      "items": {
+       "properties": {
+        "start": {
+         "title": "Start",
+         "description": "Start time in seconds",
+         "anyOf": [
+          {
+           "type": "number"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "speaker_id": {
+         "title": "Speaker Id",
+         "description": "Speaker identifier if diarization was enabled",
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "type": {
+         "title": "Type",
+         "description": "Type of element (word, spacing, or audio_event)",
+         "type": "string"
+        },
+        "end": {
+         "title": "End",
+         "description": "End time in seconds",
+         "anyOf": [
+          {
+           "type": "number"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "text": {
+         "title": "Text",
+         "description": "The transcribed word or audio event",
+         "type": "string"
+        }
+       },
+       "title": "TranscriptionWord",
+       "type": "object",
+       "x-fal-order-properties": [
+        "text",
+        "start",
+        "end",
+        "type",
+        "speaker_id"
+       ],
+       "required": [
+        "text",
+        "type"
+       ]
+      }
+     },
+     "text": {
+      "title": "Text",
+      "description": "The full transcribed text",
+      "type": "string"
+     },
+     "language_code": {
+      "title": "Language Code",
+      "description": "Detected or specified language code",
+      "type": "string"
+     }
+    },
+    "title": "TranscriptionOutput",
+    "type": "object",
+    "x-fal-order-properties": [
+     "text",
+     "language_code",
+     "language_probability",
+     "words"
+    ],
+    "required": [
+     "text",
+     "language_code",
+     "language_probability",
+     "words"
+    ]
+   }
+  },
+  "fal-ai/elevenlabs/speech-to-text/scribe-v2": {
+   "endpoint_id": "fal-ai/elevenlabs/speech-to-text/scribe-v2",
+   "display_name": "ElevenLabs Speech to Text - Scribe V2",
+   "description": "Use Scribe-V2 from ElevenLabs to do blazingly fast speech to text inferences!",
+   "status_base": "fal-ai/elevenlabs/speech-to-text/scribe-v2",
+   "input": {
+    "properties": {
+     "audio_url": {
+      "title": "Audio Url",
+      "description": "URL of the audio file to transcribe",
+      "type": "string"
+     },
+     "tag_audio_events": {
+      "default": true,
+      "title": "Tag Audio Events",
+      "description": "Tag audio events like laughter, applause, etc.",
+      "type": "boolean"
+     },
+     "language_code": {
+      "title": "Language Code",
+      "description": "Language code of the audio",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "keyterms": {
+      "default": [],
+      "maxItems": 100,
+      "title": "Keyterms",
+      "type": "array",
+      "description": "Words or sentences to bias the model towards transcribing. Up to 100 keyterms, max 50 characters each. Adds 30% premium over base transcription price.",
+      "items": {
+       "type": "string"
+      }
+     },
+     "diarize": {
+      "default": true,
+      "title": "Diarize",
+      "description": "Whether to annotate who is speaking",
+      "type": "boolean"
+     }
+    },
+    "title": "SpeechToTextRequestScribeV2",
+    "type": "object",
+    "x-fal-order-properties": [
+     "audio_url",
+     "language_code",
+     "tag_audio_events",
+     "diarize",
+     "keyterms"
+    ],
+    "required": [
+     "audio_url"
+    ]
+   },
+   "output": {
+    "properties": {
+     "language_probability": {
+      "title": "Language Probability",
+      "description": "Confidence in language detection",
+      "type": "number"
+     },
+     "words": {
+      "title": "Words",
+      "description": "Word-level transcription details",
+      "type": "array",
+      "items": {
+       "properties": {
+        "start": {
+         "title": "Start",
+         "description": "Start time in seconds",
+         "anyOf": [
+          {
+           "type": "number"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "speaker_id": {
+         "title": "Speaker Id",
+         "description": "Speaker identifier if diarization was enabled",
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "type": {
+         "title": "Type",
+         "description": "Type of element (word, spacing, or audio_event)",
+         "type": "string"
+        },
+        "end": {
+         "title": "End",
+         "description": "End time in seconds",
+         "anyOf": [
+          {
+           "type": "number"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "text": {
+         "title": "Text",
+         "description": "The transcribed word or audio event",
+         "type": "string"
+        }
+       },
+       "title": "TranscriptionWord",
+       "type": "object",
+       "x-fal-order-properties": [
+        "text",
+        "start",
+        "end",
+        "type",
+        "speaker_id"
+       ],
+       "required": [
+        "text",
+        "type"
+       ]
+      }
+     },
+     "text": {
+      "title": "Text",
+      "description": "The full transcribed text",
+      "type": "string"
+     },
+     "language_code": {
+      "title": "Language Code",
+      "description": "Detected or specified language code",
+      "type": "string"
+     }
+    },
+    "title": "TranscriptionOutputV2",
+    "type": "object",
+    "x-fal-order-properties": [
+     "text",
+     "language_code",
+     "language_probability",
+     "words"
+    ],
+    "required": [
+     "text",
+     "language_code",
+     "language_probability",
+     "words"
+    ]
+   }
+  },
+  "kotoba-technologies/kotoba-stt/v1/speech-to-text": {
+   "endpoint_id": "kotoba-technologies/kotoba-stt/v1/speech-to-text",
+   "display_name": "Kotoba Speech-to-Text",
+   "description": "Accurate transcription of an audio clip in one request, with word timestamps, tuned for Japanese and East Asian languages.",
+   "status_base": "kotoba-technologies/kotoba-stt/v1/speech-to-text",
+   "input": {
+    "properties": {
+     "audio_url": {
+      "description": "Speech to transcribe: an https:// URL on fal's CDN (Playground uploads and microphone recordings) or a base64 data: URI. Up to 2 minutes.",
+      "title": "Audio Url",
+      "type": "string"
+     },
+     "with_timestamps": {
+      "description": "Return `words` with start and end times for each word.",
+      "default": false,
+      "title": "With Timestamps",
+      "type": "boolean"
+     },
+     "language": {
+      "enum": [
+       "ja",
+       "en",
+       "ko",
+       "zh",
+       "es",
+       "zh-hk",
+       "zh-tw",
+       "auto"
+      ],
+      "description": "Language spoken in the audio.",
+      "title": "Language",
+      "type": "string"
+     },
+     "kana": {
+      "description": "Write personal and place names in katakana (Japanese).",
+      "default": false,
+      "title": "Kana",
+      "type": "boolean"
+     },
+     "keywords": {
+      "description": "Up to 1000 terms of at most 64 characters, such as names or product words, whose spelling the transcript should prefer.",
+      "title": "Keywords",
+      "anyOf": [
+       {
+        "items": {
+         "maxLength": 64,
+         "type": "string"
+        },
+        "maxItems": 1000,
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "diarization": {
+      "description": "Attribute words to speakers (`speaker_id` on each word; models with speaker tokens only). Word times are null unless `with_timestamps` is also set.",
+      "default": false,
+      "title": "Diarization",
+      "type": "boolean"
+     }
+    },
+    "title": "SpeechToTextRequest",
+    "x-fal-order-properties": [
+     "audio_url",
+     "language",
+     "with_timestamps",
+     "diarization",
+     "keywords",
+     "kana"
+    ],
+    "required": [
+     "audio_url",
+     "language"
+    ],
+    "additionalProperties": false,
+    "type": "object"
+   },
+   "output": {
+    "title": "SpeechToTextResponse",
+    "required": [
+     "language_code",
+     "language_probability",
+     "text",
+     "words"
+    ],
+    "type": "object",
+    "properties": {
+     "language_probability": {
+      "title": "Language Probability",
+      "type": "number"
+     },
+     "language_code": {
+      "title": "Language Code",
+      "type": "string"
+     },
+     "words": {
+      "items": {
+       "title": "SpeechToTextWord",
+       "required": [
+        "text"
+       ],
+       "type": "object",
+       "properties": {
+        "speaker_id": {
+         "title": "Speaker Id",
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "end": {
+         "title": "End",
+         "anyOf": [
+          {
+           "type": "number"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "start": {
+         "title": "Start",
+         "anyOf": [
+          {
+           "type": "number"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "type": {
+         "enum": [
+          "word",
+          "spacing",
+          "audio_event"
+         ],
+         "default": "word",
+         "title": "Type",
+         "type": "string"
+        },
+        "text": {
+         "title": "Text",
+         "type": "string"
+        }
+       }
+      },
+      "title": "Words",
+      "type": "array"
+     },
+     "text": {
+      "title": "Text",
+      "type": "string"
+     },
+     "audio_duration_secs": {
+      "title": "Audio Duration Secs",
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    }
+   }
+  },
+  "nvidia/nemotron-asr-multilingual/asr": {
+   "endpoint_id": "nvidia/nemotron-asr-multilingual/asr",
+   "display_name": "Nemotron Asr Multilingual",
+   "description": "Nemotron-ASR-Streaming is a multi lingual, streaming Automatic Speech Recognition (ASR) engineered to deliver high-quality multi lingual transcription across both low-latency streaming and high-throughput batch workloads.",
+   "status_base": "nvidia/nemotron-asr-multilingual/asr",
+   "input": {
+    "properties": {
+     "audio_url": {
+      "title": "Audio URL",
+      "type": "string",
+      "description": "URL of the audio file to transcribe."
+     },
+     "acceleration": {
+      "default": "regular",
+      "enum": [
+       "none",
+       "regular",
+       "high",
+       "full"
+      ],
+      "title": "Acceleration",
+      "type": "string",
+      "description": "Controls the speed/accuracy trade-off. 'none' = best accuracy (1.12s chunks), 'regular' = balanced (0.56s chunks), 'high' = faster (0.32s chunks), 'full' = fastest (0.08s chunks)."
+     },
+     "language": {
+      "default": "auto",
+      "enum": [
+       "auto",
+       "en-US",
+       "en-GB",
+       "es-US",
+       "es-ES",
+       "de-DE",
+       "fr-FR",
+       "fr-CA",
+       "it-IT",
+       "ar-AR",
+       "ja-JP",
+       "ko-KR",
+       "pt-BR",
+       "pt-PT",
+       "ru-RU",
+       "hi-IN",
+       "zh-CN",
+       "vi-VN",
+       "he-IL",
+       "nl-NL",
+       "cs-CZ",
+       "da-DK",
+       "pl-PL",
+       "nn-NO",
+       "nb-NO",
+       "sv-SE",
+       "th-TH",
+       "tr-TR",
+       "bg-BG",
+       "el-GR",
+       "et-EE",
+       "fi-FI",
+       "hr-HR",
+       "hu-HU",
+       "lt-LT",
+       "lv-LV",
+       "ro-RO",
+       "sk-SK",
+       "uk-UA",
+       "mt-MT",
+       "sl-SI"
+      ],
+      "title": "Language",
+      "type": "string",
+      "description": "Target language for transcription (language-ID prompt). 'auto' lets the model detect the language."
+     }
+    },
+    "title": "SpeechInput",
+    "type": "object",
+    "x-fal-order-properties": [
+     "audio_url",
+     "language",
+     "acceleration"
+    ],
+    "required": [
+     "audio_url"
+    ]
+   },
+   "output": {
+    "properties": {
+     "partial": {
+      "default": false,
+      "title": "Partial Result",
+      "type": "boolean",
+      "description": "True if this is an intermediate result during streaming."
+     },
+     "output": {
+      "title": "Transcribed Text",
+      "type": "string",
+      "description": "The transcribed text from the audio."
+     }
+    },
+    "title": "SpeechOutput",
+    "type": "object",
+    "x-fal-order-properties": [
+     "output",
+     "partial"
+    ],
+    "required": [
+     "output"
+    ]
+   }
+  },
+  "fal-ai/speech-to-text": {
+   "endpoint_id": "fal-ai/speech-to-text",
+   "display_name": "Speech-to-Text",
+   "description": "Leverage the rapid processing capabilities of AI models to enable accurate and efficient real-time speech-to-text transcription.",
+   "status_base": "fal-ai/speech-to-text",
+   "input": {
+    "properties": {
+     "audio_url": {
+      "title": "Audio Path",
+      "description": "Local filesystem path (or remote URL) to a long audio file",
+      "type": "string"
+     },
+     "use_pnc": {
+      "type": "boolean",
+      "title": "Use Punctuation/Capitalization (PnC)",
+      "description": "Whether to use Canary's built-in punctuation & capitalization",
+      "default": true
+     }
+    },
+    "required": [
+     "audio_url"
+    ],
+    "title": "SpeechInput",
+    "x-fal-order-properties": [
+     "audio_url",
+     "use_pnc"
+    ],
+    "type": "object"
+   },
+   "output": {
+    "properties": {
+     "output": {
+      "title": "Transcribed Text",
+      "description": "The partial or final transcription output from Canary",
+      "type": "string"
+     },
+     "partial": {
+      "type": "boolean",
+      "title": "Partial",
+      "description": "Indicates if this is a partial (in-progress) transcript",
+      "default": false
+     }
+    },
+    "required": [
+     "output"
+    ],
+    "title": "SpeechOutput",
+    "x-fal-order-properties": [
+     "output",
+     "partial"
+    ],
+    "type": "object"
+   }
+  },
+  "fal-ai/speech-to-text/turbo": {
+   "endpoint_id": "fal-ai/speech-to-text/turbo",
+   "display_name": "Speech-to-Text",
+   "description": "Leverage the rapid processing capabilities of AI models to enable accurate and efficient real-time speech-to-text transcription.",
+   "status_base": "fal-ai/speech-to-text/turbo",
+   "input": {
+    "properties": {
+     "audio_url": {
+      "title": "Audio Path",
+      "description": "Local filesystem path (or remote URL) to a long audio file",
+      "type": "string"
+     },
+     "use_pnc": {
+      "type": "boolean",
+      "title": "Use Punctuation/Capitalization (PnC)",
+      "description": "Whether to use Canary's built-in punctuation & capitalization",
+      "default": true
+     }
+    },
+    "required": [
+     "audio_url"
+    ],
+    "title": "SpeechInput",
+    "x-fal-order-properties": [
+     "audio_url",
+     "use_pnc"
+    ],
+    "type": "object"
+   },
+   "output": {
+    "properties": {
+     "output": {
+      "title": "Transcribed Text",
+      "description": "The partial or final transcription output from Canary",
+      "type": "string"
+     },
+     "partial": {
+      "type": "boolean",
+      "title": "Partial",
+      "description": "Indicates if this is a partial (in-progress) transcript",
+      "default": false
+     }
+    },
+    "required": [
+     "output"
+    ],
+    "title": "SpeechOutput",
+    "x-fal-order-properties": [
+     "output",
+     "partial"
+    ],
+    "type": "object"
+   }
+  },
+  "fal-ai/speech-to-text/stream": {
+   "endpoint_id": "fal-ai/speech-to-text/stream",
+   "display_name": "Speech-To-text",
+   "description": "Leverage the rapid processing capabilities of AI models to enable accurate and efficient real-time speech-to-text transcription.",
+   "status_base": "fal-ai/speech-to-text/stream",
+   "input": {
+    "properties": {
+     "audio_url": {
+      "title": "Audio Path",
+      "description": "Local filesystem path (or remote URL) to a long audio file",
+      "type": "string"
+     },
+     "use_pnc": {
+      "type": "boolean",
+      "title": "Use Punctuation/Capitalization (PnC)",
+      "description": "Whether to use Canary's built-in punctuation & capitalization",
+      "default": true
+     }
+    },
+    "required": [
+     "audio_url"
+    ],
+    "title": "SpeechInput",
+    "x-fal-order-properties": [
+     "audio_url",
+     "use_pnc"
+    ],
+    "type": "object"
+   },
+   "output": {}
+  },
+  "fal-ai/speech-to-text/turbo/stream": {
+   "endpoint_id": "fal-ai/speech-to-text/turbo/stream",
+   "display_name": "Speech-to-Text",
+   "description": "Leverage the rapid processing capabilities of AI models to enable accurate and efficient real-time speech-to-text transcription.",
+   "status_base": "fal-ai/speech-to-text/turbo/stream",
+   "input": {
+    "properties": {
+     "audio_url": {
+      "title": "Audio Path",
+      "description": "Local filesystem path (or remote URL) to a long audio file",
+      "type": "string"
+     },
+     "use_pnc": {
+      "type": "boolean",
+      "title": "Use Punctuation/Capitalization (PnC)",
+      "description": "Whether to use Canary's built-in punctuation & capitalization",
+      "default": true
+     }
+    },
+    "required": [
+     "audio_url"
+    ],
+    "title": "SpeechInput",
+    "x-fal-order-properties": [
+     "audio_url",
+     "use_pnc"
+    ],
+    "type": "object"
+   },
+   "output": {}
+  },
+  "fal-ai/wizper": {
+   "endpoint_id": "fal-ai/wizper",
+   "display_name": "Wizper (Whisper v3 -- fal.ai edition)",
+   "description": "[Experimental] Whisper v3 Large -- but optimized by our inference wizards. Same WER, double the performance!",
+   "status_base": "fal-ai/wizper",
+   "input": {
+    "properties": {
+     "max_segment_len": {
+      "default": 29,
+      "title": "Max Segment Len",
+      "minimum": 10,
+      "description": "Maximum speech segment duration in seconds before splitting.",
+      "maximum": 29,
+      "type": "integer"
+     },
+     "merge_chunks": {
+      "default": true,
+      "title": "Merge Chunks",
+      "description": "Whether to merge consecutive chunks. When enabled, chunks are merged if their combined duration does not exceed max_segment_len.",
+      "type": "boolean"
+     },
+     "chunk_level": {
+      "default": "segment",
+      "title": "Chunk Level",
+      "description": "Level of the chunks to return.",
+      "const": "segment",
+      "type": "string"
+     },
+     "version": {
+      "default": "3",
+      "title": "Version",
+      "description": "Version of the model to use. All of the models are the Whisper large variant.",
+      "const": "3",
+      "type": "string"
+     },
+     "audio_url": {
+      "title": "Audio Url",
+      "description": "URL of the audio file to transcribe. Supported formats: mp3, mp4, mpeg, mpga, m4a, wav or webm.",
+      "type": "string"
+     },
+     "task": {
+      "enum": [
+       "transcribe",
+       "translate"
+      ],
+      "title": "Task",
+      "default": "transcribe",
+      "description": "Task to perform on the audio file. Either transcribe or translate.",
+      "type": "string"
+     },
+     "language": {
+      "anyOf": [
+       {
+        "enum": [
+         "af",
+         "am",
+         "ar",
+         "as",
+         "az",
+         "ba",
+         "be",
+         "bg",
+         "bn",
+         "bo",
+         "br",
+         "bs",
+         "ca",
+         "cs",
+         "cy",
+         "da",
+         "de",
+         "el",
+         "en",
+         "es",
+         "et",
+         "eu",
+         "fa",
+         "fi",
+         "fo",
+         "fr",
+         "gl",
+         "gu",
+         "ha",
+         "haw",
+         "he",
+         "hi",
+         "hr",
+         "ht",
+         "hu",
+         "hy",
+         "id",
+         "is",
+         "it",
+         "ja",
+         "jw",
+         "ka",
+         "kk",
+         "km",
+         "kn",
+         "ko",
+         "la",
+         "lb",
+         "ln",
+         "lo",
+         "lt",
+         "lv",
+         "mg",
+         "mi",
+         "mk",
+         "ml",
+         "mn",
+         "mr",
+         "ms",
+         "mt",
+         "my",
+         "ne",
+         "nl",
+         "nn",
+         "no",
+         "oc",
+         "pa",
+         "pl",
+         "ps",
+         "pt",
+         "ro",
+         "ru",
+         "sa",
+         "sd",
+         "si",
+         "sk",
+         "sl",
+         "sn",
+         "so",
+         "sq",
+         "sr",
+         "su",
+         "sv",
+         "sw",
+         "ta",
+         "te",
+         "tg",
+         "th",
+         "tk",
+         "tl",
+         "tr",
+         "tt",
+         "uk",
+         "ur",
+         "uz",
+         "vi",
+         "yi",
+         "yo",
+         "zh"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "\n        Language of the audio file.\n        If translate is selected as the task, the audio will be translated to\n        English, regardless of the language selected. If `None` is passed,\n        the language will be automatically detected. This will also increase\n        the inference time.\n        ",
+      "title": "Language",
+      "default": "en"
+     }
+    },
+    "title": "WhisperInput",
+    "required": [
+     "audio_url"
+    ],
+    "x-fal-order-properties": [
+     "audio_url",
+     "task",
+     "language",
+     "chunk_level",
+     "max_segment_len",
+     "merge_chunks",
+     "version"
+    ],
+    "type": "object"
+   },
+   "output": {
+    "properties": {
+     "chunks": {
+      "title": "Chunks",
+      "description": "Timestamp chunks of the audio file",
+      "items": {
+       "properties": {
+        "timestamp": {
+         "maxItems": 2,
+         "title": "Timestamp",
+         "minItems": 2,
+         "description": "Start and end timestamp of the chunk",
+         "prefixItems": [
+          {
+           "anyOf": [
+            {
+             "type": "number"
+            },
+            {
+             "type": "null"
+            }
+           ]
+          },
+          {
+           "anyOf": [
+            {
+             "type": "number"
+            },
+            {
+             "type": "null"
+            }
+           ]
+          }
+         ],
+         "type": "array"
+        },
+        "text": {
+         "title": "Text",
+         "description": "Transcription of the chunk",
+         "type": "string"
+        }
+       },
+       "title": "WhisperChunk",
+       "required": [
+        "timestamp",
+        "text"
+       ],
+       "x-fal-order-properties": [
+        "timestamp",
+        "text"
+       ],
+       "type": "object"
+      },
+      "type": "array"
+     },
+     "text": {
+      "title": "Text",
+      "description": "Transcription of the audio file",
+      "type": "string"
+     },
+     "languages": {
+      "title": "Languages",
+      "description": "List of languages that the audio file is inferred to be. Defaults to null.",
+      "items": {
+       "enum": [
+        "af",
+        "am",
+        "ar",
+        "as",
+        "az",
+        "ba",
+        "be",
+        "bg",
+        "bn",
+        "bo",
+        "br",
+        "bs",
+        "ca",
+        "cs",
+        "cy",
+        "da",
+        "de",
+        "el",
+        "en",
+        "es",
+        "et",
+        "eu",
+        "fa",
+        "fi",
+        "fo",
+        "fr",
+        "gl",
+        "gu",
+        "ha",
+        "haw",
+        "he",
+        "hi",
+        "hr",
+        "ht",
+        "hu",
+        "hy",
+        "id",
+        "is",
+        "it",
+        "ja",
+        "jw",
+        "ka",
+        "kk",
+        "km",
+        "kn",
+        "ko",
+        "la",
+        "lb",
+        "ln",
+        "lo",
+        "lt",
+        "lv",
+        "mg",
+        "mi",
+        "mk",
+        "ml",
+        "mn",
+        "mr",
+        "ms",
+        "mt",
+        "my",
+        "ne",
+        "nl",
+        "nn",
+        "no",
+        "oc",
+        "pa",
+        "pl",
+        "ps",
+        "pt",
+        "ro",
+        "ru",
+        "sa",
+        "sd",
+        "si",
+        "sk",
+        "sl",
+        "sn",
+        "so",
+        "sq",
+        "sr",
+        "su",
+        "sv",
+        "sw",
+        "ta",
+        "te",
+        "tg",
+        "th",
+        "tk",
+        "tl",
+        "tr",
+        "tt",
+        "uk",
+        "ur",
+        "uz",
+        "vi",
+        "yi",
+        "yo",
+        "zh"
+       ],
+       "type": "string"
+      },
+      "type": "array"
+     }
+    },
+    "title": "WhisperOutput",
+    "required": [
+     "text",
+     "chunks",
+     "languages"
+    ],
+    "x-fal-order-properties": [
+     "text",
+     "chunks",
+     "languages"
+    ],
+    "type": "object"
+   }
+  }
+ }
+}
