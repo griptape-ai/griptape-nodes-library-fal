@@ -1,0 +1,6627 @@
+{
+ "category": "text-to-speech",
+ "models": {
+  "async/tts-pro/v1.0": {
+   "endpoint_id": "async/tts-pro/v1.0",
+   "display_name": "Async Text to Speech Pro V1.0",
+   "description": "Generate professional-quality voiceovers in seconds with Async TTS Pro model text-based control over pauses, emphasis, and timing. Voice ids can be found at https://async.com/developer/voice-library",
+   "input": {
+    "properties": {
+     "output_format": {
+      "properties": {
+       "bit_rate": {
+        "anyOf": [
+         {
+          "type": "integer",
+          "minimum": 32000,
+          "maximum": 320000
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Output bit rate. Only used when container is 'mp3'.",
+        "title": "Bit Rate"
+       },
+       "container": {
+        "type": "string",
+        "enum": [
+         "mp3",
+         "raw"
+        ],
+        "description": "Output audio container format.",
+        "default": "mp3",
+        "title": "Container"
+       },
+       "sample_rate": {
+        "maximum": 48000,
+        "minimum": 8000,
+        "type": "integer",
+        "description": "Output sample rate in Hz.",
+        "default": 44100,
+        "title": "Sample Rate"
+       },
+       "encoding": {
+        "anyOf": [
+         {
+          "type": "string",
+          "enum": [
+           "pcm_s16le",
+           "pcm_f32le",
+           "pcm_mulaw"
+          ]
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "PCM encoding. Only used when container is 'raw'.",
+        "title": "Encoding"
+       }
+      },
+      "x-fal-order-properties": [
+       "container",
+       "encoding",
+       "sample_rate",
+       "bit_rate"
+      ],
+      "type": "object",
+      "title": "OutputFormat"
+     },
+     "language": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "en",
+         "fr",
+         "es",
+         "de",
+         "it",
+         "pt"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Force synthesis in a specific language (ISO 639-1).",
+      "title": "Language"
+     },
+     "voice": {
+      "properties": {
+       "name": {
+        "type": "string",
+        "enum": [
+         "Jennie",
+         "Stella",
+         "Max",
+         "Hayes",
+         "Elara",
+         "Cleo",
+         "Fisher",
+         "Corin",
+         "Thaddeus",
+         "Lucina",
+         "Acadia",
+         "Huxley",
+         "Winslet",
+         "Jethro",
+         "Elio",
+         "Rupert",
+         "Eira",
+         "Nyra",
+         "Arian",
+         "Lily",
+         "Pierce",
+         "Kaela",
+         "Elowen",
+         "Freya",
+         "Lenny",
+         "Alessa",
+         "Pandora",
+         "Fia",
+         "Abbott",
+         "Kael",
+         "Orla",
+         "Sable",
+         "Marnie",
+         "Sera",
+         "Virel",
+         "Liora",
+         "Riven",
+         "Elys",
+         "Dreena",
+         "Rhea",
+         "Vela",
+         "Nymera",
+         "Isolde",
+         "Lirien",
+         "Zella",
+         "Avenna",
+         "Mirelle",
+         "Calia",
+         "Lunea",
+         "Lucan",
+         "Tarian",
+         "Arlo",
+         "Jovan",
+         "Neron",
+         "Ziven",
+         "Dax",
+         "Orien",
+         "Lior",
+         "Eryx",
+         "Tyren",
+         "Nox",
+         "Elric",
+         "Varian",
+         "Zoran",
+         "Miro",
+         "Dalen",
+         "Ronix",
+         "Jarek",
+         "Nyxie",
+         "Soren",
+         "Viona",
+         "Selene",
+         "Rachiel",
+         "Corbin",
+         "Abigail",
+         "Faith",
+         "Kimberly",
+         "Dave",
+         "Grace",
+         "Alden",
+         "Renly",
+         "Violet",
+         "Joel",
+         "Xavier",
+         "Esmeralda",
+         "Robert",
+         "Lila",
+         "Brooks",
+         "Lennox",
+         "Vanessa",
+         "Simon",
+         "Nyomi",
+         "Jack",
+         "Penelope",
+         "Brayden",
+         "Abel",
+         "Nellie",
+         "Connie",
+         "Andrew",
+         "Lincoln"
+        ],
+        "description": "Predefined voice, chosen by name. Ignored when `id` is set.",
+        "default": "Jennie",
+        "title": "Name"
+       }
+      },
+      "x-fal-order-properties": [
+       "name"
+      ],
+      "type": "object",
+      "description": "Voice selection: by `name` from the predefined catalogue, or by raw `id`.\n\nBACKWARD COMPATIBILITY IS THE CONSTRAINT HERE. `{\"voice\": {\"id\": \"<uuid>\"}}` is already in\nproduction, so `id` keeps working untouched and always WINS over `name`. `id` merely became\noptional, which is strictly more permissive \u2014 no request that used to succeed can now fail.\n`name` is the new default path: it renders as a dropdown in the fal playground because a\nLiteral becomes an enum in the JSON schema.",
+      "title": "Voice"
+     },
+     "transcript": {
+      "type": "string",
+      "description": "Text to convert to speech.",
+      "title": "Transcript"
+     }
+    },
+    "x-fal-order-properties": [
+     "transcript",
+     "voice",
+     "output_format",
+     "language"
+    ],
+    "type": "object",
+    "required": [
+     "transcript",
+     "voice"
+    ],
+    "title": "TTSInput"
+   }
+  },
+  "fal-ai/bytedance/seed-speech/tts/v2": {
+   "endpoint_id": "fal-ai/bytedance/seed-speech/tts/v2",
+   "display_name": "Bytedance Seed Speech Text to Speech",
+   "description": "Seed Speech developed by ByteDance, is a family of large-scale text-to-speech models capable of synthesizing speech that is virtually indistinguishable from human speech.",
+   "input": {
+    "x-fal-order-properties": [
+     "text",
+     "voice",
+     "output_format",
+     "sample_rate",
+     "speed",
+     "volume",
+     "pitch",
+     "language",
+     "voice_instruction"
+    ],
+    "required": [
+     "text"
+    ],
+    "properties": {
+     "voice": {
+      "enum": [
+       "vivi_mixed_en_zh_ja_es_id",
+       "mindy_en_es_id_pt_zh",
+       "stokie_en",
+       "dacey_en",
+       "tim_en",
+       "kian_en_zh",
+       "cedric_en_zh",
+       "sophie_en_zh",
+       "jean_en_zh",
+       "magnus_en_zh",
+       "mabel_en_zh",
+       "nadia_en_zh",
+       "opal_en_zh",
+       "pearl_en_zh",
+       "quentin_en_zh",
+       "vienna_mixed_en_zh",
+       "alina_mixed_en_zh",
+       "corinne_mixed_en_zh",
+       "esther_mixed_en_zh",
+       "freya_mixed_en_zh",
+       "gigi_mixed_en_zh",
+       "holly_mixed_en_zh",
+       "lyla_mixed_en_zh",
+       "daisy_mixed_en_zh",
+       "tracy_es_zh",
+       "jess_ja_es_id_pt_en_zh",
+       "pinky_es_ko_mixed_en_zh",
+       "sweety_ja_es",
+       "sandy_es_mixed_en_zh",
+       "sven_de",
+       "minimi_ja",
+       "usseau_fr",
+       "felipe_es",
+       "han_id",
+       "martins_pt",
+       "enzo_it",
+       "shane_ko",
+       "bonnie_zh",
+       "felix_zh",
+       "celeste_zh",
+       "monkey_king_zh"
+      ],
+      "description": "Voice to use for synthesis. The preset name encodes the voice and its supported language codes. 'mixed_en_zh' means the voice can seamlessly blend English and Chinese; separate codes (e.g. 'en_zh') mean the voice supports each language independently.",
+      "default": "stokie_en",
+      "title": "Voice",
+      "type": "string"
+     },
+     "pitch": {
+      "description": "Voice pitch shift in semitones. 0 is normal pitch, -12 lowers by one octave, 12 raises by one octave.",
+      "default": 0,
+      "minimum": -12,
+      "title": "Pitch",
+      "maximum": 12,
+      "type": "integer"
+     },
+     "voice_instruction": {
+      "description": "Optional natural-language instruction that steers the delivery (tone, emotion, pace, volume), e.g. 'Speak in a cheerful tone' or 'Could you speak a bit slower?'. It is not spoken aloud and does not affect billing.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Voice Instruction"
+     },
+     "sample_rate": {
+      "enum": [
+       8000,
+       16000,
+       22050,
+       24000,
+       32000,
+       44100,
+       48000
+      ],
+      "description": "Sample rate of the output audio in Hz.",
+      "default": 24000,
+      "title": "Sample Rate",
+      "type": "integer"
+     },
+     "language": {
+      "description": "Force the text to be read as a single language, disabling automatic language detection. Leave unset for automatic detection (including seamless Chinese/English mixing on bilingual voices). Codes: zh (Chinese), en (English), ja (Japanese), es-mx (Mexican Spanish), id (Indonesian), pt-br (Brazilian Portuguese), ko (Korean), it (Italian), de (German), fr (French).",
+      "anyOf": [
+       {
+        "enum": [
+         "zh",
+         "en",
+         "ja",
+         "es-mx",
+         "id",
+         "pt-br",
+         "ko",
+         "it",
+         "de",
+         "fr"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Language"
+     },
+     "text": {
+      "description": "The text to synthesize into speech.",
+      "title": "Text",
+      "maxLength": 5000,
+      "type": "string"
+     },
+     "volume": {
+      "description": "Volume. 1.0 is normal volume, 0.5 is half, 2.0 is double.",
+      "default": 1,
+      "minimum": 0.5,
+      "title": "Volume",
+      "maximum": 2,
+      "type": "number"
+     },
+     "output_format": {
+      "enum": [
+       "mp3",
+       "opus"
+      ],
+      "description": "Output audio format. 'mp3' returns MP3 audio; 'opus' returns Opus audio in an Ogg container.",
+      "default": "mp3",
+      "title": "Output Format",
+      "type": "string"
+     },
+     "speed": {
+      "description": "Speech speed. 1.0 is normal speed, 0.5 is half speed, 2.0 is double speed.",
+      "default": 1,
+      "minimum": 0.5,
+      "title": "Speed",
+      "maximum": 2,
+      "type": "number"
+     }
+    },
+    "title": "ByteDanceTTS2Input",
+    "type": "object"
+   }
+  },
+  "fal-ai/chatterbox/text-to-speech": {
+   "endpoint_id": "fal-ai/chatterbox/text-to-speech",
+   "display_name": "Chatterbox",
+   "description": "Whether you're working on memes, videos, games, or AI agents, Chatterbox brings your content to life. Use the first tts from resemble ai.",
+   "input": {
+    "type": "object",
+    "properties": {
+     "exaggeration": {
+      "description": "Exaggeration factor for the generated speech (0.0 = no exaggeration, 1.0 = maximum exaggeration).",
+      "minimum": 0,
+      "type": "number",
+      "default": 0.25,
+      "maximum": 1,
+      "title": "Exaggeration"
+     },
+     "text": {
+      "description": "The text to be converted to speech (maximum 5000 characters). You can additionally add the following emotive tags: <laugh>, <chuckle>, <sigh>, <cough>, <sniffle>, <groan>, <yawn>, <gasp>",
+      "type": "string",
+      "title": "Text"
+     },
+     "temperature": {
+      "description": "Temperature for generation (higher = more creative).",
+      "minimum": 0.05,
+      "type": "number",
+      "default": 0.7,
+      "maximum": 2,
+      "title": "Temperature"
+     },
+     "audio_url": {
+      "description": "Optional URL to an audio file to use as a reference for the generated speech. If provided, the model will try to match the style and tone of the reference audio.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": "https://storage.googleapis.com/chatterbox-demo-samples/prompts/male_rickmorty.mp3",
+      "title": "Audio Url"
+     },
+     "cfg": {
+      "minimum": 0.1,
+      "type": "number",
+      "default": 0.5,
+      "maximum": 1,
+      "title": "Cfg"
+     },
+     "seed": {
+      "description": "Useful to control the reproducibility of the generated audio. Assuming all other properties didn't change, a fixed seed should always generate the exact same audio file. Set to 0 for random seed..",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Seed"
+     }
+    },
+    "required": [
+     "text"
+    ],
+    "x-fal-order-properties": [
+     "text",
+     "audio_url",
+     "exaggeration",
+     "temperature",
+     "cfg",
+     "seed"
+    ],
+    "title": "ChatterboxRequest"
+   }
+  },
+  "fal-ai/chatterbox/text-to-speech/multilingual": {
+   "endpoint_id": "fal-ai/chatterbox/text-to-speech/multilingual",
+   "display_name": "Chatterbox",
+   "description": "Whether you're working on memes, videos, games, or AI agents, Chatterbox brings your content to life. Use the first tts from resemble ai.",
+   "input": {
+    "type": "object",
+    "properties": {
+     "exaggeration": {
+      "description": "Controls speech expressiveness and emotional intensity (0.25-2.0). 0.5 is neutral, higher values increase expressiveness. Extreme values may be unstable.",
+      "minimum": 0.25,
+      "type": "number",
+      "default": 0.5,
+      "maximum": 2,
+      "title": "Exaggeration"
+     },
+     "seed": {
+      "description": "Random seed for reproducible results. Set to 0 for random generation, or provide a specific number for consistent outputs.",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Seed"
+     },
+     "text": {
+      "description": "The text to be converted to speech (maximum 300 characters). Supports 23 languages including English, French, German, Spanish, Italian, Portuguese, Hindi, Arabic, Chinese, Japanese, Korean, and more.",
+      "maxLength": 300,
+      "type": "string",
+      "title": "Text"
+     },
+     "temperature": {
+      "description": "Controls randomness and variation in generation (0.05-2.0). Higher values create more varied speech patterns.",
+      "minimum": 0.05,
+      "type": "number",
+      "default": 0.8,
+      "maximum": 2,
+      "title": "Temperature"
+     },
+     "voice": {
+      "description": "Language code for synthesis, or a reference audio URL with custom_audio_language selected. Invalid reference audio is rejected with a non-billable 422 error.",
+      "type": "string",
+      "default": "english",
+      "title": "Voice"
+     },
+     "cfg_scale": {
+      "description": "Configuration/pace weight controlling generation guidance (0.0-1.0). Use 0.0 for language transfer to mitigate accent inheritance.",
+      "minimum": 0,
+      "type": "number",
+      "default": 0.5,
+      "maximum": 1,
+      "title": "CFG Scale"
+     },
+     "custom_audio_language": {
+      "description": "If using a custom audio URL, specify the language of the audio here. Ignored if voice is not a custom url.",
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "english",
+         "arabic",
+         "danish",
+         "german",
+         "greek",
+         "spanish",
+         "finnish",
+         "french",
+         "hebrew",
+         "hindi",
+         "italian",
+         "japanese",
+         "korean",
+         "malay",
+         "dutch",
+         "norwegian",
+         "polish",
+         "portuguese",
+         "russian",
+         "swedish",
+         "swahili",
+         "turkish",
+         "chinese"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Custom Audio Language"
+     }
+    },
+    "required": [
+     "text"
+    ],
+    "x-fal-order-properties": [
+     "text",
+     "voice",
+     "custom_audio_language",
+     "exaggeration",
+     "temperature",
+     "cfg_scale",
+     "seed"
+    ],
+    "title": "ChatterboxMultilingualRequest"
+   }
+  },
+  "resemble-ai/chatterboxhd/text-to-speech": {
+   "endpoint_id": "resemble-ai/chatterboxhd/text-to-speech",
+   "display_name": "Chatterboxhd",
+   "description": "Generate expressive, natural speech with Resemble AI's Chatterbox. Features unique emotion control, instant voice cloning from short audio, and built-in watermarking.",
+   "input": {
+    "description": "Input parameters for the TTS request.",
+    "type": "object",
+    "properties": {
+     "text": {
+      "description": "Text to synthesize into speech.",
+      "type": "string",
+      "title": "Text",
+      "default": "My name is Maximus Decimus Meridius, commander of the Armies of the North, General of the Felix Legions and loyal servant to the true emperor, Marcus Aurelius. Father to a murdered son, husband to a murdered wife. And I will have my vengeance, in this life or the next."
+     },
+     "exaggeration": {
+      "description": "Controls emotion exaggeration. Range typically 0.25 to 2.0.",
+      "type": "number",
+      "minimum": 0.25,
+      "maximum": 2,
+      "title": "Exaggeration",
+      "default": 0.5
+     },
+     "high_quality_audio": {
+      "description": "If True, the generated audio will be upscaled to 48kHz. The generation of the audio will take longer, but the quality will be higher. If False, the generated audio will be 24kHz. ",
+      "type": "boolean",
+      "title": "High Quality Audio",
+      "default": false
+     },
+     "voice": {
+      "enum": [
+       "Aurora",
+       "Blade",
+       "Britney",
+       "Carl",
+       "Cliff",
+       "Richard",
+       "Rico",
+       "Siobhan",
+       "Vicky"
+      ],
+      "description": "The voice to use for the TTS request. If neither voice nor audio are provided, a random voice will be used.",
+      "type": "string",
+      "title": "Voice"
+     },
+     "audio_url": {
+      "description": "URL to the audio sample to use as a voice prompt for zero-shot TTS voice cloning. Providing a audio sample will override the voice setting. If neither voice nor audio_url are provided, a random voice will be used.",
+      "type": "string",
+      "title": "Audio Url"
+     },
+     "temperature": {
+      "minimum": 0.05,
+      "maximum": 5,
+      "type": "number",
+      "description": "Controls the randomness of generation. Range typically 0.05 to 5.",
+      "title": "Temperature",
+      "default": 0.8
+     },
+     "seed": {
+      "minimum": 0,
+      "description": "Useful to control the reproducibility of the generated audio. Assuming all other properties didn't change, a fixed seed should always generate the exact same audio file. Set to 0 for random seed.",
+      "type": "integer",
+      "title": "Seed",
+      "default": 0
+     },
+     "cfg": {
+      "description": "Classifier-free guidance scale (CFG) controls the conditioning factor. Range typically 0.2 to 1.0. For expressive or dramatic speech, try lower cfg values (e.g. ~0.3) and increase exaggeration to around 0.7 or higher. If the reference speaker has a fast speaking style, lowering cfg to around 0.3 can improve pacing.",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "title": "Cfg",
+      "default": 0.5
+     }
+    },
+    "x-fal-order-properties": [
+     "text",
+     "voice",
+     "audio_url",
+     "exaggeration",
+     "cfg",
+     "high_quality_audio",
+     "seed",
+     "temperature"
+    ],
+    "title": "TTSInput"
+   }
+  },
+  "fal-ai/dia-tts": {
+   "endpoint_id": "fal-ai/dia-tts",
+   "display_name": "Dia",
+   "description": "Dia directly generates realistic dialogue from transcripts. Audio conditioning enables emotion control. Produces natural nonverbals like laughter and throat clearing.",
+   "input": {
+    "properties": {
+     "text": {
+      "title": "Text",
+      "type": "string",
+      "description": "The text to be converted to speech."
+     }
+    },
+    "title": "DiaRequest",
+    "type": "object",
+    "x-fal-order-properties": [
+     "text"
+    ],
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "elevenlabs/tts/eleven-v4": {
+   "endpoint_id": "elevenlabs/tts/eleven-v4",
+   "display_name": "Eleven v4",
+   "description": "Generate expressive speech with Eleven v4 from ElevenLabs. Control delivery with audio tags, voice stability, similarity settings, and IPA pronunciation.",
+   "input": {
+    "properties": {
+     "output_format": {
+      "default": "mp3_44100_128",
+      "enum": [
+       "mp3_22050_32",
+       "mp3_44100_32",
+       "mp3_44100_64",
+       "mp3_44100_96",
+       "mp3_44100_128",
+       "mp3_44100_192",
+       "pcm_8000",
+       "pcm_16000",
+       "pcm_22050",
+       "pcm_24000",
+       "pcm_44100",
+       "pcm_48000",
+       "ulaw_8000",
+       "alaw_8000",
+       "opus_48000_32",
+       "opus_48000_64",
+       "opus_48000_96",
+       "opus_48000_128",
+       "opus_48000_192"
+      ],
+      "title": "Output Format",
+      "description": "Output format of the generated audio. Formatted as codec_sample_rate_bitrate.",
+      "type": "string"
+     },
+     "apply_text_normalization": {
+      "default": "auto",
+      "enum": [
+       "auto",
+       "on",
+       "off"
+      ],
+      "title": "Apply Text Normalization",
+      "description": "Whether to normalize text such as numbers and dates before generation.",
+      "type": "string"
+     },
+     "voice": {
+      "default": "Rachel",
+      "title": "Voice",
+      "description": "The voice to use for speech generation",
+      "type": "string"
+     },
+     "text": {
+      "maxLength": 5000,
+      "minLength": 1,
+      "description": "The text to convert to speech. Supports audio tags such as [whispering] and IPA pronunciation enclosed in forward slashes.",
+      "title": "Text",
+      "type": "string"
+     },
+     "similarity_boost": {
+      "default": 0.75,
+      "title": "Similarity Boost",
+      "description": "How closely the output follows the reference voice. Higher values increase similarity but may reduce naturalness.",
+      "minimum": 0,
+      "maximum": 1,
+      "type": "number"
+     },
+     "seed": {
+      "title": "Seed",
+      "description": "Seed for best-effort reproducibility. Identical output is not guaranteed.",
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "language_code": {
+      "title": "Language Code",
+      "description": "Language code (ISO 639-1) for speech generation and text normalization.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "stability": {
+      "default": 0.5,
+      "title": "Stability",
+      "description": "Voice stability. Lower values allow more expressive delivery; higher values make delivery more consistent.",
+      "minimum": 0,
+      "maximum": 1,
+      "type": "number"
+     },
+     "timestamps": {
+      "default": false,
+      "title": "Timestamps",
+      "description": "Whether to return character-level timing information with the generated audio.",
+      "type": "boolean"
+     }
+    },
+    "title": "TextToSpeechRequestV4",
+    "type": "object",
+    "x-fal-order-properties": [
+     "text",
+     "voice",
+     "stability",
+     "similarity_boost",
+     "seed",
+     "language_code",
+     "output_format",
+     "apply_text_normalization",
+     "timestamps"
+    ],
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "elevenlabs/tts/eleven-v4-turbo": {
+   "endpoint_id": "elevenlabs/tts/eleven-v4-turbo",
+   "display_name": "Eleven v4 Turbo",
+   "description": "Generate speech with Eleven v4 Turbo from ElevenLabs. Choose a voice and control delivery with audio tags, stability, similarity settings, and IPA pronunciation.",
+   "input": {
+    "properties": {
+     "output_format": {
+      "default": "mp3_44100_128",
+      "enum": [
+       "mp3_22050_32",
+       "mp3_44100_32",
+       "mp3_44100_64",
+       "mp3_44100_96",
+       "mp3_44100_128",
+       "mp3_44100_192",
+       "pcm_8000",
+       "pcm_16000",
+       "pcm_22050",
+       "pcm_24000",
+       "pcm_44100",
+       "pcm_48000",
+       "ulaw_8000",
+       "alaw_8000",
+       "opus_48000_32",
+       "opus_48000_64",
+       "opus_48000_96",
+       "opus_48000_128",
+       "opus_48000_192"
+      ],
+      "title": "Output Format",
+      "description": "Output format of the generated audio. Formatted as codec_sample_rate_bitrate.",
+      "type": "string"
+     },
+     "apply_text_normalization": {
+      "default": "auto",
+      "enum": [
+       "auto",
+       "on",
+       "off"
+      ],
+      "title": "Apply Text Normalization",
+      "description": "Whether to normalize text such as numbers and dates before generation.",
+      "type": "string"
+     },
+     "voice": {
+      "default": "Rachel",
+      "title": "Voice",
+      "description": "The voice to use for speech generation",
+      "type": "string"
+     },
+     "text": {
+      "maxLength": 5000,
+      "minLength": 1,
+      "description": "The text to convert to speech. Supports audio tags such as [whispering] and IPA pronunciation enclosed in forward slashes.",
+      "title": "Text",
+      "type": "string"
+     },
+     "similarity_boost": {
+      "default": 0.75,
+      "title": "Similarity Boost",
+      "description": "How closely the output follows the reference voice. Higher values increase similarity but may reduce naturalness.",
+      "minimum": 0,
+      "maximum": 1,
+      "type": "number"
+     },
+     "seed": {
+      "title": "Seed",
+      "description": "Seed for best-effort reproducibility. Identical output is not guaranteed.",
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4294967295
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "language_code": {
+      "title": "Language Code",
+      "description": "Language code (ISO 639-1) for speech generation and text normalization.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "stability": {
+      "default": 0.5,
+      "title": "Stability",
+      "description": "Voice stability. Lower values allow more expressive delivery; higher values make delivery more consistent.",
+      "minimum": 0,
+      "maximum": 1,
+      "type": "number"
+     },
+     "timestamps": {
+      "default": false,
+      "title": "Timestamps",
+      "description": "Whether to return character-level timing information with the generated audio.",
+      "type": "boolean"
+     }
+    },
+    "title": "TextToSpeechRequestV4",
+    "type": "object",
+    "x-fal-order-properties": [
+     "text",
+     "voice",
+     "stability",
+     "similarity_boost",
+     "seed",
+     "language_code",
+     "output_format",
+     "apply_text_normalization",
+     "timestamps"
+    ],
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "fal-ai/elevenlabs/tts/turbo-v2.5": {
+   "endpoint_id": "fal-ai/elevenlabs/tts/turbo-v2.5",
+   "display_name": "ElevenLabs TTS Turbo v2.5",
+   "description": "Generate high-speed text-to-speech audio using ElevenLabs TTS Turbo v2.5.",
+   "input": {
+    "properties": {
+     "speed": {
+      "default": 1,
+      "title": "Speed",
+      "description": "Speech speed (0.7-1.2). Values below 1.0 slow down the speech, above 1.0 speed it up. Extreme values may affect quality.",
+      "minimum": 0.7,
+      "maximum": 1.2,
+      "type": "number"
+     },
+     "apply_text_normalization": {
+      "default": "auto",
+      "enum": [
+       "auto",
+       "on",
+       "off"
+      ],
+      "title": "Apply Text Normalization",
+      "description": "This parameter controls text normalization with three modes: 'auto', 'on', and 'off'. When set to 'auto', the system will automatically decide whether to apply text normalization (e.g., spelling out numbers). With 'on', text normalization will always be applied, while with 'off', it will be skipped.",
+      "type": "string"
+     },
+     "style": {
+      "default": 0,
+      "title": "Style",
+      "description": "Style exaggeration (0-1)",
+      "minimum": 0,
+      "maximum": 1,
+      "type": "number"
+     },
+     "text": {
+      "minLength": 1,
+      "description": "The text to convert to speech",
+      "title": "Text",
+      "type": "string"
+     },
+     "similarity_boost": {
+      "default": 0.75,
+      "title": "Similarity Boost",
+      "description": "Similarity boost (0-1)",
+      "minimum": 0,
+      "maximum": 1,
+      "type": "number"
+     },
+     "voice": {
+      "default": "Rachel",
+      "title": "Voice",
+      "description": "The voice to use for speech generation",
+      "type": "string"
+     },
+     "previous_text": {
+      "title": "Previous Text",
+      "description": "The text that came before the text of the current request. Can be used to improve the speech's continuity when concatenating together multiple generations or to influence the speech's continuity in the current generation.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "language_code": {
+      "title": "Language Code",
+      "description": "Language code (ISO 639-1) used to enforce a language for the model. An error will be returned if language code is not supported by the model.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "stability": {
+      "default": 0.5,
+      "title": "Stability",
+      "description": "Voice stability (0-1)",
+      "minimum": 0,
+      "maximum": 1,
+      "type": "number"
+     },
+     "timestamps": {
+      "default": false,
+      "title": "Timestamps",
+      "description": "Whether to return timestamps for each word in the generated speech",
+      "type": "boolean"
+     },
+     "next_text": {
+      "title": "Next Text",
+      "description": "The text that comes after the text of the current request. Can be used to improve the speech's continuity when concatenating together multiple generations or to influence the speech's continuity in the current generation.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "title": "TextToSpeechRequest",
+    "type": "object",
+    "x-fal-order-properties": [
+     "text",
+     "voice",
+     "stability",
+     "similarity_boost",
+     "style",
+     "speed",
+     "timestamps",
+     "previous_text",
+     "next_text",
+     "language_code",
+     "apply_text_normalization"
+    ],
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "fal-ai/gemini-3.1-flash-tts": {
+   "endpoint_id": "fal-ai/gemini-3.1-flash-tts",
+   "display_name": "Gemini 3.1 Flash Tts",
+   "description": "Newest audio model from Google introduces granular audio tags that give you precise control to direct AI speech for expressive audio generation.",
+   "input": {
+    "title": "Gemini31FlashTTSInput",
+    "properties": {
+     "style_instructions": {
+      "title": "Style Instructions",
+      "description": "Optional style and delivery instructions prepended to the prompt. Controls expressiveness, accent, pace, tone, and emotional expression using natural language. Use this to separate style control from the text content. Examples: 'Speak warmly and slowly', 'Read this as a dramatic newscast', 'Use a British accent with a cheerful tone', 'Whisper mysteriously'.",
+      "anyOf": [
+       {
+        "maxLength": 4000,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "voice": {
+      "title": "Voice",
+      "description": "Voice preset for single-speaker synthesis. 30 distinct voices are available. Ignored when speakers is set. Popular choices: Kore (strong, firm female), Puck (upbeat, lively male), Charon (calm, professional male), Zephyr (bright, clear female), Aoede (warm, melodic female).",
+      "default": "Kore",
+      "type": "string",
+      "enum": [
+       "Achernar",
+       "Achird",
+       "Algenib",
+       "Algieba",
+       "Alnilam",
+       "Aoede",
+       "Autonoe",
+       "Callirrhoe",
+       "Charon",
+       "Despina",
+       "Enceladus",
+       "Erinome",
+       "Fenrir",
+       "Gacrux",
+       "Iapetus",
+       "Kore",
+       "Laomedeia",
+       "Leda",
+       "Orus",
+       "Pulcherrima",
+       "Puck",
+       "Rasalgethi",
+       "Sadachbia",
+       "Sadaltager",
+       "Schedar",
+       "Sulafat",
+       "Umbriel",
+       "Vindemiatrix",
+       "Zephyr",
+       "Zubenelgenubi"
+      ]
+     },
+     "prompt": {
+      "type": "string",
+      "maxLength": 50000,
+      "title": "Prompt",
+      "description": "The text to convert to speech. Gemini 3.1 Flash TTS supports natural-language prompting for style, pace, accent, and emotional expression \u2014 include delivery instructions inline with the text (e.g. 'Say cheerfully: Have a wonderful day!'). Supports expressive audio tags like [sigh], [laughing], [whispering], [short pause] for fine-grained control over delivery. For multi-speaker synthesis, prefix lines with speaker aliases defined in the speakers field (e.g. 'Alice: Hello!\\nBob: Hi!').",
+      "minLength": 1
+     },
+     "speakers": {
+      "title": "Speakers",
+      "description": "Multi-speaker voice configuration. When set, enables multi-speaker synthesis where different parts of the text are spoken by different voices. Each speaker needs a voice and a speaker_id (alias) that matches prefixes in the prompt.",
+      "anyOf": [
+       {
+        "minItems": 2,
+        "items": {
+         "title": "SpeakerConfig",
+         "properties": {
+          "voice": {
+           "title": "Voice",
+           "description": "Voice preset for this speaker.",
+           "type": "string",
+           "enum": [
+            "Achernar",
+            "Achird",
+            "Algenib",
+            "Algieba",
+            "Alnilam",
+            "Aoede",
+            "Autonoe",
+            "Callirrhoe",
+            "Charon",
+            "Despina",
+            "Enceladus",
+            "Erinome",
+            "Fenrir",
+            "Gacrux",
+            "Iapetus",
+            "Kore",
+            "Laomedeia",
+            "Leda",
+            "Orus",
+            "Pulcherrima",
+            "Puck",
+            "Rasalgethi",
+            "Sadachbia",
+            "Sadaltager",
+            "Schedar",
+            "Sulafat",
+            "Umbriel",
+            "Vindemiatrix",
+            "Zephyr",
+            "Zubenelgenubi"
+           ]
+          },
+          "speaker_id": {
+           "pattern": "^\\w+$",
+           "title": "Speaker Id",
+           "description": "Alias used to identify this speaker in the prompt. Use this alias as a prefix in the prompt field, e.g. 'Alice: Hello! Bob: Hi there!'. Must be alphanumeric with no whitespace.",
+           "type": "string"
+          }
+         },
+         "required": [
+          "voice",
+          "speaker_id"
+         ],
+         "description": "Voice configuration for a single speaker in multi-speaker synthesis.",
+         "type": "object",
+         "x-fal-order-properties": [
+          "voice",
+          "speaker_id"
+         ]
+        },
+        "type": "array",
+        "maxItems": 10
+       },
+       {
+        "minItems": 0,
+        "type": "array",
+        "maxItems": 0
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "temperature": {
+      "minimum": 0,
+      "maximum": 2,
+      "default": 1,
+      "description": "Controls the randomness of the speech output. Higher values produce more creative and varied delivery, while lower values make the output more predictable and focused.",
+      "type": "number",
+      "title": "Temperature"
+     },
+     "output_format": {
+      "title": "Output Format",
+      "default": "mp3",
+      "description": "Audio output format. mp3: compressed, small file size (recommended). wav: uncompressed PCM wrapped in WAV (24 kHz, 16-bit mono). ogg_opus: Ogg container with Opus codec, good quality-to-size ratio.",
+      "type": "string",
+      "enum": [
+       "wav",
+       "mp3",
+       "ogg_opus"
+      ]
+     },
+     "language_code": {
+      "title": "Language Code",
+      "description": "Language for multilingual synthesis. When set, steers the model to speak in the specified language. If not set, the model auto-detects the language from the text.",
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "Arabic (Egypt)",
+         "Bangla (Bangladesh)",
+         "Dutch (Netherlands)",
+         "English (India)",
+         "English (US)",
+         "French (France)",
+         "German (Germany)",
+         "Hindi (India)",
+         "Indonesian (Indonesia)",
+         "Italian (Italy)",
+         "Japanese (Japan)",
+         "Korean (South Korea)",
+         "Marathi (India)",
+         "Polish (Poland)",
+         "Portuguese (Brazil)",
+         "Romanian (Romania)",
+         "Russian (Russia)",
+         "Spanish (Spain)",
+         "Tamil (India)",
+         "Telugu (India)",
+         "Thai (Thailand)",
+         "Turkish (Turkey)",
+         "Ukrainian (Ukraine)",
+         "Vietnamese (Vietnam)",
+         "Afrikaans (South Africa)",
+         "Albanian (Albania)",
+         "Amharic (Ethiopia)",
+         "Arabic (World)",
+         "Armenian (Armenia)",
+         "Azerbaijani (Azerbaijan)",
+         "Basque (Spain)",
+         "Belarusian (Belarus)",
+         "Bulgarian (Bulgaria)",
+         "Burmese (Myanmar)",
+         "Catalan (Spain)",
+         "Cebuano (Philippines)",
+         "Chinese Mandarin (China)",
+         "Chinese Mandarin (Taiwan)",
+         "Croatian (Croatia)",
+         "Czech (Czech Republic)",
+         "Danish (Denmark)",
+         "English (Australia)",
+         "English (UK)",
+         "Estonian (Estonia)",
+         "Filipino (Philippines)",
+         "Finnish (Finland)",
+         "French (Canada)",
+         "Galician (Spain)",
+         "Georgian (Georgia)",
+         "Greek (Greece)",
+         "Gujarati (India)",
+         "Haitian Creole (Haiti)",
+         "Hebrew (Israel)",
+         "Hungarian (Hungary)",
+         "Icelandic (Iceland)",
+         "Javanese (Java)",
+         "Kannada (India)",
+         "Konkani (India)",
+         "Lao (Laos)",
+         "Latin (Vatican City)",
+         "Latvian (Latvia)",
+         "Lithuanian (Lithuania)",
+         "Luxembourgish (Luxembourg)",
+         "Macedonian (North Macedonia)",
+         "Maithili (India)",
+         "Malagasy (Madagascar)",
+         "Malay (Malaysia)",
+         "Malayalam (India)",
+         "Mongolian (Mongolia)",
+         "Nepali (Nepal)",
+         "Norwegian Bokmal (Norway)",
+         "Norwegian Nynorsk (Norway)",
+         "Odia (India)",
+         "Pashto (Afghanistan)",
+         "Persian (Iran)",
+         "Portuguese (Portugal)",
+         "Punjabi (India)",
+         "Serbian (Serbia)",
+         "Sindhi (India)",
+         "Sinhala (Sri Lanka)",
+         "Slovak (Slovakia)",
+         "Slovenian (Slovenia)",
+         "Spanish (Latin America)",
+         "Spanish (Mexico)",
+         "Swahili (Kenya)",
+         "Swedish (Sweden)",
+         "Urdu (Pakistan)"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "required": [
+     "prompt"
+    ],
+    "description": "Input for Gemini 3.1 Flash TTS preview speech generation.",
+    "type": "object",
+    "x-fal-order-properties": [
+     "prompt",
+     "style_instructions",
+     "voice",
+     "language_code",
+     "speakers",
+     "temperature",
+     "output_format"
+    ]
+   }
+  },
+  "google/gemini-3.8-flash-lite-tts": {
+   "endpoint_id": "google/gemini-3.8-flash-lite-tts",
+   "display_name": "Gemini 3.8 Flash Lite TTS",
+   "description": "Generate expressive speech with Gemini 3.8 Flash Lite TTS. Choose from 30 voices, guide delivery with style instructions, and create single-speaker narration or two-speaker dialogue.",
+   "input": {
+    "type": "object",
+    "x-fal-order-properties": [
+     "prompt",
+     "style_instructions",
+     "voice",
+     "speakers",
+     "turns",
+     "enable_safety_checker"
+    ],
+    "title": "Gemini38TTSInput",
+    "properties": {
+     "enable_safety_checker": {
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true
+     },
+     "voice": {
+      "description": "Prebuilt voice for single-speaker speech.",
+      "type": "string",
+      "enum": [
+       "Achernar",
+       "Achird",
+       "Algenib",
+       "Algieba",
+       "Alnilam",
+       "Aoede",
+       "Autonoe",
+       "Callirrhoe",
+       "Charon",
+       "Despina",
+       "Enceladus",
+       "Erinome",
+       "Fenrir",
+       "Gacrux",
+       "Iapetus",
+       "Kore",
+       "Laomedeia",
+       "Leda",
+       "Orus",
+       "Pulcherrima",
+       "Puck",
+       "Rasalgethi",
+       "Sadachbia",
+       "Sadaltager",
+       "Schedar",
+       "Sulafat",
+       "Umbriel",
+       "Vindemiatrix",
+       "Zephyr",
+       "Zubenelgenubi"
+      ],
+      "title": "Voice",
+      "default": "Kore"
+     },
+     "prompt": {
+      "description": "Verbatim text for single-speaker speech. Put delivery directions in style_instructions; inline vocal events may use <laugh> or <sigh>. For dialogue, omit prompt and provide speakers and turns instead. The provider limits the complete input to 8,192 tokens.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Prompt"
+     },
+     "speakers": {
+      "description": "Exactly two distinct speaker aliases and their prebuilt voices for dialogue.",
+      "anyOf": [
+       {
+        "maxItems": 2,
+        "type": "array",
+        "minItems": 2,
+        "items": {
+         "type": "object",
+         "x-fal-order-properties": [
+          "speaker_id",
+          "voice"
+         ],
+         "title": "SpeakerConfig",
+         "properties": {
+          "voice": {
+           "description": "Prebuilt voice for this speaker.",
+           "type": "string",
+           "enum": [
+            "Achernar",
+            "Achird",
+            "Algenib",
+            "Algieba",
+            "Alnilam",
+            "Aoede",
+            "Autonoe",
+            "Callirrhoe",
+            "Charon",
+            "Despina",
+            "Enceladus",
+            "Erinome",
+            "Fenrir",
+            "Gacrux",
+            "Iapetus",
+            "Kore",
+            "Laomedeia",
+            "Leda",
+            "Orus",
+            "Pulcherrima",
+            "Puck",
+            "Rasalgethi",
+            "Sadachbia",
+            "Sadaltager",
+            "Schedar",
+            "Sulafat",
+            "Umbriel",
+            "Vindemiatrix",
+            "Zephyr",
+            "Zubenelgenubi"
+           ],
+           "title": "Voice"
+          },
+          "speaker_id": {
+           "description": "Speaker alias used in each turn.",
+           "type": "string",
+           "title": "Speaker ID",
+           "minLength": 1
+          }
+         },
+         "required": [
+          "speaker_id",
+          "voice"
+         ],
+         "additionalProperties": false
+        }
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Speakers"
+     },
+     "turns": {
+      "description": "Ordered dialogue turns, each identifying a configured speaker.",
+      "anyOf": [
+       {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+         "type": "object",
+         "x-fal-order-properties": [
+          "speaker_id",
+          "text",
+          "style_instructions"
+         ],
+         "title": "SpeechTurn",
+         "properties": {
+          "speaker_id": {
+           "description": "Alias of a configured speaker.",
+           "type": "string",
+           "title": "Speaker ID",
+           "minLength": 1
+          },
+          "text": {
+           "description": "Verbatim transcript for this turn.",
+           "type": "string",
+           "title": "Text",
+           "minLength": 1
+          },
+          "style_instructions": {
+           "description": "Optional delivery style for this turn.",
+           "anyOf": [
+            {
+             "type": "string"
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "title": "Style Instructions"
+          }
+         },
+         "required": [
+          "speaker_id",
+          "text"
+         ],
+         "additionalProperties": false
+        }
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Turns"
+     },
+     "style_instructions": {
+      "description": "Delivery style, separate from the spoken transcript. Applies to all turns unless overridden.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Style Instructions"
+     }
+    },
+    "additionalProperties": false
+   }
+  },
+  "google/gemini-3.8-flash-tts": {
+   "endpoint_id": "google/gemini-3.8-flash-tts",
+   "display_name": "Gemini 3.8 Flash TTS",
+   "description": "Generate expressive speech with Gemini 3.8 Flash TTS. Choose from 30 voices, direct delivery with style instructions, and create single-speaker narration or two-speaker dialogue.",
+   "input": {
+    "properties": {
+     "speakers": {
+      "anyOf": [
+       {
+        "minItems": 2,
+        "maxItems": 2,
+        "items": {
+         "properties": {
+          "speaker_id": {
+           "title": "Speaker ID",
+           "description": "Speaker alias used in each turn.",
+           "minLength": 1,
+           "type": "string"
+          },
+          "voice": {
+           "enum": [
+            "Achernar",
+            "Achird",
+            "Algenib",
+            "Algieba",
+            "Alnilam",
+            "Aoede",
+            "Autonoe",
+            "Callirrhoe",
+            "Charon",
+            "Despina",
+            "Enceladus",
+            "Erinome",
+            "Fenrir",
+            "Gacrux",
+            "Iapetus",
+            "Kore",
+            "Laomedeia",
+            "Leda",
+            "Orus",
+            "Pulcherrima",
+            "Puck",
+            "Rasalgethi",
+            "Sadachbia",
+            "Sadaltager",
+            "Schedar",
+            "Sulafat",
+            "Umbriel",
+            "Vindemiatrix",
+            "Zephyr",
+            "Zubenelgenubi"
+           ],
+           "title": "Voice",
+           "description": "Prebuilt voice for this speaker.",
+           "type": "string"
+          }
+         },
+         "title": "SpeakerConfig",
+         "required": [
+          "speaker_id",
+          "voice"
+         ],
+         "additionalProperties": false,
+         "x-fal-order-properties": [
+          "speaker_id",
+          "voice"
+         ],
+         "type": "object"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Exactly two distinct speaker aliases and their prebuilt voices for dialogue.",
+      "title": "Speakers"
+     },
+     "prompt": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Verbatim text for single-speaker speech. Put delivery directions in style_instructions; inline vocal events may use <laugh> or <sigh>. For dialogue, omit prompt and provide speakers and turns instead. The provider limits the complete input to 8,192 tokens.",
+      "title": "Prompt"
+     },
+     "turns": {
+      "anyOf": [
+       {
+        "minItems": 1,
+        "items": {
+         "properties": {
+          "speaker_id": {
+           "title": "Speaker ID",
+           "description": "Alias of a configured speaker.",
+           "minLength": 1,
+           "type": "string"
+          },
+          "text": {
+           "title": "Text",
+           "description": "Verbatim transcript for this turn.",
+           "minLength": 1,
+           "type": "string"
+          },
+          "style_instructions": {
+           "anyOf": [
+            {
+             "type": "string"
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "title": "Style Instructions",
+           "description": "Optional delivery style for this turn."
+          }
+         },
+         "title": "SpeechTurn",
+         "required": [
+          "speaker_id",
+          "text"
+         ],
+         "additionalProperties": false,
+         "x-fal-order-properties": [
+          "speaker_id",
+          "text",
+          "style_instructions"
+         ],
+         "type": "object"
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Ordered dialogue turns, each identifying a configured speaker.",
+      "title": "Turns"
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean"
+     },
+     "voice": {
+      "enum": [
+       "Achernar",
+       "Achird",
+       "Algenib",
+       "Algieba",
+       "Alnilam",
+       "Aoede",
+       "Autonoe",
+       "Callirrhoe",
+       "Charon",
+       "Despina",
+       "Enceladus",
+       "Erinome",
+       "Fenrir",
+       "Gacrux",
+       "Iapetus",
+       "Kore",
+       "Laomedeia",
+       "Leda",
+       "Orus",
+       "Pulcherrima",
+       "Puck",
+       "Rasalgethi",
+       "Sadachbia",
+       "Sadaltager",
+       "Schedar",
+       "Sulafat",
+       "Umbriel",
+       "Vindemiatrix",
+       "Zephyr",
+       "Zubenelgenubi"
+      ],
+      "title": "Voice",
+      "default": "Kore",
+      "description": "Prebuilt voice for single-speaker speech.",
+      "type": "string"
+     },
+     "style_instructions": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Delivery style, separate from the spoken transcript. Applies to all turns unless overridden.",
+      "title": "Style Instructions"
+     }
+    },
+    "title": "Gemini38TTSInput",
+    "additionalProperties": false,
+    "x-fal-order-properties": [
+     "prompt",
+     "style_instructions",
+     "voice",
+     "speakers",
+     "turns",
+     "enable_safety_checker"
+    ],
+    "type": "object"
+   }
+  },
+  "heygen/heygen-voice": {
+   "endpoint_id": "heygen/heygen-voice",
+   "display_name": "HeyGen Voice",
+   "description": "HeyGen Voice turns text into natural speech with a library voice or an instant clone from a reference clip.",
+   "input": {
+    "x-fal-order-properties": [
+     "text",
+     "voice",
+     "reference_audio_url",
+     "language",
+     "expressiveness_boost",
+     "enable_safety_checker"
+    ],
+    "properties": {
+     "voice": {
+      "title": "Voice",
+      "type": "string",
+      "description": "HeyGen public voice. Ignored when reference_audio_url is set.",
+      "enum": [
+       "Jonah",
+       "Nadine",
+       "Tabitha",
+       "Soren",
+       "Elowen",
+       "Vincent",
+       "Jocelyn",
+       "Marielle",
+       "Corinne",
+       "Lucian",
+       "Kieran",
+       "Hugh",
+       "Noelle",
+       "Bram",
+       "Ewan",
+       "Iona",
+       "Cecily",
+       "Simon",
+       "Weston",
+       "Felicity",
+       "Gareth",
+       "Rory",
+       "Meredith",
+       "Sabrina"
+      ],
+      "default": "Jonah"
+     },
+     "language": {
+      "title": "Language",
+      "anyOf": [
+       {
+        "enum": [
+         "ar",
+         "be",
+         "bg",
+         "ca",
+         "cs",
+         "da",
+         "de",
+         "el",
+         "en",
+         "es",
+         "fa",
+         "fi",
+         "fr",
+         "he",
+         "hi",
+         "hr",
+         "hu",
+         "id",
+         "it",
+         "ja",
+         "ko",
+         "mk",
+         "ms",
+         "nl",
+         "pl",
+         "pt",
+         "ro",
+         "ru",
+         "sk",
+         "sl",
+         "sr",
+         "sv",
+         "ta",
+         "th",
+         "tl",
+         "tr",
+         "uk",
+         "vi",
+         "zh"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Language of the text. Detected from the text when omitted."
+     },
+     "text": {
+      "title": "Text",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5000,
+      "description": "The text to speak."
+     },
+     "reference_audio_url": {
+      "title": "Reference Audio Url",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Recording of a single speaker to clone instead of using a public voice. Only the first 3 minutes are used."
+     },
+     "expressiveness_boost": {
+      "maximum": 1,
+      "title": "Expressiveness Boost",
+      "type": "number",
+      "description": "How expressive the delivery is.",
+      "minimum": 0,
+      "default": 1
+     },
+     "enable_safety_checker": {
+      "title": "Enable Safety Checker",
+      "type": "boolean",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "default": true
+     }
+    },
+    "additionalProperties": false,
+    "title": "HeyGenVoiceInput",
+    "type": "object",
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "heygen/heygen-voice/turbo": {
+   "endpoint_id": "heygen/heygen-voice/turbo",
+   "display_name": "HeyGen Voice Turbo",
+   "description": "HeyGen Voice Turbo is the fast, low-cost tier of HeyGen Voice, with library voices and instant cloning from a reference clip.",
+   "input": {
+    "x-fal-order-properties": [
+     "text",
+     "voice",
+     "reference_audio_url",
+     "language",
+     "expressiveness_boost",
+     "enable_safety_checker"
+    ],
+    "properties": {
+     "voice": {
+      "title": "Voice",
+      "type": "string",
+      "description": "HeyGen public voice. Ignored when reference_audio_url is set.",
+      "enum": [
+       "Jonah",
+       "Nadine",
+       "Tabitha",
+       "Soren",
+       "Elowen",
+       "Vincent",
+       "Jocelyn",
+       "Marielle",
+       "Corinne",
+       "Lucian",
+       "Kieran",
+       "Hugh",
+       "Noelle",
+       "Bram",
+       "Ewan",
+       "Iona",
+       "Cecily",
+       "Simon",
+       "Weston",
+       "Felicity",
+       "Gareth",
+       "Rory",
+       "Meredith",
+       "Sabrina"
+      ],
+      "default": "Jonah"
+     },
+     "language": {
+      "title": "Language",
+      "anyOf": [
+       {
+        "enum": [
+         "ar",
+         "be",
+         "bg",
+         "ca",
+         "cs",
+         "da",
+         "de",
+         "el",
+         "en",
+         "es",
+         "fa",
+         "fi",
+         "fr",
+         "he",
+         "hi",
+         "hr",
+         "hu",
+         "id",
+         "it",
+         "ja",
+         "ko",
+         "mk",
+         "ms",
+         "nl",
+         "pl",
+         "pt",
+         "ro",
+         "ru",
+         "sk",
+         "sl",
+         "sr",
+         "sv",
+         "ta",
+         "th",
+         "tl",
+         "tr",
+         "uk",
+         "vi",
+         "zh"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Language of the text. Detected from the text when omitted."
+     },
+     "text": {
+      "title": "Text",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5000,
+      "description": "The text to speak."
+     },
+     "reference_audio_url": {
+      "title": "Reference Audio Url",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Recording of a single speaker to clone instead of using a public voice. Only the first 3 minutes are used."
+     },
+     "expressiveness_boost": {
+      "maximum": 1,
+      "title": "Expressiveness Boost",
+      "type": "number",
+      "description": "How expressive the delivery is.",
+      "minimum": 0,
+      "default": 1
+     },
+     "enable_safety_checker": {
+      "title": "Enable Safety Checker",
+      "type": "boolean",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "default": true
+     }
+    },
+    "additionalProperties": false,
+    "title": "HeyGenVoiceInput",
+    "type": "object",
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "fal-ai/index-tts-2/text-to-speech": {
+   "endpoint_id": "fal-ai/index-tts-2/text-to-speech",
+   "display_name": "Index TTS 2.0",
+   "description": "Generate natural, clear speeches using Index TTS 2.0 from IndexTeam",
+   "input": {
+    "required": [
+     "audio_url",
+     "prompt"
+    ],
+    "x-fal-order-properties": [
+     "audio_url",
+     "prompt",
+     "emotional_audio_url",
+     "strength",
+     "emotional_strengths",
+     "should_use_prompt_for_emotion",
+     "emotion_prompt",
+     "enable_safety_checker"
+    ],
+    "type": "object",
+    "title": "IndexTTS2Input",
+    "properties": {
+     "prompt": {
+      "title": "Prompt",
+      "type": "string",
+      "description": "The speech prompt to generate"
+     },
+     "emotional_strengths": {
+      "description": "The strengths of individual emotions for fine-grained control. ",
+      "anyOf": [
+       {
+        "properties": {
+         "surprised": {
+          "maximum": 1,
+          "default": 0,
+          "minimum": 0,
+          "type": "number",
+          "title": "Surprised",
+          "description": "Strength of surprise emotion"
+         },
+         "sad": {
+          "maximum": 1,
+          "default": 0,
+          "minimum": 0,
+          "type": "number",
+          "title": "Sad",
+          "description": "Strength of sadness emotion"
+         },
+         "angry": {
+          "maximum": 1,
+          "default": 0,
+          "minimum": 0,
+          "type": "number",
+          "title": "Angry",
+          "description": "Strength of anger emotion"
+         },
+         "melancholic": {
+          "maximum": 1,
+          "default": 0,
+          "minimum": 0,
+          "type": "number",
+          "title": "Melancholic",
+          "description": "Strength of melancholic emotion"
+         },
+         "disgusted": {
+          "maximum": 1,
+          "default": 0,
+          "minimum": 0,
+          "type": "number",
+          "title": "Disgusted",
+          "description": "Strength of disgust emotion"
+         },
+         "happy": {
+          "maximum": 1,
+          "default": 0,
+          "minimum": 0,
+          "type": "number",
+          "title": "Happy",
+          "description": "Strength of happiness emotion"
+         },
+         "afraid": {
+          "maximum": 1,
+          "default": 0,
+          "minimum": 0,
+          "type": "number",
+          "title": "Afraid",
+          "description": "Strength of fear emotion"
+         },
+         "calm": {
+          "maximum": 1,
+          "default": 0,
+          "minimum": 0,
+          "type": "number",
+          "title": "Calm",
+          "description": "Strength of calm emotion"
+         }
+        },
+        "x-fal-order-properties": [
+         "happy",
+         "angry",
+         "sad",
+         "afraid",
+         "disgusted",
+         "melancholic",
+         "surprised",
+         "calm"
+        ],
+        "type": "object",
+        "title": "EmotionalStrengths"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "emotion_prompt": {
+      "title": "Emotion Prompt",
+      "description": "The emotional prompt to influence the emotional style. Must be used together with should_use_prompt_for_emotion.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "audio_url": {
+      "title": "Audio Url",
+      "type": "string",
+      "description": "The audio file to generate the speech from."
+     },
+     "emotional_audio_url": {
+      "description": "The emotional reference audio file to extract the style from.",
+      "title": "Emotional Audio Url",
+      "anyOf": [
+       {
+        "type": "string",
+        "ui": {
+         "field": "audio"
+        }
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "strength": {
+      "maximum": 1,
+      "default": 1,
+      "minimum": 0,
+      "type": "number",
+      "title": "Strength",
+      "description": "The strength of the emotional style transfer. Higher values result in stronger emotional influence."
+     },
+     "should_use_prompt_for_emotion": {
+      "default": false,
+      "title": "Should Use Prompt For Emotion",
+      "description": "Whether to use the `prompt` to calculate emotional strengths, if enabled it will overwrite the `emotional_strengths` values. If `emotion_prompt` is provided, it will be used to instead of `prompt` to extract the emotional style.",
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    }
+   }
+  },
+  "fal-ai/inworld-tts": {
+   "endpoint_id": "fal-ai/inworld-tts",
+   "display_name": "Inworld TTS-1.5 Max",
+   "description": "Text to Speech Endpoint for Inworld's TTS-1.5 Max.",
+   "input": {
+    "properties": {
+     "text": {
+      "maxLength": 2000,
+      "type": "string",
+      "title": "Text",
+      "description": "The text to synthesize into speech. Maximum 2000 characters."
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "sample_rate_hertz": {
+      "enum": [
+       8000,
+       16000,
+       24000,
+       32000,
+       40000,
+       48000
+      ],
+      "default": 48000,
+      "type": "integer",
+      "title": "Sample Rate Hertz",
+      "description": "The sample rate in Hz for the output audio."
+     },
+     "voice": {
+      "enum": [
+       "Loretta (en)",
+       "Darlene (en)",
+       "Marlene (en)",
+       "Hank (en)",
+       "Evelyn (en)",
+       "Celeste (en)",
+       "Pippa (en)",
+       "Tessa (en)",
+       "Liam (en)",
+       "Callum (en)",
+       "Hamish (en)",
+       "Abby (en)",
+       "Graham (en)",
+       "Rupert (en)",
+       "Mortimer (en)",
+       "Snik (en)",
+       "Anjali (en)",
+       "Saanvi (en)",
+       "Arjun (en)",
+       "Claire (en)",
+       "Oliver (en)",
+       "Simon (en)",
+       "Elliot (en)",
+       "James (en)",
+       "Serena (en)",
+       "Gareth (en)",
+       "Vinny (en)",
+       "Lauren (en)",
+       "Jessica (en)",
+       "Ethan (en)",
+       "Tyler (en)",
+       "Jason (en)",
+       "Chloe (en)",
+       "Veronica (en)",
+       "Victoria (en)",
+       "Miranda (en)",
+       "Sebastian (en)",
+       "Victor (en)",
+       "Malcolm (en)",
+       "Kayla (en)",
+       "Nate (en)",
+       "Jake (en)",
+       "Brian (en)",
+       "Amina (en)",
+       "Kelsey (en)",
+       "Derek (en)",
+       "Grant (en)",
+       "Evan (en)",
+       "Alex (en)",
+       "Ashley (en)",
+       "Craig (en)",
+       "Deborah (en)",
+       "Dennis (en)",
+       "Edward (en)",
+       "Elizabeth (en)",
+       "Hades (en)",
+       "Julia (en)",
+       "Pixie (en)",
+       "Mark (en)",
+       "Olivia (en)",
+       "Priya (en)",
+       "Ronald (en)",
+       "Sarah (en)",
+       "Shaun (en)",
+       "Theodore (en)",
+       "Timothy (en)",
+       "Wendy (en)",
+       "Dominus (en)",
+       "Hana (en)",
+       "Clive (en)",
+       "Carter (en)",
+       "Blake (en)",
+       "Luna (en)",
+       "Yichen (zh)",
+       "Xiaoyin (zh)",
+       "Xinyi (zh)",
+       "Jing (zh)",
+       "Erik (nl)",
+       "Katrien (nl)",
+       "Lennart (nl)",
+       "Lore (nl)",
+       "Alain (fr)",
+       "H\u00e9l\u00e8ne (fr)",
+       "Mathieu (fr)",
+       "\u00c9tienne (fr)",
+       "Johanna (de)",
+       "Josef (de)",
+       "Gianni (it)",
+       "Orietta (it)",
+       "Asuka (ja)",
+       "Satoshi (ja)",
+       "Hyunwoo (ko)",
+       "Minji (ko)",
+       "Seojun (ko)",
+       "Yoona (ko)",
+       "Szymon (pl)",
+       "Wojciech (pl)",
+       "Heitor (pt)",
+       "Mait\u00ea (pt)",
+       "Diego (es)",
+       "Lupita (es)",
+       "Miguel (es)",
+       "Rafael (es)",
+       "Svetlana (ru)",
+       "Elena (ru)",
+       "Dmitry (ru)",
+       "Nikolai (ru)",
+       "Riya (hi)",
+       "Manoj (hi)",
+       "Yael (he)",
+       "Oren (he)",
+       "Nour (ar)",
+       "Omar (ar)"
+      ],
+      "default": "Craig (en)",
+      "type": "string",
+      "title": "Voice",
+      "description": "The voice to use for synthesis."
+     }
+    },
+    "x-fal-order-properties": [
+     "text",
+     "voice",
+     "sample_rate_hertz",
+     "enable_safety_checker"
+    ],
+    "type": "object",
+    "title": "InworldTTSInput",
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "fal-ai/kling-video/v1/tts": {
+   "endpoint_id": "fal-ai/kling-video/v1/tts",
+   "display_name": "Kling TTS",
+   "description": "Generate speech from text prompts and different voices using the Kling TTS model, which leverages advanced AI techniques to create high-quality text-to-speech.",
+   "input": {
+    "properties": {
+     "voice_speed": {
+      "default": 1,
+      "title": "Voice Speed",
+      "type": "number",
+      "minimum": 0.8,
+      "maximum": 2,
+      "description": "Rate of speech"
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean",
+      "description": "Disabling safety checks requires account authorization; unauthorized requests are always checked."
+     },
+     "voice_id": {
+      "default": "genshin_vindi2",
+      "enum": [
+       "genshin_vindi2",
+       "zhinen_xuesheng",
+       "AOT",
+       "ai_shatang",
+       "genshin_klee2",
+       "genshin_kirara",
+       "ai_kaiya",
+       "oversea_male1",
+       "ai_chenjiahao_712",
+       "girlfriend_4_speech02",
+       "chat1_female_new-3",
+       "chat_0407_5-1",
+       "cartoon-boy-07",
+       "uk_boy1",
+       "cartoon-girl-01",
+       "PeppaPig_platform",
+       "ai_huangzhong_712",
+       "ai_huangyaoshi_712",
+       "ai_laoguowang_712",
+       "chengshu_jiejie",
+       "you_pingjing",
+       "calm_story1",
+       "uk_man2",
+       "laopopo_speech02",
+       "heainainai_speech02",
+       "reader_en_m-v1",
+       "commercial_lady_en_f-v1",
+       "tiyuxi_xuedi",
+       "tiexin_nanyou",
+       "girlfriend_1_speech02",
+       "girlfriend_2_speech02",
+       "zhuxi_speech02",
+       "uk_oldman3",
+       "dongbeilaotie_speech02",
+       "chongqingxiaohuo_speech02",
+       "chuanmeizi_speech02",
+       "chaoshandashu_speech02",
+       "ai_taiwan_man2_speech02",
+       "xianzhanggui_speech02",
+       "tianjinjiejie_speech02",
+       "diyinnansang_DB_CN_M_04-v2",
+       "yizhipiannan-v1",
+       "guanxiaofang-v2",
+       "tianmeixuemei-v1",
+       "daopianyansang-v1",
+       "mengwa-v1"
+      ],
+      "title": "Voice Id",
+      "type": "string",
+      "description": "The voice ID to use for speech synthesis"
+     },
+     "text": {
+      "maxLength": 500,
+      "title": "Text",
+      "type": "string",
+      "description": "The text to be converted to speech"
+     }
+    },
+    "title": "TTSInput",
+    "type": "object",
+    "x-fal-order-properties": [
+     "enable_safety_checker",
+     "text",
+     "voice_id",
+     "voice_speed"
+    ],
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "fal-ai/maya/batch": {
+   "endpoint_id": "fal-ai/maya/batch",
+   "display_name": "Maya",
+   "description": "Maya1 is a state-of-the-art speech model by Maya Research for expressive voice generation, built to capture real human emotion and precise voice design.",
+   "input": {
+    "description": "Input schema for batch Maya-1-Voice TTS generation",
+    "type": "object",
+    "properties": {
+     "sample_rate": {
+      "description": "Output audio sample rate for all generations. 48 kHz provides higher quality, 24 kHz is faster.",
+      "type": "string",
+      "default": "48 kHz",
+      "enum": [
+       "48 kHz",
+       "24 kHz"
+      ],
+      "title": "Sample Rate"
+     },
+     "temperature": {
+      "description": "Sampling temperature for all generations.",
+      "minimum": 0,
+      "type": "number",
+      "default": 0.4,
+      "maximum": 2,
+      "title": "Temperature"
+     },
+     "top_p": {
+      "description": "Nucleus sampling parameter for all generations.",
+      "minimum": 0,
+      "type": "number",
+      "default": 0.9,
+      "maximum": 1,
+      "title": "Top P"
+     },
+     "enable_safety_checker": {
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean",
+      "default": true,
+      "title": "Enable Safety Checker"
+     },
+     "texts": {
+      "description": "List of texts to synthesize into speech. You can embed emotion tags in each text using the format <emotion_name>.",
+      "title": "Texts",
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "minItems": 1,
+      "maxItems": 100
+     },
+     "max_tokens": {
+      "description": "Maximum SNAC tokens per generation.",
+      "minimum": 28,
+      "type": "integer",
+      "default": 2000,
+      "maximum": 4000,
+      "title": "Max Tokens"
+     },
+     "repetition_penalty": {
+      "description": "Repetition penalty for all generations.",
+      "minimum": 1,
+      "type": "number",
+      "default": 1.1,
+      "maximum": 2,
+      "title": "Repetition Penalty"
+     },
+     "output_format": {
+      "description": "Output audio format for all generated speech files",
+      "type": "string",
+      "default": "wav",
+      "enum": [
+       "wav",
+       "mp3"
+      ],
+      "title": "Output Format"
+     },
+     "prompts": {
+      "description": "List of voice descriptions for each text. Must match the length of texts list. Each describes the voice/character attributes.",
+      "title": "Prompts",
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "minItems": 1,
+      "maxItems": 100
+     }
+    },
+    "required": [
+     "texts",
+     "prompts"
+    ],
+    "x-fal-order-properties": [
+     "texts",
+     "prompts",
+     "temperature",
+     "top_p",
+     "max_tokens",
+     "repetition_penalty",
+     "sample_rate",
+     "output_format",
+     "enable_safety_checker"
+    ],
+    "title": "MayaVoiceBatchInput"
+   }
+  },
+  "fal-ai/maya/stream": {
+   "endpoint_id": "fal-ai/maya/stream",
+   "display_name": "Maya",
+   "description": "Maya1 is a state-of-the-art speech model by Maya Research for expressive voice generation, built to capture real human emotion and precise voice design.",
+   "input": {
+    "description": "Input schema for Maya-1-Voice streaming TTS generation",
+    "type": "object",
+    "properties": {
+     "sample_rate": {
+      "description": "Output audio sample rate. 48 kHz uses upsampling for higher quality audio, 24 kHz is native SNAC output (faster, lower latency).",
+      "type": "string",
+      "default": "24 kHz",
+      "enum": [
+       "48 kHz",
+       "24 kHz"
+      ],
+      "title": "Sample Rate"
+     },
+     "text": {
+      "maxLength": 5000,
+      "type": "string",
+      "description": "The text to synthesize into speech. You can embed emotion tags anywhere in the text using the format <emotion_name>. Available emotions: laugh, laugh_harder, sigh, chuckle, gasp, angry, excited, whisper, cry, scream, sing, snort, exhale, gulp, giggle, sarcastic, curious. Example: 'Hello world! <excited> This is amazing!' or 'I can't believe this <sigh> happened again.'",
+      "title": "Text"
+     },
+     "top_p": {
+      "description": "Nucleus sampling parameter. Controls diversity of token selection.",
+      "minimum": 0,
+      "type": "number",
+      "default": 0.9,
+      "maximum": 1,
+      "title": "Top P"
+     },
+     "enable_safety_checker": {
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean",
+      "default": true,
+      "title": "Enable Safety Checker"
+     },
+     "temperature": {
+      "description": "Sampling temperature. Lower values (0.2-0.5) produce more stable/consistent audio. Higher values add variation.",
+      "minimum": 0,
+      "type": "number",
+      "default": 0.4,
+      "maximum": 2,
+      "title": "Temperature"
+     },
+     "prompt": {
+      "maxLength": 500,
+      "type": "string",
+      "description": "Description of the voice/character. Includes attributes like age, accent, pitch, timbre, pacing, tone, and intensity. See examples for format.",
+      "title": "Prompt"
+     },
+     "output_format": {
+      "description": "Output audio format. 'mp3' for browser-playable audio, 'wav' for uncompressed audio, 'pcm' for raw PCM (lowest latency, requires client-side decoding).",
+      "type": "string",
+      "default": "mp3",
+      "enum": [
+       "mp3",
+       "wav",
+       "pcm"
+      ],
+      "title": "Output Format"
+     },
+     "repetition_penalty": {
+      "description": "Penalty for repeating tokens. Higher values reduce repetition artifacts.",
+      "minimum": 1,
+      "type": "number",
+      "default": 1.1,
+      "maximum": 2,
+      "title": "Repetition Penalty"
+     },
+     "max_tokens": {
+      "description": "Maximum number of SNAC tokens to generate (7 tokens per frame). Controls maximum audio length.",
+      "minimum": 28,
+      "type": "integer",
+      "default": 2000,
+      "maximum": 4000,
+      "title": "Max Tokens"
+     }
+    },
+    "required": [
+     "text",
+     "prompt"
+    ],
+    "x-fal-order-properties": [
+     "text",
+     "prompt",
+     "temperature",
+     "top_p",
+     "max_tokens",
+     "repetition_penalty",
+     "sample_rate",
+     "output_format",
+     "enable_safety_checker"
+    ],
+    "title": "MayaVoiceStreamingInput"
+   }
+  },
+  "fal-ai/maya": {
+   "endpoint_id": "fal-ai/maya",
+   "display_name": "Maya1",
+   "description": "Maya1 is a state-of-the-art speech model by Maya Research for expressive voice generation, built to capture real human emotion and precise voice design.",
+   "input": {
+    "description": "Input schema for Maya-1-Voice TTS generation",
+    "type": "object",
+    "properties": {
+     "sample_rate": {
+      "description": "Output audio sample rate. 48 kHz provides higher quality audio, 24 kHz is faster.",
+      "type": "string",
+      "default": "48 kHz",
+      "enum": [
+       "48 kHz",
+       "24 kHz"
+      ],
+      "title": "Sample Rate"
+     },
+     "text": {
+      "maxLength": 5000,
+      "type": "string",
+      "description": "The text to synthesize into speech. You can embed emotion tags anywhere in the text using the format <emotion_name>. Available emotions: laugh, laugh_harder, sigh, chuckle, gasp, angry, excited, whisper, cry, scream, sing, snort, exhale, gulp, giggle, sarcastic, curious. Example: 'Hello world! <excited> This is amazing!' or 'I can't believe this <sigh> happened again.'",
+      "title": "Text"
+     },
+     "top_p": {
+      "description": "Nucleus sampling parameter. Controls diversity of token selection.",
+      "minimum": 0,
+      "type": "number",
+      "default": 0.9,
+      "maximum": 1,
+      "title": "Top P"
+     },
+     "enable_safety_checker": {
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean",
+      "default": true,
+      "title": "Enable Safety Checker"
+     },
+     "temperature": {
+      "description": "Sampling temperature. Lower values (0.2-0.5) produce more stable/consistent audio. Higher values add variation.",
+      "minimum": 0,
+      "type": "number",
+      "default": 0.4,
+      "maximum": 2,
+      "title": "Temperature"
+     },
+     "prompt": {
+      "maxLength": 500,
+      "type": "string",
+      "description": "Description of the voice/character. Includes attributes like age, accent, pitch, timbre, pacing, tone, and intensity. See examples for format.",
+      "title": "Prompt"
+     },
+     "output_format": {
+      "description": "Output audio format for the generated speech",
+      "type": "string",
+      "default": "wav",
+      "enum": [
+       "wav",
+       "mp3"
+      ],
+      "title": "Output Format"
+     },
+     "repetition_penalty": {
+      "description": "Penalty for repeating tokens. Higher values reduce repetition artifacts.",
+      "minimum": 1,
+      "type": "number",
+      "default": 1.1,
+      "maximum": 2,
+      "title": "Repetition Penalty"
+     },
+     "max_tokens": {
+      "description": "Maximum number of SNAC tokens to generate (7 tokens per frame). Controls maximum audio length.",
+      "minimum": 28,
+      "type": "integer",
+      "default": 2000,
+      "maximum": 4000,
+      "title": "Max Tokens"
+     }
+    },
+    "required": [
+     "text",
+     "prompt"
+    ],
+    "x-fal-order-properties": [
+     "text",
+     "prompt",
+     "temperature",
+     "top_p",
+     "max_tokens",
+     "repetition_penalty",
+     "sample_rate",
+     "output_format",
+     "enable_safety_checker"
+    ],
+    "title": "MayaVoiceInput"
+   }
+  },
+  "fal-ai/minimax/preview/speech-2.5-hd": {
+   "endpoint_id": "fal-ai/minimax/preview/speech-2.5-hd",
+   "display_name": "Minimax",
+   "description": "Generate speech from text prompts and different voices using the MiniMax Speech-02 HD model, which leverages advanced AI techniques to create high-quality text-to-speech.",
+   "input": {
+    "properties": {
+     "audio_setting": {
+      "properties": {
+       "channel": {
+        "type": "integer",
+        "title": "Channel",
+        "default": 1,
+        "enum": [
+         1,
+         2
+        ],
+        "description": "Number of audio channels (1=mono, 2=stereo)"
+       },
+       "bitrate": {
+        "type": "integer",
+        "title": "Bitrate",
+        "default": 128000,
+        "enum": [
+         32000,
+         64000,
+         128000,
+         256000
+        ],
+        "description": "Bitrate of generated audio"
+       },
+       "format": {
+        "type": "string",
+        "title": "Format",
+        "default": "mp3",
+        "enum": [
+         "mp3",
+         "pcm",
+         "flac"
+        ],
+        "description": "Audio format"
+       },
+       "sample_rate": {
+        "type": "integer",
+        "title": "Sample Rate",
+        "default": 32000,
+        "enum": [
+         8000,
+         16000,
+         22050,
+         24000,
+         32000,
+         44100
+        ],
+        "description": "Sample rate of generated audio"
+       }
+      },
+      "type": "object",
+      "title": "AudioSetting",
+      "x-fal-order-properties": [
+       "sample_rate",
+       "bitrate",
+       "format",
+       "channel"
+      ]
+     },
+     "language_boost": {
+      "title": "Language Boost",
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "Persian",
+         "Filipino",
+         "Tamil",
+         "Chinese",
+         "Chinese,Yue",
+         "English",
+         "Arabic",
+         "Russian",
+         "Spanish",
+         "French",
+         "Portuguese",
+         "German",
+         "Turkish",
+         "Dutch",
+         "Ukrainian",
+         "Vietnamese",
+         "Indonesian",
+         "Japanese",
+         "Italian",
+         "Korean",
+         "Thai",
+         "Polish",
+         "Romanian",
+         "Greek",
+         "Czech",
+         "Finnish",
+         "Hindi",
+         "Bulgarian",
+         "Danish",
+         "Hebrew",
+         "Malay",
+         "Slovak",
+         "Swedish",
+         "Croatian",
+         "Hungarian",
+         "Norwegian",
+         "Slovenian",
+         "Catalan",
+         "Nynorsk",
+         "Afrikaans",
+         "auto"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Enhance recognition of specified languages and dialects"
+     },
+     "output_format": {
+      "type": "string",
+      "title": "Output Format",
+      "default": "hex",
+      "enum": [
+       "url",
+       "hex"
+      ],
+      "description": "Format of the output content (non-streaming only)"
+     },
+     "text": {
+      "maxLength": 5000,
+      "type": "string",
+      "title": "Text",
+      "minLength": 1,
+      "description": "Text to convert to speech (max 5000 characters, minimum 1 non-whitespace character)"
+     },
+     "pronunciation_dict": {
+      "anyOf": [
+       {
+        "properties": {
+         "tone_list": {
+          "description": "List of pronunciation replacements in format ['text/(pronunciation)', ...]. For Chinese, tones are 1-5. Example: ['\u71d5\u5c11\u98de/(yan4)(shao3)(fei1)']",
+          "type": "array",
+          "title": "Tone List",
+          "items": {
+           "type": "string"
+          }
+         }
+        },
+        "type": "object",
+        "title": "PronunciationDict",
+        "x-fal-order-properties": [
+         "tone_list"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Custom pronunciation dictionary for text replacement"
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "voice_setting": {
+      "properties": {
+       "speed": {
+        "type": "number",
+        "title": "Speed",
+        "maximum": 2,
+        "default": 1,
+        "minimum": 0.5,
+        "description": "Speech speed (0.5-2.0)"
+       },
+       "vol": {
+        "type": "number",
+        "title": "Vol",
+        "maximum": 10,
+        "default": 1,
+        "minimum": 0.01,
+        "description": "Volume (0-10)"
+       },
+       "voice_id": {
+        "type": "string",
+        "title": "Voice Id",
+        "minLength": 1,
+        "default": "Wise_Woman",
+        "description": "Predefined voice ID to use for synthesis"
+       },
+       "pitch": {
+        "type": "integer",
+        "title": "Pitch",
+        "maximum": 12,
+        "default": 0,
+        "minimum": -12,
+        "description": "Voice pitch (-12 to 12)"
+       },
+       "english_normalization": {
+        "type": "boolean",
+        "title": "English Normalization",
+        "default": false,
+        "description": "Enables English text normalization to improve number reading performance, with a slight increase in latency"
+       },
+       "emotion": {
+        "title": "Emotion",
+        "anyOf": [
+         {
+          "type": "string",
+          "enum": [
+           "happy",
+           "sad",
+           "angry",
+           "fearful",
+           "disgusted",
+           "surprised",
+           "neutral"
+          ]
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Emotion of the generated speech"
+       }
+      },
+      "type": "object",
+      "title": "VoiceSetting",
+      "x-fal-order-properties": [
+       "voice_id",
+       "speed",
+       "vol",
+       "pitch",
+       "emotion",
+       "english_normalization"
+      ]
+     }
+    },
+    "type": "object",
+    "title": "TextToSpeechHDv25Request",
+    "x-fal-order-properties": [
+     "enable_safety_checker",
+     "text",
+     "voice_setting",
+     "audio_setting",
+     "language_boost",
+     "output_format",
+     "pronunciation_dict"
+    ],
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "fal-ai/minimax/preview/speech-2.5-turbo": {
+   "endpoint_id": "fal-ai/minimax/preview/speech-2.5-turbo",
+   "display_name": "Minimax",
+   "description": "Generate fast speech from text prompts and different voices using the MiniMax Speech-02 Turbo model, which leverages advanced AI techniques to create high-quality text-to-speech.",
+   "input": {
+    "properties": {
+     "audio_setting": {
+      "properties": {
+       "channel": {
+        "type": "integer",
+        "title": "Channel",
+        "default": 1,
+        "enum": [
+         1,
+         2
+        ],
+        "description": "Number of audio channels (1=mono, 2=stereo)"
+       },
+       "bitrate": {
+        "type": "integer",
+        "title": "Bitrate",
+        "default": 128000,
+        "enum": [
+         32000,
+         64000,
+         128000,
+         256000
+        ],
+        "description": "Bitrate of generated audio"
+       },
+       "format": {
+        "type": "string",
+        "title": "Format",
+        "default": "mp3",
+        "enum": [
+         "mp3",
+         "pcm",
+         "flac"
+        ],
+        "description": "Audio format"
+       },
+       "sample_rate": {
+        "type": "integer",
+        "title": "Sample Rate",
+        "default": 32000,
+        "enum": [
+         8000,
+         16000,
+         22050,
+         24000,
+         32000,
+         44100
+        ],
+        "description": "Sample rate of generated audio"
+       }
+      },
+      "type": "object",
+      "title": "AudioSetting",
+      "x-fal-order-properties": [
+       "sample_rate",
+       "bitrate",
+       "format",
+       "channel"
+      ]
+     },
+     "language_boost": {
+      "title": "Language Boost",
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "Persian",
+         "Filipino",
+         "Tamil",
+         "Chinese",
+         "Chinese,Yue",
+         "English",
+         "Arabic",
+         "Russian",
+         "Spanish",
+         "French",
+         "Portuguese",
+         "German",
+         "Turkish",
+         "Dutch",
+         "Ukrainian",
+         "Vietnamese",
+         "Indonesian",
+         "Japanese",
+         "Italian",
+         "Korean",
+         "Thai",
+         "Polish",
+         "Romanian",
+         "Greek",
+         "Czech",
+         "Finnish",
+         "Hindi",
+         "Bulgarian",
+         "Danish",
+         "Hebrew",
+         "Malay",
+         "Slovak",
+         "Swedish",
+         "Croatian",
+         "Hungarian",
+         "Norwegian",
+         "Slovenian",
+         "Catalan",
+         "Nynorsk",
+         "Afrikaans",
+         "auto"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Enhance recognition of specified languages and dialects"
+     },
+     "output_format": {
+      "type": "string",
+      "title": "Output Format",
+      "default": "hex",
+      "enum": [
+       "url",
+       "hex"
+      ],
+      "description": "Format of the output content (non-streaming only)"
+     },
+     "text": {
+      "maxLength": 5000,
+      "type": "string",
+      "title": "Text",
+      "minLength": 1,
+      "description": "Text to convert to speech (max 5000 characters, minimum 1 non-whitespace character)"
+     },
+     "pronunciation_dict": {
+      "anyOf": [
+       {
+        "properties": {
+         "tone_list": {
+          "description": "List of pronunciation replacements in format ['text/(pronunciation)', ...]. For Chinese, tones are 1-5. Example: ['\u71d5\u5c11\u98de/(yan4)(shao3)(fei1)']",
+          "type": "array",
+          "title": "Tone List",
+          "items": {
+           "type": "string"
+          }
+         }
+        },
+        "type": "object",
+        "title": "PronunciationDict",
+        "x-fal-order-properties": [
+         "tone_list"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Custom pronunciation dictionary for text replacement"
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "voice_setting": {
+      "properties": {
+       "speed": {
+        "type": "number",
+        "title": "Speed",
+        "maximum": 2,
+        "default": 1,
+        "minimum": 0.5,
+        "description": "Speech speed (0.5-2.0)"
+       },
+       "vol": {
+        "type": "number",
+        "title": "Vol",
+        "maximum": 10,
+        "default": 1,
+        "minimum": 0.01,
+        "description": "Volume (0-10)"
+       },
+       "voice_id": {
+        "type": "string",
+        "title": "Voice Id",
+        "minLength": 1,
+        "default": "Wise_Woman",
+        "description": "Predefined voice ID to use for synthesis"
+       },
+       "pitch": {
+        "type": "integer",
+        "title": "Pitch",
+        "maximum": 12,
+        "default": 0,
+        "minimum": -12,
+        "description": "Voice pitch (-12 to 12)"
+       },
+       "english_normalization": {
+        "type": "boolean",
+        "title": "English Normalization",
+        "default": false,
+        "description": "Enables English text normalization to improve number reading performance, with a slight increase in latency"
+       },
+       "emotion": {
+        "title": "Emotion",
+        "anyOf": [
+         {
+          "type": "string",
+          "enum": [
+           "happy",
+           "sad",
+           "angry",
+           "fearful",
+           "disgusted",
+           "surprised",
+           "neutral"
+          ]
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Emotion of the generated speech"
+       }
+      },
+      "type": "object",
+      "title": "VoiceSetting",
+      "x-fal-order-properties": [
+       "voice_id",
+       "speed",
+       "vol",
+       "pitch",
+       "emotion",
+       "english_normalization"
+      ]
+     }
+    },
+    "type": "object",
+    "title": "TextToSpeechTurbov25Request",
+    "x-fal-order-properties": [
+     "enable_safety_checker",
+     "text",
+     "voice_setting",
+     "audio_setting",
+     "language_boost",
+     "output_format",
+     "pronunciation_dict"
+    ],
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "fal-ai/minimax/speech-2.6-hd": {
+   "endpoint_id": "fal-ai/minimax/speech-2.6-hd",
+   "display_name": "MiniMax Speech 2.6 [HD]",
+   "description": "Generate speech from text prompts and different voices using the MiniMax Speech-2.6 HD model, which leverages advanced AI techniques to create high-quality text-to-speech.",
+   "input": {
+    "properties": {
+     "normalization_setting": {
+      "properties": {
+       "target_range": {
+        "type": "number",
+        "title": "Target Range",
+        "maximum": 20,
+        "default": 8,
+        "minimum": 0,
+        "description": "Target loudness range in LU (default 8.0)"
+       },
+       "enabled": {
+        "type": "boolean",
+        "title": "Enabled",
+        "default": true,
+        "description": "Enable loudness normalization for the audio"
+       },
+       "target_loudness": {
+        "type": "number",
+        "title": "Target Loudness",
+        "maximum": -10,
+        "default": -18,
+        "minimum": -70,
+        "description": "Target loudness in LUFS (default -18.0)"
+       },
+       "target_peak": {
+        "type": "number",
+        "title": "Target Peak",
+        "maximum": 0,
+        "default": -0.5,
+        "minimum": -3,
+        "description": "Target peak level in dBTP (default -0.5)."
+       }
+      },
+      "type": "object",
+      "title": "LoudnessNormalizationSetting",
+      "x-fal-order-properties": [
+       "enabled",
+       "target_loudness",
+       "target_range",
+       "target_peak"
+      ]
+     },
+     "audio_setting": {
+      "properties": {
+       "channel": {
+        "type": "integer",
+        "title": "Channel",
+        "default": 1,
+        "enum": [
+         1,
+         2
+        ],
+        "description": "Number of audio channels (1=mono, 2=stereo)"
+       },
+       "bitrate": {
+        "type": "integer",
+        "title": "Bitrate",
+        "default": 128000,
+        "enum": [
+         32000,
+         64000,
+         128000,
+         256000
+        ],
+        "description": "Bitrate of generated audio"
+       },
+       "format": {
+        "type": "string",
+        "title": "Format",
+        "default": "mp3",
+        "enum": [
+         "mp3",
+         "pcm",
+         "flac"
+        ],
+        "description": "Audio format"
+       },
+       "sample_rate": {
+        "type": "integer",
+        "title": "Sample Rate",
+        "default": 32000,
+        "enum": [
+         8000,
+         16000,
+         22050,
+         24000,
+         32000,
+         44100
+        ],
+        "description": "Sample rate of generated audio"
+       }
+      },
+      "type": "object",
+      "title": "AudioSetting",
+      "x-fal-order-properties": [
+       "sample_rate",
+       "bitrate",
+       "format",
+       "channel"
+      ]
+     },
+     "pronunciation_dict": {
+      "anyOf": [
+       {
+        "properties": {
+         "tone_list": {
+          "description": "List of pronunciation replacements in format ['text/(pronunciation)', ...]. For Chinese, tones are 1-5. Example: ['\u71d5\u5c11\u98de/(yan4)(shao3)(fei1)']",
+          "type": "array",
+          "title": "Tone List",
+          "items": {
+           "type": "string"
+          }
+         }
+        },
+        "type": "object",
+        "title": "PronunciationDict",
+        "x-fal-order-properties": [
+         "tone_list"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Custom pronunciation dictionary for text replacement"
+     },
+     "output_format": {
+      "type": "string",
+      "title": "Output Format",
+      "default": "hex",
+      "enum": [
+       "url",
+       "hex"
+      ],
+      "description": "Format of the output content (non-streaming only)"
+     },
+     "voice_setting": {
+      "properties": {
+       "speed": {
+        "type": "number",
+        "title": "Speed",
+        "maximum": 2,
+        "default": 1,
+        "minimum": 0.5,
+        "description": "Speech speed (0.5-2.0)"
+       },
+       "vol": {
+        "type": "number",
+        "title": "Vol",
+        "maximum": 10,
+        "default": 1,
+        "minimum": 0.01,
+        "description": "Volume (0-10)"
+       },
+       "voice_id": {
+        "type": "string",
+        "title": "Voice Id",
+        "minLength": 1,
+        "default": "Wise_Woman",
+        "description": "Predefined voice ID to use for synthesis"
+       },
+       "pitch": {
+        "type": "integer",
+        "title": "Pitch",
+        "maximum": 12,
+        "default": 0,
+        "minimum": -12,
+        "description": "Voice pitch (-12 to 12)"
+       },
+       "english_normalization": {
+        "type": "boolean",
+        "title": "English Normalization",
+        "default": false,
+        "description": "Enables English text normalization to improve number reading performance, with a slight increase in latency"
+       },
+       "emotion": {
+        "title": "Emotion",
+        "anyOf": [
+         {
+          "type": "string",
+          "enum": [
+           "happy",
+           "sad",
+           "angry",
+           "fearful",
+           "disgusted",
+           "surprised",
+           "neutral"
+          ]
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Emotion of the generated speech"
+       }
+      },
+      "type": "object",
+      "title": "VoiceSetting",
+      "x-fal-order-properties": [
+       "voice_id",
+       "speed",
+       "vol",
+       "pitch",
+       "emotion",
+       "english_normalization"
+      ]
+     },
+     "language_boost": {
+      "title": "Language Boost",
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "Chinese",
+         "Chinese,Yue",
+         "English",
+         "Arabic",
+         "Russian",
+         "Spanish",
+         "French",
+         "Portuguese",
+         "German",
+         "Turkish",
+         "Dutch",
+         "Ukrainian",
+         "Vietnamese",
+         "Indonesian",
+         "Japanese",
+         "Italian",
+         "Korean",
+         "Thai",
+         "Polish",
+         "Romanian",
+         "Greek",
+         "Czech",
+         "Finnish",
+         "Hindi",
+         "Bulgarian",
+         "Danish",
+         "Hebrew",
+         "Malay",
+         "Slovak",
+         "Swedish",
+         "Croatian",
+         "Hungarian",
+         "Norwegian",
+         "Slovenian",
+         "Catalan",
+         "Nynorsk",
+         "Afrikaans",
+         "auto"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Enhance recognition of specified languages and dialects"
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "prompt": {
+      "maxLength": 10000,
+      "type": "string",
+      "title": "Prompt",
+      "minLength": 1,
+      "description": "Text to convert to speech. Paragraph breaks should be marked with newline characters. **NOTE**: You can customize speech pauses by adding markers in the form `<#x#>`, where `x` is the pause duration in seconds. Valid range: `[0.01, 99.99]`, up to two decimal places. Pause markers must be placed between speakable text segments and cannot be used consecutively."
+     }
+    },
+    "type": "object",
+    "title": "TextToSpeechHD26Request",
+    "x-fal-order-properties": [
+     "enable_safety_checker",
+     "prompt",
+     "voice_setting",
+     "audio_setting",
+     "language_boost",
+     "output_format",
+     "pronunciation_dict",
+     "normalization_setting"
+    ],
+    "required": [
+     "prompt"
+    ]
+   }
+  },
+  "fal-ai/minimax/speech-2.6-turbo": {
+   "endpoint_id": "fal-ai/minimax/speech-2.6-turbo",
+   "display_name": "MiniMax Speech 2.6 [Turbo]",
+   "description": "Generate speech from text prompts and different voices using the MiniMax Speech-2.6 HD model, which leverages advanced AI techniques to create high-quality text-to-speech.",
+   "input": {
+    "properties": {
+     "normalization_setting": {
+      "properties": {
+       "target_range": {
+        "type": "number",
+        "title": "Target Range",
+        "maximum": 20,
+        "default": 8,
+        "minimum": 0,
+        "description": "Target loudness range in LU (default 8.0)"
+       },
+       "enabled": {
+        "type": "boolean",
+        "title": "Enabled",
+        "default": true,
+        "description": "Enable loudness normalization for the audio"
+       },
+       "target_loudness": {
+        "type": "number",
+        "title": "Target Loudness",
+        "maximum": -10,
+        "default": -18,
+        "minimum": -70,
+        "description": "Target loudness in LUFS (default -18.0)"
+       },
+       "target_peak": {
+        "type": "number",
+        "title": "Target Peak",
+        "maximum": 0,
+        "default": -0.5,
+        "minimum": -3,
+        "description": "Target peak level in dBTP (default -0.5)."
+       }
+      },
+      "type": "object",
+      "title": "LoudnessNormalizationSetting",
+      "x-fal-order-properties": [
+       "enabled",
+       "target_loudness",
+       "target_range",
+       "target_peak"
+      ]
+     },
+     "audio_setting": {
+      "properties": {
+       "channel": {
+        "type": "integer",
+        "title": "Channel",
+        "default": 1,
+        "enum": [
+         1,
+         2
+        ],
+        "description": "Number of audio channels (1=mono, 2=stereo)"
+       },
+       "bitrate": {
+        "type": "integer",
+        "title": "Bitrate",
+        "default": 128000,
+        "enum": [
+         32000,
+         64000,
+         128000,
+         256000
+        ],
+        "description": "Bitrate of generated audio"
+       },
+       "format": {
+        "type": "string",
+        "title": "Format",
+        "default": "mp3",
+        "enum": [
+         "mp3",
+         "pcm",
+         "flac"
+        ],
+        "description": "Audio format"
+       },
+       "sample_rate": {
+        "type": "integer",
+        "title": "Sample Rate",
+        "default": 32000,
+        "enum": [
+         8000,
+         16000,
+         22050,
+         24000,
+         32000,
+         44100
+        ],
+        "description": "Sample rate of generated audio"
+       }
+      },
+      "type": "object",
+      "title": "AudioSetting",
+      "x-fal-order-properties": [
+       "sample_rate",
+       "bitrate",
+       "format",
+       "channel"
+      ]
+     },
+     "pronunciation_dict": {
+      "anyOf": [
+       {
+        "properties": {
+         "tone_list": {
+          "description": "List of pronunciation replacements in format ['text/(pronunciation)', ...]. For Chinese, tones are 1-5. Example: ['\u71d5\u5c11\u98de/(yan4)(shao3)(fei1)']",
+          "type": "array",
+          "title": "Tone List",
+          "items": {
+           "type": "string"
+          }
+         }
+        },
+        "type": "object",
+        "title": "PronunciationDict",
+        "x-fal-order-properties": [
+         "tone_list"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Custom pronunciation dictionary for text replacement"
+     },
+     "output_format": {
+      "type": "string",
+      "title": "Output Format",
+      "default": "hex",
+      "enum": [
+       "url",
+       "hex"
+      ],
+      "description": "Format of the output content (non-streaming only)"
+     },
+     "voice_setting": {
+      "properties": {
+       "speed": {
+        "type": "number",
+        "title": "Speed",
+        "maximum": 2,
+        "default": 1,
+        "minimum": 0.5,
+        "description": "Speech speed (0.5-2.0)"
+       },
+       "vol": {
+        "type": "number",
+        "title": "Vol",
+        "maximum": 10,
+        "default": 1,
+        "minimum": 0.01,
+        "description": "Volume (0-10)"
+       },
+       "voice_id": {
+        "type": "string",
+        "title": "Voice Id",
+        "minLength": 1,
+        "default": "Wise_Woman",
+        "description": "Predefined voice ID to use for synthesis"
+       },
+       "pitch": {
+        "type": "integer",
+        "title": "Pitch",
+        "maximum": 12,
+        "default": 0,
+        "minimum": -12,
+        "description": "Voice pitch (-12 to 12)"
+       },
+       "english_normalization": {
+        "type": "boolean",
+        "title": "English Normalization",
+        "default": false,
+        "description": "Enables English text normalization to improve number reading performance, with a slight increase in latency"
+       },
+       "emotion": {
+        "title": "Emotion",
+        "anyOf": [
+         {
+          "type": "string",
+          "enum": [
+           "happy",
+           "sad",
+           "angry",
+           "fearful",
+           "disgusted",
+           "surprised",
+           "neutral"
+          ]
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Emotion of the generated speech"
+       }
+      },
+      "type": "object",
+      "title": "VoiceSetting",
+      "x-fal-order-properties": [
+       "voice_id",
+       "speed",
+       "vol",
+       "pitch",
+       "emotion",
+       "english_normalization"
+      ]
+     },
+     "language_boost": {
+      "title": "Language Boost",
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "Chinese",
+         "Chinese,Yue",
+         "English",
+         "Arabic",
+         "Russian",
+         "Spanish",
+         "French",
+         "Portuguese",
+         "German",
+         "Turkish",
+         "Dutch",
+         "Ukrainian",
+         "Vietnamese",
+         "Indonesian",
+         "Japanese",
+         "Italian",
+         "Korean",
+         "Thai",
+         "Polish",
+         "Romanian",
+         "Greek",
+         "Czech",
+         "Finnish",
+         "Hindi",
+         "Bulgarian",
+         "Danish",
+         "Hebrew",
+         "Malay",
+         "Slovak",
+         "Swedish",
+         "Croatian",
+         "Hungarian",
+         "Norwegian",
+         "Slovenian",
+         "Catalan",
+         "Nynorsk",
+         "Afrikaans",
+         "auto"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Enhance recognition of specified languages and dialects"
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "prompt": {
+      "maxLength": 10000,
+      "type": "string",
+      "title": "Prompt",
+      "minLength": 1,
+      "description": "Text to convert to speech. Paragraph breaks should be marked with newline characters. **NOTE**: You can customize speech pauses by adding markers in the form `<#x#>`, where `x` is the pause duration in seconds. Valid range: `[0.01, 99.99]`, up to two decimal places. Pause markers must be placed between speakable text segments and cannot be used consecutively."
+     }
+    },
+    "type": "object",
+    "title": "TextToSpeechTurbo26Request",
+    "x-fal-order-properties": [
+     "enable_safety_checker",
+     "prompt",
+     "voice_setting",
+     "audio_setting",
+     "language_boost",
+     "output_format",
+     "pronunciation_dict",
+     "normalization_setting"
+    ],
+    "required": [
+     "prompt"
+    ]
+   }
+  },
+  "fal-ai/minimax/speech-2.8-hd": {
+   "endpoint_id": "fal-ai/minimax/speech-2.8-hd",
+   "display_name": "MiniMax Speech 2.8 [HD]",
+   "description": "Generate speech from text prompts and different voices using the MiniMax Speech-2.8 HD model, which leverages advanced AI techniques to create high-quality text-to-speech.",
+   "input": {
+    "properties": {
+     "normalization_setting": {
+      "properties": {
+       "target_range": {
+        "type": "number",
+        "title": "Target Range",
+        "maximum": 20,
+        "default": 8,
+        "minimum": 0,
+        "description": "Target loudness range in LU (default 8.0)"
+       },
+       "enabled": {
+        "type": "boolean",
+        "title": "Enabled",
+        "default": true,
+        "description": "Enable loudness normalization for the audio"
+       },
+       "target_loudness": {
+        "type": "number",
+        "title": "Target Loudness",
+        "maximum": -10,
+        "default": -18,
+        "minimum": -70,
+        "description": "Target loudness in LUFS (default -18.0)"
+       },
+       "target_peak": {
+        "type": "number",
+        "title": "Target Peak",
+        "maximum": 0,
+        "default": -0.5,
+        "minimum": -3,
+        "description": "Target peak level in dBTP (default -0.5)."
+       }
+      },
+      "type": "object",
+      "title": "LoudnessNormalizationSetting",
+      "x-fal-order-properties": [
+       "enabled",
+       "target_loudness",
+       "target_range",
+       "target_peak"
+      ]
+     },
+     "audio_setting": {
+      "properties": {
+       "channel": {
+        "type": "integer",
+        "title": "Channel",
+        "default": 1,
+        "enum": [
+         1,
+         2
+        ],
+        "description": "Number of audio channels (1=mono, 2=stereo)"
+       },
+       "bitrate": {
+        "type": "integer",
+        "title": "Bitrate",
+        "default": 128000,
+        "enum": [
+         32000,
+         64000,
+         128000,
+         256000
+        ],
+        "description": "Bitrate of generated audio"
+       },
+       "format": {
+        "type": "string",
+        "title": "Format",
+        "default": "mp3",
+        "enum": [
+         "mp3",
+         "pcm",
+         "flac"
+        ],
+        "description": "Audio format"
+       },
+       "sample_rate": {
+        "type": "integer",
+        "title": "Sample Rate",
+        "default": 32000,
+        "enum": [
+         8000,
+         16000,
+         22050,
+         24000,
+         32000,
+         44100
+        ],
+        "description": "Sample rate of generated audio"
+       }
+      },
+      "type": "object",
+      "title": "AudioSetting",
+      "x-fal-order-properties": [
+       "sample_rate",
+       "bitrate",
+       "format",
+       "channel"
+      ]
+     },
+     "pronunciation_dict": {
+      "anyOf": [
+       {
+        "properties": {
+         "tone_list": {
+          "description": "List of pronunciation replacements in format ['text/(pronunciation)', ...]. For Chinese, tones are 1-5. Example: ['\u71d5\u5c11\u98de/(yan4)(shao3)(fei1)']",
+          "type": "array",
+          "title": "Tone List",
+          "items": {
+           "type": "string"
+          }
+         }
+        },
+        "type": "object",
+        "title": "PronunciationDict",
+        "x-fal-order-properties": [
+         "tone_list"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Custom pronunciation dictionary for text replacement"
+     },
+     "output_format": {
+      "type": "string",
+      "title": "Output Format",
+      "default": "hex",
+      "enum": [
+       "url",
+       "hex"
+      ],
+      "description": "Format of the output content (non-streaming only)"
+     },
+     "voice_setting": {
+      "properties": {
+       "speed": {
+        "type": "number",
+        "title": "Speed",
+        "maximum": 2,
+        "default": 1,
+        "minimum": 0.5,
+        "description": "Speech speed (0.5-2.0)"
+       },
+       "vol": {
+        "type": "number",
+        "title": "Vol",
+        "maximum": 10,
+        "default": 1,
+        "minimum": 0.01,
+        "description": "Volume (0-10)"
+       },
+       "voice_id": {
+        "type": "string",
+        "title": "Voice Id",
+        "minLength": 1,
+        "default": "Wise_Woman",
+        "description": "Predefined voice ID to use for synthesis"
+       },
+       "pitch": {
+        "type": "integer",
+        "title": "Pitch",
+        "maximum": 12,
+        "default": 0,
+        "minimum": -12,
+        "description": "Voice pitch (-12 to 12)"
+       },
+       "english_normalization": {
+        "type": "boolean",
+        "title": "English Normalization",
+        "default": false,
+        "description": "Enables English text normalization to improve number reading performance, with a slight increase in latency"
+       },
+       "emotion": {
+        "title": "Emotion",
+        "anyOf": [
+         {
+          "type": "string",
+          "enum": [
+           "happy",
+           "sad",
+           "angry",
+           "fearful",
+           "disgusted",
+           "surprised",
+           "neutral"
+          ]
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Emotion of the generated speech"
+       }
+      },
+      "type": "object",
+      "title": "VoiceSetting",
+      "x-fal-order-properties": [
+       "voice_id",
+       "speed",
+       "vol",
+       "pitch",
+       "emotion",
+       "english_normalization"
+      ]
+     },
+     "voice_modify": {
+      "anyOf": [
+       {
+        "properties": {
+         "intensity": {
+          "type": "integer",
+          "title": "Intensity",
+          "maximum": 100,
+          "default": 0,
+          "minimum": -100,
+          "description": "Intensity/energy of the voice. Range: -100 to 100. Higher values create more energetic speech."
+         },
+         "pitch": {
+          "type": "integer",
+          "title": "Pitch",
+          "maximum": 100,
+          "default": 0,
+          "minimum": -100,
+          "description": "Pitch adjustment in semitones. Range: -100 to 100. Positive values raise pitch, negative values lower it."
+         },
+         "timbre": {
+          "type": "integer",
+          "title": "Timbre",
+          "maximum": 100,
+          "default": 0,
+          "minimum": -100,
+          "description": "Timbre adjustment. Range: -100 to 100. Affects the tonal quality of the voice."
+         }
+        },
+        "type": "object",
+        "title": "VoiceModify",
+        "x-fal-order-properties": [
+         "pitch",
+         "intensity",
+         "timbre"
+        ],
+        "description": "Voice modification settings for Speech 2.8 models."
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Voice modification settings to adjust pitch, intensity, and timbre."
+     },
+     "language_boost": {
+      "title": "Language Boost",
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "Chinese",
+         "Chinese,Yue",
+         "English",
+         "Arabic",
+         "Russian",
+         "Spanish",
+         "French",
+         "Portuguese",
+         "German",
+         "Turkish",
+         "Dutch",
+         "Ukrainian",
+         "Vietnamese",
+         "Indonesian",
+         "Japanese",
+         "Italian",
+         "Korean",
+         "Thai",
+         "Polish",
+         "Romanian",
+         "Greek",
+         "Czech",
+         "Finnish",
+         "Hindi",
+         "Bulgarian",
+         "Danish",
+         "Hebrew",
+         "Malay",
+         "Slovak",
+         "Swedish",
+         "Croatian",
+         "Hungarian",
+         "Norwegian",
+         "Slovenian",
+         "Catalan",
+         "Nynorsk",
+         "Afrikaans",
+         "auto"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Enhance recognition of specified languages and dialects"
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "prompt": {
+      "maxLength": 10000,
+      "type": "string",
+      "title": "Prompt",
+      "minLength": 1,
+      "description": "Text to convert to speech. Use `<#x#>` for pauses (x = 0.01-99.99 seconds). Supports interjection tags: `(laughs)`, `(sighs)`, `(coughs)`, `(clears throat)`, `(gasps)`, `(sniffs)`, `(groans)`, `(yawns)`."
+     }
+    },
+    "type": "object",
+    "title": "TextToSpeechHD28Request",
+    "x-fal-order-properties": [
+     "enable_safety_checker",
+     "prompt",
+     "voice_setting",
+     "audio_setting",
+     "language_boost",
+     "output_format",
+     "pronunciation_dict",
+     "normalization_setting",
+     "voice_modify"
+    ],
+    "required": [
+     "prompt"
+    ],
+    "description": "Request model for Speech 2.8 HD - highest quality speech synthesis."
+   }
+  },
+  "fal-ai/minimax/speech-2.8-turbo": {
+   "endpoint_id": "fal-ai/minimax/speech-2.8-turbo",
+   "display_name": "MiniMax Speech 2.8 [Turbo]",
+   "description": "Generate speech from text prompts and different voices using the MiniMax Speech-2.8 Turbo model, which leverages advanced AI techniques to create high-quality text-to-speech.",
+   "input": {
+    "properties": {
+     "normalization_setting": {
+      "properties": {
+       "target_range": {
+        "type": "number",
+        "title": "Target Range",
+        "maximum": 20,
+        "default": 8,
+        "minimum": 0,
+        "description": "Target loudness range in LU (default 8.0)"
+       },
+       "enabled": {
+        "type": "boolean",
+        "title": "Enabled",
+        "default": true,
+        "description": "Enable loudness normalization for the audio"
+       },
+       "target_loudness": {
+        "type": "number",
+        "title": "Target Loudness",
+        "maximum": -10,
+        "default": -18,
+        "minimum": -70,
+        "description": "Target loudness in LUFS (default -18.0)"
+       },
+       "target_peak": {
+        "type": "number",
+        "title": "Target Peak",
+        "maximum": 0,
+        "default": -0.5,
+        "minimum": -3,
+        "description": "Target peak level in dBTP (default -0.5)."
+       }
+      },
+      "type": "object",
+      "title": "LoudnessNormalizationSetting",
+      "x-fal-order-properties": [
+       "enabled",
+       "target_loudness",
+       "target_range",
+       "target_peak"
+      ]
+     },
+     "audio_setting": {
+      "properties": {
+       "channel": {
+        "type": "integer",
+        "title": "Channel",
+        "default": 1,
+        "enum": [
+         1,
+         2
+        ],
+        "description": "Number of audio channels (1=mono, 2=stereo)"
+       },
+       "bitrate": {
+        "type": "integer",
+        "title": "Bitrate",
+        "default": 128000,
+        "enum": [
+         32000,
+         64000,
+         128000,
+         256000
+        ],
+        "description": "Bitrate of generated audio"
+       },
+       "format": {
+        "type": "string",
+        "title": "Format",
+        "default": "mp3",
+        "enum": [
+         "mp3",
+         "pcm",
+         "flac"
+        ],
+        "description": "Audio format"
+       },
+       "sample_rate": {
+        "type": "integer",
+        "title": "Sample Rate",
+        "default": 32000,
+        "enum": [
+         8000,
+         16000,
+         22050,
+         24000,
+         32000,
+         44100
+        ],
+        "description": "Sample rate of generated audio"
+       }
+      },
+      "type": "object",
+      "title": "AudioSetting",
+      "x-fal-order-properties": [
+       "sample_rate",
+       "bitrate",
+       "format",
+       "channel"
+      ]
+     },
+     "pronunciation_dict": {
+      "anyOf": [
+       {
+        "properties": {
+         "tone_list": {
+          "description": "List of pronunciation replacements in format ['text/(pronunciation)', ...]. For Chinese, tones are 1-5. Example: ['\u71d5\u5c11\u98de/(yan4)(shao3)(fei1)']",
+          "type": "array",
+          "title": "Tone List",
+          "items": {
+           "type": "string"
+          }
+         }
+        },
+        "type": "object",
+        "title": "PronunciationDict",
+        "x-fal-order-properties": [
+         "tone_list"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Custom pronunciation dictionary for text replacement"
+     },
+     "output_format": {
+      "type": "string",
+      "title": "Output Format",
+      "default": "hex",
+      "enum": [
+       "url",
+       "hex"
+      ],
+      "description": "Format of the output content (non-streaming only)"
+     },
+     "voice_setting": {
+      "properties": {
+       "speed": {
+        "type": "number",
+        "title": "Speed",
+        "maximum": 2,
+        "default": 1,
+        "minimum": 0.5,
+        "description": "Speech speed (0.5-2.0)"
+       },
+       "vol": {
+        "type": "number",
+        "title": "Vol",
+        "maximum": 10,
+        "default": 1,
+        "minimum": 0.01,
+        "description": "Volume (0-10)"
+       },
+       "voice_id": {
+        "type": "string",
+        "title": "Voice Id",
+        "minLength": 1,
+        "default": "Wise_Woman",
+        "description": "Predefined voice ID to use for synthesis"
+       },
+       "pitch": {
+        "type": "integer",
+        "title": "Pitch",
+        "maximum": 12,
+        "default": 0,
+        "minimum": -12,
+        "description": "Voice pitch (-12 to 12)"
+       },
+       "english_normalization": {
+        "type": "boolean",
+        "title": "English Normalization",
+        "default": false,
+        "description": "Enables English text normalization to improve number reading performance, with a slight increase in latency"
+       },
+       "emotion": {
+        "title": "Emotion",
+        "anyOf": [
+         {
+          "type": "string",
+          "enum": [
+           "happy",
+           "sad",
+           "angry",
+           "fearful",
+           "disgusted",
+           "surprised",
+           "neutral"
+          ]
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Emotion of the generated speech"
+       }
+      },
+      "type": "object",
+      "title": "VoiceSetting",
+      "x-fal-order-properties": [
+       "voice_id",
+       "speed",
+       "vol",
+       "pitch",
+       "emotion",
+       "english_normalization"
+      ]
+     },
+     "voice_modify": {
+      "anyOf": [
+       {
+        "properties": {
+         "intensity": {
+          "type": "integer",
+          "title": "Intensity",
+          "maximum": 100,
+          "default": 0,
+          "minimum": -100,
+          "description": "Intensity/energy of the voice. Range: -100 to 100. Higher values create more energetic speech."
+         },
+         "pitch": {
+          "type": "integer",
+          "title": "Pitch",
+          "maximum": 100,
+          "default": 0,
+          "minimum": -100,
+          "description": "Pitch adjustment in semitones. Range: -100 to 100. Positive values raise pitch, negative values lower it."
+         },
+         "timbre": {
+          "type": "integer",
+          "title": "Timbre",
+          "maximum": 100,
+          "default": 0,
+          "minimum": -100,
+          "description": "Timbre adjustment. Range: -100 to 100. Affects the tonal quality of the voice."
+         }
+        },
+        "type": "object",
+        "title": "VoiceModify",
+        "x-fal-order-properties": [
+         "pitch",
+         "intensity",
+         "timbre"
+        ],
+        "description": "Voice modification settings for Speech 2.8 models."
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Voice modification settings to adjust pitch, intensity, and timbre."
+     },
+     "language_boost": {
+      "title": "Language Boost",
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "Chinese",
+         "Chinese,Yue",
+         "English",
+         "Arabic",
+         "Russian",
+         "Spanish",
+         "French",
+         "Portuguese",
+         "German",
+         "Turkish",
+         "Dutch",
+         "Ukrainian",
+         "Vietnamese",
+         "Indonesian",
+         "Japanese",
+         "Italian",
+         "Korean",
+         "Thai",
+         "Polish",
+         "Romanian",
+         "Greek",
+         "Czech",
+         "Finnish",
+         "Hindi",
+         "Bulgarian",
+         "Danish",
+         "Hebrew",
+         "Malay",
+         "Slovak",
+         "Swedish",
+         "Croatian",
+         "Hungarian",
+         "Norwegian",
+         "Slovenian",
+         "Catalan",
+         "Nynorsk",
+         "Afrikaans",
+         "auto"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Enhance recognition of specified languages and dialects"
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "prompt": {
+      "maxLength": 10000,
+      "type": "string",
+      "title": "Prompt",
+      "minLength": 1,
+      "description": "Text to convert to speech. Use `<#x#>` for pauses (x = 0.01-99.99 seconds). Supports interjection tags: `(laughs)`, `(sighs)`, `(coughs)`, `(clears throat)`, `(gasps)`, `(sniffs)`, `(groans)`, `(yawns)`."
+     }
+    },
+    "type": "object",
+    "title": "TextToSpeechTurbo28Request",
+    "x-fal-order-properties": [
+     "enable_safety_checker",
+     "prompt",
+     "voice_setting",
+     "audio_setting",
+     "language_boost",
+     "output_format",
+     "pronunciation_dict",
+     "normalization_setting",
+     "voice_modify"
+    ],
+    "required": [
+     "prompt"
+    ],
+    "description": "Request model for Speech 2.8 Turbo - faster speech synthesis with good quality."
+   }
+  },
+  "fal-ai/minimax/speech-02-hd": {
+   "endpoint_id": "fal-ai/minimax/speech-02-hd",
+   "display_name": "MiniMax Speech-02 HD",
+   "description": "Generate speech from text prompts and different voices using the MiniMax Speech-02 HD model, which leverages advanced AI techniques to create high-quality text-to-speech.",
+   "input": {
+    "properties": {
+     "audio_setting": {
+      "properties": {
+       "channel": {
+        "type": "integer",
+        "title": "Channel",
+        "default": 1,
+        "enum": [
+         1,
+         2
+        ],
+        "description": "Number of audio channels (1=mono, 2=stereo)"
+       },
+       "bitrate": {
+        "type": "integer",
+        "title": "Bitrate",
+        "default": 128000,
+        "enum": [
+         32000,
+         64000,
+         128000,
+         256000
+        ],
+        "description": "Bitrate of generated audio"
+       },
+       "format": {
+        "type": "string",
+        "title": "Format",
+        "default": "mp3",
+        "enum": [
+         "mp3",
+         "pcm",
+         "flac"
+        ],
+        "description": "Audio format"
+       },
+       "sample_rate": {
+        "type": "integer",
+        "title": "Sample Rate",
+        "default": 32000,
+        "enum": [
+         8000,
+         16000,
+         22050,
+         24000,
+         32000,
+         44100
+        ],
+        "description": "Sample rate of generated audio"
+       }
+      },
+      "type": "object",
+      "title": "AudioSetting",
+      "x-fal-order-properties": [
+       "sample_rate",
+       "bitrate",
+       "format",
+       "channel"
+      ]
+     },
+     "language_boost": {
+      "title": "Language Boost",
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "Chinese",
+         "Chinese,Yue",
+         "English",
+         "Arabic",
+         "Russian",
+         "Spanish",
+         "French",
+         "Portuguese",
+         "German",
+         "Turkish",
+         "Dutch",
+         "Ukrainian",
+         "Vietnamese",
+         "Indonesian",
+         "Japanese",
+         "Italian",
+         "Korean",
+         "Thai",
+         "Polish",
+         "Romanian",
+         "Greek",
+         "Czech",
+         "Finnish",
+         "Hindi",
+         "Bulgarian",
+         "Danish",
+         "Hebrew",
+         "Malay",
+         "Slovak",
+         "Swedish",
+         "Croatian",
+         "Hungarian",
+         "Norwegian",
+         "Slovenian",
+         "Catalan",
+         "Nynorsk",
+         "Afrikaans",
+         "auto"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Enhance recognition of specified languages and dialects"
+     },
+     "output_format": {
+      "type": "string",
+      "title": "Output Format",
+      "default": "hex",
+      "enum": [
+       "url",
+       "hex"
+      ],
+      "description": "Format of the output content (non-streaming only)"
+     },
+     "text": {
+      "maxLength": 5000,
+      "type": "string",
+      "title": "Text",
+      "minLength": 1,
+      "description": "Text to convert to speech (max 5000 characters, minimum 1 non-whitespace character)"
+     },
+     "pronunciation_dict": {
+      "anyOf": [
+       {
+        "properties": {
+         "tone_list": {
+          "description": "List of pronunciation replacements in format ['text/(pronunciation)', ...]. For Chinese, tones are 1-5. Example: ['\u71d5\u5c11\u98de/(yan4)(shao3)(fei1)']",
+          "type": "array",
+          "title": "Tone List",
+          "items": {
+           "type": "string"
+          }
+         }
+        },
+        "type": "object",
+        "title": "PronunciationDict",
+        "x-fal-order-properties": [
+         "tone_list"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Custom pronunciation dictionary for text replacement"
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "voice_setting": {
+      "properties": {
+       "speed": {
+        "type": "number",
+        "title": "Speed",
+        "maximum": 2,
+        "default": 1,
+        "minimum": 0.5,
+        "description": "Speech speed (0.5-2.0)"
+       },
+       "vol": {
+        "type": "number",
+        "title": "Vol",
+        "maximum": 10,
+        "default": 1,
+        "minimum": 0.01,
+        "description": "Volume (0-10)"
+       },
+       "voice_id": {
+        "type": "string",
+        "title": "Voice Id",
+        "minLength": 1,
+        "default": "Wise_Woman",
+        "description": "Predefined voice ID to use for synthesis"
+       },
+       "pitch": {
+        "type": "integer",
+        "title": "Pitch",
+        "maximum": 12,
+        "default": 0,
+        "minimum": -12,
+        "description": "Voice pitch (-12 to 12)"
+       },
+       "english_normalization": {
+        "type": "boolean",
+        "title": "English Normalization",
+        "default": false,
+        "description": "Enables English text normalization to improve number reading performance, with a slight increase in latency"
+       },
+       "emotion": {
+        "title": "Emotion",
+        "anyOf": [
+         {
+          "type": "string",
+          "enum": [
+           "happy",
+           "sad",
+           "angry",
+           "fearful",
+           "disgusted",
+           "surprised",
+           "neutral"
+          ]
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Emotion of the generated speech"
+       }
+      },
+      "type": "object",
+      "title": "VoiceSetting",
+      "x-fal-order-properties": [
+       "voice_id",
+       "speed",
+       "vol",
+       "pitch",
+       "emotion",
+       "english_normalization"
+      ]
+     }
+    },
+    "type": "object",
+    "title": "TextToSpeechHDRequest",
+    "x-fal-order-properties": [
+     "enable_safety_checker",
+     "text",
+     "voice_setting",
+     "audio_setting",
+     "language_boost",
+     "output_format",
+     "pronunciation_dict"
+    ],
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "fal-ai/minimax/speech-02-turbo": {
+   "endpoint_id": "fal-ai/minimax/speech-02-turbo",
+   "display_name": "MiniMax Speech-02 Turbo",
+   "description": "Generate fast speech from text prompts and different voices using the MiniMax Speech-02 Turbo model, which leverages advanced AI techniques to create high-quality text-to-speech.",
+   "input": {
+    "properties": {
+     "audio_setting": {
+      "properties": {
+       "channel": {
+        "type": "integer",
+        "title": "Channel",
+        "default": 1,
+        "enum": [
+         1,
+         2
+        ],
+        "description": "Number of audio channels (1=mono, 2=stereo)"
+       },
+       "bitrate": {
+        "type": "integer",
+        "title": "Bitrate",
+        "default": 128000,
+        "enum": [
+         32000,
+         64000,
+         128000,
+         256000
+        ],
+        "description": "Bitrate of generated audio"
+       },
+       "format": {
+        "type": "string",
+        "title": "Format",
+        "default": "mp3",
+        "enum": [
+         "mp3",
+         "pcm",
+         "flac"
+        ],
+        "description": "Audio format"
+       },
+       "sample_rate": {
+        "type": "integer",
+        "title": "Sample Rate",
+        "default": 32000,
+        "enum": [
+         8000,
+         16000,
+         22050,
+         24000,
+         32000,
+         44100
+        ],
+        "description": "Sample rate of generated audio"
+       }
+      },
+      "type": "object",
+      "title": "AudioSetting",
+      "x-fal-order-properties": [
+       "sample_rate",
+       "bitrate",
+       "format",
+       "channel"
+      ]
+     },
+     "language_boost": {
+      "title": "Language Boost",
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "Chinese",
+         "Chinese,Yue",
+         "English",
+         "Arabic",
+         "Russian",
+         "Spanish",
+         "French",
+         "Portuguese",
+         "German",
+         "Turkish",
+         "Dutch",
+         "Ukrainian",
+         "Vietnamese",
+         "Indonesian",
+         "Japanese",
+         "Italian",
+         "Korean",
+         "Thai",
+         "Polish",
+         "Romanian",
+         "Greek",
+         "Czech",
+         "Finnish",
+         "Hindi",
+         "Bulgarian",
+         "Danish",
+         "Hebrew",
+         "Malay",
+         "Slovak",
+         "Swedish",
+         "Croatian",
+         "Hungarian",
+         "Norwegian",
+         "Slovenian",
+         "Catalan",
+         "Nynorsk",
+         "Afrikaans",
+         "auto"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Enhance recognition of specified languages and dialects"
+     },
+     "output_format": {
+      "type": "string",
+      "title": "Output Format",
+      "default": "hex",
+      "enum": [
+       "url",
+       "hex"
+      ],
+      "description": "Format of the output content (non-streaming only)"
+     },
+     "text": {
+      "maxLength": 5000,
+      "type": "string",
+      "title": "Text",
+      "minLength": 1,
+      "description": "Text to convert to speech (max 5000 characters, minimum 1 non-whitespace character)"
+     },
+     "pronunciation_dict": {
+      "anyOf": [
+       {
+        "properties": {
+         "tone_list": {
+          "description": "List of pronunciation replacements in format ['text/(pronunciation)', ...]. For Chinese, tones are 1-5. Example: ['\u71d5\u5c11\u98de/(yan4)(shao3)(fei1)']",
+          "type": "array",
+          "title": "Tone List",
+          "items": {
+           "type": "string"
+          }
+         }
+        },
+        "type": "object",
+        "title": "PronunciationDict",
+        "x-fal-order-properties": [
+         "tone_list"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Custom pronunciation dictionary for text replacement"
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "voice_setting": {
+      "properties": {
+       "speed": {
+        "type": "number",
+        "title": "Speed",
+        "maximum": 2,
+        "default": 1,
+        "minimum": 0.5,
+        "description": "Speech speed (0.5-2.0)"
+       },
+       "vol": {
+        "type": "number",
+        "title": "Vol",
+        "maximum": 10,
+        "default": 1,
+        "minimum": 0.01,
+        "description": "Volume (0-10)"
+       },
+       "voice_id": {
+        "type": "string",
+        "title": "Voice Id",
+        "minLength": 1,
+        "default": "Wise_Woman",
+        "description": "Predefined voice ID to use for synthesis"
+       },
+       "pitch": {
+        "type": "integer",
+        "title": "Pitch",
+        "maximum": 12,
+        "default": 0,
+        "minimum": -12,
+        "description": "Voice pitch (-12 to 12)"
+       },
+       "english_normalization": {
+        "type": "boolean",
+        "title": "English Normalization",
+        "default": false,
+        "description": "Enables English text normalization to improve number reading performance, with a slight increase in latency"
+       },
+       "emotion": {
+        "title": "Emotion",
+        "anyOf": [
+         {
+          "type": "string",
+          "enum": [
+           "happy",
+           "sad",
+           "angry",
+           "fearful",
+           "disgusted",
+           "surprised",
+           "neutral"
+          ]
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "description": "Emotion of the generated speech"
+       }
+      },
+      "type": "object",
+      "title": "VoiceSetting",
+      "x-fal-order-properties": [
+       "voice_id",
+       "speed",
+       "vol",
+       "pitch",
+       "emotion",
+       "english_normalization"
+      ]
+     }
+    },
+    "type": "object",
+    "title": "TextToSpeechTurboRequest",
+    "x-fal-order-properties": [
+     "enable_safety_checker",
+     "text",
+     "voice_setting",
+     "audio_setting",
+     "language_boost",
+     "output_format",
+     "pronunciation_dict"
+    ],
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "fal-ai/minimax/voice-clone": {
+   "endpoint_id": "fal-ai/minimax/voice-clone",
+   "display_name": "MiniMax Voice Cloning",
+   "description": "Clone a voice from a sample audio and generate speech from text prompts using the MiniMax model, which leverages advanced AI techniques to create high-quality text-to-speech.",
+   "input": {
+    "properties": {
+     "accuracy": {
+      "title": "Accuracy",
+      "anyOf": [
+       {
+        "type": "number",
+        "maximum": 1,
+        "minimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Text validation accuracy threshold (0-1)"
+     },
+     "noise_reduction": {
+      "type": "boolean",
+      "title": "Noise Reduction",
+      "default": false,
+      "description": "Enable noise reduction for the cloned voice"
+     },
+     "need_volume_normalization": {
+      "type": "boolean",
+      "title": "Need Volume Normalization",
+      "default": false,
+      "description": "Enable volume normalization for the cloned voice"
+     },
+     "text": {
+      "title": "Text",
+      "default": "Hello, this is a preview of your cloned voice! I hope you like it!",
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 1000
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Text to generate a TTS preview with the cloned voice (optional)"
+     },
+     "model": {
+      "type": "string",
+      "title": "Model",
+      "default": "speech-02-hd",
+      "enum": [
+       "speech-02-hd",
+       "speech-02-turbo",
+       "speech-01-hd",
+       "speech-01-turbo"
+      ],
+      "description": "TTS model to use for preview. Options: speech-02-hd, speech-02-turbo, speech-01-hd, speech-01-turbo"
+     },
+     "audio_url": {
+      "type": "string",
+      "title": "Audio Url",
+      "description": "\n            URL of the input audio file for voice cloning. Should be at least 10 seconds\n            long. To retain the voice permanently, use it with a TTS (text-to-speech)\n            endpoint at least once within 7 days. Otherwise, it will be\n            automatically deleted.\n        "
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening."
+     }
+    },
+    "type": "object",
+    "title": "VoiceCloneRequest",
+    "x-fal-order-properties": [
+     "enable_safety_checker",
+     "audio_url",
+     "noise_reduction",
+     "need_volume_normalization",
+     "accuracy",
+     "text",
+     "model"
+    ],
+    "required": [
+     "audio_url"
+    ]
+   }
+  },
+  "fal-ai/minimax/voice-design": {
+   "endpoint_id": "fal-ai/minimax/voice-design",
+   "display_name": "MiniMax Voice Design",
+   "description": "Design a personalized voice from a text description, and generate speech from text prompts using the MiniMax model, which leverages advanced AI techniques to create high-quality text-to-speech.",
+   "input": {
+    "properties": {
+     "preview_text": {
+      "maxLength": 500,
+      "type": "string",
+      "title": "Preview Text",
+      "minLength": 1,
+      "description": "Text for audio preview. Must be at least 1 character and limited to 500 characters. A fee of $30 per 1M characters will be charged for the generation of the preview audio."
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "prompt": {
+      "maxLength": 2000,
+      "type": "string",
+      "title": "Prompt",
+      "description": "Voice description prompt for generating a personalized voice"
+     }
+    },
+    "type": "object",
+    "title": "VoiceDesignRequest",
+    "x-fal-order-properties": [
+     "enable_safety_checker",
+     "prompt",
+     "preview_text"
+    ],
+    "required": [
+     "prompt",
+     "preview_text"
+    ]
+   }
+  },
+  "fal-ai/orpheus-tts": {
+   "endpoint_id": "fal-ai/orpheus-tts",
+   "display_name": "Orpheus TTS",
+   "description": "Orpheus TTS is a state-of-the-art, Llama-based Speech-LLM designed for high-quality, empathetic text-to-speech generation. This model has been finetuned to deliver human-level speech synthesis, achieving exceptional clarity, expressiveness, and real-time performances.",
+   "input": {
+    "properties": {
+     "temperature": {
+      "default": 0.7,
+      "title": "Temperature",
+      "minimum": 0,
+      "description": "Temperature for generation (higher = more creative).",
+      "maximum": 2,
+      "type": "number"
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean"
+     },
+     "text": {
+      "title": "Text",
+      "description": "The text to be converted to speech. You can additionally add the following emotive tags: <laugh>, <chuckle>, <sigh>, <cough>, <sniffle>, <groan>, <yawn>, <gasp>",
+      "type": "string"
+     },
+     "voice": {
+      "enum": [
+       "tara",
+       "leah",
+       "jess",
+       "leo",
+       "dan",
+       "mia",
+       "zac",
+       "zoe"
+      ],
+      "title": "Voice",
+      "description": "Voice ID for the desired voice.",
+      "default": "tara",
+      "type": "string"
+     },
+     "repetition_penalty": {
+      "default": 1.2,
+      "title": "Repetition Penalty",
+      "minimum": 1.1,
+      "description": "Repetition penalty (>= 1.1 required for stable generations).",
+      "maximum": 2,
+      "type": "number"
+     }
+    },
+    "title": "OrpheusRequest",
+    "required": [
+     "text"
+    ],
+    "x-fal-order-properties": [
+     "text",
+     "voice",
+     "temperature",
+     "repetition_penalty",
+     "enable_safety_checker"
+    ],
+    "type": "object"
+   }
+  },
+  "fal-ai/qwen-3-tts/text-to-speech/0.6b": {
+   "endpoint_id": "fal-ai/qwen-3-tts/text-to-speech/0.6b",
+   "display_name": "Qwen 3 TTS - Text to Speech [0.6B]",
+   "description": "Bring speech to your texts using Qwen3-TTS Custom-Voice model with pre-trained voices or use your custom voice with Qwen3-TTS Clone Voice model",
+   "input": {
+    "properties": {
+     "subtalker_temperature": {
+      "default": 0.9,
+      "title": "Subtalker Temperature",
+      "description": "Temperature for sub-talker sampling.",
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "top_k": {
+      "default": 50,
+      "title": "Top K",
+      "description": "Top-k sampling parameter.",
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "subtalker_top_k": {
+      "default": 50,
+      "title": "Subtalker Top K",
+      "description": "Top-k for sub-talker sampling.",
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "top_p": {
+      "default": 1,
+      "title": "Top P",
+      "description": "Top-p sampling parameter.",
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "reference_text": {
+      "title": "Reference Text",
+      "description": "Optional reference text that was used when creating the speaker embedding. Providing this can improve synthesis quality when using a cloned voice.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "subtalker_top_p": {
+      "default": 1,
+      "title": "Subtalker Top P",
+      "description": "Top-p for sub-talker sampling.",
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "temperature": {
+      "default": 0.9,
+      "title": "Temperature",
+      "description": "Sampling temperature; higher => more random.",
+      "anyOf": [
+       {
+        "type": "number",
+        "maximum": 1,
+        "exclusiveMinimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean"
+     },
+     "subtalker_dosample": {
+      "default": true,
+      "title": "Subtalker Dosample",
+      "description": "Sampling switch for the sub-talker.",
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "voice": {
+      "title": "Voice",
+      "description": "The voice to be used for speech synthesis, will be ignored if a speaker embedding is provided. Check out the **[documentation](https://github.com/QwenLM/Qwen3-TTS/tree/main?tab=readme-ov-file#custom-voice-generate)** for each voice's details and which language they primarily support.",
+      "anyOf": [
+       {
+        "enum": [
+         "Vivian",
+         "Serena",
+         "Uncle_Fu",
+         "Dylan",
+         "Eric",
+         "Ryan",
+         "Aiden",
+         "Ono_Anna",
+         "Sohee"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "text": {
+      "title": "Text",
+      "description": "The text to be converted to speech.",
+      "type": "string"
+     },
+     "language": {
+      "default": "Auto",
+      "enum": [
+       "Auto",
+       "English",
+       "Chinese",
+       "Spanish",
+       "French",
+       "German",
+       "Italian",
+       "Japanese",
+       "Korean",
+       "Portuguese",
+       "Russian"
+      ],
+      "title": "Language",
+      "description": "The language of the voice.",
+      "type": "string"
+     },
+     "prompt": {
+      "title": "Prompt",
+      "description": "Optional prompt to guide the style of the generated speech. This prompt will be ignored if a speaker embedding is provided.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "speaker_voice_embedding_file_url": {
+      "title": "Speaker Voice Embedding File Url",
+      "description": "URL to a speaker embedding file in safetensors format, from `fal-ai/qwen-3-tts/clone-voice/0.6b` endpoint. If provided, the TTS model will use the cloned voice for synthesis instead of the predefined voices.",
+      "anyOf": [
+       {
+        "type": "string",
+        "ui": {
+         "field": "url"
+        }
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "max_new_tokens": {
+      "default": 200,
+      "title": "Max New Tokens",
+      "description": "Maximum number of new codec tokens to generate.",
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 8192
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "repetition_penalty": {
+      "default": 1.05,
+      "title": "Repetition Penalty",
+      "description": "Penalty to reduce repeated tokens/codes.",
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "title": "Qwen3TTSInput06b",
+    "type": "object",
+    "x-fal-order-properties": [
+     "text",
+     "prompt",
+     "voice",
+     "language",
+     "speaker_voice_embedding_file_url",
+     "reference_text",
+     "top_k",
+     "top_p",
+     "temperature",
+     "repetition_penalty",
+     "subtalker_dosample",
+     "subtalker_top_k",
+     "subtalker_top_p",
+     "subtalker_temperature",
+     "max_new_tokens",
+     "enable_safety_checker"
+    ],
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "fal-ai/qwen-3-tts/text-to-speech/1.7b": {
+   "endpoint_id": "fal-ai/qwen-3-tts/text-to-speech/1.7b",
+   "display_name": "Qwen 3 TTS - Text to Speech [1.7B]",
+   "description": "Bring speech to your texts using Qwen3-TTS Custom-Voice model with pre-trained voices or use your custom voice with Qwen3-TTS Clone Voice model",
+   "input": {
+    "properties": {
+     "subtalker_temperature": {
+      "default": 0.9,
+      "title": "Subtalker Temperature",
+      "description": "Temperature for sub-talker sampling.",
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "top_k": {
+      "default": 50,
+      "title": "Top K",
+      "description": "Top-k sampling parameter.",
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "subtalker_top_k": {
+      "default": 50,
+      "title": "Subtalker Top K",
+      "description": "Top-k for sub-talker sampling.",
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "top_p": {
+      "default": 1,
+      "title": "Top P",
+      "description": "Top-p sampling parameter.",
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "reference_text": {
+      "title": "Reference Text",
+      "description": "Optional reference text that was used when creating the speaker embedding. Providing this can improve synthesis quality when using a cloned voice.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "subtalker_top_p": {
+      "default": 1,
+      "title": "Subtalker Top P",
+      "description": "Top-p for sub-talker sampling.",
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "temperature": {
+      "default": 0.9,
+      "title": "Temperature",
+      "description": "Sampling temperature; higher => more random.",
+      "anyOf": [
+       {
+        "type": "number",
+        "maximum": 1,
+        "exclusiveMinimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean"
+     },
+     "subtalker_dosample": {
+      "default": true,
+      "title": "Subtalker Dosample",
+      "description": "Sampling switch for the sub-talker.",
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "voice": {
+      "title": "Voice",
+      "description": "The voice to be used for speech synthesis, will be ignored if a speaker embedding is provided. Check out the **[documentation](https://github.com/QwenLM/Qwen3-TTS/tree/main?tab=readme-ov-file#custom-voice-generate)** for each voice's details and which language they primarily support.",
+      "anyOf": [
+       {
+        "enum": [
+         "Vivian",
+         "Serena",
+         "Uncle_Fu",
+         "Dylan",
+         "Eric",
+         "Ryan",
+         "Aiden",
+         "Ono_Anna",
+         "Sohee"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "text": {
+      "title": "Text",
+      "description": "The text to be converted to speech.",
+      "type": "string"
+     },
+     "language": {
+      "default": "Auto",
+      "enum": [
+       "Auto",
+       "English",
+       "Chinese",
+       "Spanish",
+       "French",
+       "German",
+       "Italian",
+       "Japanese",
+       "Korean",
+       "Portuguese",
+       "Russian"
+      ],
+      "title": "Language",
+      "description": "The language of the voice.",
+      "type": "string"
+     },
+     "prompt": {
+      "title": "Prompt",
+      "description": "Optional prompt to guide the style of the generated speech. This prompt will be ignored if a speaker embedding is provided.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "speaker_voice_embedding_file_url": {
+      "title": "Speaker Voice Embedding File Url",
+      "description": "URL to a speaker embedding file in safetensors format, from `fal-ai/qwen-3-tts/clone-voice` endpoint. If provided, the TTS model will use the cloned voice for synthesis instead of the predefined voices.",
+      "anyOf": [
+       {
+        "type": "string",
+        "ui": {
+         "field": "url"
+        }
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "max_new_tokens": {
+      "default": 200,
+      "title": "Max New Tokens",
+      "description": "Maximum number of new codec tokens to generate.",
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 8192
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "repetition_penalty": {
+      "default": 1.05,
+      "title": "Repetition Penalty",
+      "description": "Penalty to reduce repeated tokens/codes.",
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "title": "Qwen3TTSInput",
+    "type": "object",
+    "x-fal-order-properties": [
+     "text",
+     "prompt",
+     "voice",
+     "language",
+     "speaker_voice_embedding_file_url",
+     "reference_text",
+     "top_k",
+     "top_p",
+     "temperature",
+     "repetition_penalty",
+     "subtalker_dosample",
+     "subtalker_top_k",
+     "subtalker_top_p",
+     "subtalker_temperature",
+     "max_new_tokens",
+     "enable_safety_checker"
+    ],
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "fal-ai/qwen-3-tts/voice-design/1.7b": {
+   "endpoint_id": "fal-ai/qwen-3-tts/voice-design/1.7b",
+   "display_name": "Qwen 3 TTS - Voice Design [1.7B]",
+   "description": "Create custom voices using Qwen3-TTS Voice Design model and later use Clone Voice model to create your own voices!",
+   "input": {
+    "properties": {
+     "subtalker_temperature": {
+      "default": 0.9,
+      "title": "Subtalker Temperature",
+      "description": "Temperature for sub-talker sampling.",
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "temperature": {
+      "default": 0.9,
+      "title": "Temperature",
+      "description": "Sampling temperature; higher => more random.",
+      "anyOf": [
+       {
+        "type": "number",
+        "maximum": 1,
+        "exclusiveMinimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean"
+     },
+     "max_new_tokens": {
+      "default": 200,
+      "title": "Max New Tokens",
+      "description": "Maximum number of new codec tokens to generate.",
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 8192
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "top_k": {
+      "default": 50,
+      "title": "Top K",
+      "description": "Top-k sampling parameter.",
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "text": {
+      "title": "Text",
+      "description": "The text to be converted to speech.",
+      "type": "string"
+     },
+     "language": {
+      "default": "Auto",
+      "enum": [
+       "Auto",
+       "English",
+       "Chinese",
+       "Spanish",
+       "French",
+       "German",
+       "Italian",
+       "Japanese",
+       "Korean",
+       "Portuguese",
+       "Russian"
+      ],
+      "title": "Language",
+      "description": "The language of the voice to be designed.",
+      "type": "string"
+     },
+     "top_p": {
+      "default": 1,
+      "title": "Top P",
+      "description": "Top-p sampling parameter.",
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "subtalker_top_k": {
+      "default": 50,
+      "title": "Subtalker Top K",
+      "description": "Top-k for sub-talker sampling.",
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "prompt": {
+      "title": "Prompt",
+      "description": "Optional prompt to guide the style of the generated speech.",
+      "type": "string"
+     },
+     "subtalker_dosample": {
+      "default": true,
+      "title": "Subtalker Dosample",
+      "description": "Sampling switch for the sub-talker.",
+      "anyOf": [
+       {
+        "type": "boolean"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "repetition_penalty": {
+      "default": 1.05,
+      "title": "Repetition Penalty",
+      "description": "Penalty to reduce repeated tokens/codes.",
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "subtalker_top_p": {
+      "default": 1,
+      "title": "Subtalker Top P",
+      "description": "Top-p for sub-talker sampling.",
+      "anyOf": [
+       {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "title": "Qwen3DesignVoiceInput",
+    "type": "object",
+    "x-fal-order-properties": [
+     "text",
+     "language",
+     "prompt",
+     "top_k",
+     "top_p",
+     "temperature",
+     "repetition_penalty",
+     "subtalker_dosample",
+     "subtalker_top_k",
+     "subtalker_top_p",
+     "subtalker_temperature",
+     "max_new_tokens",
+     "enable_safety_checker"
+    ],
+    "required": [
+     "text",
+     "prompt"
+    ]
+   }
+  },
+  "alibaba/qwen-audio-3-tts": {
+   "endpoint_id": "alibaba/qwen-audio-3-tts",
+   "display_name": "Qwen Audio 3.0 TTS (Flash)",
+   "description": "Generate natural multilingual speech from text with fast voice and language control using Qwen Audio 3.0 TTS Flash.",
+   "input": {
+    "properties": {
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean"
+     },
+     "voice": {
+      "default": "Cherry",
+      "title": "Voice",
+      "type": "string",
+      "description": "The voice used for speech synthesis. See the [Qwen-TTS voice list](https://www.alibabacloud.com/help/en/model-studio/qwen-tts-voice-list) for each voice's language and dialect coverage.",
+      "enum": [
+       "Cherry",
+       "Serena",
+       "Ethan",
+       "Chelsie",
+       "Momo",
+       "Vivian",
+       "Moon",
+       "Maia",
+       "Kai",
+       "Nofish",
+       "Bella",
+       "Jennifer",
+       "Ryan",
+       "Katerina",
+       "Aiden",
+       "Mia",
+       "Mochi",
+       "Bellona",
+       "Vincent",
+       "Bunny",
+       "Neil",
+       "Elias",
+       "Arthur",
+       "Nini",
+       "Seren",
+       "Pip",
+       "Stella",
+       "Bodega",
+       "Sonrisa",
+       "Alek",
+       "Dolce",
+       "Sohee",
+       "Lenn",
+       "Emilien",
+       "Andre",
+       "Jada",
+       "Dylan",
+       "Li",
+       "Marcus",
+       "Roy",
+       "Peter",
+       "Sunny",
+       "Eric",
+       "Rocky",
+       "Kiki"
+      ]
+     },
+     "text": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "type": "string",
+      "description": "The text to convert to speech.",
+      "title": "Text"
+     },
+     "language": {
+      "default": "Auto",
+      "title": "Language",
+      "type": "string",
+      "description": "Language of the input text. `Auto` lets the model detect it; setting it explicitly improves pronunciation and intonation.",
+      "enum": [
+       "Auto",
+       "Chinese",
+       "English",
+       "Spanish",
+       "Russian",
+       "Italian",
+       "French",
+       "Korean",
+       "Japanese",
+       "German",
+       "Portuguese"
+      ]
+     }
+    },
+    "title": "QwenAudio3TTSInput",
+    "type": "object",
+    "x-fal-order-properties": [
+     "text",
+     "voice",
+     "language",
+     "enable_safety_checker"
+    ],
+    "required": [
+     "text"
+    ]
+   }
+  },
+  "fal-ai/vibevoice/0.5b": {
+   "endpoint_id": "fal-ai/vibevoice/0.5b",
+   "display_name": "Vibevoice",
+   "description": "Generate long speech snippets fast using Microsoft's powerful TTS.",
+   "input": {
+    "x-fal-order-properties": [
+     "script",
+     "speaker",
+     "seed",
+     "cfg_scale",
+     "enable_safety_checker"
+    ],
+    "type": "object",
+    "required": [
+     "script",
+     "speaker"
+    ],
+    "title": "VibeVoice0_5bInput",
+    "description": "Input schema for VibeVoice-0.5b TTS generation",
+    "properties": {
+     "enable_safety_checker": {
+      "type": "boolean",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "title": "Enable Safety Checker",
+      "default": true
+     },
+     "seed": {
+      "description": "Random seed for reproducible generation.",
+      "title": "Seed",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "speaker": {
+      "enum": [
+       "Frank",
+       "Wayne",
+       "Carter",
+       "Emma",
+       "Grace",
+       "Mike"
+      ],
+      "type": "string",
+      "description": "Voice to use for speaking.",
+      "title": "Speaker"
+     },
+     "script": {
+      "type": "string",
+      "description": "The script to convert to speech.",
+      "title": "Script",
+      "maxLength": 90000
+     },
+     "cfg_scale": {
+      "maximum": 2,
+      "type": "number",
+      "minimum": 1,
+      "title": "CFG Scale",
+      "description": "CFG (Classifier-Free Guidance) scale for generation. Higher values increase adherence to text.",
+      "default": 1.3
+     }
+    }
+   }
+  },
+  "fal-ai/vibevoice": {
+   "endpoint_id": "fal-ai/vibevoice",
+   "display_name": "VibeVoice 1.5B",
+   "description": "Generate long, expressive multi-voice speech using Microsoft's powerful TTS",
+   "input": {
+    "x-fal-order-properties": [
+     "script",
+     "speakers",
+     "seed",
+     "cfg_scale",
+     "enable_safety_checker"
+    ],
+    "type": "object",
+    "required": [
+     "script",
+     "speakers"
+    ],
+    "title": "VibeVoiceInput",
+    "description": "Input schema for VibeVoice TTS generation",
+    "properties": {
+     "enable_safety_checker": {
+      "type": "boolean",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "title": "Enable Safety Checker",
+      "default": true
+     },
+     "seed": {
+      "description": "Random seed for reproducible generation.",
+      "title": "Seed",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "script": {
+      "type": "string",
+      "description": "The script to convert to speech. Can be formatted with 'Speaker X:' prefixes for multi-speaker dialogues.",
+      "title": "Script",
+      "maxLength": 90000
+     },
+     "cfg_scale": {
+      "maximum": 2,
+      "type": "number",
+      "minimum": 1,
+      "title": "CFG Scale",
+      "description": "CFG (Classifier-Free Guidance) scale for generation. Higher values increase adherence to text.",
+      "default": 1.3
+     },
+     "speakers": {
+      "items": {
+       "x-fal-order-properties": [
+        "preset",
+        "audio_url"
+       ],
+       "type": "object",
+       "properties": {
+        "preset": {
+         "enum": [
+          "Alice [EN]",
+          "Carter [EN]",
+          "Frank [EN]",
+          "Mary [EN] (Background Music)",
+          "Maya [EN]",
+          "Anchen [ZH] (Background Music)",
+          "Bowen [ZH]",
+          "Xinran [ZH]"
+         ],
+         "type": "string",
+         "description": "Default voice preset to use for the speaker. Not used if `audio_url` is provided.",
+         "title": "Preset",
+         "default": "Alice [EN]"
+        },
+        "audio_url": {
+         "description": "URL to a voice sample audio file. If provided, `preset` will be ignored.",
+         "title": "Audio URL",
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        }
+       },
+       "title": "VibeVoiceSpeaker"
+      },
+      "type": "array",
+      "description": "List of speakers to use for the script. If not provided, will be inferred from the script or voice samples.",
+      "title": "Speakers"
+     }
+    }
+   }
+  },
+  "fal-ai/vibevoice/7b": {
+   "endpoint_id": "fal-ai/vibevoice/7b",
+   "display_name": "VibeVoice 7B",
+   "description": "Generate long, expressive multi-voice speech using Microsoft's powerful TTS",
+   "input": {
+    "x-fal-order-properties": [
+     "script",
+     "speakers",
+     "seed",
+     "cfg_scale",
+     "enable_safety_checker"
+    ],
+    "type": "object",
+    "required": [
+     "script",
+     "speakers"
+    ],
+    "title": "VibeVoice7bInput",
+    "description": "Input schema for VibeVoice-7b TTS generation",
+    "properties": {
+     "enable_safety_checker": {
+      "type": "boolean",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "title": "Enable Safety Checker",
+      "default": true
+     },
+     "seed": {
+      "description": "Random seed for reproducible generation.",
+      "title": "Seed",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "script": {
+      "type": "string",
+      "description": "The script to convert to speech. Can be formatted with 'Speaker X:' prefixes for multi-speaker dialogues.",
+      "title": "Script",
+      "maxLength": 30000
+     },
+     "cfg_scale": {
+      "maximum": 2,
+      "type": "number",
+      "minimum": 1,
+      "title": "CFG Scale",
+      "description": "CFG (Classifier-Free Guidance) scale for generation. Higher values increase adherence to text.",
+      "default": 1.3
+     },
+     "speakers": {
+      "items": {
+       "x-fal-order-properties": [
+        "preset",
+        "audio_url"
+       ],
+       "type": "object",
+       "properties": {
+        "preset": {
+         "enum": [
+          "Alice [EN]",
+          "Carter [EN]",
+          "Frank [EN]",
+          "Mary [EN] (Background Music)",
+          "Maya [EN]",
+          "Anchen [ZH] (Background Music)",
+          "Bowen [ZH]",
+          "Xinran [ZH]"
+         ],
+         "type": "string",
+         "description": "Default voice preset to use for the speaker. Not used if `audio_url` is provided.",
+         "title": "Preset",
+         "default": "Alice [EN]"
+        },
+        "audio_url": {
+         "description": "URL to a voice sample audio file. If provided, `preset` will be ignored.",
+         "title": "Audio URL",
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        }
+       },
+       "title": "VibeVoiceSpeaker"
+      },
+      "type": "array",
+      "description": "List of speakers to use for the script. If not provided, will be inferred from the script or voice samples.",
+      "title": "Speakers"
+     }
+    }
+   }
+  },
+  "xai/tts/v1": {
+   "endpoint_id": "xai/tts/v1",
+   "display_name": "xAI Text to Speech",
+   "description": "Generate speech with expressive and realistic voices from xAI",
+   "input": {
+    "required": [
+     "text"
+    ],
+    "properties": {
+     "voice": {
+      "type": "string",
+      "title": "Voice",
+      "description": "Built-in xAI voice to use for synthesis.",
+      "enum": [
+       "carina",
+       "zagan",
+       "helix",
+       "orion",
+       "luna",
+       "iris",
+       "altair",
+       "zenith",
+       "perseus",
+       "helios",
+       "lux",
+       "kepler",
+       "rigel",
+       "cosmo",
+       "celeste",
+       "ursa",
+       "sirius",
+       "lumen",
+       "castor",
+       "naksh",
+       "atlas",
+       "aurora",
+       "liora",
+       "ara",
+       "eve",
+       "leo",
+       "rex",
+       "sal"
+      ],
+      "default": "eve"
+     },
+     "text": {
+      "type": "string",
+      "maxLength": 15000,
+      "title": "Text",
+      "description": "The text to convert to speech. Maximum 15,000 characters. Supports speech tags for expressive delivery: inline tags like [laugh], [pause], [sigh] and wrapping tags like <whisper>text</whisper>, <slow>text</slow>.",
+      "minLength": 1
+     },
+     "language": {
+      "type": "string",
+      "title": "Language",
+      "description": "BCP-47 language code or 'auto' for automatic detection. Supported: en, zh, fr, de, hi, id, it, ja, ko, pt-BR, pt-PT, ru, es-MX, es-ES, tr, vi, bn, ar-EG, ar-SA, ar-AE.",
+      "enum": [
+       "auto",
+       "en",
+       "ar-EG",
+       "ar-SA",
+       "ar-AE",
+       "bn",
+       "zh",
+       "fr",
+       "de",
+       "hi",
+       "id",
+       "it",
+       "ja",
+       "ko",
+       "pt-BR",
+       "pt-PT",
+       "ru",
+       "es-MX",
+       "es-ES",
+       "tr",
+       "vi"
+      ],
+      "default": "auto"
+     },
+     "enable_safety_checker": {
+      "title": "Enable Safety Checker",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean",
+      "default": true
+     },
+     "output_format": {
+      "properties": {
+       "codec": {
+        "default": "mp3",
+        "title": "Codec",
+        "description": "Audio codec. Supported: mp3, wav, pcm, mulaw, alaw.",
+        "enum": [
+         "mp3",
+         "wav",
+         "pcm",
+         "mulaw",
+         "alaw"
+        ],
+        "type": "string"
+       },
+       "sample_rate": {
+        "default": 24000,
+        "title": "Sample Rate",
+        "description": "Sample rate in Hz.",
+        "enum": [
+         8000,
+         16000,
+         22050,
+         24000,
+         44100,
+         48000
+        ],
+        "type": "integer"
+       },
+       "bit_rate": {
+        "title": "Bit Rate",
+        "description": "Bit rate in bps. Only applicable for MP3 codec. Defaults to 128000 for MP3.",
+        "anyOf": [
+         {
+          "enum": [
+           32000,
+           64000,
+           96000,
+           128000,
+           192000
+          ],
+          "type": "integer"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "title": "OutputFormat",
+      "description": "Output format configuration for the TTS API.",
+      "type": "object",
+      "x-fal-order-properties": [
+       "codec",
+       "sample_rate",
+       "bit_rate"
+      ]
+     }
+    },
+    "title": "XAITTSInput",
+    "description": "Input for xAI text-to-speech generation.",
+    "type": "object",
+    "x-fal-order-properties": [
+     "text",
+     "voice",
+     "language",
+     "output_format",
+     "enable_safety_checker"
+    ]
+   }
+  },
+  "fal-ai/zonos2": {
+   "endpoint_id": "fal-ai/zonos2",
+   "display_name": "Zonos2 Text to Speech",
+   "description": "Zonos2 is a text-to-speech model that clones a voice from a short sample and speaks naturally across many languages.",
+   "input": {
+    "x-fal-order-properties": [
+     "reference_audio_url",
+     "text",
+     "language",
+     "seed",
+     "accurate_mode",
+     "clean_speaker_background",
+     "temperature",
+     "top_p",
+     "min_p",
+     "top_k",
+     "max_tokens",
+     "enable_safety_checker"
+    ],
+    "type": "object",
+    "title": "Zonos2Input",
+    "properties": {
+     "accurate_mode": {
+      "type": "boolean",
+      "title": "Accurate Mode",
+      "default": true,
+      "description": "True = closer voice match; False = more expressive."
+     },
+     "temperature": {
+      "type": "number",
+      "maximum": 2,
+      "title": "Temperature",
+      "default": 1.15,
+      "minimum": 0,
+      "description": "Sampling temperature."
+     },
+     "seed": {
+      "title": "Seed",
+      "anyOf": [
+       {
+        "type": "integer",
+        "maximum": 2147483647,
+        "minimum": 0
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Seed for reproducibility. Random when omitted."
+     },
+     "text": {
+      "type": "string",
+      "title": "Text",
+      "default": "\"Fal\" is the fastest solution for your audio generation.",
+      "description": "Text to synthesize in the cloned voice."
+     },
+     "language": {
+      "type": "string",
+      "title": "Language",
+      "default": "en_us",
+      "description": "Text-normalization language code. Supported: en_us, en_gb, fr_fr, de, es, it, pt_br, ja, cmn, ko. Unsupported codes skip normalization."
+     },
+     "max_tokens": {
+      "title": "Max Tokens",
+      "anyOf": [
+       {
+        "type": "integer",
+        "maximum": 6144,
+        "minimum": 1
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Maximum number of audio frames to generate. Defaults to the model context limit."
+     },
+     "top_p": {
+      "type": "number",
+      "maximum": 1,
+      "title": "Top P",
+      "default": 0,
+      "minimum": 0,
+      "description": "Nucleus sampling probability (0 disables)."
+     },
+     "reference_audio_url": {
+      "type": "string",
+      "title": "Reference Audio Url",
+      "description": "Reference audio to clone the voice from."
+     },
+     "min_p": {
+      "type": "number",
+      "maximum": 1,
+      "title": "Min P",
+      "default": 0.18,
+      "minimum": 0,
+      "description": "Minimum-probability sampling threshold."
+     },
+     "top_k": {
+      "type": "integer",
+      "maximum": 2048,
+      "title": "Top K",
+      "default": 106,
+      "minimum": 0,
+      "description": "Top-k sampling cutoff (0 disables)."
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "clean_speaker_background": {
+      "type": "boolean",
+      "title": "Clean Speaker Background",
+      "default": false,
+      "description": "Mark the reference audio as having a clean background."
+     }
+    },
+    "required": [
+     "reference_audio_url"
+    ]
+   }
+  }
+ }
+}

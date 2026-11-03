@@ -1,0 +1,570 @@
+{
+ "category": "video-to-audio",
+ "models": {
+  "fal-ai/kling-video/video-to-audio": {
+   "endpoint_id": "fal-ai/kling-video/video-to-audio",
+   "display_name": "Kling Video",
+   "description": "Generate audio from input videos using Kling",
+   "input": {
+    "properties": {
+     "video_url": {
+      "title": "Video Url",
+      "description": "The video URL to extract audio from. Only .mp4/.mov formats are supported. File size does not exceed 100MB. Video duration between 3.0s and 20.0s.",
+      "_fal_ui_field": "video",
+      "x-fal": {
+       "min_duration": 3,
+       "max_duration": 20,
+       "timeout": 120,
+       "max_file_size": 104857600
+      },
+      "type": "string",
+      "limit_description": "Max file size: 100.0MB, Min duration: 3.0s, Max duration: 20.0s, Timeout: 120.0s"
+     },
+     "sound_effect_prompt": {
+      "default": "Car tires screech as they accelerate in a drag race",
+      "title": "Sound Effect Prompt",
+      "description": "Sound effect prompt. Cannot exceed 200 characters.",
+      "anyOf": [
+       {
+        "maxLength": 200,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "asmr_mode": {
+      "default": false,
+      "title": "Asmr Mode",
+      "type": "boolean",
+      "description": "Enable ASMR mode. This mode enhances detailed sound effects and is suitable for highly immersive content scenarios."
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean",
+      "description": "Disabling safety checks requires account authorization; unauthorized requests are always checked."
+     },
+     "background_music_prompt": {
+      "default": "intense car race",
+      "title": "Background Music Prompt",
+      "description": "Background music prompt. Cannot exceed 200 characters.",
+      "anyOf": [
+       {
+        "maxLength": 200,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "title": "VideoToAudioInput",
+    "type": "object",
+    "x-fal-order-properties": [
+     "enable_safety_checker",
+     "video_url",
+     "sound_effect_prompt",
+     "background_music_prompt",
+     "asmr_mode"
+    ],
+    "required": [
+     "video_url"
+    ]
+   }
+  },
+  "mirelo-ai/sfx2.0/video-to-audio": {
+   "endpoint_id": "mirelo-ai/sfx2.0/video-to-audio",
+   "display_name": "Mirelo SFX2.0",
+   "description": "Generates synchronized sound effects for a video as audio files, with speech preserved or separated. Supports text prompts for off-screen sounds and ambience.",
+   "input": {
+    "properties": {
+     "return_speech": {
+      "default": false,
+      "title": "Return Speech",
+      "description": "Also return the input's separated speech as its own audio file, in the response's speech. With preserve_speech false the soundtracks are sound effects only and the speech is separated while they generate. With preserve_speech true it is the speech separated from the input that the soundtracks were generated around, not the speech in them: the model renders that speech anew, so the file does not cancel or double it cleanly when layered onto a soundtrack. The file is mono, in upload_audio_format, and as long as the soundtracks. It is not billed.",
+      "type": "boolean"
+     },
+     "duration": {
+      "default": 10,
+      "title": "Duration",
+      "minimum": 1,
+      "description": "Seconds of sound to generate, from 1 s to 600 s, clamped to the video's length. Over 10 s generates in 10 s windows. A video shorter than 1 s answers 400.",
+      "maximum": 600,
+      "type": "number"
+     },
+     "preserve_speech": {
+      "default": true,
+      "title": "Preserve Speech",
+      "description": "Keep the speech in the input's audio and generate the rest of the soundtrack around it. False generates sound effects only and suppresses speech.",
+      "type": "boolean"
+     },
+     "seed": {
+      "anyOf": [
+       {
+        "minimum": -1,
+        "maximum": 18446744073709552000,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Seed",
+      "description": "Seed for generation. -1 or None for random."
+     },
+     "video_url": {
+      "title": "Video Url",
+      "description": "Video to add sound to: an http(s) URL, or a base64 data URI up to 8 MB.",
+      "type": "string"
+     },
+     "text_prompt": {
+      "anyOf": [
+       {
+        "maxLength": 2000,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional text guiding the soundtrack. Name sounds the picture does not show, such as off-screen sounds or an ambience bed, to have them worked into it.",
+      "title": "Text Prompt"
+     },
+     "upload_audio_format": {
+      "enum": [
+       "wav",
+       "mp3",
+       "aac",
+       "flac"
+      ],
+      "title": "Audio Format",
+      "default": "wav",
+      "description": "Audio format of each file",
+      "type": "string"
+     },
+     "upload_audio_bitrate_kbps": {
+      "anyOf": [
+       {
+        "minimum": 32,
+        "maximum": 320,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Audio Bitrate (kbps)",
+      "description": "Bitrate in kbps for an mp3 or aac upload. mp3 is written at exactly this constant rate, one of 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320. aac takes 32 to 256 as a target the encoder may undershoot on mono or sparse audio. Unset keeps the default: mp3 at LAME V0 VBR, aac at a 256 kbps target. Refused with a lossless upload_audio_format."
+     },
+     "negative_prompt": {
+      "anyOf": [
+       {
+        "maxLength": 1000,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Sounds to keep out of the result, as a short comma-separated list.",
+      "title": "Negative Prompt"
+     },
+     "num_samples": {
+      "default": 2,
+      "title": "Number of Samples",
+      "minimum": 1,
+      "description": "Number of variations to generate. Billed per sample.",
+      "maximum": 4,
+      "type": "integer"
+     }
+    },
+    "required": [
+     "video_url"
+    ],
+    "title": "VideoToAudioInput",
+    "x-fal-order-properties": [
+     "video_url",
+     "text_prompt",
+     "negative_prompt",
+     "preserve_speech",
+     "duration",
+     "num_samples",
+     "seed",
+     "upload_audio_format",
+     "upload_audio_bitrate_kbps",
+     "return_speech"
+    ],
+    "type": "object"
+   }
+  },
+  "mureka/v9.5/generate/soundtrack": {
+   "endpoint_id": "mureka/v9.5/generate/soundtrack",
+   "display_name": "Mureka 9.5 Soundtrack Generation",
+   "description": "Generates soundtracks from an uploaded image or video, with optional style and mood guidance, audio-range selection, and multiple variations.",
+   "input": {
+    "properties": {
+     "image_id": {
+      "anyOf": [
+       {
+        "minLength": 1,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Image Id",
+      "description": "Image ID returned by /files/upload with purpose='soundtrack'. Provide exactly one of image_id or video_id."
+     },
+     "audio_start": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Audio Start",
+      "description": "Start time of the soundtrack audio in milliseconds. If only audio_start is specified, generation starts there and continues for the video duration, stopping at the end of the song if the remaining audio is shorter. The soundtrack audio segment must be at least 3 seconds long, and a 1-second fade-in is added at the beginning."
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean"
+     },
+     "prompt": {
+      "anyOf": [
+       {
+        "maxLength": 1024,
+        "minLength": 1,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Prompt",
+      "description": "Optional description of the desired soundtrack style and mood."
+     },
+     "video_id": {
+      "anyOf": [
+       {
+        "minLength": 1,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Video Id",
+      "description": "Video ID returned by /files/upload with purpose='soundtrack'. Provide exactly one of image_id or video_id."
+     },
+     "audio_end": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Audio End",
+      "description": "End time of the soundtrack audio in milliseconds. If both audio_start and audio_end are specified, generation uses those times. If audio_end exceeds the song duration, generation stops at the end of the song. The soundtrack audio segment must be at least 3 seconds long, and a 1-second fade-out is added at the end."
+     }
+    },
+    "title": "GenerateSoundtrackV95Input",
+    "description": "Input for v9.5 GenerateSoundtrack.",
+    "x-fal-order-properties": [
+     "image_id",
+     "video_id",
+     "prompt",
+     "audio_start",
+     "audio_end",
+     "enable_safety_checker"
+    ],
+    "type": "object"
+   }
+  },
+  "fal-ai/sam-audio/visual-separate": {
+   "endpoint_id": "fal-ai/sam-audio/visual-separate",
+   "display_name": "Sam Audio",
+   "description": "Audio separation with SAM Audio. Isolate any sound using natural language\u2014professional-grade audio editing made simple for creators, researchers, and accessibility applications.",
+   "input": {
+    "x-fal-order-properties": [
+     "video_url",
+     "mask_video_url",
+     "prompt",
+     "reranking_candidates",
+     "acceleration",
+     "max_chunk_duration",
+     "chunk_overlap",
+     "output_format"
+    ],
+    "type": "object",
+    "description": "Input for visual-prompted audio separation.",
+    "title": "SAMAudioVisualInput",
+    "properties": {
+     "output_format": {
+      "enum": [
+       "wav",
+       "mp3"
+      ],
+      "type": "string",
+      "description": "Output audio format.",
+      "title": "Output Format",
+      "default": "wav"
+     },
+     "prompt": {
+      "type": "string",
+      "description": "Text prompt to assist with separation. Use natural language to describe the target sound.",
+      "title": "Prompt",
+      "default": ""
+     },
+     "reranking_candidates": {
+      "maximum": 4,
+      "type": "integer",
+      "minimum": 1,
+      "title": "Reranking Candidates",
+      "description": "Number of candidates to generate and rank. Higher improves quality but increases latency and cost.",
+      "default": 1
+     },
+     "video_url": {
+      "type": "string",
+      "description": "URL of the video file to process (MP4, MOV, etc.)",
+      "title": "Video Url"
+     },
+     "max_chunk_duration": {
+      "maximum": 60,
+      "type": "number",
+      "minimum": 10,
+      "title": "Max Chunk Duration",
+      "description": "Maximum audio duration (in seconds) to process in a single pass. Longer audio will be chunked with overlap and blended.",
+      "default": 60
+     },
+     "mask_video_url": {
+      "description": "URL of the mask video (binary mask indicating target object). Black=target, White=background.",
+      "title": "Mask Video Url",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "acceleration": {
+      "enum": [
+       "fast",
+       "balanced",
+       "quality"
+      ],
+      "type": "string",
+      "description": "The acceleration level to use.",
+      "title": "Acceleration",
+      "default": "balanced"
+     },
+     "chunk_overlap": {
+      "maximum": 30,
+      "type": "number",
+      "minimum": 0,
+      "title": "Chunk Overlap",
+      "description": "Overlap duration (in seconds) between chunks for crossfade blending.",
+      "default": 5
+     }
+    },
+    "required": [
+     "video_url"
+    ]
+   }
+  },
+  "sonilo/v1.1/video-to-music": {
+   "endpoint_id": "sonilo/v1.1/video-to-music",
+   "display_name": "V1.1",
+   "description": "Analyzes your video\u2019s pacing, mood, and timing to generate a frame-synced, licensed, commercial-use-safe soundtrack in seconds.",
+   "input": {
+    "properties": {
+     "prompt": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Prompt",
+      "description": "Optional text prompt steering the musical style. If omitted, a prompt is generated automatically from the video."
+     },
+     "duration": {
+      "anyOf": [
+       {
+        "minimum": 1,
+        "maximum": 600,
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Duration",
+      "description": "Optional. Length (seconds) of the video segment to score. When set, scores a segment of this length starting at Start Offset (or from the beginning if Start Offset is unset). Defaults (None) to the rest of the video: the whole video when Start Offset is unset, or from Start Offset to the end when it is set."
+     },
+     "start_offset": {
+      "anyOf": [
+       {
+        "minimum": 0,
+        "maximum": 600,
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Start Offset",
+      "description": "Optional. Start scoring from this offset (seconds) into the video. Requires Start Offset + Duration <= Video Duration."
+     },
+     "prompt_influence": {
+      "default": 0.5,
+      "title": "Prompt Influence",
+      "minimum": 0,
+      "description": "Turn it up to match the text prompt",
+      "maximum": 1,
+      "type": "number"
+     },
+     "video_url": {
+      "title": "Video Url",
+      "description": "Public http(s) URL of the source video to score.",
+      "type": "string"
+     },
+     "num_samples": {
+      "default": 1,
+      "title": "Num Samples",
+      "minimum": 1,
+      "description": "How many distinct music tracks to generate for the video.",
+      "maximum": 3,
+      "type": "integer"
+     }
+    },
+    "required": [
+     "video_url"
+    ],
+    "title": "VideoToMusicInput",
+    "x-fal-order-properties": [
+     "video_url",
+     "num_samples",
+     "prompt",
+     "prompt_influence",
+     "start_offset",
+     "duration"
+    ],
+    "type": "object"
+   }
+  },
+  "sonilo/v1.1/video-to-sound-effects": {
+   "endpoint_id": "sonilo/v1.1/video-to-sound-effects",
+   "display_name": "V1.1 Video to Sound Effects",
+   "description": "Analyzes a video and generates synchronized, royalty-free sound effects timed to visible actions. Returns the generated sound-effects audio track for commercial use.",
+   "input": {
+    "title": "Sfxv1VideoInput",
+    "description": "sfx-v1.0 video schema (video-to-audio / video-to-video): plain-language\nfield help for the product Playground. Prompt and segments are advanced;\nflash and seed are hidden.",
+    "type": "object",
+    "required": [
+     "video_url"
+    ],
+    "x-fal-order-properties": [
+     "video_url",
+     "prompt",
+     "segments",
+     "audio_format",
+     "keep_speech_vocal"
+    ],
+    "properties": {
+     "keep_speech_vocal": {
+      "default": false,
+      "title": "Keep Speech Vocal",
+      "type": "boolean",
+      "description": "Keep the original video's speech/vocals. When on, the source audio is separated (music source separation) and the isolated vocals are kept as recorded, with the generated sound mixed in at a level matched to the voice; the rest of the original soundtrack (music, ambience) is dropped. Applies to the returned audio and video. When off (default), the result carries only the generated sound."
+     },
+     "audio_format": {
+      "default": "aac",
+      "title": "Audio Format",
+      "description": "Format of the returned audio file: aac (default), mp3, wav, or flac. (The video with sound is always AAC.)",
+      "type": "string",
+      "enum": [
+       "wav",
+       "mp3",
+       "aac",
+       "flac"
+      ]
+     },
+     "prompt": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Prompt",
+      "description": "Optional. Describe the kind of sound you want; it steers the generated audio for every scene. Leave empty to caption the video automatically."
+     },
+     "video_url": {
+      "title": "Video Url",
+      "type": "string",
+      "description": "The video to add sound to (public URL, or upload a file). The generated audio matches the video's length."
+     },
+     "segments": {
+      "anyOf": [
+       {
+        "items": {
+         "title": "SfxSegment",
+         "type": "object",
+         "x-fal-order-properties": [
+          "start",
+          "end",
+          "prompt"
+         ],
+         "properties": {
+          "end": {
+           "default": 0,
+           "title": "End",
+           "description": "Segment end time in seconds. Must equal the next segment's start (contiguous; no gaps/overlaps); the last segment's end must be <= the video duration.",
+           "type": "number",
+           "minimum": 0
+          },
+          "start": {
+           "default": 0,
+           "title": "Start",
+           "description": "Segment start time in seconds (from video start). The FIRST segment's start must be 0.",
+           "type": "number",
+           "minimum": 0
+          },
+          "prompt": {
+           "default": "",
+           "title": "Prompt",
+           "description": "SFX / foley description for this segment.",
+           "type": "string"
+          }
+         }
+        },
+        "type": "array"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Segments",
+      "description": "Optional. Split the video into time ranges, each with its own sound description. Leave empty to split into scenes automatically."
+     }
+    }
+   }
+  }
+ }
+}

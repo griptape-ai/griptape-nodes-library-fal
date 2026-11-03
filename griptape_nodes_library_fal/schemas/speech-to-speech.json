@@ -1,0 +1,531 @@
+{
+ "category": "speech-to-speech",
+ "models": {
+  "fal-ai/chatterbox/speech-to-speech": {
+   "endpoint_id": "fal-ai/chatterbox/speech-to-speech",
+   "display_name": "Chatterbox",
+   "description": "Whether you're working on memes, videos, games, or AI agents, Chatterbox brings your content to life. Use the first tts from resemble ai.",
+   "input": {
+    "type": "object",
+    "properties": {
+     "target_voice_audio_url": {
+      "description": "Required URL to an audio file to use as the target reference voice for speech-to-speech voice conversion.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Target Voice Audio Url"
+     },
+     "source_audio_url": {
+      "type": "string",
+      "title": "Source Audio Url"
+     }
+    },
+    "required": [
+     "source_audio_url"
+    ],
+    "x-fal-order-properties": [
+     "source_audio_url",
+     "target_voice_audio_url"
+    ],
+    "title": "ChatterboxVCRequest"
+   }
+  },
+  "resemble-ai/chatterboxhd/speech-to-speech": {
+   "endpoint_id": "resemble-ai/chatterboxhd/speech-to-speech",
+   "display_name": "Chatterboxhd",
+   "description": "Transform voices using Resemble AI's Chatterbox. Convert audio to new voices or your own samples, with expressive results and built-in perceptual watermarking.",
+   "input": {
+    "description": "Input parameters for the speech-to-speech request.",
+    "type": "object",
+    "properties": {
+     "high_quality_audio": {
+      "description": "If True, the generated audio will be upscaled to 48kHz. The generation of the audio will take longer, but the quality will be higher. If False, the generated audio will be 24kHz. ",
+      "type": "boolean",
+      "title": "High Quality Audio",
+      "default": false
+     },
+     "target_voice_audio_url": {
+      "description": "URL to the audio file which represents the voice of the output audio. If provided, this will override the target_voice setting. If neither target_voice nor target_voice_audio_url are provided, the default target voice will be used.",
+      "type": "string",
+      "title": "Target Voice Audio Url"
+     },
+     "source_audio_url": {
+      "description": "URL to the source audio file to be voice-converted.",
+      "type": "string",
+      "title": "Source Audio Url"
+     },
+     "target_voice": {
+      "enum": [
+       "Aurora",
+       "Blade",
+       "Britney",
+       "Carl",
+       "Cliff",
+       "Richard",
+       "Rico",
+       "Siobhan",
+       "Vicky"
+      ],
+      "description": "The voice to use for the speech-to-speech request. If neither target_voice nor target_voice_audio_url are provided, a random target voice will be used.",
+      "type": "string",
+      "title": "Target Voice"
+     }
+    },
+    "x-fal-order-properties": [
+     "source_audio_url",
+     "target_voice",
+     "target_voice_audio_url",
+     "high_quality_audio"
+    ],
+    "title": "STSInput",
+    "required": [
+     "source_audio_url"
+    ]
+   }
+  },
+  "xai/grok-voice": {
+   "endpoint_id": "xai/grok-voice",
+   "display_name": "Grok Voice",
+   "description": "Build real-time voice applications powered by Grok. Send recorded audio and get a voice and text response.",
+   "input": {
+    "properties": {
+     "voice": {
+      "title": "Voice",
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "carina",
+         "zagan",
+         "helix",
+         "orion",
+         "luna",
+         "iris",
+         "altair",
+         "zenith",
+         "perseus",
+         "helios",
+         "lux",
+         "kepler",
+         "rigel",
+         "cosmo",
+         "celeste",
+         "ursa",
+         "sirius",
+         "lumen",
+         "castor",
+         "naksh",
+         "atlas",
+         "aurora",
+         "liora",
+         "ara",
+         "eve",
+         "leo",
+         "rex",
+         "sal"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Built-in xAI voice for the agent's reply. Uses Grok's default voice when omitted."
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "tools": {
+      "properties": {
+       "mcp_servers": {
+        "items": {
+         "properties": {
+          "authorization": {
+           "title": "Authorization",
+           "default": null,
+           "anyOf": [
+            {
+             "type": "string",
+             "format": "password",
+             "writeOnly": true
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "description": "Sensitive authorization value forwarded only to xAI."
+          },
+          "server_url": {
+           "minLength": 1,
+           "title": "Server Url",
+           "type": "string",
+           "format": "uri",
+           "description": "Caller-selected HTTP(S) MCP endpoint. xAI makes the remote connection and supports Streaming HTTP/SSE transports. Use at your own risk; fal does not connect to or SSRF-fetch this URL."
+          },
+          "allowed_tools": {
+           "title": "Allowed Tools",
+           "default": null,
+           "anyOf": [
+            {
+             "type": "array",
+             "minItems": 1,
+             "items": {
+              "type": "string"
+             }
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "description": "Optional allow-list of tool names exposed from this server."
+          },
+          "enabled": {
+           "type": "boolean",
+           "title": "Enabled",
+           "default": true,
+           "description": "False omits this server."
+          },
+          "headers": {
+           "title": "Headers",
+           "default": null,
+           "anyOf": [
+            {
+             "type": "object",
+             "additionalProperties": {
+              "type": "string",
+              "format": "password",
+              "writeOnly": true
+             }
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "description": "Sensitive MCP request headers forwarded only to xAI."
+          },
+          "server_label": {
+           "maxLength": 128,
+           "minLength": 1,
+           "title": "Server Label",
+           "type": "string",
+           "description": "Label xAI uses to identify and prefix this server's tools."
+          },
+          "server_description": {
+           "title": "Server Description",
+           "default": null,
+           "anyOf": [
+            {
+             "type": "string",
+             "maxLength": 2000
+            },
+            {
+             "type": "null"
+            }
+           ],
+           "description": "Description of the capabilities exposed by this server."
+          }
+         },
+         "type": "object",
+         "title": "GrokRemoteMCPTool",
+         "additionalProperties": false,
+         "required": [
+          "server_url",
+          "server_label"
+         ],
+         "description": "A caller-selected remote MCP server that xAI will connect to.\n\nUse at your own risk. The connection is made by xAI's infrastructure,\nnot by fal; choosing this tool explicitly accepts that trust boundary.\nAuthentication and headers are masked in fal error metadata and logs."
+        },
+        "type": "array",
+        "title": "MCP Servers",
+        "description": "Remote MCP servers that xAI connects to and executes."
+       },
+       "web_search": {
+        "properties": {
+         "location": {
+          "default": null,
+          "anyOf": [
+           {
+            "properties": {
+             "region": {
+              "title": "Region",
+              "default": null,
+              "anyOf": [
+               {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "description": "Region used to localize web-search results."
+             },
+             "country": {
+              "title": "Country",
+              "default": null,
+              "anyOf": [
+               {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "description": "Country used to localize web-search results."
+             },
+             "timezone": {
+              "title": "Timezone",
+              "default": null,
+              "anyOf": [
+               {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "description": "IANA timezone name, for example America/New_York."
+             },
+             "city": {
+              "title": "City",
+              "default": null,
+              "anyOf": [
+               {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+               },
+               {
+                "type": "null"
+               }
+              ],
+              "description": "City used to localize web-search results."
+             }
+            },
+            "type": "object",
+            "title": "GrokSearchLocation",
+            "additionalProperties": false
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "Optional location used to localize search results."
+         },
+         "allowed_domains": {
+          "title": "Allowed Domains",
+          "default": null,
+          "anyOf": [
+           {
+            "type": "array",
+            "maxItems": 5,
+            "minItems": 1,
+            "items": {
+             "type": "string"
+            }
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "Restrict results to at most five domains, without protocol or path."
+         },
+         "enabled": {
+          "type": "boolean",
+          "title": "Enabled",
+          "default": false,
+          "description": "Whether to include web_search in session.tools. Disabled by default; set true to let the agent search the web."
+         },
+         "enable_image_understanding": {
+          "title": "Enable Image Understanding",
+          "default": null,
+          "anyOf": [
+           {
+            "type": "boolean"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "Allow the agent to inspect images found during web search."
+         },
+         "excluded_domains": {
+          "title": "Excluded Domains",
+          "default": null,
+          "anyOf": [
+           {
+            "type": "array",
+            "maxItems": 5,
+            "minItems": 1,
+            "items": {
+             "type": "string"
+            }
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "Exclude results from at most five domains, without protocol or path."
+         }
+        },
+        "type": "object",
+        "title": "GrokWebSearchTool",
+        "additionalProperties": false,
+        "description": "Configuration for one xAI web_search tool declaration."
+       },
+       "x_search": {
+        "properties": {
+         "enable_video_understanding": {
+          "title": "Enable Video Understanding",
+          "default": null,
+          "anyOf": [
+           {
+            "type": "boolean"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "Allow the agent to inspect videos found on X."
+         },
+         "allowed_x_handles": {
+          "title": "Allowed X Handles",
+          "default": null,
+          "anyOf": [
+           {
+            "type": "array",
+            "maxItems": 20,
+            "minItems": 1,
+            "items": {
+             "type": "string"
+            }
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "Restrict results to posts from at most 20 X handles."
+         },
+         "enabled": {
+          "type": "boolean",
+          "title": "Enabled",
+          "default": false,
+          "description": "Whether to include x_search in session.tools. Disabled by default; set true to let the agent search X posts."
+         },
+         "excluded_x_handles": {
+          "title": "Excluded X Handles",
+          "default": null,
+          "anyOf": [
+           {
+            "type": "array",
+            "maxItems": 20,
+            "minItems": 1,
+            "items": {
+             "type": "string"
+            }
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "Exclude posts from at most 20 X handles."
+         },
+         "enable_image_understanding": {
+          "title": "Enable Image Understanding",
+          "default": null,
+          "anyOf": [
+           {
+            "type": "boolean"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "Allow the agent to inspect images found on X."
+         },
+         "from_date": {
+          "title": "From Date",
+          "default": null,
+          "anyOf": [
+           {
+            "type": "string",
+            "format": "date"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "Earliest post date, as ISO YYYY-MM-DD."
+         },
+         "to_date": {
+          "title": "To Date",
+          "default": null,
+          "anyOf": [
+           {
+            "type": "string",
+            "format": "date"
+           },
+           {
+            "type": "null"
+           }
+          ],
+          "description": "Latest post date, as ISO YYYY-MM-DD."
+         }
+        },
+        "type": "object",
+        "title": "GrokXSearchTool",
+        "additionalProperties": false,
+        "description": "Configuration for one xAI x_search tool declaration."
+       }
+      },
+      "type": "object",
+      "title": "GrokToolsConfiguration",
+      "additionalProperties": false,
+      "description": "Typed xAI tools supported by this app's convenience configuration.\n\nEvery tool is disabled in the default configuration: the searches must\nbe switched on via their ``enabled`` flags and ``mcp_servers`` starts\nempty. ``file_search`` / collections are intentionally absent and\nunsupported due to Zero Data Retention (ZDR) requirements. Caller-side\nfunction tools are likewise absent from the typed configuration \u2014 they\nrequire a client that answers callback events over /realtime, so they\nremain available only to raw ``session.update`` passthrough clients.\nRaw realtime passthrough stays generic except that ZDR-incompatible\ntool declarations are rejected in-band."
+     },
+     "audio_url": {
+      "type": "string",
+      "title": "Audio URL",
+      "description": "URL of the audio containing the user's speech. The Grok agent listens to it and replies with speech. Most common audio formats are supported; the audio is converted to 16-bit 24 kHz mono PCM before being sent to Grok. Maximum duration 10 minutes, maximum file size 50 MB."
+     },
+     "prompt": {
+      "title": "Prompt",
+      "anyOf": [
+       {
+        "type": "string",
+        "maxLength": 20000
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Optional system instructions describing the agent's persona and conversation context. Uses Grok's default persona when omitted."
+     }
+    },
+    "type": "object",
+    "title": "GrokVoiceConversationInput",
+    "x-fal-order-properties": [
+     "audio_url",
+     "prompt",
+     "voice",
+     "tools",
+     "enable_safety_checker"
+    ],
+    "required": [
+     "audio_url"
+    ]
+   }
+  }
+ }
+}

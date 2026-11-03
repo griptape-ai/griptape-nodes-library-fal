@@ -1,0 +1,3254 @@
+{
+ "category": "audio-to-video",
+ "models": {
+  "veed/avatars/audio-to-video": {
+   "endpoint_id": "veed/avatars/audio-to-video",
+   "display_name": "Avatars",
+   "description": "Generate high-quality videos with UGC-like avatars from audio",
+   "input": {
+    "title": "Audio2VideoInput",
+    "type": "object",
+    "properties": {
+     "audio_url": {
+      "maxLength": 2083,
+      "type": "string",
+      "minLength": 1,
+      "title": "Audio Url",
+      "format": "uri"
+     },
+     "avatar_id": {
+      "enum": [
+       "emily_vertical_primary",
+       "emily_vertical_secondary",
+       "marcus_vertical_primary",
+       "marcus_vertical_secondary",
+       "mira_vertical_primary",
+       "mira_vertical_secondary",
+       "jasmine_vertical_primary",
+       "jasmine_vertical_secondary",
+       "jasmine_vertical_walking",
+       "aisha_vertical_walking",
+       "elena_vertical_primary",
+       "elena_vertical_secondary",
+       "any_male_vertical_primary",
+       "any_female_vertical_primary",
+       "any_male_vertical_secondary",
+       "any_female_vertical_secondary",
+       "any_female_vertical_walking",
+       "emily_primary",
+       "emily_side",
+       "marcus_primary",
+       "marcus_side",
+       "aisha_walking",
+       "elena_primary",
+       "elena_side",
+       "any_male_primary",
+       "any_female_primary",
+       "any_male_side",
+       "any_female_side"
+      ],
+      "description": "The avatar to use for the video",
+      "type": "string",
+      "title": "Avatar Id"
+     }
+    },
+    "x-fal-order-properties": [
+     "avatar_id",
+     "audio_url"
+    ],
+    "required": [
+     "avatar_id",
+     "audio_url"
+    ]
+   }
+  },
+  "argil/avatars/audio-to-video": {
+   "endpoint_id": "argil/avatars/audio-to-video",
+   "display_name": "Avatars Audio to Video",
+   "description": "High-quality avatar videos that feel real, generated from your audio",
+   "input": {
+    "title": "InferenceRequest",
+    "type": "object",
+    "properties": {
+     "avatar": {
+      "enum": [
+       "Mia outdoor (UGC)",
+       "Lara (Masterclass)",
+       "Ines (UGC)",
+       "Maria (Masterclass)",
+       "Emma (UGC)",
+       "Sienna (Masterclass)",
+       "Elena (UGC)",
+       "Jasmine (Masterclass)",
+       "Amara (Masterclass)",
+       "Ryan podcast (UGC)",
+       "Tyler (Masterclass)",
+       "Jayse (Masterclass)",
+       "Paul (Masterclass)",
+       "Matteo (UGC)",
+       "Daniel car (UGC)",
+       "Dario (Masterclass)",
+       "Viva (Masterclass)",
+       "Chen (Masterclass)",
+       "Alex (Masterclass)",
+       "Vanessa (UGC)",
+       "Laurent (UGC)",
+       "Noemie car (UGC)",
+       "Brandon (UGC)",
+       "Byron (Masterclass)",
+       "Calista (Masterclass)",
+       "Milo (Masterclass)",
+       "Fabien (Masterclass)",
+       "Rose (UGC)"
+      ],
+      "title": "Avatar",
+      "type": "string"
+     },
+     "remove_background": {
+      "title": "Remove Background",
+      "type": "boolean",
+      "description": "Enabling the remove background feature will result in a 50% increase in the price.",
+      "default": false
+     },
+     "audio_url": {
+      "title": "Audio Url",
+      "type": "string"
+     }
+    },
+    "x-fal-order-properties": [
+     "avatar",
+     "audio_url",
+     "remove_background"
+    ],
+    "required": [
+     "avatar",
+     "audio_url"
+    ]
+   }
+  },
+  "fal-ai/echomimic-v3": {
+   "endpoint_id": "fal-ai/echomimic-v3",
+   "display_name": "EchoMimic V3",
+   "description": "EchoMimic V3 generates a talking avatar model from a picture, audio and text prompt.",
+   "input": {
+    "properties": {
+     "audio_url": {
+      "title": "Audio URL",
+      "type": "string",
+      "description": "The URL of the audio to use as a reference for the video generation."
+     },
+     "seed": {
+      "title": "Seed",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "The seed to use for the video generation."
+     },
+     "audio_guidance_scale": {
+      "type": "number",
+      "maximum": 10,
+      "title": "Audio Guidance Scale",
+      "default": 2.5,
+      "minimum": 0,
+      "description": "The audio guidance scale to use for the video generation."
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening."
+     },
+     "negative_prompt": {
+      "type": "string",
+      "title": "Negative Prompt",
+      "default": "",
+      "description": "The negative prompt to use for the video generation."
+     },
+     "num_frames_per_generation": {
+      "type": "integer",
+      "maximum": 161,
+      "title": "Number of frames per generation",
+      "default": 121,
+      "minimum": 49,
+      "description": "The number of frames to generate at once."
+     },
+     "image_url": {
+      "title": "Image URL",
+      "type": "string",
+      "description": "The URL of the image to use as a reference for the video generation."
+     },
+     "guidance_scale": {
+      "type": "number",
+      "maximum": 10,
+      "title": "Guidance Scale",
+      "default": 4.5,
+      "minimum": 1,
+      "description": "The guidance scale to use for the video generation."
+     },
+     "prompt": {
+      "title": "Prompt",
+      "type": "string",
+      "description": "The prompt to use for the video generation."
+     }
+    },
+    "type": "object",
+    "title": "EchoMimicRequest",
+    "x-fal-order-properties": [
+     "image_url",
+     "audio_url",
+     "prompt",
+     "negative_prompt",
+     "num_frames_per_generation",
+     "guidance_scale",
+     "audio_guidance_scale",
+     "seed",
+     "enable_safety_checker"
+    ],
+    "required": [
+     "image_url",
+     "audio_url",
+     "prompt"
+    ]
+   }
+  },
+  "fal-ai/elevenlabs/dubbing": {
+   "endpoint_id": "fal-ai/elevenlabs/dubbing",
+   "display_name": "ElevenLabs Dubbing",
+   "description": "Generate dubbed videos or audios using ElevenLabs Dubbing feature!",
+   "input": {
+    "properties": {
+     "highest_resolution": {
+      "default": true,
+      "title": "Highest Resolution",
+      "description": "Whether to use the highest resolution for dubbing.",
+      "type": "boolean"
+     },
+     "source_lang": {
+      "title": "Source Lang",
+      "description": "Source language code. If not provided, will be auto-detected.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "video_url": {
+      "title": "Video Url",
+      "description": "URL of the video file to dub. Either audio_url or video_url must be provided. If both are provided, video_url takes priority.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "audio_url": {
+      "title": "Audio Url",
+      "description": "URL of the audio file to dub. Either audio_url or video_url must be provided.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "num_speakers": {
+      "title": "Num Speakers",
+      "description": "Number of speakers in the audio. If not provided, will be auto-detected.",
+      "anyOf": [
+       {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 50
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "target_lang": {
+      "title": "Target Lang",
+      "description": "Target language code for dubbing (ISO 639-1)",
+      "type": "string"
+     }
+    },
+    "title": "DubbingRequest",
+    "type": "object",
+    "x-fal-order-properties": [
+     "audio_url",
+     "video_url",
+     "target_lang",
+     "source_lang",
+     "num_speakers",
+     "highest_resolution"
+    ],
+    "required": [
+     "target_lang"
+    ]
+   }
+  },
+  "fal-ai/longcat-single-avatar/image-audio-to-video": {
+   "endpoint_id": "fal-ai/longcat-single-avatar/image-audio-to-video",
+   "display_name": "Longcat Single Avatar",
+   "description": "LongCat-Video-Avatar is an audio-driven video generation model that can generates super-realistic, lip-synchronized long video generation with natural dynamics and consistent identity.",
+   "input": {
+    "properties": {
+     "enable_prompt_expansion": {
+      "default": false,
+      "title": "Enable Prompt Expansion",
+      "description": "Whether to enable prompt expansion using an LLM to enhance the prompt for better video quality.",
+      "type": "boolean"
+     },
+     "text_guidance_scale": {
+      "default": 4,
+      "title": "Text Guidance Scale",
+      "description": "The text guidance scale for classifier-free guidance.",
+      "minimum": 1,
+      "maximum": 10,
+      "type": "number"
+     },
+     "image_url": {
+      "title": "Image URL",
+      "description": "The URL of the image to animate.",
+      "type": "string"
+     },
+     "num_segments": {
+      "default": 1,
+      "title": "Number of Segments",
+      "description": "Number of video segments to generate. Each segment adds ~5 seconds of video. First segment is ~5.8s, additional segments are 5s each.",
+      "minimum": 1,
+      "maximum": 10,
+      "type": "integer"
+     },
+     "resolution": {
+      "default": "480p",
+      "enum": [
+       "480p",
+       "720p"
+      ],
+      "title": "Resolution",
+      "description": "Resolution of the generated video (480p or 720p). Billing is per video-second (16 frames): 480p is 1 unit per second and 720p is 4 units per second.",
+      "type": "string"
+     },
+     "seed": {
+      "title": "Seed",
+      "description": "The seed for the random number generator.",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "prompt": {
+      "default": "A person is talking naturally with natural expressions and movements.",
+      "title": "Prompt",
+      "description": "The prompt to guide the video generation.",
+      "type": "string"
+     },
+     "num_inference_steps": {
+      "default": 50,
+      "title": "Number of Inference Steps",
+      "description": "The number of inference steps to use.",
+      "minimum": 10,
+      "maximum": 100,
+      "type": "integer"
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "Whether to enable safety checker. Disabling it requires account authorization; unauthorized requests are always checked.",
+      "type": "boolean"
+     },
+     "audio_url": {
+      "title": "Audio URL",
+      "description": "The URL of the audio file to drive the avatar.",
+      "type": "string"
+     },
+     "audio_guidance_scale": {
+      "default": 4,
+      "title": "Audio Guidance Scale",
+      "description": "The audio guidance scale. Higher values may lead to exaggerated mouth movements.",
+      "minimum": 1,
+      "maximum": 10,
+      "type": "number"
+     },
+     "negative_prompt": {
+      "default": "Close-up, Bright tones, overexposed, static, blurred details, subtitles, style, works, paintings, images, static, overall gray, worst quality, low quality, JPEG compression residue, ugly, incomplete, extra fingers, poorly drawn hands, poorly drawn faces, deformed, disfigured, misshapen limbs, fused fingers, still picture, messy background, three legs, many people in the background, walking backwards",
+      "title": "Negative Prompt",
+      "description": "The negative prompt to avoid in the video generation.",
+      "type": "string"
+     }
+    },
+    "title": "ImageAudioToVideoRequest",
+    "type": "object",
+    "description": "Request model for image+audio to video generation.",
+    "x-fal-order-properties": [
+     "image_url",
+     "audio_url",
+     "prompt",
+     "negative_prompt",
+     "num_inference_steps",
+     "text_guidance_scale",
+     "audio_guidance_scale",
+     "resolution",
+     "num_segments",
+     "seed",
+     "enable_safety_checker",
+     "enable_prompt_expansion"
+    ],
+    "required": [
+     "image_url",
+     "audio_url"
+    ]
+   }
+  },
+  "fal-ai/longcat-single-avatar/audio-to-video": {
+   "endpoint_id": "fal-ai/longcat-single-avatar/audio-to-video",
+   "display_name": "Longcat Single Avatar",
+   "description": "LongCat-Video-Avatar is an audio-driven video generation model that can generates super-realistic, lip-synchronized long video generation with natural dynamics and consistent identity.",
+   "input": {
+    "properties": {
+     "enable_prompt_expansion": {
+      "default": false,
+      "title": "Enable Prompt Expansion",
+      "description": "Whether to enable prompt expansion using an LLM to enhance the prompt for better video quality.",
+      "type": "boolean"
+     },
+     "text_guidance_scale": {
+      "default": 4,
+      "title": "Text Guidance Scale",
+      "description": "The text guidance scale for classifier-free guidance.",
+      "minimum": 1,
+      "maximum": 10,
+      "type": "number"
+     },
+     "num_segments": {
+      "default": 1,
+      "title": "Number of Segments",
+      "description": "Number of video segments to generate. Each segment adds ~5 seconds of video. First segment is ~5.8s, additional segments are 5s each.",
+      "minimum": 1,
+      "maximum": 10,
+      "type": "integer"
+     },
+     "resolution": {
+      "default": "480p",
+      "enum": [
+       "480p",
+       "720p"
+      ],
+      "title": "Resolution",
+      "description": "Resolution of the generated video (480p or 720p). Billing is per video-second (16 frames): 480p is 1 unit per second and 720p is 4 units per second.",
+      "type": "string"
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "Whether to enable safety checker. Disabling it requires account authorization; unauthorized requests are always checked.",
+      "type": "boolean"
+     },
+     "seed": {
+      "title": "Seed",
+      "description": "The seed for the random number generator.",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "prompt": {
+      "default": "A person is talking naturally with natural expressions and movements.",
+      "title": "Prompt",
+      "description": "The prompt to guide the video generation.",
+      "type": "string"
+     },
+     "num_inference_steps": {
+      "default": 50,
+      "title": "Number of Inference Steps",
+      "description": "The number of inference steps to use.",
+      "minimum": 10,
+      "maximum": 100,
+      "type": "integer"
+     },
+     "audio_url": {
+      "title": "Audio URL",
+      "description": "The URL of the audio file to drive the avatar.",
+      "type": "string"
+     },
+     "audio_guidance_scale": {
+      "default": 4,
+      "title": "Audio Guidance Scale",
+      "description": "The audio guidance scale. Higher values may lead to exaggerated mouth movements.",
+      "minimum": 1,
+      "maximum": 10,
+      "type": "number"
+     },
+     "negative_prompt": {
+      "default": "Close-up, Bright tones, overexposed, static, blurred details, subtitles, style, works, paintings, images, static, overall gray, worst quality, low quality, JPEG compression residue, ugly, incomplete, extra fingers, poorly drawn hands, poorly drawn faces, deformed, disfigured, misshapen limbs, fused fingers, still picture, messy background, three legs, many people in the background, walking backwards",
+      "title": "Negative Prompt",
+      "description": "The negative prompt to avoid in the video generation.",
+      "type": "string"
+     }
+    },
+    "title": "AudioToVideoRequest",
+    "type": "object",
+    "description": "Request model for audio-to-video generation.",
+    "x-fal-order-properties": [
+     "audio_url",
+     "prompt",
+     "negative_prompt",
+     "num_inference_steps",
+     "text_guidance_scale",
+     "audio_guidance_scale",
+     "resolution",
+     "num_segments",
+     "seed",
+     "enable_safety_checker",
+     "enable_prompt_expansion"
+    ],
+    "required": [
+     "audio_url"
+    ]
+   }
+  },
+  "fal-ai/ltx-2.3-quality/audio-to-video": {
+   "endpoint_id": "fal-ai/ltx-2.3-quality/audio-to-video",
+   "display_name": "Ltx 2.3 Quality",
+   "description": "Generate high-quality video with audio from audio, text and images using LTX-2.3",
+   "input": {
+    "x-fal-order-properties": [
+     "prompt",
+     "audio_url",
+     "image_url",
+     "match_audio_length",
+     "num_frames",
+     "resolution",
+     "frames_per_second",
+     "num_inference_steps",
+     "guidance_scale",
+     "generate_audio",
+     "image_strength",
+     "negative_prompt",
+     "seed",
+     "enable_prompt_expansion",
+     "enable_safety_checker",
+     "video_quality",
+     "video_write_mode",
+     "sync_mode"
+    ],
+    "required": [
+     "prompt",
+     "audio_url"
+    ],
+    "description": "Audio-to-video generation driven by an uploaded audio track.",
+    "properties": {
+     "audio_url": {
+      "description": "The URL of the audio track that drives generation.",
+      "title": "Audio URL",
+      "type": "string"
+     },
+     "negative_prompt": {
+      "description": "The negative prompt to steer generation away from.",
+      "default": "color distortion, overexposure, static, blurry details, subtitles, style, artwork, painting, frame, still, dim overall tone, worst quality, low quality, JPEG compression artifacts, ugly, mutilated, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, malformed limbs, fused fingers, motionless frame, cluttered background, three legs, crowded background, walking backwards",
+      "title": "Negative Prompt",
+      "type": "string"
+     },
+     "num_inference_steps": {
+      "description": "Number of inference steps. Defaults to 15 and can be increased up to 30.",
+      "default": 15,
+      "minimum": 8,
+      "title": "Number of Inference Steps",
+      "maximum": 30,
+      "type": "integer"
+     },
+     "prompt": {
+      "description": "The prompt to guide the audio-driven video generation.",
+      "title": "Prompt",
+      "type": "string"
+     },
+     "generate_audio": {
+      "type": "boolean",
+      "description": "Whether to include audio in the returned video. When disabled, the final MP4 is returned without an audio track.",
+      "default": true,
+      "title": "Generate Audio"
+     },
+     "guidance_scale": {
+      "description": "Classifier-free guidance scale. The default is tuned for fast, high-quality generation.",
+      "default": 1,
+      "minimum": 1,
+      "title": "Guidance Scale",
+      "maximum": 20,
+      "type": "number"
+     },
+     "enable_prompt_expansion": {
+      "description": "Whether to enable prompt expansion.",
+      "default": true,
+      "title": "Enable Prompt Expansion",
+      "type": "boolean"
+     },
+     "image_strength": {
+      "description": "Conditioning strength for the optional first frame. 1.0 keeps the image more strictly; lower values give the model more freedom.",
+      "default": 0.7,
+      "minimum": 0,
+      "title": "Image Strength",
+      "maximum": 1,
+      "type": "number"
+     },
+     "video_write_mode": {
+      "enum": [
+       "fast",
+       "balanced",
+       "small"
+      ],
+      "description": "The write mode of the generated video.",
+      "default": "balanced",
+      "title": "Video Write Mode",
+      "type": "string"
+     },
+     "seed": {
+      "description": "Random seed for reproducibility. If None, a random seed is chosen.",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Seed"
+     },
+     "video_quality": {
+      "enum": [
+       "low",
+       "medium",
+       "high",
+       "maximum"
+      ],
+      "description": "The quality preset of the generated video.",
+      "default": "high",
+      "title": "Video Quality",
+      "type": "string"
+     },
+     "frames_per_second": {
+      "description": "Frames per second of the generated video.",
+      "default": 24,
+      "minimum": 1,
+      "title": "FPS",
+      "maximum": 60,
+      "type": "number"
+     },
+     "image_url": {
+      "description": "Optional URL of an image to use as the first frame. When omitted, generation runs from text and audio only.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Image URL"
+     },
+     "sync_mode": {
+      "description": "If True, the media is returned as a data URI inline in the response. Useful for short-lived requests and tests.",
+      "default": false,
+      "title": "Sync Mode",
+      "type": "boolean"
+     },
+     "enable_safety_checker": {
+      "description": "Whether to enable the safety checker.",
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean"
+     },
+     "num_frames": {
+      "type": "integer",
+      "description": "The number of frames to generate.",
+      "default": 121,
+      "minimum": 9,
+      "title": "Number of Frames",
+      "maximum": 481
+     },
+     "resolution": {
+      "description": "Final output size. 'auto' matches the input image aspect ratio when image_url is provided; otherwise it uses a landscape fallback.",
+      "anyOf": [
+       {
+        "x-fal-order-properties": [
+         "width",
+         "height"
+        ],
+        "properties": {
+         "width": {
+          "exclusiveMinimum": 0,
+          "description": "The width of the generated image.",
+          "default": 512,
+          "title": "Width",
+          "maximum": 14142,
+          "type": "integer"
+         },
+         "height": {
+          "exclusiveMinimum": 0,
+          "description": "The height of the generated image.",
+          "default": 512,
+          "title": "Height",
+          "maximum": 14142,
+          "type": "integer"
+         }
+        },
+        "title": "ImageSize",
+        "type": "object"
+       },
+       {
+        "enum": [
+         "auto",
+         "square_hd",
+         "square",
+         "portrait_4_3",
+         "portrait_16_9",
+         "landscape_4_3",
+         "landscape_16_9"
+        ],
+        "type": "string"
+       }
+      ],
+      "default": "auto",
+      "title": "Resolution"
+     },
+     "match_audio_length": {
+      "type": "boolean",
+      "description": "When enabled, derives the number of frames from the audio duration and frames_per_second. When disabled, uses num_frames.",
+      "default": true,
+      "title": "Match Audio Length"
+     }
+    },
+    "title": "LTX23QualityAudioToVideoInput",
+    "type": "object"
+   }
+  },
+  "fal-ai/ltx-2.3-quality/audio-to-video/lora": {
+   "endpoint_id": "fal-ai/ltx-2.3-quality/audio-to-video/lora",
+   "display_name": "Ltx 2.3 Quality",
+   "description": "Generate high-quality video with audio from audio, text and images using LTX-2.3 and custom LoRA",
+   "input": {
+    "x-fal-order-properties": [
+     "prompt",
+     "audio_url",
+     "image_url",
+     "match_audio_length",
+     "num_frames",
+     "resolution",
+     "frames_per_second",
+     "num_inference_steps",
+     "guidance_scale",
+     "generate_audio",
+     "image_strength",
+     "negative_prompt",
+     "seed",
+     "enable_prompt_expansion",
+     "enable_safety_checker",
+     "video_quality",
+     "video_write_mode",
+     "sync_mode",
+     "loras"
+    ],
+    "required": [
+     "loras",
+     "prompt",
+     "audio_url"
+    ],
+    "description": "Audio-to-video + user-supplied LoRAs.",
+    "properties": {
+     "audio_url": {
+      "description": "The URL of the audio track that drives generation.",
+      "title": "Audio URL",
+      "type": "string"
+     },
+     "negative_prompt": {
+      "description": "The negative prompt to steer generation away from.",
+      "default": "color distortion, overexposure, static, blurry details, subtitles, style, artwork, painting, frame, still, dim overall tone, worst quality, low quality, JPEG compression artifacts, ugly, mutilated, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, malformed limbs, fused fingers, motionless frame, cluttered background, three legs, crowded background, walking backwards",
+      "title": "Negative Prompt",
+      "type": "string"
+     },
+     "num_inference_steps": {
+      "description": "Number of inference steps. Defaults to 15 and can be increased up to 30.",
+      "default": 15,
+      "minimum": 8,
+      "title": "Number of Inference Steps",
+      "maximum": 30,
+      "type": "integer"
+     },
+     "prompt": {
+      "description": "The prompt to guide the audio-driven video generation.",
+      "title": "Prompt",
+      "type": "string"
+     },
+     "generate_audio": {
+      "type": "boolean",
+      "description": "Whether to include audio in the returned video. When disabled, the final MP4 is returned without an audio track.",
+      "default": true,
+      "title": "Generate Audio"
+     },
+     "guidance_scale": {
+      "description": "Classifier-free guidance scale. The default is tuned for fast, high-quality generation.",
+      "default": 1,
+      "minimum": 1,
+      "title": "Guidance Scale",
+      "maximum": 20,
+      "type": "number"
+     },
+     "enable_prompt_expansion": {
+      "description": "Whether to enable prompt expansion.",
+      "default": true,
+      "title": "Enable Prompt Expansion",
+      "type": "boolean"
+     },
+     "image_strength": {
+      "description": "Conditioning strength for the optional first frame. 1.0 keeps the image more strictly; lower values give the model more freedom.",
+      "default": 0.7,
+      "minimum": 0,
+      "title": "Image Strength",
+      "maximum": 1,
+      "type": "number"
+     },
+     "video_write_mode": {
+      "enum": [
+       "fast",
+       "balanced",
+       "small"
+      ],
+      "description": "The write mode of the generated video.",
+      "default": "balanced",
+      "title": "Video Write Mode",
+      "type": "string"
+     },
+     "seed": {
+      "description": "Random seed for reproducibility. If None, a random seed is chosen.",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Seed"
+     },
+     "video_quality": {
+      "enum": [
+       "low",
+       "medium",
+       "high",
+       "maximum"
+      ],
+      "description": "The quality preset of the generated video.",
+      "default": "high",
+      "title": "Video Quality",
+      "type": "string"
+     },
+     "frames_per_second": {
+      "description": "Frames per second of the generated video.",
+      "default": 24,
+      "minimum": 1,
+      "title": "FPS",
+      "maximum": 60,
+      "type": "number"
+     },
+     "image_url": {
+      "description": "Optional URL of an image to use as the first frame. When omitted, generation runs from text and audio only.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Image URL"
+     },
+     "sync_mode": {
+      "description": "If True, the media is returned as a data URI inline in the response. Useful for short-lived requests and tests.",
+      "default": false,
+      "title": "Sync Mode",
+      "type": "boolean"
+     },
+     "loras": {
+      "maxItems": 3,
+      "description": "Up to 3 LoRAs to apply on top of LTX-2.3. Each path is downloaded through the registry SSRF-safe downloader before it is loaded. Max size: 3 GB per LoRA.",
+      "title": "LoRAs",
+      "items": {
+       "x-fal-order-properties": [
+        "path",
+        "scale",
+        "transformer"
+       ],
+       "required": [
+        "path"
+       ],
+       "description": "A single LoRA to apply on top of the LTX-2.3 base model.\n\nLoaded at request time through the registry SSRF-safe downloader.",
+       "properties": {
+        "scale": {
+         "description": "Strength of the LoRA application (0.0 to 2.0). Higher values = stronger effect on the generated video.",
+         "default": 1,
+         "minimum": 0,
+         "title": "Scale",
+         "maximum": 2,
+         "type": "number"
+        },
+        "transformer": {
+         "enum": [
+          "high",
+          "low",
+          "both"
+         ],
+         "description": "Forward-compatibility flag for multi-transformer architectures. LTX-2.3 has a single transformer, so 'both' is the right choice for almost all users.",
+         "default": "both",
+         "title": "Transformer",
+         "type": "string"
+        },
+        "path": {
+         "description": "Direct HTTP(S) download URL of the LoRA file (.safetensors). The file is downloaded through an SSRF-safe downloader before it is loaded. Max size: 3 GB.",
+         "title": "Path",
+         "maxLength": 2048,
+         "type": "string"
+        }
+       },
+       "title": "LoRAInput",
+       "type": "object"
+      },
+      "type": "array"
+     },
+     "enable_safety_checker": {
+      "description": "Whether to enable the safety checker.",
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean"
+     },
+     "num_frames": {
+      "type": "integer",
+      "description": "The number of frames to generate.",
+      "default": 121,
+      "minimum": 9,
+      "title": "Number of Frames",
+      "maximum": 481
+     },
+     "resolution": {
+      "description": "Final output size. 'auto' matches the input image aspect ratio when image_url is provided; otherwise it uses a landscape fallback.",
+      "anyOf": [
+       {
+        "x-fal-order-properties": [
+         "width",
+         "height"
+        ],
+        "properties": {
+         "width": {
+          "exclusiveMinimum": 0,
+          "description": "The width of the generated image.",
+          "default": 512,
+          "title": "Width",
+          "maximum": 14142,
+          "type": "integer"
+         },
+         "height": {
+          "exclusiveMinimum": 0,
+          "description": "The height of the generated image.",
+          "default": 512,
+          "title": "Height",
+          "maximum": 14142,
+          "type": "integer"
+         }
+        },
+        "title": "ImageSize",
+        "type": "object"
+       },
+       {
+        "enum": [
+         "auto",
+         "square_hd",
+         "square",
+         "portrait_4_3",
+         "portrait_16_9",
+         "landscape_4_3",
+         "landscape_16_9"
+        ],
+        "type": "string"
+       }
+      ],
+      "default": "auto",
+      "title": "Resolution"
+     },
+     "match_audio_length": {
+      "type": "boolean",
+      "description": "When enabled, derives the number of frames from the audio duration and frames_per_second. When disabled, uses num_frames.",
+      "default": true,
+      "title": "Match Audio Length"
+     }
+    },
+    "title": "LTX23QualityLoRAAudioToVideoInput",
+    "type": "object"
+   }
+  },
+  "fal-ai/ltx-2.3/audio-to-video": {
+   "endpoint_id": "fal-ai/ltx-2.3/audio-to-video",
+   "display_name": "LTX 2.3 Video Pro",
+   "description": "LTX-2.3 is a high-quality, fast AI video model available in Pro and Fast variants for text-to-video, image-to-video, and audio-to-video.",
+   "input": {
+    "properties": {
+     "prompt": {
+      "description": "Text description of how the video should be generated. Required if image_url is not provided. When image_url is provided, this describes how the image should be animated.",
+      "title": "Prompt",
+      "anyOf": [
+       {
+        "minLength": 1,
+        "maxLength": 5000,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "audio_url": {
+      "description": "URL of the audio file to generate a video from. Duration must be between 2 and 20 seconds; pro models support a maximum of 10 seconds. Must be publicly accessible or base64 data URI.",
+      "type": "string",
+      "title": "Audio URL"
+     },
+     "image_url": {
+      "description": "URL of an image to use as the first frame of the video. If not provided, prompt is required.",
+      "title": "Image URL",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "aspect_ratio": {
+      "description": "The aspect ratio of the generated video. If 'auto', the aspect ratio will be determined automatically based on the input image, or defaults to 16:9 if no image is provided.",
+      "default": "auto",
+      "type": "string",
+      "title": "Aspect Ratio",
+      "enum": [
+       "auto",
+       "16:9",
+       "9:16"
+      ]
+     },
+     "guidance_scale": {
+      "description": "Guidance scale for video generation. Higher values make the output more closely follow the prompt. Defaults to 5 for text-to-video, or 9 when providing an image.",
+      "title": "Guidance Scale",
+      "anyOf": [
+       {
+        "minimum": 1,
+        "maximum": 50,
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "enable_safety_checker": {
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "default": true
+     }
+    },
+    "type": "object",
+    "required": [
+     "audio_url"
+    ],
+    "x-fal-order-properties": [
+     "audio_url",
+     "image_url",
+     "prompt",
+     "guidance_scale",
+     "aspect_ratio",
+     "enable_safety_checker"
+    ],
+    "title": "LTXV23AudioToVideoRequest"
+   }
+  },
+  "lightricks/ltx-2.5/audio-to-video/fast": {
+   "endpoint_id": "lightricks/ltx-2.5/audio-to-video/fast",
+   "display_name": "Ltx 2.5 Audio to Video Fast",
+   "description": "LTX-2.5 is Lightricks' open-source audio-video model. This endpoint generates video timed to a supplied audio clip in a speed-optimized mode \u2014 useful for music-driven content, dialogue-led shorts, and ads keyed to a track.",
+   "input": {
+    "type": "object",
+    "properties": {
+     "audio_url": {
+      "type": "string",
+      "description": "URL of the audio file to generate a video from. Duration must be between 2 and 20 seconds; pro models support a maximum of 10 seconds. Must be publicly accessible or base64 data URI.",
+      "title": "Audio URL"
+     },
+     "image_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "URL of an image to use as the first frame of the video. If not provided, prompt is required.",
+      "title": "Image URL"
+     },
+     "prompt": {
+      "anyOf": [
+       {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 5000
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Text description of how the video should be generated. Required if image_url is not provided. When image_url is provided, this describes how the image should be animated.",
+      "title": "Prompt"
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "title": "Enable Safety Checker"
+     },
+     "aspect_ratio": {
+      "type": "string",
+      "default": "auto",
+      "enum": [
+       "auto",
+       "16:9",
+       "9:16"
+      ],
+      "description": "The aspect ratio of the generated video. If 'auto', the aspect ratio will be determined automatically based on the input image, or defaults to 16:9 if no image is provided.",
+      "title": "Aspect Ratio"
+     }
+    },
+    "required": [
+     "audio_url"
+    ],
+    "x-fal-order-properties": [
+     "audio_url",
+     "image_url",
+     "prompt",
+     "aspect_ratio",
+     "enable_safety_checker"
+    ],
+    "title": "LTXV25AudioToVideoRequest"
+   }
+  },
+  "lightricks/ltx-2.5/audio-to-video/pro": {
+   "endpoint_id": "lightricks/ltx-2.5/audio-to-video/pro",
+   "display_name": "Ltx 2.5 Audio to Video Pro",
+   "description": "LTX-2.5 is Lightricks' open-source audio-video model. This endpoint generates video timed to a supplied audio clip in a quality-optimized mode, for final visuals synchronized to music, dialogue, or a soundtrack.",
+   "input": {
+    "type": "object",
+    "properties": {
+     "audio_url": {
+      "type": "string",
+      "description": "URL of the audio file to generate a video from. Duration must be between 2 and 20 seconds; pro models support a maximum of 10 seconds. Must be publicly accessible or base64 data URI.",
+      "title": "Audio URL"
+     },
+     "image_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "URL of an image to use as the first frame of the video. If not provided, prompt is required.",
+      "title": "Image URL"
+     },
+     "prompt": {
+      "anyOf": [
+       {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 5000
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Text description of how the video should be generated. Required if image_url is not provided. When image_url is provided, this describes how the image should be animated.",
+      "title": "Prompt"
+     },
+     "enable_safety_checker": {
+      "type": "boolean",
+      "default": true,
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "title": "Enable Safety Checker"
+     },
+     "aspect_ratio": {
+      "type": "string",
+      "default": "auto",
+      "enum": [
+       "auto",
+       "16:9",
+       "9:16"
+      ],
+      "description": "The aspect ratio of the generated video. If 'auto', the aspect ratio will be determined automatically based on the input image, or defaults to 16:9 if no image is provided.",
+      "title": "Aspect Ratio"
+     }
+    },
+    "required": [
+     "audio_url"
+    ],
+    "x-fal-order-properties": [
+     "audio_url",
+     "image_url",
+     "prompt",
+     "aspect_ratio",
+     "enable_safety_checker"
+    ],
+    "title": "LTXV25AudioToVideoRequest"
+   }
+  },
+  "fal-ai/ltx-2.3-22b/audio-to-video": {
+   "endpoint_id": "fal-ai/ltx-2.3-22b/audio-to-video",
+   "display_name": "LTX-2.3 22B",
+   "description": "Generate video with audio from audio, text and images using LTX-2",
+   "input": {
+    "properties": {
+     "audio_strength": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "Audio Strength",
+      "description": "Audio conditioning strength. Values below 1.0 will allow the model to change the audio, while a value of exactly 1.0 will use the input audio without modification."
+     },
+     "video_output_type": {
+      "default": "X264 (.mp4)",
+      "enum": [
+       "X264 (.mp4)",
+       "VP9 (.webm)",
+       "PRORES4444 (.mov)",
+       "GIF (.gif)"
+      ],
+      "type": "string",
+      "title": "Video Output Type",
+      "description": "The output type of the generated video."
+     },
+     "end_image_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "The URL of the image to use as the end of the video.",
+      "title": "End Image URL"
+     },
+     "acceleration": {
+      "default": "regular",
+      "enum": [
+       "none",
+       "regular",
+       "high",
+       "full"
+      ],
+      "title": "Acceleration",
+      "type": "string",
+      "description": "The acceleration level to use."
+     },
+     "use_multiscale": {
+      "default": true,
+      "type": "boolean",
+      "title": "Use Multi-Scale",
+      "description": "Whether to use multi-scale generation. If True, the model will generate the video at a smaller scale first, then use the smaller video to guide the generation of a video at or above your requested size. This results in better coherence and details."
+     },
+     "camera_lora_scale": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "Camera LoRA Scale",
+      "description": "The scale of the camera LoRA to use. This allows you to control the camera movement of the generated video more accurately than just prompting the model to move the camera."
+     },
+     "camera_lora": {
+      "default": "none",
+      "enum": [
+       "dolly_in",
+       "dolly_out",
+       "dolly_left",
+       "dolly_right",
+       "jib_up",
+       "jib_down",
+       "static",
+       "none"
+      ],
+      "title": "Camera LoRA",
+      "type": "string",
+      "description": "The camera LoRA to use. This allows you to control the camera movement of the generated video more accurately than just prompting the model to move the camera."
+     },
+     "video_cfg_scale": {
+      "minimum": 1,
+      "default": 3,
+      "maximum": 20,
+      "type": "number",
+      "title": "Video CFG Scale",
+      "description": "The Classifier-Free Guidance (CFG) scale for the video. Higher values result in more consistent and focused video content."
+     },
+     "sync_mode": {
+      "default": false,
+      "type": "boolean",
+      "title": "Sync Mode",
+      "description": "If `True`, the media will be returned as a data URI and the output data won't be available in the request history."
+     },
+     "gradient_estimation_gamma": {
+      "minimum": 0,
+      "default": 2,
+      "maximum": 10,
+      "type": "number",
+      "title": "Gradient Estimation Gamma",
+      "description": "The gamma of gradient estimation during denoising. Set to 0 to disable."
+     },
+     "video_rescaling_scale": {
+      "minimum": 0,
+      "default": 0.7,
+      "maximum": 1,
+      "type": "number",
+      "title": "Video Rescaling Scale",
+      "description": "The rescaling scale for the video. Controls the ratio between classifier-free guidance and spatiotemporal guidance."
+     },
+     "distill_lora_first_pass_scale": {
+      "minimum": 0,
+      "default": 0.2,
+      "maximum": 1,
+      "type": "number",
+      "title": "Distill Lora First Pass Scale",
+      "description": "The scale of the distill LoRA to use for the first pass. Set to 0 to disable."
+     },
+     "use_restart_sampling": {
+      "default": false,
+      "type": "boolean",
+      "title": "Use Restart Sampling",
+      "description": "Whether to use restart sampling. This will inject a small amount of noise during each denoising step, which can help improve the quality of the generated video."
+     },
+     "audio_rescaling_scale": {
+      "minimum": 0,
+      "default": 0.7,
+      "maximum": 1,
+      "type": "number",
+      "title": "Audio Rescaling Scale",
+      "description": "The rescaling scale for the audio. Controls the ratio between classifier-free guidance and spatiotemporal guidance."
+     },
+     "num_frames": {
+      "minimum": 9,
+      "default": 121,
+      "maximum": 481,
+      "type": "integer",
+      "title": "Number of Frames",
+      "description": "The number of frames to generate."
+     },
+     "video_modality_scale": {
+      "minimum": 0,
+      "default": 3,
+      "maximum": 10,
+      "type": "number",
+      "title": "Video Modality Scale",
+      "description": "The modality scale for the video. Controls the ratio between video and audio modalities."
+     },
+     "num_inference_steps": {
+      "minimum": 8,
+      "default": 40,
+      "maximum": 50,
+      "type": "integer",
+      "title": "Number of Inference Steps",
+      "description": "The number of inference steps to use."
+     },
+     "negative_prompt": {
+      "default": "news broadcast, 3d animation, computer graphics, pc game, console game, video game, cartoon, childish, watermark, logo, text, on screen text, subtitles, titles, signature, slowmo, static",
+      "type": "string",
+      "title": "Negative Prompt",
+      "description": "The negative prompt to generate the video from."
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "description": "Whether to enable the safety checker."
+     },
+     "end_image_strength": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "End Image Strength",
+      "description": "The strength of the end image to use for the video generation."
+     },
+     "image_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Image URL",
+      "description": "Optional URL of an image to use as the first frame of the video."
+     },
+     "audio_modality_scale": {
+      "minimum": 0,
+      "default": 3,
+      "maximum": 10,
+      "type": "number",
+      "title": "Audio Modality Scale",
+      "description": "The modality scale for the audio. Controls the ratio between video and audio modalities."
+     },
+     "image_strength": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "Image Strength",
+      "description": "The strength of the image to use for the video generation."
+     },
+     "scheduler": {
+      "default": "ltx2",
+      "enum": [
+       "ltx2",
+       "linear_quadratic",
+       "beta"
+      ],
+      "title": "Scheduler",
+      "type": "string",
+      "description": "The scheduler to use."
+     },
+     "video_quality": {
+      "default": "high",
+      "enum": [
+       "low",
+       "medium",
+       "high",
+       "maximum"
+      ],
+      "type": "string",
+      "title": "Video Quality",
+      "description": "The quality of the generated video."
+     },
+     "match_audio_length": {
+      "default": true,
+      "type": "boolean",
+      "title": "Match Audio Length",
+      "description": "When enabled, the number of frames will be calculated based on the audio duration and FPS. When disabled, use the specified num_frames."
+     },
+     "video_stg_scale": {
+      "minimum": 0,
+      "default": 0,
+      "maximum": 20,
+      "type": "number",
+      "title": "Video STG Scale",
+      "description": "The Spatiotemporal Guidance (STG) scale for the video. Higher values result in more consistent and focused video content."
+     },
+     "prompt": {
+      "title": "Prompt",
+      "type": "string",
+      "description": "The prompt to generate the video from."
+     },
+     "preprocess_audio": {
+      "default": true,
+      "type": "boolean",
+      "title": "Preprocess Audio",
+      "description": "Whether to preprocess the audio before using it as conditioning."
+     },
+     "video_size": {
+      "anyOf": [
+       {
+        "properties": {
+         "height": {
+          "maximum": 14142,
+          "default": 512,
+          "type": "integer",
+          "title": "Height",
+          "exclusiveMinimum": 0,
+          "description": "The height of the generated image."
+         },
+         "width": {
+          "maximum": 14142,
+          "default": 512,
+          "type": "integer",
+          "title": "Width",
+          "exclusiveMinimum": 0,
+          "description": "The width of the generated image."
+         }
+        },
+        "x-fal-order-properties": [
+         "width",
+         "height"
+        ],
+        "type": "object",
+        "title": "ImageSize"
+       },
+       {
+        "enum": [
+         "auto",
+         "square_hd",
+         "square",
+         "portrait_4_3",
+         "portrait_16_9",
+         "landscape_4_3",
+         "landscape_16_9"
+        ],
+        "type": "string"
+       }
+      ],
+      "default": "landscape_16_9",
+      "description": "The size of the generated video. Use 'auto' to match the input image dimensions if provided.",
+      "title": "Video Size"
+     },
+     "audio_stg_scale": {
+      "minimum": 0,
+      "default": 0,
+      "maximum": 20,
+      "type": "number",
+      "title": "Audio STG Scale",
+      "description": "The Spatiotemporal Guidance (STG) scale for the audio. Higher values result in more consistent and focused audio content."
+     },
+     "video_write_mode": {
+      "default": "balanced",
+      "enum": [
+       "fast",
+       "balanced",
+       "small"
+      ],
+      "type": "string",
+      "title": "Video Write Mode",
+      "description": "The write mode of the generated video."
+     },
+     "fps": {
+      "minimum": 1,
+      "default": 24,
+      "maximum": 60,
+      "type": "number",
+      "title": "FPS",
+      "description": "The frames per second of the generated video."
+     },
+     "distill_lora_second_pass_scale": {
+      "minimum": 0,
+      "default": 0.5,
+      "maximum": 1,
+      "type": "number",
+      "title": "Distill Lora Second Pass Scale",
+      "description": "The scale of the distill LoRA to use for the second and subsequent passes."
+     },
+     "audio_cfg_scale": {
+      "minimum": 1,
+      "default": 7,
+      "maximum": 20,
+      "type": "number",
+      "title": "Audio CFG Scale",
+      "description": "The Classifier-Free Guidance (CFG) scale for the audio. Higher values result in more consistent and focused audio content."
+     },
+     "enable_prompt_expansion": {
+      "default": true,
+      "type": "boolean",
+      "title": "Enable Prompt Expansion",
+      "description": "Whether to enable prompt expansion."
+     },
+     "audio_url": {
+      "title": "Audio URL",
+      "type": "string",
+      "description": "The URL of the audio to generate the video from."
+     },
+     "seed": {
+      "description": "The seed for the random number generator.",
+      "title": "Seed",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "x-fal-order-properties": [
+     "prompt",
+     "audio_url",
+     "image_url",
+     "end_image_url",
+     "match_audio_length",
+     "num_frames",
+     "video_size",
+     "use_multiscale",
+     "fps",
+     "num_inference_steps",
+     "video_cfg_scale",
+     "video_stg_scale",
+     "video_rescaling_scale",
+     "video_modality_scale",
+     "audio_cfg_scale",
+     "audio_stg_scale",
+     "audio_rescaling_scale",
+     "audio_modality_scale",
+     "gradient_estimation_gamma",
+     "use_restart_sampling",
+     "scheduler",
+     "acceleration",
+     "camera_lora",
+     "camera_lora_scale",
+     "negative_prompt",
+     "seed",
+     "enable_prompt_expansion",
+     "enable_safety_checker",
+     "video_output_type",
+     "video_quality",
+     "video_write_mode",
+     "sync_mode",
+     "distill_lora_first_pass_scale",
+     "distill_lora_second_pass_scale",
+     "image_strength",
+     "end_image_strength",
+     "audio_strength",
+     "preprocess_audio"
+    ],
+    "type": "object",
+    "title": "LTX23AudioToVideoInput",
+    "required": [
+     "prompt",
+     "audio_url"
+    ]
+   }
+  },
+  "fal-ai/ltx-2.3-22b/audio-to-video/lora": {
+   "endpoint_id": "fal-ai/ltx-2.3-22b/audio-to-video/lora",
+   "display_name": "LTX-2.3 22B",
+   "description": "Generate video with audio from audio, text and images using LTX-2.3 and custom LoRA",
+   "input": {
+    "properties": {
+     "audio_strength": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "Audio Strength",
+      "description": "Audio conditioning strength. Values below 1.0 will allow the model to change the audio, while a value of exactly 1.0 will use the input audio without modification."
+     },
+     "video_output_type": {
+      "default": "X264 (.mp4)",
+      "enum": [
+       "X264 (.mp4)",
+       "VP9 (.webm)",
+       "PRORES4444 (.mov)",
+       "GIF (.gif)"
+      ],
+      "type": "string",
+      "title": "Video Output Type",
+      "description": "The output type of the generated video."
+     },
+     "end_image_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "The URL of the image to use as the end of the video.",
+      "title": "End Image URL"
+     },
+     "acceleration": {
+      "default": "regular",
+      "enum": [
+       "none",
+       "regular",
+       "high",
+       "full"
+      ],
+      "title": "Acceleration",
+      "type": "string",
+      "description": "The acceleration level to use."
+     },
+     "use_multiscale": {
+      "default": true,
+      "type": "boolean",
+      "title": "Use Multi-Scale",
+      "description": "Whether to use multi-scale generation. If True, the model will generate the video at a smaller scale first, then use the smaller video to guide the generation of a video at or above your requested size. This results in better coherence and details."
+     },
+     "camera_lora_scale": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "Camera LoRA Scale",
+      "description": "The scale of the camera LoRA to use. This allows you to control the camera movement of the generated video more accurately than just prompting the model to move the camera."
+     },
+     "camera_lora": {
+      "default": "none",
+      "enum": [
+       "dolly_in",
+       "dolly_out",
+       "dolly_left",
+       "dolly_right",
+       "jib_up",
+       "jib_down",
+       "static",
+       "none"
+      ],
+      "title": "Camera LoRA",
+      "type": "string",
+      "description": "The camera LoRA to use. This allows you to control the camera movement of the generated video more accurately than just prompting the model to move the camera."
+     },
+     "video_cfg_scale": {
+      "minimum": 1,
+      "default": 3,
+      "maximum": 20,
+      "type": "number",
+      "title": "Video CFG Scale",
+      "description": "The Classifier-Free Guidance (CFG) scale for the video. Higher values result in more consistent and focused video content."
+     },
+     "loras": {
+      "type": "array",
+      "title": "LoRAs",
+      "items": {
+       "properties": {
+        "weight_name": {
+         "description": "Name of the LoRA weight. Only used if `path` is a HuggingFace repository, and is only required when the repository contains multiple LoRA weights.",
+         "title": "Weight Name",
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "path": {
+         "type": "string",
+         "title": "Path",
+         "description": "URL, HuggingFace repo ID (owner/repo) to lora weights."
+        },
+        "scale": {
+         "minimum": 0,
+         "default": 1,
+         "maximum": 4,
+         "type": "number",
+         "title": "Scale",
+         "description": "Scale factor for LoRA application (0.0 to 4.0)."
+        }
+       },
+       "x-fal-order-properties": [
+        "path",
+        "weight_name",
+        "scale"
+       ],
+       "type": "object",
+       "title": "LoRAInput",
+       "required": [
+        "path"
+       ],
+       "description": "LoRA weight configuration."
+      },
+      "description": "The LoRAs to use for the generation."
+     },
+     "sync_mode": {
+      "default": false,
+      "type": "boolean",
+      "title": "Sync Mode",
+      "description": "If `True`, the media will be returned as a data URI and the output data won't be available in the request history."
+     },
+     "gradient_estimation_gamma": {
+      "minimum": 0,
+      "default": 2,
+      "maximum": 10,
+      "type": "number",
+      "title": "Gradient Estimation Gamma",
+      "description": "The gamma of gradient estimation during denoising. Set to 0 to disable."
+     },
+     "video_rescaling_scale": {
+      "minimum": 0,
+      "default": 0.7,
+      "maximum": 1,
+      "type": "number",
+      "title": "Video Rescaling Scale",
+      "description": "The rescaling scale for the video. Controls the ratio between classifier-free guidance and spatiotemporal guidance."
+     },
+     "distill_lora_first_pass_scale": {
+      "minimum": 0,
+      "default": 0.2,
+      "maximum": 1,
+      "type": "number",
+      "title": "Distill Lora First Pass Scale",
+      "description": "The scale of the distill LoRA to use for the first pass. Set to 0 to disable."
+     },
+     "use_restart_sampling": {
+      "default": false,
+      "type": "boolean",
+      "title": "Use Restart Sampling",
+      "description": "Whether to use restart sampling. This will inject a small amount of noise during each denoising step, which can help improve the quality of the generated video."
+     },
+     "audio_rescaling_scale": {
+      "minimum": 0,
+      "default": 0.7,
+      "maximum": 1,
+      "type": "number",
+      "title": "Audio Rescaling Scale",
+      "description": "The rescaling scale for the audio. Controls the ratio between classifier-free guidance and spatiotemporal guidance."
+     },
+     "num_frames": {
+      "minimum": 9,
+      "default": 121,
+      "maximum": 481,
+      "type": "integer",
+      "title": "Number of Frames",
+      "description": "The number of frames to generate."
+     },
+     "video_modality_scale": {
+      "minimum": 0,
+      "default": 3,
+      "maximum": 10,
+      "type": "number",
+      "title": "Video Modality Scale",
+      "description": "The modality scale for the video. Controls the ratio between video and audio modalities."
+     },
+     "num_inference_steps": {
+      "minimum": 8,
+      "default": 40,
+      "maximum": 50,
+      "type": "integer",
+      "title": "Number of Inference Steps",
+      "description": "The number of inference steps to use."
+     },
+     "negative_prompt": {
+      "default": "news broadcast, 3d animation, computer graphics, pc game, console game, video game, cartoon, childish, watermark, logo, text, on screen text, subtitles, titles, signature, slowmo, static",
+      "type": "string",
+      "title": "Negative Prompt",
+      "description": "The negative prompt to generate the video from."
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "description": "Whether to enable the safety checker."
+     },
+     "end_image_strength": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "End Image Strength",
+      "description": "The strength of the end image to use for the video generation."
+     },
+     "image_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Image URL",
+      "description": "Optional URL of an image to use as the first frame of the video."
+     },
+     "audio_modality_scale": {
+      "minimum": 0,
+      "default": 3,
+      "maximum": 10,
+      "type": "number",
+      "title": "Audio Modality Scale",
+      "description": "The modality scale for the audio. Controls the ratio between video and audio modalities."
+     },
+     "image_strength": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "Image Strength",
+      "description": "The strength of the image to use for the video generation."
+     },
+     "scheduler": {
+      "default": "ltx2",
+      "enum": [
+       "ltx2",
+       "linear_quadratic",
+       "beta"
+      ],
+      "title": "Scheduler",
+      "type": "string",
+      "description": "The scheduler to use."
+     },
+     "video_quality": {
+      "default": "high",
+      "enum": [
+       "low",
+       "medium",
+       "high",
+       "maximum"
+      ],
+      "type": "string",
+      "title": "Video Quality",
+      "description": "The quality of the generated video."
+     },
+     "match_audio_length": {
+      "default": true,
+      "type": "boolean",
+      "title": "Match Audio Length",
+      "description": "When enabled, the number of frames will be calculated based on the audio duration and FPS. When disabled, use the specified num_frames."
+     },
+     "video_stg_scale": {
+      "minimum": 0,
+      "default": 0,
+      "maximum": 20,
+      "type": "number",
+      "title": "Video STG Scale",
+      "description": "The Spatiotemporal Guidance (STG) scale for the video. Higher values result in more consistent and focused video content."
+     },
+     "prompt": {
+      "title": "Prompt",
+      "type": "string",
+      "description": "The prompt to generate the video from."
+     },
+     "preprocess_audio": {
+      "default": true,
+      "type": "boolean",
+      "title": "Preprocess Audio",
+      "description": "Whether to preprocess the audio before using it as conditioning."
+     },
+     "video_size": {
+      "anyOf": [
+       {
+        "properties": {
+         "height": {
+          "maximum": 14142,
+          "default": 512,
+          "type": "integer",
+          "title": "Height",
+          "exclusiveMinimum": 0,
+          "description": "The height of the generated image."
+         },
+         "width": {
+          "maximum": 14142,
+          "default": 512,
+          "type": "integer",
+          "title": "Width",
+          "exclusiveMinimum": 0,
+          "description": "The width of the generated image."
+         }
+        },
+        "x-fal-order-properties": [
+         "width",
+         "height"
+        ],
+        "type": "object",
+        "title": "ImageSize"
+       },
+       {
+        "enum": [
+         "auto",
+         "square_hd",
+         "square",
+         "portrait_4_3",
+         "portrait_16_9",
+         "landscape_4_3",
+         "landscape_16_9"
+        ],
+        "type": "string"
+       }
+      ],
+      "default": "landscape_16_9",
+      "description": "The size of the generated video. Use 'auto' to match the input image dimensions if provided.",
+      "title": "Video Size"
+     },
+     "audio_stg_scale": {
+      "minimum": 0,
+      "default": 0,
+      "maximum": 20,
+      "type": "number",
+      "title": "Audio STG Scale",
+      "description": "The Spatiotemporal Guidance (STG) scale for the audio. Higher values result in more consistent and focused audio content."
+     },
+     "video_write_mode": {
+      "default": "balanced",
+      "enum": [
+       "fast",
+       "balanced",
+       "small"
+      ],
+      "type": "string",
+      "title": "Video Write Mode",
+      "description": "The write mode of the generated video."
+     },
+     "fps": {
+      "minimum": 1,
+      "default": 24,
+      "maximum": 60,
+      "type": "number",
+      "title": "FPS",
+      "description": "The frames per second of the generated video."
+     },
+     "distill_lora_second_pass_scale": {
+      "minimum": 0,
+      "default": 0.5,
+      "maximum": 1,
+      "type": "number",
+      "title": "Distill Lora Second Pass Scale",
+      "description": "The scale of the distill LoRA to use for the second and subsequent passes."
+     },
+     "audio_cfg_scale": {
+      "minimum": 1,
+      "default": 7,
+      "maximum": 20,
+      "type": "number",
+      "title": "Audio CFG Scale",
+      "description": "The Classifier-Free Guidance (CFG) scale for the audio. Higher values result in more consistent and focused audio content."
+     },
+     "enable_prompt_expansion": {
+      "default": true,
+      "type": "boolean",
+      "title": "Enable Prompt Expansion",
+      "description": "Whether to enable prompt expansion."
+     },
+     "audio_url": {
+      "title": "Audio URL",
+      "type": "string",
+      "description": "The URL of the audio to generate the video from."
+     },
+     "seed": {
+      "description": "The seed for the random number generator.",
+      "title": "Seed",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "x-fal-order-properties": [
+     "prompt",
+     "audio_url",
+     "image_url",
+     "end_image_url",
+     "match_audio_length",
+     "num_frames",
+     "video_size",
+     "use_multiscale",
+     "fps",
+     "num_inference_steps",
+     "video_cfg_scale",
+     "video_stg_scale",
+     "video_rescaling_scale",
+     "video_modality_scale",
+     "audio_cfg_scale",
+     "audio_stg_scale",
+     "audio_rescaling_scale",
+     "audio_modality_scale",
+     "gradient_estimation_gamma",
+     "use_restart_sampling",
+     "scheduler",
+     "acceleration",
+     "camera_lora",
+     "camera_lora_scale",
+     "negative_prompt",
+     "seed",
+     "enable_prompt_expansion",
+     "enable_safety_checker",
+     "video_output_type",
+     "video_quality",
+     "video_write_mode",
+     "sync_mode",
+     "loras",
+     "distill_lora_first_pass_scale",
+     "distill_lora_second_pass_scale",
+     "image_strength",
+     "end_image_strength",
+     "audio_strength",
+     "preprocess_audio"
+    ],
+    "type": "object",
+    "title": "LTX23LoRAAudioToVideoInput",
+    "required": [
+     "loras",
+     "prompt",
+     "audio_url"
+    ]
+   }
+  },
+  "fal-ai/ltx-2.3-22b/distilled/audio-to-video": {
+   "endpoint_id": "fal-ai/ltx-2.3-22b/distilled/audio-to-video",
+   "display_name": "LTX-2.3 22B Distilled",
+   "description": "Generate video with audio from audio, text and images using LTX-2 Distilled",
+   "input": {
+    "properties": {
+     "scheduler": {
+      "default": "ltx2",
+      "enum": [
+       "ltx2",
+       "linear_quadratic",
+       "beta"
+      ],
+      "title": "Scheduler",
+      "type": "string",
+      "description": "The scheduler to use."
+     },
+     "audio_strength": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "Audio Strength",
+      "description": "Audio conditioning strength. Values below 1.0 will allow the model to change the audio, while a value of exactly 1.0 will use the input audio without modification."
+     },
+     "video_output_type": {
+      "default": "X264 (.mp4)",
+      "enum": [
+       "X264 (.mp4)",
+       "VP9 (.webm)",
+       "PRORES4444 (.mov)",
+       "GIF (.gif)"
+      ],
+      "type": "string",
+      "title": "Video Output Type",
+      "description": "The output type of the generated video."
+     },
+     "prompt": {
+      "title": "Prompt",
+      "type": "string",
+      "description": "The prompt to generate the video from."
+     },
+     "acceleration": {
+      "default": "none",
+      "enum": [
+       "none",
+       "regular",
+       "high",
+       "full"
+      ],
+      "title": "Acceleration",
+      "type": "string",
+      "description": "The acceleration level to use."
+     },
+     "preprocess_audio": {
+      "default": true,
+      "type": "boolean",
+      "title": "Preprocess Audio",
+      "description": "Whether to preprocess the audio before using it as conditioning."
+     },
+     "video_size": {
+      "anyOf": [
+       {
+        "properties": {
+         "height": {
+          "maximum": 14142,
+          "default": 512,
+          "type": "integer",
+          "title": "Height",
+          "exclusiveMinimum": 0,
+          "description": "The height of the generated image."
+         },
+         "width": {
+          "maximum": 14142,
+          "default": 512,
+          "type": "integer",
+          "title": "Width",
+          "exclusiveMinimum": 0,
+          "description": "The width of the generated image."
+         }
+        },
+        "x-fal-order-properties": [
+         "width",
+         "height"
+        ],
+        "type": "object",
+        "title": "ImageSize"
+       },
+       {
+        "enum": [
+         "auto",
+         "square_hd",
+         "square",
+         "portrait_4_3",
+         "portrait_16_9",
+         "landscape_4_3",
+         "landscape_16_9"
+        ],
+        "type": "string"
+       }
+      ],
+      "default": "landscape_16_9",
+      "description": "The size of the generated video. Use 'auto' to match the input image dimensions if provided.",
+      "title": "Video Size"
+     },
+     "use_multiscale": {
+      "default": true,
+      "type": "boolean",
+      "title": "Use Multi-Scale",
+      "description": "Whether to use multi-scale generation. If True, the model will generate the video at a smaller scale first, then use the smaller video to guide the generation of a video at or above your requested size. This results in better coherence and details."
+     },
+     "video_write_mode": {
+      "default": "balanced",
+      "enum": [
+       "fast",
+       "balanced",
+       "small"
+      ],
+      "type": "string",
+      "title": "Video Write Mode",
+      "description": "The write mode of the generated video."
+     },
+     "camera_lora": {
+      "default": "none",
+      "enum": [
+       "dolly_in",
+       "dolly_out",
+       "dolly_left",
+       "dolly_right",
+       "jib_up",
+       "jib_down",
+       "static",
+       "none"
+      ],
+      "title": "Camera LoRA",
+      "type": "string",
+      "description": "The camera LoRA to use. This allows you to control the camera movement of the generated video more accurately than just prompting the model to move the camera."
+     },
+     "fps": {
+      "minimum": 1,
+      "default": 24,
+      "maximum": 60,
+      "type": "number",
+      "title": "FPS",
+      "description": "The frames per second of the generated video."
+     },
+     "distill_lora_second_pass_scale": {
+      "minimum": 0,
+      "default": 0.5,
+      "maximum": 1,
+      "type": "number",
+      "title": "Distill Lora Second Pass Scale",
+      "description": "The scale of the distill LoRA to use for the second and subsequent passes."
+     },
+     "sync_mode": {
+      "default": false,
+      "type": "boolean",
+      "title": "Sync Mode",
+      "description": "If `True`, the media will be returned as a data URI and the output data won't be available in the request history."
+     },
+     "camera_lora_scale": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "Camera LoRA Scale",
+      "description": "The scale of the camera LoRA to use. This allows you to control the camera movement of the generated video more accurately than just prompting the model to move the camera."
+     },
+     "video_quality": {
+      "default": "high",
+      "enum": [
+       "low",
+       "medium",
+       "high",
+       "maximum"
+      ],
+      "type": "string",
+      "title": "Video Quality",
+      "description": "The quality of the generated video."
+     },
+     "match_audio_length": {
+      "default": true,
+      "type": "boolean",
+      "title": "Match Audio Length",
+      "description": "When enabled, the number of frames will be calculated based on the audio duration and FPS. When disabled, use the specified num_frames."
+     },
+     "end_image_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "The URL of the image to use as the end of the video.",
+      "title": "End Image URL"
+     },
+     "enable_prompt_expansion": {
+      "default": true,
+      "type": "boolean",
+      "title": "Enable Prompt Expansion",
+      "description": "Whether to enable prompt expansion."
+     },
+     "num_frames": {
+      "minimum": 9,
+      "default": 121,
+      "maximum": 481,
+      "type": "integer",
+      "title": "Number of Frames",
+      "description": "The number of frames to generate."
+     },
+     "audio_url": {
+      "title": "Audio URL",
+      "type": "string",
+      "description": "The URL of the audio to generate the video from."
+     },
+     "negative_prompt": {
+      "default": "news broadcast, 3d animation, computer graphics, pc game, console game, video game, cartoon, childish, watermark, logo, text, on screen text, subtitles, titles, signature, slowmo, static",
+      "type": "string",
+      "title": "Negative Prompt",
+      "description": "The negative prompt to generate the video from."
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "description": "Whether to enable the safety checker."
+     },
+     "end_image_strength": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "End Image Strength",
+      "description": "The strength of the end image to use for the video generation."
+     },
+     "image_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Image URL",
+      "description": "Optional URL of an image to use as the first frame of the video."
+     },
+     "image_strength": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "Image Strength",
+      "description": "The strength of the image to use for the video generation."
+     },
+     "seed": {
+      "description": "The seed for the random number generator.",
+      "title": "Seed",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "x-fal-order-properties": [
+     "prompt",
+     "audio_url",
+     "image_url",
+     "end_image_url",
+     "match_audio_length",
+     "num_frames",
+     "video_size",
+     "use_multiscale",
+     "fps",
+     "scheduler",
+     "acceleration",
+     "camera_lora",
+     "camera_lora_scale",
+     "negative_prompt",
+     "seed",
+     "enable_prompt_expansion",
+     "enable_safety_checker",
+     "video_output_type",
+     "video_quality",
+     "video_write_mode",
+     "sync_mode",
+     "distill_lora_second_pass_scale",
+     "image_strength",
+     "end_image_strength",
+     "audio_strength",
+     "preprocess_audio"
+    ],
+    "type": "object",
+    "title": "LTX23DistilledAudioToVideoInput",
+    "required": [
+     "prompt",
+     "audio_url"
+    ]
+   }
+  },
+  "fal-ai/ltx-2.3-22b/distilled/audio-to-video/lora": {
+   "endpoint_id": "fal-ai/ltx-2.3-22b/distilled/audio-to-video/lora",
+   "display_name": "LTX-2.3 22B Distilled",
+   "description": "Generate video with audio from audio, text and images using LTX-2.3 Distilled and custom LoRA",
+   "input": {
+    "properties": {
+     "scheduler": {
+      "default": "ltx2",
+      "enum": [
+       "ltx2",
+       "linear_quadratic",
+       "beta"
+      ],
+      "title": "Scheduler",
+      "type": "string",
+      "description": "The scheduler to use."
+     },
+     "audio_strength": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "Audio Strength",
+      "description": "Audio conditioning strength. Values below 1.0 will allow the model to change the audio, while a value of exactly 1.0 will use the input audio without modification."
+     },
+     "video_output_type": {
+      "default": "X264 (.mp4)",
+      "enum": [
+       "X264 (.mp4)",
+       "VP9 (.webm)",
+       "PRORES4444 (.mov)",
+       "GIF (.gif)"
+      ],
+      "type": "string",
+      "title": "Video Output Type",
+      "description": "The output type of the generated video."
+     },
+     "prompt": {
+      "title": "Prompt",
+      "type": "string",
+      "description": "The prompt to generate the video from."
+     },
+     "acceleration": {
+      "default": "none",
+      "enum": [
+       "none",
+       "regular",
+       "high",
+       "full"
+      ],
+      "title": "Acceleration",
+      "type": "string",
+      "description": "The acceleration level to use."
+     },
+     "preprocess_audio": {
+      "default": true,
+      "type": "boolean",
+      "title": "Preprocess Audio",
+      "description": "Whether to preprocess the audio before using it as conditioning."
+     },
+     "video_size": {
+      "anyOf": [
+       {
+        "properties": {
+         "height": {
+          "maximum": 14142,
+          "default": 512,
+          "type": "integer",
+          "title": "Height",
+          "exclusiveMinimum": 0,
+          "description": "The height of the generated image."
+         },
+         "width": {
+          "maximum": 14142,
+          "default": 512,
+          "type": "integer",
+          "title": "Width",
+          "exclusiveMinimum": 0,
+          "description": "The width of the generated image."
+         }
+        },
+        "x-fal-order-properties": [
+         "width",
+         "height"
+        ],
+        "type": "object",
+        "title": "ImageSize"
+       },
+       {
+        "enum": [
+         "auto",
+         "square_hd",
+         "square",
+         "portrait_4_3",
+         "portrait_16_9",
+         "landscape_4_3",
+         "landscape_16_9"
+        ],
+        "type": "string"
+       }
+      ],
+      "default": "landscape_16_9",
+      "description": "The size of the generated video. Use 'auto' to match the input image dimensions if provided.",
+      "title": "Video Size"
+     },
+     "use_multiscale": {
+      "default": true,
+      "type": "boolean",
+      "title": "Use Multi-Scale",
+      "description": "Whether to use multi-scale generation. If True, the model will generate the video at a smaller scale first, then use the smaller video to guide the generation of a video at or above your requested size. This results in better coherence and details."
+     },
+     "video_write_mode": {
+      "default": "balanced",
+      "enum": [
+       "fast",
+       "balanced",
+       "small"
+      ],
+      "type": "string",
+      "title": "Video Write Mode",
+      "description": "The write mode of the generated video."
+     },
+     "camera_lora": {
+      "default": "none",
+      "enum": [
+       "dolly_in",
+       "dolly_out",
+       "dolly_left",
+       "dolly_right",
+       "jib_up",
+       "jib_down",
+       "static",
+       "none"
+      ],
+      "title": "Camera LoRA",
+      "type": "string",
+      "description": "The camera LoRA to use. This allows you to control the camera movement of the generated video more accurately than just prompting the model to move the camera."
+     },
+     "fps": {
+      "minimum": 1,
+      "default": 24,
+      "maximum": 60,
+      "type": "number",
+      "title": "FPS",
+      "description": "The frames per second of the generated video."
+     },
+     "distill_lora_second_pass_scale": {
+      "minimum": 0,
+      "default": 0.5,
+      "maximum": 1,
+      "type": "number",
+      "title": "Distill Lora Second Pass Scale",
+      "description": "The scale of the distill LoRA to use for the second and subsequent passes."
+     },
+     "sync_mode": {
+      "default": false,
+      "type": "boolean",
+      "title": "Sync Mode",
+      "description": "If `True`, the media will be returned as a data URI and the output data won't be available in the request history."
+     },
+     "camera_lora_scale": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "Camera LoRA Scale",
+      "description": "The scale of the camera LoRA to use. This allows you to control the camera movement of the generated video more accurately than just prompting the model to move the camera."
+     },
+     "video_quality": {
+      "default": "high",
+      "enum": [
+       "low",
+       "medium",
+       "high",
+       "maximum"
+      ],
+      "type": "string",
+      "title": "Video Quality",
+      "description": "The quality of the generated video."
+     },
+     "match_audio_length": {
+      "default": true,
+      "type": "boolean",
+      "title": "Match Audio Length",
+      "description": "When enabled, the number of frames will be calculated based on the audio duration and FPS. When disabled, use the specified num_frames."
+     },
+     "end_image_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "The URL of the image to use as the end of the video.",
+      "title": "End Image URL"
+     },
+     "enable_prompt_expansion": {
+      "default": true,
+      "type": "boolean",
+      "title": "Enable Prompt Expansion",
+      "description": "Whether to enable prompt expansion."
+     },
+     "num_frames": {
+      "minimum": 9,
+      "default": 121,
+      "maximum": 481,
+      "type": "integer",
+      "title": "Number of Frames",
+      "description": "The number of frames to generate."
+     },
+     "loras": {
+      "type": "array",
+      "title": "LoRAs",
+      "items": {
+       "properties": {
+        "weight_name": {
+         "description": "Name of the LoRA weight. Only used if `path` is a HuggingFace repository, and is only required when the repository contains multiple LoRA weights.",
+         "title": "Weight Name",
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "path": {
+         "type": "string",
+         "title": "Path",
+         "description": "URL, HuggingFace repo ID (owner/repo) to lora weights."
+        },
+        "scale": {
+         "minimum": 0,
+         "default": 1,
+         "maximum": 4,
+         "type": "number",
+         "title": "Scale",
+         "description": "Scale factor for LoRA application (0.0 to 4.0)."
+        }
+       },
+       "x-fal-order-properties": [
+        "path",
+        "weight_name",
+        "scale"
+       ],
+       "type": "object",
+       "title": "LoRAInput",
+       "required": [
+        "path"
+       ],
+       "description": "LoRA weight configuration."
+      },
+      "description": "The LoRAs to use for the generation."
+     },
+     "audio_url": {
+      "title": "Audio URL",
+      "type": "string",
+      "description": "The URL of the audio to generate the video from."
+     },
+     "negative_prompt": {
+      "default": "news broadcast, 3d animation, computer graphics, pc game, console game, video game, cartoon, childish, watermark, logo, text, on screen text, subtitles, titles, signature, slowmo, static",
+      "type": "string",
+      "title": "Negative Prompt",
+      "description": "The negative prompt to generate the video from."
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "type": "boolean",
+      "title": "Enable Safety Checker",
+      "description": "Whether to enable the safety checker."
+     },
+     "end_image_strength": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "End Image Strength",
+      "description": "The strength of the end image to use for the video generation."
+     },
+     "image_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Image URL",
+      "description": "Optional URL of an image to use as the first frame of the video."
+     },
+     "image_strength": {
+      "minimum": 0,
+      "default": 1,
+      "maximum": 1,
+      "type": "number",
+      "title": "Image Strength",
+      "description": "The strength of the image to use for the video generation."
+     },
+     "seed": {
+      "description": "The seed for the random number generator.",
+      "title": "Seed",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "x-fal-order-properties": [
+     "prompt",
+     "audio_url",
+     "image_url",
+     "end_image_url",
+     "match_audio_length",
+     "num_frames",
+     "video_size",
+     "use_multiscale",
+     "fps",
+     "scheduler",
+     "acceleration",
+     "camera_lora",
+     "camera_lora_scale",
+     "negative_prompt",
+     "seed",
+     "enable_prompt_expansion",
+     "enable_safety_checker",
+     "video_output_type",
+     "video_quality",
+     "video_write_mode",
+     "sync_mode",
+     "loras",
+     "distill_lora_second_pass_scale",
+     "image_strength",
+     "end_image_strength",
+     "audio_strength",
+     "preprocess_audio"
+    ],
+    "type": "object",
+    "title": "LTX23LoRADistilledAudioToVideoInput",
+    "required": [
+     "loras",
+     "prompt",
+     "audio_url"
+    ]
+   }
+  },
+  "mureka/api/generate/lyrics-video": {
+   "endpoint_id": "mureka/api/generate/lyrics-video",
+   "display_name": "Mureka Lyrics Video",
+   "description": "Creates a lyrics video from generated or uploaded audio, with selectable layouts, aspect ratios, backgrounds, and lyric-row or time-range selection.",
+   "input": {
+    "properties": {
+     "lyrics_start_row": {
+      "anyOf": [
+       {
+        "minimum": 1,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Lyrics Start Row",
+      "description": "First lyric row to include, starting at 1. Must be paired with lyrics_end_row and cannot be combined with a time selection. Provide either both lyric-row fields or both selection_start and selection_end. One complete pair is required."
+     },
+     "title": {
+      "anyOf": [
+       {
+        "minLength": 1,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Title",
+      "description": "Optional title displayed in the lyrics video."
+     },
+     "upload_audio_id": {
+      "anyOf": [
+       {
+        "minLength": 1,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Upload Audio Id",
+      "description": "Audio ID returned by /files/upload with purpose='audio'. Provide exactly one of song_id or upload_audio_id."
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean"
+     },
+     "cover_url": {
+      "anyOf": [
+       {
+        "_fal_ui_field": "url",
+        "ui": {
+         "field": "url"
+        },
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Cover Url",
+      "description": "Optional public HTTPS URL or data URI for a JPG, PNG, or WebP cover. Not supported with layout_1."
+     },
+     "selection_end": {
+      "anyOf": [
+       {
+        "minimum": 0,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Selection End",
+      "description": "End of the included audio range in milliseconds. Must be paired with selection_start and cannot be combined with lyric-row selection. Provide either both time-selection fields or both lyrics_start_row and lyrics_end_row. One complete pair is required."
+     },
+     "selection_start": {
+      "anyOf": [
+       {
+        "minimum": 0,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Selection Start",
+      "description": "Start of the included audio range in milliseconds. Must be paired with selection_end and cannot be combined with lyric-row selection. Provide either both time-selection fields or both lyrics_start_row and lyrics_end_row. One complete pair is required."
+     },
+     "layout": {
+      "enum": [
+       "layout_1",
+       "layout_2",
+       "layout_3",
+       "layout_4",
+       "layout_5",
+       "layout_6",
+       "layout_7"
+      ],
+      "title": "Layout",
+      "default": "layout_1",
+      "description": "Visual layout template for the lyrics video.",
+      "type": "string"
+     },
+     "background_id": {
+      "anyOf": [
+       {
+        "minLength": 1,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Background Id",
+      "description": "Background image ID returned by /files/upload with purpose='lyrics-video'."
+     },
+     "aspect_ratio": {
+      "enum": [
+       "16:9",
+       "9:16",
+       "3:4",
+       "4:3"
+      ],
+      "title": "Aspect Ratio",
+      "default": "9:16",
+      "description": "Output video aspect ratio.",
+      "type": "string"
+     },
+     "lyrics_end_row": {
+      "anyOf": [
+       {
+        "minimum": 1,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Lyrics End Row",
+      "description": "Last lyric row to include. Must be paired with lyrics_start_row and cannot be combined with a time selection. Provide either both lyric-row fields or both selection_start and selection_end. One complete pair is required."
+     },
+     "song_id": {
+      "anyOf": [
+       {
+        "minLength": 1,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Song Id",
+      "description": "Generated audio ID from song_id in a song or instrumental response. Provide exactly one of song_id or upload_audio_id."
+     }
+    },
+    "title": "GenerateLyricsVideoInput",
+    "x-fal-order-properties": [
+     "song_id",
+     "upload_audio_id",
+     "background_id",
+     "cover_url",
+     "title",
+     "aspect_ratio",
+     "layout",
+     "lyrics_start_row",
+     "lyrics_end_row",
+     "selection_start",
+     "selection_end",
+     "enable_safety_checker"
+    ],
+    "type": "object"
+   }
+  },
+  "pixverse/music-video/vibemv": {
+   "endpoint_id": "pixverse/music-video/vibemv",
+   "display_name": "PixVerse VibeMV",
+   "description": "PixVerse VibeMV generates music videos from audio, with optional character references and lyric subtitles. It supports visual style presets, custom style references, five aspect ratios, and output at 720p or 1080p.",
+   "input": {
+    "type": "object",
+    "properties": {
+     "lyrics": {
+      "description": "Optional lyrics to display as subtitles.",
+      "anyOf": [
+       {
+        "maxLength": 5000,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Lyrics"
+     },
+     "style_image_url": {
+      "description": "Optional style reference image URL. Only used with the Custom style.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Style Image Url"
+     },
+     "style": {
+      "description": "Visual style for the music video.",
+      "enum": [
+       "Custom",
+       "Cinematic",
+       "Lo-fi",
+       "Dreamscape",
+       "Woolen Felt",
+       "Candy",
+       "Golden Age",
+       "Voxel",
+       "Retro Game",
+       "Claymation",
+       "Woodland Tale",
+       "Impressionism",
+       "Decadence",
+       "Futuristic",
+       "Chromatic Clash",
+       "Holiday"
+      ],
+      "type": "string",
+      "default": "Cinematic",
+      "title": "Style"
+     },
+     "lip_sync_switch": {
+      "description": "Enable lip sync so characters mouth the vocals. Works best with a character reference image.",
+      "type": "boolean",
+      "default": false,
+      "title": "Lip Sync Switch"
+     },
+     "enable_safety_checker": {
+      "description": "Authorized callers may set false to request relaxed screening.",
+      "type": "boolean",
+      "default": true,
+      "title": "Enable Safety Checker"
+     },
+     "music_style": {
+      "description": "Optional musical genre used to guide the visuals.",
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "Pop",
+         "Rock",
+         "Hip Hop",
+         "R&B",
+         "Jazz",
+         "Reggae",
+         "Country",
+         "Folk",
+         "Electronic",
+         "Classical",
+         "Soul",
+         "Funk",
+         "Metal",
+         "Ambient",
+         "Others"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Music Style"
+     },
+     "aspect_ratio": {
+      "description": "Aspect ratio of the generated video.",
+      "enum": [
+       "16:9",
+       "9:16",
+       "1:1",
+       "4:3",
+       "3:4"
+      ],
+      "type": "string",
+      "default": "16:9",
+      "title": "Aspect Ratio"
+     },
+     "audio_url": {
+      "description": "URL of an MP3 or WAV file between 10 seconds and 6 minutes.",
+      "type": "string",
+      "title": "Audio Url"
+     },
+     "resolution": {
+      "description": "Resolution of the generated video.",
+      "enum": [
+       "720p",
+       "1080p"
+      ],
+      "type": "string",
+      "default": "720p",
+      "title": "Resolution"
+     },
+     "image_url": {
+      "description": "Optional character reference image URL.",
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Image Url"
+     }
+    },
+    "required": [
+     "audio_url"
+    ],
+    "x-fal-order-properties": [
+     "audio_url",
+     "image_url",
+     "style_image_url",
+     "music_style",
+     "style",
+     "aspect_ratio",
+     "resolution",
+     "lyrics",
+     "lip_sync_switch",
+     "enable_safety_checker"
+    ],
+    "title": "MusicVideoRequest"
+   }
+  },
+  "fal-ai/wan/v2.2-14b/speech-to-video": {
+   "endpoint_id": "fal-ai/wan/v2.2-14b/speech-to-video",
+   "display_name": "Wan-2.2 Speech-to-Video 14B",
+   "description": "Wan-S2V is a video model that generates high-quality videos from static images and audio, with realistic facial expressions, body movements, and professional camera work for film and television applications",
+   "input": {
+    "properties": {
+     "frames_per_second": {
+      "title": "Frames per Second",
+      "description": "Frames per second of the generated video. Must be between 4 to 60. When using interpolation and `adjust_fps_for_interpolation` is set to true (default true,) the final FPS will be multiplied by the number of interpolated frames plus one. For example, if the generated frames per second is 16 and the number of interpolated frames is 1, the final frames per second will be 32. If `adjust_fps_for_interpolation` is set to false, this value will be used as-is.",
+      "anyOf": [
+       {
+        "minimum": 4,
+        "maximum": 60,
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "default": 16
+     },
+     "video_write_mode": {
+      "enum": [
+       "fast",
+       "balanced",
+       "small"
+      ],
+      "title": "Video Write Mode",
+      "description": "The write mode of the output video. Faster write mode means faster results but larger file size, balanced write mode is a good compromise between speed and quality, and small write mode is the slowest but produces the smallest file size.",
+      "default": "balanced",
+      "type": "string"
+     },
+     "num_inference_steps": {
+      "default": 27,
+      "title": "Number of Inference Steps",
+      "description": "Number of inference steps for sampling. Higher values give better quality but take longer.",
+      "minimum": 2,
+      "maximum": 40,
+      "type": "integer"
+     },
+     "image_url": {
+      "title": "Image URL",
+      "description": "URL of the input image. If the input image does not match the chosen aspect ratio, it is resized and center cropped.",
+      "type": "string"
+     },
+     "audio_url": {
+      "title": "Audio URL",
+      "description": "The URL of the audio file.",
+      "type": "string"
+     },
+     "enable_safety_checker": {
+      "default": false,
+      "title": "Enable Safety Checker",
+      "description": "If set to true, input data will be checked for safety before processing. Disabling it requires account authorization; unauthorized requests are always checked.",
+      "type": "boolean"
+     },
+     "seed": {
+      "title": "Seed",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "description": "Random seed for reproducibility. If None, a random seed is chosen."
+     },
+     "guidance_scale": {
+      "default": 3.5,
+      "title": "Guidance Scale",
+      "description": "Classifier-free guidance scale. Higher values give better adherence to the prompt but may decrease quality.",
+      "minimum": 1,
+      "maximum": 10,
+      "type": "number"
+     },
+     "resolution": {
+      "enum": [
+       "480p",
+       "580p",
+       "720p"
+      ],
+      "title": "Resolution",
+      "description": "Resolution of the generated video (480p, 580p, or 720p).",
+      "default": "480p",
+      "type": "string"
+     },
+     "num_frames": {
+      "title": "Number of Frames",
+      "minimum": 40,
+      "maximum": 120,
+      "default": 80,
+      "multipleOf": 4,
+      "description": "Number of frames to generate. Must be between 40 to 120, (must be multiple of 4).",
+      "type": "integer"
+     },
+     "prompt": {
+      "title": "Prompt",
+      "description": "The text prompt used for video generation.",
+      "type": "string"
+     },
+     "negative_prompt": {
+      "default": "",
+      "title": "Negative Prompt",
+      "description": "Negative prompt for video generation.",
+      "type": "string"
+     },
+     "video_quality": {
+      "enum": [
+       "low",
+       "medium",
+       "high",
+       "maximum"
+      ],
+      "title": "Video Quality",
+      "description": "The quality of the output video. Higher quality means better visual quality but larger file size.",
+      "default": "high",
+      "type": "string"
+     },
+     "enable_output_safety_checker": {
+      "default": false,
+      "title": "Enable Output Safety Checker",
+      "description": "If set to true, output video will be checked for safety after generation.",
+      "type": "boolean"
+     },
+     "shift": {
+      "default": 5,
+      "title": "Shift",
+      "description": "Shift value for the video. Must be between 1.0 and 10.0.",
+      "minimum": 1,
+      "maximum": 10,
+      "type": "number"
+     }
+    },
+    "title": "WanS2VRequest",
+    "required": [
+     "prompt",
+     "image_url",
+     "audio_url"
+    ],
+    "x-fal-order-properties": [
+     "prompt",
+     "negative_prompt",
+     "num_frames",
+     "frames_per_second",
+     "seed",
+     "resolution",
+     "num_inference_steps",
+     "enable_safety_checker",
+     "enable_output_safety_checker",
+     "guidance_scale",
+     "shift",
+     "video_quality",
+     "video_write_mode",
+     "image_url",
+     "audio_url"
+    ],
+    "type": "object"
+   }
+  }
+ }
+}

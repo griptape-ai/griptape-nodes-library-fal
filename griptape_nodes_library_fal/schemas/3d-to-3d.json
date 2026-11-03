@@ -1,0 +1,951 @@
+{
+ "category": "3d-to-3d",
+ "models": {
+  "hitem3d/hi3d/split": {
+   "endpoint_id": "hitem3d/hi3d/split",
+   "display_name": "Hi3D 3D Part Splitter",
+   "description": "Split a 3D model into parts with Hi3D.",
+   "input": {
+    "properties": {
+     "mesh_url": {
+      "title": "Mesh Url",
+      "description": "URL of the input model to split. GLB, STL and OBJ formats are supported, up to 200MB.",
+      "type": "string"
+     },
+     "export_format": {
+      "default": "glb",
+      "enum": [
+       "glb",
+       "obj",
+       "stl",
+       "fbx",
+       "usdz"
+      ],
+      "title": "Export Format",
+      "description": "File format of the generated model. Character split currently supports only 'glb'.",
+      "type": "string"
+     },
+     "model": {
+      "default": "character",
+      "enum": [
+       "character",
+       "general"
+      ],
+      "title": "Model",
+      "description": "Split model type: 'character' splits humanoid models using a template with optional joints; 'general' splits any model by granularity level.",
+      "type": "string"
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "If set to true, inputs are checked for safety before processing.",
+      "type": "boolean"
+     },
+     "joint": {
+      "default": "ball",
+      "enum": [
+       "none",
+       "ball",
+       "dovetail"
+      ],
+      "title": "Joint",
+      "description": "Joint type added between character parts (used when model is 'character').",
+      "type": "string"
+     },
+     "level": {
+      "default": "medium",
+      "enum": [
+       "low",
+       "medium",
+       "high"
+      ],
+      "title": "Level",
+      "description": "Split granularity (used when model is 'general').",
+      "type": "string"
+     },
+     "part": {
+      "default": "a",
+      "enum": [
+       "a",
+       "b",
+       "c",
+       "d",
+       "e",
+       "f"
+      ],
+      "title": "Part",
+      "description": "Character split template (used when model is 'character'): 'a' 6 parts, 'b' 5 parts, 'c' 4 parts excluding head, 'd' 4 parts including head, 'e' 3 parts, 'f' 2 parts.",
+      "type": "string"
+     }
+    },
+    "title": "SplitInput",
+    "description": "Input for splitting a 3D model into parts.",
+    "type": "object",
+    "x-fal-order-properties": [
+     "mesh_url",
+     "model",
+     "part",
+     "joint",
+     "level",
+     "export_format",
+     "enable_safety_checker"
+    ],
+    "required": [
+     "mesh_url"
+    ]
+   }
+  },
+  "hitem3d/hi3d/multicolor": {
+   "endpoint_id": "hitem3d/hi3d/multicolor",
+   "display_name": "Hi3D 3D to Multicolor",
+   "description": "Convert a textured 3D model into a multicolor model suited for multicolor 3D printing with Hi3D.",
+   "input": {
+    "properties": {
+     "mesh_url": {
+      "title": "Mesh Url",
+      "description": "URL of the input textured model. Only GLB format is supported, up to 200MB.",
+      "type": "string"
+     },
+     "export_format": {
+      "default": "glb",
+      "enum": [
+       "glb",
+       "obj",
+       "fbx"
+      ],
+      "title": "Export Format",
+      "description": "File format of the generated model. STL, USDZ and 3MF are not currently supported by the partner.",
+      "type": "string"
+     },
+     "number_of_colors": {
+      "default": 4,
+      "title": "Number Of Colors",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8,
+      "description": "Number of colors in the generated model (1-8), or 0 for the maximum. Use 0 if you plan to edit the colors later."
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "If set to true, inputs are checked for safety before processing.",
+      "type": "boolean"
+     }
+    },
+    "title": "MulticolorInput",
+    "description": "Input for converting a textured model into a multicolor model.",
+    "type": "object",
+    "x-fal-order-properties": [
+     "mesh_url",
+     "number_of_colors",
+     "export_format",
+     "enable_safety_checker"
+    ],
+    "required": [
+     "mesh_url"
+    ]
+   }
+  },
+  "hitem3d/hi3d/texture": {
+   "endpoint_id": "hitem3d/hi3d/texture",
+   "display_name": "Hi3D Texture",
+   "description": "Texture an existing geometry mesh using a reference image with Hi3D.",
+   "input": {
+    "properties": {
+     "mesh_url": {
+      "title": "Mesh Url",
+      "description": "URL of the geometry model to texture. Only GLB format is supported (e.g. the geometry output of the image-to-3d endpoint with enable_texture=false).",
+      "type": "string"
+     },
+     "export_format": {
+      "default": "glb",
+      "enum": [
+       "glb",
+       "obj",
+       "stl",
+       "fbx",
+       "usdz"
+      ],
+      "title": "Export Format",
+      "description": "File format of the generated model.",
+      "type": "string"
+     },
+     "model": {
+      "default": "hitem3dv1.5",
+      "enum": [
+       "hitem3dv1.5",
+       "scene-portraitv1.5"
+      ],
+      "title": "Model",
+      "description": "Model version used for texturing. Only v1.5 models support the staged texture task.",
+      "type": "string"
+     },
+     "enable_safety_checker": {
+      "default": true,
+      "title": "Enable Safety Checker",
+      "description": "If set to true, input images are checked for safety before processing.",
+      "type": "boolean"
+     },
+     "image_url": {
+      "title": "Image Url",
+      "description": "URL of the reference image used to texture the model. PNG, JPEG and WebP formats are supported, up to 20MB.",
+      "type": "string"
+     },
+     "resolution": {
+      "title": "Resolution",
+      "description": "Texture generation resolution. hitem3dv1.5 accepts 512, 1024, 1536 and 1536pro; scene-portraitv1.5 accepts 1536. Defaults to the model's recommended resolution.",
+      "anyOf": [
+       {
+        "enum": [
+         "512",
+         "1024",
+         "1536",
+         "1536pro"
+        ],
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "title": "TextureInput",
+    "description": "Input for the staged texture task (texture an existing geometry mesh).",
+    "type": "object",
+    "x-fal-order-properties": [
+     "image_url",
+     "mesh_url",
+     "model",
+     "resolution",
+     "export_format",
+     "enable_safety_checker"
+    ],
+    "required": [
+     "image_url",
+     "mesh_url"
+    ]
+   }
+  },
+  "fal-ai/hunyuan-3d/v3.1/part": {
+   "endpoint_id": "fal-ai/hunyuan-3d/v3.1/part",
+   "display_name": "Hunyuan 3D Part Splitter",
+   "description": "Split 3D models into parts with Hunyuan 3D",
+   "input": {
+    "type": "object",
+    "properties": {
+     "input_file_url": {
+      "description": "URL of FBX file to split into parts. ONLY FBX format supported. Max size: 100MB, face count \u226430,000. Recommended: AIGC-generated models.",
+      "type": "string",
+      "title": "Input File Url"
+     }
+    },
+    "x-fal-order-properties": [
+     "input_file_url"
+    ],
+    "required": [
+     "input_file_url"
+    ],
+    "title": "PartInput"
+   }
+  },
+  "fal-ai/hunyuan-3d/v3.1/smart-topology": {
+   "endpoint_id": "fal-ai/hunyuan-3d/v3.1/smart-topology",
+   "display_name": "Hunyuan 3D Smart Topology",
+   "description": "Optimize 3D mesh topology with Hunyuan 3D Smart Topology.",
+   "input": {
+    "type": "object",
+    "properties": {
+     "face_level": {
+      "description": "Target polygon density. high: more detail/polygons, medium: balanced, low: fewer polygons.",
+      "title": "Face Level",
+      "type": "string",
+      "default": "medium",
+      "enum": [
+       "high",
+       "medium",
+       "low"
+      ]
+     },
+     "input_file_type": {
+      "description": "Input 3D file format.",
+      "title": "Input File Type",
+      "type": "string",
+      "default": "glb",
+      "enum": [
+       "glb",
+       "obj"
+      ]
+     },
+     "polygon_type": {
+      "description": "Output polygon type. triangle: triangular faces only. quadrilateral: mixed quad and triangle faces.",
+      "title": "Polygon Type",
+      "type": "string",
+      "default": "triangle",
+      "enum": [
+       "triangle",
+       "quadrilateral"
+      ]
+     },
+     "input_file_url": {
+      "description": "URL of GLB or OBJ file to optimize topology. Max size: 200MB.",
+      "type": "string",
+      "default": "https://v3b.fal.media/files/b/0a8c09c0/VYDiCTcDGK55qY2-idGbX_model.glb",
+      "title": "Input File Url"
+     }
+    },
+    "x-fal-order-properties": [
+     "input_file_url",
+     "input_file_type",
+     "polygon_type",
+     "face_level"
+    ],
+    "title": "SmartTopologyInput"
+   }
+  },
+  "meshy/v6-lite/retexture": {
+   "endpoint_id": "meshy/v6-lite/retexture",
+   "display_name": "Meshy 6 Lite Retexture",
+   "description": "Meshy 6 Lite retexture applies new textures to an existing 3D model from a text prompt or a reference image, with optional PBR maps.",
+   "input": {
+    "properties": {
+     "texture_resolution": {
+      "enum": [
+       "2k",
+       "4k",
+       "8k"
+      ],
+      "description": "Base color resolution: 2k (2048), 4k (4096), or 8k (8192). 4k and 8k require Meshy 6 or 7. At 8k, PBR maps are 4k and no emission map is generated.",
+      "default": "2k",
+      "title": "Texture Resolution",
+      "type": "string"
+     },
+     "text_style_prompt": {
+      "description": "Describe your desired texture style using text. Maximum 600 characters. Required if image_style_url is not provided.",
+      "anyOf": [
+       {
+        "maxLength": 600,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text Style Prompt"
+     },
+     "enable_original_uv": {
+      "description": "Use the original UV mapping of the model instead of generating new UVs. If the model has no original UV, output quality may be reduced.",
+      "default": true,
+      "title": "Enable Original Uv",
+      "type": "boolean"
+     },
+     "enable_safety_checker": {
+      "description": "If set to true, input data will be checked for safety before processing.",
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean"
+     },
+     "image_style_url": {
+      "description": "2D image to guide the texturing process. Supports .jpg, .jpeg, and .png formats. Required if text_style_prompt is not provided. If both are provided, image_style_url takes precedence.",
+      "anyOf": [
+       {
+        "ui": {
+         "field": "image"
+        },
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "max_pixels": 178956970,
+      "title": "Image Style Url",
+      "max_file_size": 20971520
+     },
+     "enable_pbr": {
+      "description": "Generate PBR Maps (metallic, roughness, normal) in addition to base color.",
+      "default": false,
+      "title": "Enable Pbr",
+      "type": "boolean"
+     },
+     "model_url": {
+      "description": "URL or base64 data URI of a 3D model to texture. Supports .glb, .gltf, .obj, .fbx, .stl formats. Can be a publicly accessible URL or data URI with MIME type application/octet-stream.",
+      "title": "Model Url",
+      "type": "string"
+     }
+    },
+    "required": [
+     "model_url"
+    ],
+    "description": "Input for 3D Model Retexturing",
+    "x-fal-order-properties": [
+     "model_url",
+     "text_style_prompt",
+     "image_style_url",
+     "texture_resolution",
+     "enable_original_uv",
+     "enable_pbr",
+     "enable_safety_checker"
+    ],
+    "title": "RetextureInput",
+    "type": "object"
+   }
+  },
+  "meshy/v6/retexture": {
+   "endpoint_id": "meshy/v6/retexture",
+   "display_name": "Meshy 6 Retexture",
+   "description": "Meshy 6 retexture applies new textures to an existing 3D model from a text prompt or a reference image, with optional PBR maps.",
+   "input": {
+    "properties": {
+     "texture_resolution": {
+      "enum": [
+       "2k",
+       "4k",
+       "8k"
+      ],
+      "description": "Base color resolution: 2k (2048), 4k (4096), or 8k (8192). 4k and 8k require Meshy 6 or 7. At 8k, PBR maps are 4k and no emission map is generated.",
+      "default": "2k",
+      "title": "Texture Resolution",
+      "type": "string"
+     },
+     "text_style_prompt": {
+      "description": "Describe your desired texture style using text. Maximum 600 characters. Required if image_style_url is not provided.",
+      "anyOf": [
+       {
+        "maxLength": 600,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text Style Prompt"
+     },
+     "enable_original_uv": {
+      "description": "Use the original UV mapping of the model instead of generating new UVs. If the model has no original UV, output quality may be reduced.",
+      "default": true,
+      "title": "Enable Original Uv",
+      "type": "boolean"
+     },
+     "enable_safety_checker": {
+      "description": "If set to true, input data will be checked for safety before processing.",
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean"
+     },
+     "image_style_url": {
+      "description": "2D image to guide the texturing process. Supports .jpg, .jpeg, and .png formats. Required if text_style_prompt is not provided. If both are provided, image_style_url takes precedence.",
+      "anyOf": [
+       {
+        "ui": {
+         "field": "image"
+        },
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "max_pixels": 178956970,
+      "title": "Image Style Url",
+      "max_file_size": 20971520
+     },
+     "enable_pbr": {
+      "description": "Generate PBR Maps (metallic, roughness, normal) in addition to base color.",
+      "default": false,
+      "title": "Enable Pbr",
+      "type": "boolean"
+     },
+     "model_url": {
+      "description": "URL or base64 data URI of a 3D model to texture. Supports .glb, .gltf, .obj, .fbx, .stl formats. Can be a publicly accessible URL or data URI with MIME type application/octet-stream.",
+      "title": "Model Url",
+      "type": "string"
+     }
+    },
+    "required": [
+     "model_url"
+    ],
+    "description": "Input for 3D Model Retexturing",
+    "x-fal-order-properties": [
+     "model_url",
+     "text_style_prompt",
+     "image_style_url",
+     "texture_resolution",
+     "enable_original_uv",
+     "enable_pbr",
+     "enable_safety_checker"
+    ],
+    "title": "RetextureInput",
+    "type": "object"
+   }
+  },
+  "meshy/v7/retexture": {
+   "endpoint_id": "meshy/v7/retexture",
+   "display_name": "Meshy 7 Retexture",
+   "description": "Meshy 7 retexture applies new textures to an existing 3D model from a text prompt or a reference image, with optional PBR maps.",
+   "input": {
+    "properties": {
+     "texture_resolution": {
+      "enum": [
+       "2k",
+       "4k",
+       "8k"
+      ],
+      "description": "Base color resolution: 2k (2048), 4k (4096), or 8k (8192). 4k and 8k require Meshy 6 or 7. At 8k, PBR maps are 4k and no emission map is generated.",
+      "default": "2k",
+      "title": "Texture Resolution",
+      "type": "string"
+     },
+     "text_style_prompt": {
+      "description": "Describe your desired texture style using text. Maximum 600 characters. Required if image_style_url is not provided.",
+      "anyOf": [
+       {
+        "maxLength": 600,
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Text Style Prompt"
+     },
+     "enable_original_uv": {
+      "description": "Use the original UV mapping of the model instead of generating new UVs. If the model has no original UV, output quality may be reduced.",
+      "default": true,
+      "title": "Enable Original Uv",
+      "type": "boolean"
+     },
+     "enable_safety_checker": {
+      "description": "If set to true, input data will be checked for safety before processing.",
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean"
+     },
+     "image_style_url": {
+      "description": "2D image to guide the texturing process. Supports .jpg, .jpeg, and .png formats. Required if text_style_prompt is not provided. If both are provided, image_style_url takes precedence.",
+      "anyOf": [
+       {
+        "ui": {
+         "field": "image"
+        },
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "max_pixels": 178956970,
+      "title": "Image Style Url",
+      "max_file_size": 20971520
+     },
+     "enable_pbr": {
+      "description": "Generate PBR Maps (metallic, roughness, normal) in addition to base color.",
+      "default": false,
+      "title": "Enable Pbr",
+      "type": "boolean"
+     },
+     "model_url": {
+      "description": "URL or base64 data URI of a 3D model to texture. Supports .glb, .gltf, .obj, .fbx, .stl formats. Can be a publicly accessible URL or data URI with MIME type application/octet-stream.",
+      "title": "Model Url",
+      "type": "string"
+     }
+    },
+    "required": [
+     "model_url"
+    ],
+    "description": "Input for 3D Model Retexturing",
+    "x-fal-order-properties": [
+     "model_url",
+     "text_style_prompt",
+     "image_style_url",
+     "texture_resolution",
+     "enable_original_uv",
+     "enable_pbr",
+     "enable_safety_checker"
+    ],
+    "title": "RetextureInput",
+    "type": "object"
+   }
+  },
+  "fal-ai/meshy/rigging": {
+   "endpoint_id": "fal-ai/meshy/rigging",
+   "display_name": "Meshy Rigging",
+   "description": "Rig humanoid 3D models from GLB URLs with Meshy, returning rigged GLB/FBX files plus basic   animations.",
+   "input": {
+    "properties": {
+     "enable_animation": {
+      "description": "Apply an animation preset to the rigged model.",
+      "default": false,
+      "title": "Enable Animation",
+      "type": "boolean"
+     },
+     "enable_safety_checker": {
+      "description": "If set to true, input data will be checked for safety before processing.",
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean"
+     },
+     "height_meters": {
+      "exclusiveMinimum": 0,
+      "description": "Approximate height of the character in meters.",
+      "default": 1.7,
+      "title": "Height Meters",
+      "type": "number"
+     },
+     "animation_action_id": {
+      "description": "Animation preset ID from Meshy's library. Only used when enable_animation is true; in that case it must be in [0, 696] (``0`` is the \"Idle\" preset) and is otherwise rejected with a 422. See https://docs.meshy.ai/en/api/animation-library for available action IDs.",
+      "default": 92,
+      "title": "Animation Action Id",
+      "type": "integer"
+     },
+     "model_url": {
+      "description": "URL of a 3D model in GLB format to rig. Can be any publicly accessible URL \u2014 works with models generated by Hunyuan, Trellis, Meshy, or any other 3D generation tool. The model must be a humanoid character with clearly defined limbs.",
+      "minLength": 1,
+      "title": "Model Url",
+      "type": "string"
+     }
+    },
+    "required": [
+     "model_url"
+    ],
+    "description": "Input for standalone auto-rigging and animation of a 3D model",
+    "x-fal-order-properties": [
+     "model_url",
+     "height_meters",
+     "enable_animation",
+     "animation_action_id",
+     "enable_safety_checker"
+    ],
+    "title": "RiggingInput",
+    "type": "object"
+   }
+  },
+  "fal-ai/meshy/rigging/multi-animation": {
+   "endpoint_id": "fal-ai/meshy/rigging/multi-animation",
+   "display_name": "Meshy Rigging Multi Animation",
+   "description": "Meshy auto-rigs a humanoid 3D model fitting a skeleton and binding the mesh, then applies several motion presets from its animation library",
+   "input": {
+    "properties": {
+     "animation_action_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "description": "Animation preset IDs from Meshy's library. One animation clip is generated per ID against the same rig and returned in the 'animations' output array, in request order. Must contain at least one ID. Each ID must be in [0, 696], at most 10 distinct clips may be requested, and duplicate IDs are de-duplicated. See https://docs.meshy.ai/en/api/animation-library for available IDs.",
+      "title": "Animation Action Ids",
+      "type": "array"
+     },
+     "enable_safety_checker": {
+      "description": "If set to true, input data will be checked for safety before processing.",
+      "default": true,
+      "title": "Enable Safety Checker",
+      "type": "boolean"
+     },
+     "height_meters": {
+      "exclusiveMinimum": 0,
+      "description": "Approximate height of the character in meters.",
+      "default": 1.7,
+      "title": "Height Meters",
+      "type": "number"
+     },
+     "model_url": {
+      "description": "URL of a 3D model in GLB format to rig and animate. Can be any publicly accessible URL \u2014 works with models generated by Hunyuan, Trellis, Meshy, or any other 3D generation tool. The model must be a humanoid character with clearly defined limbs.",
+      "minLength": 1,
+      "title": "Model Url",
+      "type": "string"
+     }
+    },
+    "required": [
+     "model_url",
+     "animation_action_ids"
+    ],
+    "description": "Input for the standalone multi-clip animation endpoint.\n\nAuto-rigs a humanoid GLB model and generates multiple animation clips\nagainst that single rig \u2014 one clip per ID in ``animation_action_ids``.\nUnlike the per-generator endpoints (which apply a single optional\nanimation), this endpoint is dedicated to producing several clips at once.",
+    "x-fal-order-properties": [
+     "model_url",
+     "height_meters",
+     "animation_action_ids",
+     "enable_safety_checker"
+    ],
+    "title": "MultiAnimationInput",
+    "type": "object"
+   }
+  },
+  "fal-ai/sam-3/3d-align": {
+   "endpoint_id": "fal-ai/sam-3/3d-align",
+   "display_name": "Sam 3",
+   "description": "SAM 3D enables full scene reconstructions, placing objects and humans in a shared context together.",
+   "input": {
+    "properties": {
+     "image_url": {
+      "title": "Image Url",
+      "description": "URL of the original image used for MoGe depth estimation",
+      "type": "string"
+     },
+     "body_mask_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Body Mask Url",
+      "description": "URL of the human mask image. If not provided, uses full image."
+     },
+     "body_mesh_url": {
+      "title": "Body Mesh Url",
+      "description": "URL of the SAM-3D Body mesh file (.ply or .glb) to align",
+      "type": "string"
+     },
+     "focal_length": {
+      "anyOf": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Focal Length",
+      "description": "Focal length from SAM-3D Body metadata. If not provided, estimated from MoGe."
+     },
+     "object_mesh_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Object Mesh Url",
+      "description": "Optional URL of SAM-3D Object mesh (.glb) to create combined scene"
+     }
+    },
+    "title": "SAM3DAlignmentInput",
+    "required": [
+     "image_url",
+     "body_mesh_url"
+    ],
+    "x-fal-order-properties": [
+     "image_url",
+     "body_mesh_url",
+     "body_mask_url",
+     "object_mesh_url",
+     "focal_length"
+    ],
+    "type": "object"
+   }
+  },
+  "fal-ai/trellis-2/retexture": {
+   "endpoint_id": "fal-ai/trellis-2/retexture",
+   "display_name": "Trellis 2",
+   "description": "Retexture existing 3D models using images with Trellis 2",
+   "input": {
+    "type": "object",
+    "properties": {
+     "resolution": {
+      "description": "Internal resolution for texture generation. Higher produces finer texture details but is slower.",
+      "title": "Resolution",
+      "type": "integer",
+      "default": 1024,
+      "enum": [
+       512,
+       1024
+      ]
+     },
+     "tex_slat_guidance_interval_start": {
+      "description": "Fraction of the denoising process at which classifier-free guidance starts for the texture stage. Guidance is only applied between interval_start and interval_end.",
+      "minimum": 0,
+      "type": "number",
+      "default": 0.6,
+      "maximum": 1,
+      "title": "Tex Slat Guidance Interval Start"
+     },
+     "tex_slat_guidance_strength": {
+      "description": "How closely the texture follows the input image colors. Higher values produce more vivid but potentially oversaturated textures.",
+      "minimum": 0,
+      "type": "number",
+      "default": 1,
+      "maximum": 10,
+      "title": "Tex Slat Guidance Strength"
+     },
+     "seed": {
+      "description": "Random seed for reproducibility",
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Seed"
+     },
+     "tex_slat_rescale_t": {
+      "description": "Controls noise schedule sharpness for texture generation. Higher values produce sharper texture details.",
+      "minimum": 1,
+      "type": "number",
+      "default": 3,
+      "maximum": 6,
+      "title": "Tex Slat Rescale T"
+     },
+     "tex_slat_sampling_steps": {
+      "description": "Number of denoising steps for texture generation. More steps = slower but potentially cleaner textures.",
+      "minimum": 1,
+      "type": "integer",
+      "default": 12,
+      "maximum": 50,
+      "title": "Tex Slat Sampling Steps"
+     },
+     "mesh_url": {
+      "description": "URL of the untextured 3D mesh to retexture. Supports GLB, OBJ, PLY, and STL formats.",
+      "type": "string",
+      "title": "Mesh Url"
+     },
+     "tex_slat_guidance_rescale": {
+      "description": "Dampens artifacts from high guidance in the texture stage. Increase if textures look noisy or have color banding.",
+      "minimum": 0,
+      "type": "number",
+      "default": 0,
+      "maximum": 1,
+      "title": "Tex Slat Guidance Rescale"
+     },
+     "texture_size": {
+      "description": "Resolution of the texture image baked onto the mesh. Higher values capture finer surface details but produce larger files.",
+      "title": "Texture Size",
+      "type": "integer",
+      "default": 2048,
+      "enum": [
+       1024,
+       2048,
+       4096
+      ]
+     },
+     "tex_slat_guidance_interval_end": {
+      "description": "Fraction of the denoising process at which classifier-free guidance ends for the texture stage. Must be >= tex_slat_guidance_interval_start.",
+      "minimum": 0,
+      "type": "number",
+      "default": 0.9,
+      "maximum": 1,
+      "title": "Tex Slat Guidance Interval End"
+     },
+     "image_url": {
+      "description": "URL of the reference image for texturing",
+      "type": "string",
+      "title": "Image Url"
+     }
+    },
+    "x-fal-order-properties": [
+     "image_url",
+     "mesh_url",
+     "seed",
+     "resolution",
+     "tex_slat_guidance_strength",
+     "tex_slat_guidance_rescale",
+     "tex_slat_guidance_interval_start",
+     "tex_slat_guidance_interval_end",
+     "tex_slat_sampling_steps",
+     "tex_slat_rescale_t",
+     "texture_size"
+    ],
+    "required": [
+     "image_url",
+     "mesh_url"
+    ],
+    "title": "RetextureInputModel"
+   }
+  },
+  "tripo3d/tripo/remesh": {
+   "endpoint_id": "tripo3d/tripo/remesh",
+   "display_name": "Tripo3D Remesh",
+   "description": "Converts triangle meshes into clean quad topology at a target polygon count, animation-ready with no manual retopology.",
+   "input": {
+    "title": "RemeshInput",
+    "description": "Input for the Smart low poly / remesh (``highpoly_to_lowpoly``) task.\n\nRetopologises a high-poly 3D model into a clean, lower-poly mesh. The input\nmodel is imported into Tripo first (``import_model``), then remeshed.",
+    "required": [
+     "mesh_url"
+    ],
+    "x-fal-order-properties": [
+     "mesh_url",
+     "quad",
+     "face_limit",
+     "bake",
+     "part_names"
+    ],
+    "type": "object",
+    "properties": {
+     "mesh_url": {
+      "title": "Mesh URL",
+      "description": "URL of the input 3D model to remesh. Supported formats: GLB, OBJ, FBX, STL (max 150MB).",
+      "type": "string"
+     },
+     "face_limit": {
+      "title": "Face Limit",
+      "description": "Target face count of the remeshed model. Range 500-20000 (500-10000 when 'quad' is true). If unset, the model determines the count adaptively.",
+      "anyOf": [
+       {
+        "minimum": 500,
+        "type": "integer",
+        "maximum": 20000
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "quad": {
+      "title": "Quad",
+      "default": false,
+      "description": "Generate quad (4-sided) mesh topology instead of triangles. Forces FBX output. When enabled and 'face_limit' is unset, 'face_limit' defaults to 10000.",
+      "type": "boolean"
+     },
+     "part_names": {
+      "title": "Part Names",
+      "description": "Optional list of part names (as returned by a prior mesh segmentation) to preserve as separate parts while remeshing.",
+      "anyOf": [
+       {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "bake": {
+      "title": "Bake",
+      "default": true,
+      "description": "Bake textures onto the remeshed model during generation.",
+      "type": "boolean"
+     }
+    }
+   }
+  },
+  "tripo3d/tripo/segment": {
+   "endpoint_id": "tripo3d/tripo/segment",
+   "display_name": "Tripo3D Segment",
+   "description": "Automatically splits a 3D model into semantic parts for editing, texturing, and rigging.",
+   "input": {
+    "title": "SegmentationInput",
+    "description": "Input for the Mesh segmentation (``mesh_segmentation``) task.\n\nSegments a 3D model into semantic parts. The input model is imported into\nTripo first (``import_model``), then segmented.",
+    "required": [
+     "mesh_url"
+    ],
+    "x-fal-order-properties": [
+     "mesh_url"
+    ],
+    "type": "object",
+    "properties": {
+     "mesh_url": {
+      "title": "Mesh URL",
+      "description": "URL of the input 3D model to segment. Supported formats: GLB, OBJ, FBX, STL (max 150MB).",
+      "type": "string"
+     }
+    }
+   }
+  }
+ }
+}
