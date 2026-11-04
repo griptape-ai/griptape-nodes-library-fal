@@ -10,6 +10,7 @@ from griptape.artifacts import ImageArtifact
 from griptape.artifacts.audio_url_artifact import AudioUrlArtifact
 from griptape.artifacts.image_url_artifact import ImageUrlArtifact
 from griptape.artifacts.video_url_artifact import VideoUrlArtifact
+from griptape_nodes.common.parameter_hydration import hydrate_value
 from griptape_nodes.exe_types.core_types import Parameter, ParameterGroup, ParameterList, ParameterMode
 from griptape_nodes.exe_types.param_components.artifact_url.public_artifact_url_parameter import (
     PublicArtifactUrlParameter,
@@ -131,6 +132,14 @@ _MEDIA_OUTPUTS: dict[str, tuple[type, frozenset[str], str]] = {
         frozenset({"glb", "gltf", "obj", "fbx", "usdz", "ply", "stl"}),
         "fal_model.glb",
     ),
+}
+# The single-item kind of each media list kind.
+_LIST_ITEM_KINDS = {KIND_IMAGE_LIST: KIND_IMAGE, KIND_VIDEO_LIST: KIND_VIDEO, KIND_AUDIO_LIST: KIND_AUDIO}
+# The declared type of each media list's items. The upload helper accepts only URL artifact types.
+_LIST_ITEM_TYPES = {
+    KIND_IMAGE_LIST: "ImageUrlArtifact",
+    KIND_VIDEO_LIST: "VideoUrlArtifact",
+    KIND_AUDIO_LIST: "AudioUrlArtifact",
 }
 _TEXT_RESULT_KEYS = ("output", "text", "caption", "description", "generated_text", "transcription", "response")
 _MAX_RESULT_DEPTH = 4
@@ -453,17 +462,14 @@ class FalCategoryNode(FalQueueNode):
 
     @staticmethod
     def _build_media_list(kind: str, common: dict[str, Any]) -> Parameter:
-        artifact_name = {
-            KIND_IMAGE_LIST: "ImageUrlArtifact",
-            KIND_VIDEO_LIST: "VideoUrlArtifact",
-            KIND_AUDIO_LIST: "AudioUrlArtifact",
-        }[kind]
+        artifact_name = _LIST_ITEM_TYPES[kind]
         artifact_types = [artifact_name, "str", f"list[{artifact_name}]", "list[str]"]
         if kind == KIND_IMAGE_LIST:
             artifact_types.insert(0, "ImageArtifact")
         return ParameterList(
             name=common["name"],
             tooltip=common["tooltip"],
+            type=artifact_name,
             input_types=artifact_types,
             default_value=[],
             allowed_modes={ParameterMode.INPUT},
@@ -496,6 +502,18 @@ class FalCategoryNode(FalQueueNode):
             KIND_AUDIO: (AudioUrlArtifact, ()),
         }[kind]
         return normalize_artifact_input(value, artifact_class, accepted_types=accepted)
+
+    def _prepare_upload_value(self, param_name: str, kind: str) -> None:
+        """Turn a media value into something the upload helper can read a URL from.
+
+        The helper reads URLs only, so an in-memory ImageArtifact becomes a data URI it can upload.
+        """
+        value = self.get_parameter_value(param_name)
+        normalized = self._normalize_media(hydrate_value(value), kind)
+        if isinstance(normalized, ImageArtifact):
+            normalized = ImageUrlArtifact(f"data:{normalized.mime_type};base64,{normalized.base64}")
+        if normalized is not value:
+            self.parameter_values[param_name] = normalized
 
     def validate_before_node_run(self) -> list[Exception] | None:
         exceptions = super().validate_before_node_run() or []
@@ -585,9 +603,7 @@ class FalCategoryNode(FalQueueNode):
         value = self.get_parameter_value(param_name)
         if not value:
             return None
-        normalized = self._normalize_media(value, spec.kind)
-        if normalized != value:
-            self.parameter_values[param_name] = normalized
+        self._prepare_upload_value(param_name, spec.kind)
         parameter = self.get_parameter_by_name(param_name)
         if parameter is None:
             return None
@@ -598,10 +614,15 @@ class FalCategoryNode(FalQueueNode):
     async def _upload_list(self, param_name: str, spec: FieldSpec) -> list[str] | None:
         container = self.get_parameter_by_name(param_name)
         urls: list[str] = []
+        item_type = _LIST_ITEM_TYPES[spec.kind]
         children = container.find_elements_by_type(Parameter) if container is not None else []
         for child in children:
             if not self.get_parameter_value(child.name):
                 continue
+            # A row restored from a saved workflow keeps the type it was saved with.
+            if child.type != item_type:
+                child.type = item_type
+            self._prepare_upload_value(child.name, _LIST_ITEM_KINDS[spec.kind])
             helper = PublicArtifactUrlParameter(node=self, artifact_url_parameter=child)
             self._upload_helpers.append(helper)
             urls.append(await _get_public_url(helper))
