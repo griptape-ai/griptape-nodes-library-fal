@@ -4,7 +4,7 @@ import logging
 from typing import Any
 
 from griptape.artifacts.video_url_artifact import VideoUrlArtifact
-from griptape_nodes.exe_types.core_types import Parameter, ParameterGroup, ParameterMode
+from griptape_nodes.exe_types.core_types import NodeError, Parameter, ParameterGroup, ParameterMode
 from griptape_nodes.exe_types.param_components.artifact_url.public_artifact_url_parameter import (
     PublicArtifactUrlParameter,
 )
@@ -21,6 +21,10 @@ from griptape_nodes_library_fal.fal_queue_node import FalQueueNode
 logger = logging.getLogger("griptape_nodes")
 
 __all__ = ["FalSeedVRVideoUpscale"]
+
+
+def _missing_input_error() -> NodeError:
+    return NodeError("Connect a video to 'video_url' and run the node again.", fields={"parameter": "video_url"})
 
 
 class FalSeedVRVideoUpscale(FalQueueNode):
@@ -145,10 +149,13 @@ class FalSeedVRVideoUpscale(FalQueueNode):
         )
 
     def validate_before_node_run(self) -> list[Exception] | None:
+        # Nothing can run without a key, so report it first and alone.
+        if missing_key := self._missing_key_errors():
+            return missing_key
         exceptions = super().validate_before_node_run() or []
         video_url = self.get_parameter_value("video_url")
         if not video_url:
-            exceptions.append(ValueError("Video URL must be provided"))
+            exceptions.append(_missing_input_error())
         return exceptions if exceptions else None
 
     def after_value_set(self, parameter: Parameter, value: Any) -> None:
@@ -177,8 +184,7 @@ class FalSeedVRVideoUpscale(FalQueueNode):
     async def _build_payload(self) -> dict[str, Any]:
         video_url = self._public_video_url_parameter.get_public_url_for_parameter()
         if not video_url:
-            msg = "Video URL must be provided"
-            raise ValueError(msg)
+            raise _missing_input_error()
 
         upscale_mode = self.get_parameter_value("upscale_mode")
         payload: dict[str, Any] = {
@@ -198,15 +204,11 @@ class FalSeedVRVideoUpscale(FalQueueNode):
 
         return payload
 
-    async def _parse_result(self, result_json: dict[str, Any], request_id: str) -> None:  # noqa: ARG002
+    async def _parse_result(self, result_json: dict[str, Any], request_id: str) -> None:
         extracted_url = self._extract_video_url(result_json)
         if not extracted_url:
-            self.parameter_output_values["video"] = None
-            self._set_status_results(
-                was_successful=False,
-                result_details="Generation completed but no video URL was found in the response.",
-            )
-            return
+            msg = "The generation finished, but fal's response has no video file."
+            raise NodeError(msg, fields={"generation_id": request_id}, response=result_json)
 
         video_bytes = await self._download_bytes_from_url(extracted_url)
 

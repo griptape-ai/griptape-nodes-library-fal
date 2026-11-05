@@ -11,7 +11,7 @@ from griptape.artifacts.audio_url_artifact import AudioUrlArtifact
 from griptape.artifacts.image_url_artifact import ImageUrlArtifact
 from griptape.artifacts.video_url_artifact import VideoUrlArtifact
 from griptape_nodes.common.parameter_hydration import hydrate_value
-from griptape_nodes.exe_types.core_types import Parameter, ParameterGroup, ParameterList, ParameterMode
+from griptape_nodes.exe_types.core_types import NodeError, Parameter, ParameterGroup, ParameterList, ParameterMode
 from griptape_nodes.exe_types.param_components.artifact_url.public_artifact_url_parameter import (
     PublicArtifactUrlParameter,
 )
@@ -516,16 +516,29 @@ class FalCategoryNode(FalQueueNode):
             self.parameter_values[param_name] = normalized
 
     def validate_before_node_run(self) -> list[Exception] | None:
+        # Nothing can run without a key, so report it first and alone.
+        if missing_key := self._missing_key_errors():
+            return missing_key
         exceptions = super().validate_before_node_run() or []
         model_id = self.get_parameter_value("model")
         if not model_id:
-            exceptions.append(ValueError("A model must be selected"))
+            exceptions.append(
+                NodeError(
+                    "No model is selected. Choose one in 'model' and run the node again.",
+                    fields={"parameter": "model"},
+                )
+            )
         for param_name, spec in self._field_by_param.items():
             if not spec.required:
                 continue
             value = self.get_parameter_value(param_name)
             if value in (None, "", [], {}):
-                exceptions.append(ValueError(f"{spec.name} is required by {model_id}"))
+                exceptions.append(
+                    NodeError(
+                        f"'{param_name}' is required by {model_id}. Set a value or connect one, then run the node again.",
+                        fields={"parameter": param_name},
+                    )
+                )
         return exceptions if exceptions else None
 
     async def aprocess(self) -> None:
@@ -562,7 +575,11 @@ class FalCategoryNode(FalQueueNode):
 
         extra = self.get_parameter_value("extra_payload")
         if isinstance(extra, str) and extra.strip():
-            extra = json.loads(extra)
+            try:
+                extra = json.loads(extra)
+            except json.JSONDecodeError as e:
+                msg = f"'extra_payload' is not valid JSON ({e}). Fix it or clear it, then run the node again."
+                raise NodeError(msg, fields={"parameter": "extra_payload"}) from e
         if isinstance(extra, dict):
             payload.update(extra)
         return payload
@@ -579,7 +596,11 @@ class FalCategoryNode(FalQueueNode):
         if value in (None, ""):
             return None
         if kind == KIND_JSON:
-            parsed = json.loads(value) if isinstance(value, str) else value
+            try:
+                parsed = json.loads(value) if isinstance(value, str) else value
+            except json.JSONDecodeError as e:
+                msg = f"'{param_name}' is not valid JSON ({e}). Fix it or clear it, then run the node again."
+                raise NodeError(msg, fields={"parameter": param_name}) from e
             return parsed or None
         if kind == KIND_ENUM:
             return self._restore_enum_choice(spec, value)
@@ -627,17 +648,17 @@ class FalCategoryNode(FalQueueNode):
             self._upload_helpers.append(helper)
             urls.append(await _get_public_url(helper))
         if not urls and spec.required:
-            msg = f"{spec.name} requires at least one item"
-            raise ValueError(msg)
+            msg = f"'{param_name}' needs at least one item. Add one, then run the node again."
+            raise NodeError(msg, fields={"parameter": param_name})
         return urls or None
 
     # ---- result -----------------------------------------------------------------------------
 
-    async def _parse_result(self, result_json: dict[str, Any], request_id: str) -> None:  # noqa: ARG002
+    async def _parse_result(self, result_json: dict[str, Any], request_id: str) -> None:
         if self.OUTPUT_KIND == OUTPUT_TEXT:
             self._parse_text_result(result_json)
             return
-        await self._parse_media_result(result_json)
+        await self._parse_media_result(result_json, request_id)
 
     def _parse_text_result(self, result_json: dict[str, Any]) -> None:
         for key in _TEXT_RESULT_KEYS:
@@ -652,17 +673,13 @@ class FalCategoryNode(FalQueueNode):
             result_details="Completed. No known text field in the response, so the full response is shown.",
         )
 
-    async def _parse_media_result(self, result_json: dict[str, Any]) -> None:
+    async def _parse_media_result(self, result_json: dict[str, Any], request_id: str) -> None:
         kind = self.OUTPUT_KIND
         artifact_class, extensions, _ = _MEDIA_OUTPUTS[kind]
         urls = self._find_file_urls(result_json, extensions)
         if not urls:
-            self._set_safe_defaults()
-            self._set_status_results(
-                was_successful=False,
-                result_details=f"Generation completed but no {kind.replace('_', ' ')} file was found in the response.",
-            )
-            return
+            msg = f"The generation finished, but fal's response has no {kind.replace('_', ' ')} file."
+            raise NodeError(msg, fields={"generation_id": request_id}, response=result_json)
 
         self.parameter_output_values[f"{kind}_list"] = [artifact_class(value=url) for url in urls]
 
