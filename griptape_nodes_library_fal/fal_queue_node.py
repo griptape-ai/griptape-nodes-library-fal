@@ -40,6 +40,8 @@ TERMINAL_FAILURE_STATUSES = (STATUS_FAILED, STATUS_ERROR)
 
 # Polling gives up after this many failed polls in a row, instead of waiting out the whole timeout.
 MAX_CONSECUTIVE_POLL_ERRORS = 5
+# fal answers 401 for a key it refuses. Other 4xx statuses, such as a locked account's 403, are not key problems.
+HTTP_UNAUTHORIZED = 401
 # Client errors that retrying cannot fix. 408 and 429 are excluded because they are transient.
 NON_RETRYABLE_HTTP_STATUSES = frozenset(code for code in range(400, 500) if code not in (408, 425, 429))
 
@@ -254,7 +256,12 @@ class FalQueueNode(SuccessFailureNode, ABC):
                 response_json = response.json()
         except httpx.HTTPStatusError as e:
             self._log(f"HTTP error: {e.response.status_code} - {e.response.text}")
-            raise NodeError.from_http_response(e.response, provider=PROVIDER, secret_name=API_KEY_NAME) from e
+            raise NodeError.from_http_response(
+                e.response,
+                provider=PROVIDER,
+                secret_name=API_KEY_NAME,
+                key_refused=e.response.status_code == HTTP_UNAUTHORIZED,
+            ) from e
         except httpx.HTTPError as e:
             self._log(f"Request failed: {e}")
             raise NodeError.from_request_exception(e, provider=PROVIDER, secret_name=API_KEY_NAME) from e
@@ -324,6 +331,7 @@ class FalQueueNode(SuccessFailureNode, ABC):
                             e.response,
                             provider=PROVIDER,
                             secret_name=API_KEY_NAME,
+                            key_refused=status_code == HTTP_UNAUTHORIZED,
                             fields={"generation_id": request_id, "status_url": status_url},
                         )
                         raise self._generation_error(error, request_id=request_id, status=STATUS_ERROR) from e
@@ -365,7 +373,11 @@ class FalQueueNode(SuccessFailureNode, ABC):
         except httpx.HTTPStatusError as e:
             self._log(f"HTTP error fetching result: {e.response.status_code} - {e.response.text}")
             error = NodeError.from_http_response(
-                e.response, provider=PROVIDER, secret_name=API_KEY_NAME, fields={"generation_id": request_id}
+                e.response,
+                provider=PROVIDER,
+                secret_name=API_KEY_NAME,
+                key_refused=e.response.status_code == HTTP_UNAUTHORIZED,
+                fields={"generation_id": request_id},
             )
             raise self._generation_error(error) from e
         except httpx.HTTPError as e:
@@ -509,7 +521,10 @@ class FalQueueNode(SuccessFailureNode, ABC):
                 response.raise_for_status()
                 return response.json()
         except httpx.HTTPError as e:
-            error = NodeError.from_request_exception(e, provider=PROVIDER, secret_name=API_KEY_NAME)
+            status_code = getattr(getattr(e, "response", None), "status_code", None)
+            error = NodeError.from_request_exception(
+                e, provider=PROVIDER, secret_name=API_KEY_NAME, key_refused=status_code == HTTP_UNAUTHORIZED
+            )
             self._set_status_results(
                 was_successful=False, result_details=f"Failed to fetch status for `{request_id}`: {error}"
             )

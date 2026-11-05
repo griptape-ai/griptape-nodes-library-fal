@@ -130,10 +130,22 @@ def test_seedvr_missing_input(node_class: type[FalQueueNode], param: str) -> Non
     assert param in str(errors[0])
 
 
+def test_locked_account_403_shows_fals_reason_without_key_link(fal: Callable[[Handler], None]) -> None:
+    reason = "User is locked. Reason: Exhausted balance. Top up your balance at fal.ai/dashboard/billing."
+    fal(_route(lambda: _json(403, {"detail": reason}), _completed, _completed))
+
+    with pytest.raises(NodeError) as caught:
+        _run(_node())
+
+    assert str(caught.value) == reason
+    assert caught.value.links == []
+    assert caught.value.fields["status_code"] == 403
+
+
 def test_refused_key_links_to_settings(fal: Callable[[Handler], None]) -> None:
     fal(
         _route(
-            lambda: _json(401, {"detail": "Authentication required"}, {"x-fal-request-id": "abc"}),
+            lambda: _json(401, {"detail": "invalid key credentials"}),
             _completed,
             _completed,
         )
@@ -147,7 +159,7 @@ def test_refused_key_links_to_settings(fal: Callable[[Handler], None]) -> None:
     assert "refused" in str(error)
     assert "text_to_image" not in str(error)
     assert error.fields["status_code"] == 401
-    assert error.response == {"detail": "Authentication required"}
+    assert error.response == {"detail": "invalid key credentials"}
     assert error.links[0].url == "#settings-secrets?filter=FAL_KEY"
     assert node.parameter_output_values["was_successful"] is False
 
