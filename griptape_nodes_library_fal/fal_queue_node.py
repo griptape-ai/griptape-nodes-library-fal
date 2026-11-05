@@ -10,12 +10,19 @@ from typing import Any
 from urllib.parse import urlparse
 
 import httpx
-from griptape_nodes.exe_types.core_types import ParameterMode
+from griptape_nodes.exe_types.core_types import NodeError, ParameterMode
 from griptape_nodes.exe_types.node_types import SuccessFailureNode
 from griptape_nodes.exe_types.param_types.parameter_button import ParameterButton
 from griptape_nodes.exe_types.param_types.parameter_int import ParameterInt
 from griptape_nodes.exe_types.param_types.parameter_string import ParameterString
 from griptape_nodes.retained_mode.griptape_nodes import GriptapeNodes
+
+from griptape_nodes_library_fal.fal_node_errors import (
+    API_KEY_NAME,
+    API_KEY_URL,
+    PROVIDER,
+    failed_status_error,
+)
 
 logger = logging.getLogger("griptape_nodes")
 
@@ -33,6 +40,8 @@ TERMINAL_FAILURE_STATUSES = (STATUS_FAILED, STATUS_ERROR)
 
 # Polling gives up after this many failed polls in a row, instead of waiting out the whole timeout.
 MAX_CONSECUTIVE_POLL_ERRORS = 5
+# fal answers 401 for a key it refuses. Other 4xx statuses, such as a locked account's 403, are not key problems.
+HTTP_UNAUTHORIZED = 401
 # Client errors that retrying cannot fix. 408 and 429 are excluded because they are transient.
 NON_RETRYABLE_HTTP_STATUSES = frozenset(code for code in range(400, 500) if code not in (408, 425, 429))
 
@@ -58,7 +67,6 @@ class FalQueueNode(SuccessFailureNode, ABC):
     """
 
     SERVICE_NAME = "fal"
-    API_KEY_NAME = "FAL_KEY"
 
     # Subclasses must override these.
     QUEUE_MODEL_ID = ""
@@ -162,12 +170,18 @@ class FalQueueNode(SuccessFailureNode, ABC):
     async def aprocess(self) -> None:
         await self._process_generation()
 
+    def _get_api_key(self) -> str | None:
+        return os.getenv(API_KEY_NAME) or GriptapeNodes.SecretsManager().get_secret(API_KEY_NAME)
+
+    def _missing_key_errors(self) -> list[Exception]:
+        """Validation errors for a missing key. Nothing can run without one, so callers return it alone."""
+        return [] if self._get_api_key() else [NodeError.from_missing_secret(API_KEY_NAME, key_url=API_KEY_URL)]
+
     def _validate_api_key(self) -> str:
-        api_key = os.getenv("FAL_KEY") or GriptapeNodes.SecretsManager().get_secret(self.API_KEY_NAME)
+        api_key = self._get_api_key()
         if not api_key:
             self._set_safe_defaults()
-            msg = f"{self.name} is missing {self.API_KEY_NAME}. Ensure it's set in the environment/config."
-            raise ValueError(msg)
+            raise NodeError.from_missing_secret(API_KEY_NAME, key_url=API_KEY_URL)
         return api_key
 
     def _headers(self, api_key: str) -> dict[str, str]:
@@ -218,30 +232,43 @@ class FalQueueNode(SuccessFailureNode, ABC):
             logger.info("%s: %s", self.name, message)
 
     def _extract_error_message(self, response_json: dict[str, Any] | None) -> str:
-        if not response_json:
-            return f"{self.name} generation failed with no error details provided by fal."
+        return str(failed_status_error("", response_json or {}, request_id=""))
 
-        error = response_json.get("error")
-        if error:
-            if isinstance(error, dict):
-                error_msg = error.get("message") or error.get("error") or str(error)
-                return f"{self.name} {error_msg}"
-            return f"{self.name} {error}"
+    def _generation_error(self, error: NodeError, *, request_id: str = "", status: str = "") -> NodeError:
+        """Clear the outputs for a failed generation and return the error to raise.
 
-        detail = response_json.get("detail")
-        if detail:
-            return f"{self.name} generation failed: {detail}"
+        The request id and status are kept when given, so the Refresh button can still recover the result.
+        """
+        self._set_safe_defaults()
+        self.parameter_output_values["generation_id"] = request_id
+        if status:
+            self.parameter_output_values["generation_status"] = status
+        return error
 
-        return f"{self.name} generation failed.\n\nFull fal response:\n{response_json}"
-
-    def _extract_http_error_message(self, response: httpx.Response) -> str:
+    @staticmethod
+    def _read_json_object(
+        response: httpx.Response, what: str, fields: dict[str, str | int | float | bool] | None = None
+    ) -> dict[str, Any]:
+        """The JSON object in a 2xx response, or a NodeError saying what fal sent instead."""
+        all_fields = {"status_code": response.status_code, **(fields or {})}
         try:
-            error_json = response.json()
-        except Exception:
-            return f"{self.name}: fal error: {response.status_code} - {response.text}"
-        return self._extract_error_message(error_json)
+            body = response.json()
+        except ValueError as e:
+            text = (response.text or "").strip()
+            raise NodeError(
+                f"fal's {what} is not JSON. Run the node again.",
+                fields=all_fields,
+                response={"text": text[:2000]} if text else None,
+            ) from e
+        if not isinstance(body, dict):
+            raise NodeError(
+                f"fal's {what} is not a JSON object. Run the node again.",
+                fields=all_fields,
+                response={"body": body},
+            )
+        return body
 
-    async def _submit_generation(self, payload: dict[str, Any], headers: dict[str, str]) -> str | None:
+    async def _submit_generation(self, payload: dict[str, Any], headers: dict[str, str]) -> str:
         submit_url = self._submit_url()
         self._log(f"Submitting request to {submit_url}")
 
@@ -249,15 +276,19 @@ class FalQueueNode(SuccessFailureNode, ABC):
             async with httpx.AsyncClient() as client:
                 response = await client.post(submit_url, json=payload, headers=headers, timeout=60)
                 response.raise_for_status()
-                response_json = response.json()
         except httpx.HTTPStatusError as e:
             self._log(f"HTTP error: {e.response.status_code} - {e.response.text}")
-            raise RuntimeError(self._extract_http_error_message(e.response)) from e
+            raise NodeError.from_http_response(
+                e.response,
+                provider=PROVIDER,
+                secret_name=API_KEY_NAME,
+                key_refused=e.response.status_code == HTTP_UNAUTHORIZED,
+            ) from e
         except Exception as e:
             self._log(f"Request failed: {e}")
-            msg = f"{self.name} request failed: {e}"
-            raise RuntimeError(msg) from e
+            raise NodeError.from_request_exception(e, provider=PROVIDER, secret_name=API_KEY_NAME) from e
 
+        response_json = self._read_json_object(response, "reply to the request")
         request_id = response_json.get("request_id")
         if request_id:
             self._log(f"Submitted. request_id={request_id}")
@@ -265,10 +296,11 @@ class FalQueueNode(SuccessFailureNode, ABC):
             return str(request_id)
 
         self._log("No request_id returned from POST response")
-        return None
+        msg = "fal accepted the request but did not return a request ID, so the result cannot be fetched. Run the node again."
+        raise NodeError(msg, response=response_json if isinstance(response_json, dict) else None)
 
     def _handle_terminal_status(self, status: str, status_json: dict[str, Any]) -> bool:
-        """Return True if status is terminal. Sets failure status results for failure states."""
+        """Return True if status is terminal. Raises a NodeError for failure states."""
         if status == STATUS_COMPLETED:
             return True
 
@@ -276,15 +308,12 @@ class FalQueueNode(SuccessFailureNode, ABC):
             request_id = self.parameter_output_values.get("generation_id", "") or ""
             logger.error("%s: Generation failed with status: %s", self.name, status)
             logger.error("%s: Error response: %s", self.name, status_json)
-            self._set_safe_defaults()
-            self.parameter_output_values["generation_id"] = request_id
-            self.parameter_output_values["generation_status"] = status
-            self._set_status_results(was_successful=False, result_details=self._extract_error_message(status_json))
-            return True
+            error = failed_status_error(status, status_json, request_id=request_id)
+            raise self._generation_error(error, request_id=request_id, status=status)
 
         return False
 
-    async def _poll_generation_status(self, request_id: str, headers: dict[str, str]) -> dict[str, Any] | None:
+    async def _poll_generation_status(self, request_id: str, headers: dict[str, str]) -> dict[str, Any]:
         status_url = self._status_url(request_id)
         poll_interval = self.DEFAULT_POLL_INTERVAL
         timeout_s = self._resolve_timeout_seconds()
@@ -307,23 +336,28 @@ class FalQueueNode(SuccessFailureNode, ABC):
                     self.parameter_output_values["generation_status"] = status
 
                     if self._handle_terminal_status(status, status_json):
-                        return status_json if status == STATUS_COMPLETED else None
+                        return status_json
 
                     attempt += 1
                     if max_attempts is not None and attempt >= max_attempts:
                         break
                     await asyncio.sleep(poll_interval)
+                except NodeError:
+                    raise
                 except httpx.HTTPStatusError as e:
                     status_code = e.response.status_code
                     self._log(f"HTTP error while polling: {status_code} - {e.response.text}")
                     consecutive_errors += 1
                     # A client error such as 400, 401, 403 or 404 cannot succeed on retry.
                     if status_code in NON_RETRYABLE_HTTP_STATUSES or consecutive_errors >= MAX_CONSECUTIVE_POLL_ERRORS:
-                        self._fail_polling(
-                            request_id,
-                            f"{self._extract_http_error_message(e.response)}\n\nStatus URL: {status_url}",
+                        error = NodeError.from_http_response(
+                            e.response,
+                            provider=PROVIDER,
+                            secret_name=API_KEY_NAME,
+                            key_refused=status_code == HTTP_UNAUTHORIZED,
+                            fields={"generation_id": request_id, "status_url": status_url},
                         )
-                        return None
+                        raise self._generation_error(error, request_id=request_id, status=STATUS_ERROR) from e
                     attempt += 1
                     if max_attempts is not None and attempt >= max_attempts:
                         break
@@ -332,8 +366,10 @@ class FalQueueNode(SuccessFailureNode, ABC):
                     self._log(f"Error while polling: {e}")
                     consecutive_errors += 1
                     if consecutive_errors >= MAX_CONSECUTIVE_POLL_ERRORS:
-                        self._fail_polling(request_id, f"Failed to poll generation status: {e}")
-                        return None
+                        error = NodeError.from_request_exception(
+                            e, provider=PROVIDER, secret_name=API_KEY_NAME, fields={"generation_id": request_id}
+                        )
+                        raise self._generation_error(error, request_id=request_id, status=STATUS_ERROR) from e
                     attempt += 1
                     if max_attempts is not None and attempt >= max_attempts:
                         break
@@ -341,27 +377,15 @@ class FalQueueNode(SuccessFailureNode, ABC):
 
         # Timeout reached. Preserve generation_id so the user can recover via Refresh.
         self._log("Polling timed out waiting for result")
-        self._set_safe_defaults()
-        self.parameter_output_values["generation_id"] = request_id
-        self.parameter_output_values["generation_status"] = STATUS_TIMED_OUT
-        self._set_status_results(
-            was_successful=False,
-            result_details=(
-                f"Generation `{request_id}` did not finish within {timeout_s} seconds. "
-                f"It may still be running on fal. Click the refresh icon on the "
-                f"`generation_status` parameter to re-check and pull the result onto this node."
-            ),
+        error = NodeError(
+            f"The generation did not finish within {timeout_s} seconds. It may still be running on fal. "
+            f"Click the refresh icon on the `generation_status` parameter to re-check and pull the result "
+            f"onto this node.",
+            fields={"generation_id": request_id, "status": STATUS_TIMED_OUT},
         )
-        return None
+        raise self._generation_error(error, request_id=request_id, status=STATUS_TIMED_OUT)
 
-    def _fail_polling(self, request_id: str, message: str) -> None:
-        """Stop polling with an error. The request id is kept so Refresh can still recover the result."""
-        self._set_safe_defaults()
-        self.parameter_output_values["generation_id"] = request_id
-        self.parameter_output_values["generation_status"] = STATUS_ERROR
-        self._set_status_results(was_successful=False, result_details=message)
-
-    async def _fetch_generation_result(self, request_id: str, headers: dict[str, str]) -> dict[str, Any] | None:
+    async def _fetch_generation_result(self, request_id: str, headers: dict[str, str]) -> dict[str, Any]:
         result_url = self._result_url(request_id)
         self._log(f"Fetching result from {result_url}")
 
@@ -371,18 +395,29 @@ class FalQueueNode(SuccessFailureNode, ABC):
                 response.raise_for_status()
         except httpx.HTTPStatusError as e:
             self._log(f"HTTP error fetching result: {e.response.status_code} - {e.response.text}")
-            self._set_safe_defaults()
-            self._set_status_results(
-                was_successful=False, result_details=f"Failed to fetch generation result: HTTP {e.response.status_code}"
+            error = NodeError.from_http_response(
+                e.response,
+                provider=PROVIDER,
+                secret_name=API_KEY_NAME,
+                key_refused=e.response.status_code == HTTP_UNAUTHORIZED,
+                fields={"generation_id": request_id},
             )
-            return None
+            raise self._generation_error(error) from e
         except Exception as e:
             self._log(f"Error fetching result: {e}")
-            self._set_safe_defaults()
-            self._set_status_results(was_successful=False, result_details=f"Failed to fetch generation result: {e}")
-            return None
+            error = NodeError.from_request_exception(
+                e, provider=PROVIDER, secret_name=API_KEY_NAME, fields={"generation_id": request_id}
+            )
+            raise self._generation_error(error) from e
 
-        result_json = response.json()
+        fields: dict[str, str | int | float | bool] = {"generation_id": request_id}
+        try:
+            result_json = self._read_json_object(response, "result", fields)
+        except NodeError as e:
+            raise self._generation_error(e) from e.__cause__
+        if not result_json:
+            msg = "fal returned an empty result."
+            raise self._generation_error(NodeError(msg, fields={**fields, "status_code": response.status_code}))
         self._log("Result fetched successfully")
         return result_json
 
@@ -392,43 +427,31 @@ class FalQueueNode(SuccessFailureNode, ABC):
         self.parameter_output_values["generation_status"] = ""
 
         try:
-            api_key = self._validate_api_key()
-        except ValueError as e:
-            self._handle_api_key_validation_error(e)
-            return
+            await self._run_generation()
+        except NodeError as e:
+            self._route_failure(e)
 
+    async def _run_generation(self) -> None:
+        api_key = self._validate_api_key()
         headers = self._headers(api_key)
 
         try:
             payload = await self._build_payload()
-        except Exception as e:
-            self._handle_payload_build_error(e)
-            return
-
-        try:
-            request_id = await self._submit_generation(payload, headers)
-        except RuntimeError as e:
-            self._handle_submission_error(e)
-            return
-
-        if not request_id:
+        except NodeError:
             self._set_safe_defaults()
-            self._set_status_results(
-                was_successful=False,
-                result_details="No request_id returned from fal. Cannot proceed with generation.",
-            )
+            raise
+        except Exception as e:
+            self._set_safe_defaults()
+            self._route_failure(e)
             return
+
+        request_id = await self._submit_generation(payload, headers)
 
         # Store request_id so the Refresh affordance can recover the result on timeout/failure.
         self.parameter_output_values["generation_id"] = request_id
 
-        status_response = await self._poll_generation_status(request_id, headers)
-        if not status_response:
-            return
-
+        await self._poll_generation_status(request_id, headers)
         result_json = await self._fetch_generation_result(request_id, headers)
-        if not result_json:
-            return
 
         if "provider_response" in self.parameter_output_values:
             self.parameter_output_values["provider_response"] = result_json
@@ -436,30 +459,25 @@ class FalQueueNode(SuccessFailureNode, ABC):
         try:
             await self._parse_result(result_json, request_id)
         except Exception as e:
-            self._handle_result_parsing_error(e)
+            self._log(f"Error parsing result: {e}")
+            self._set_safe_defaults()
+            raise self._result_error(e, result_json, request_id) from e
 
-    def _handle_api_key_validation_error(self, e: ValueError) -> None:
-        self._set_safe_defaults()
-        self._set_status_results(was_successful=False, result_details=str(e))
-        self._handle_failure_exception(e)
-
-    def _handle_payload_build_error(self, e: Exception) -> None:
-        self._set_safe_defaults()
-        self._set_status_results(
-            was_successful=False, result_details=f"{self.name}: Failed to build request payload: {e}"
+    @staticmethod
+    def _result_error(e: Exception, result_json: dict[str, Any], request_id: str) -> NodeError:
+        """A NodeError for a result the node could not use. A NodeError raised while parsing is kept as is."""
+        if isinstance(e, NodeError):
+            return e
+        return NodeError(
+            f"Could not read the result fal returned: {e}",
+            fields={"generation_id": request_id},
+            response=result_json,
         )
-        self._handle_failure_exception(e)
 
-    def _handle_submission_error(self, e: RuntimeError) -> None:
-        self._set_safe_defaults()
-        self._set_status_results(was_successful=False, result_details=str(e))
-        self._handle_failure_exception(e)
-
-    def _handle_result_parsing_error(self, e: Exception) -> None:
-        self._log(f"Error parsing result: {e}")
-        self._set_safe_defaults()
-        self._set_status_results(was_successful=False, result_details=f"Failed to parse generation result: {e}")
-        self._handle_failure_exception(e)
+    def _route_failure(self, error: Exception) -> None:
+        """Record the failure, then follow Failed if it is wired and raise otherwise."""
+        self._set_status_results(was_successful=False, result_details=str(error))
+        self._handle_failure_exception(error)
 
     def _on_refresh_clicked(self, _button: Any, _details: Any) -> None:
         """Sync entry point for the Refresh button. Bridges into the async refresh flow.
@@ -496,7 +514,7 @@ class FalQueueNode(SuccessFailureNode, ABC):
 
         try:
             api_key = self._validate_api_key()
-        except ValueError as e:
+        except NodeError as e:
             self._set_status_results(was_successful=False, result_details=f"Cannot refresh: {e}")
             return
 
@@ -520,24 +538,29 @@ class FalQueueNode(SuccessFailureNode, ABC):
             async with httpx.AsyncClient() as client:
                 response = await client.get(status_url, headers=headers, timeout=60)
                 response.raise_for_status()
-                return response.json()
-        except httpx.HTTPStatusError as e:
-            self._set_status_results(
-                was_successful=False,
-                result_details=f"Failed to fetch status for `{request_id}`: HTTP {e.response.status_code}",
-            )
-        except Exception as e:
+            return self._read_json_object(response, "status reply")
+        except NodeError as e:
             self._set_status_results(
                 was_successful=False, result_details=f"Failed to fetch status for `{request_id}`: {e}"
+            )
+        except Exception as e:
+            status_code = getattr(getattr(e, "response", None), "status_code", None)
+            error = NodeError.from_request_exception(
+                e, provider=PROVIDER, secret_name=API_KEY_NAME, key_refused=status_code == HTTP_UNAUTHORIZED
+            )
+            self._set_status_results(
+                was_successful=False, result_details=f"Failed to fetch status for `{request_id}`: {error}"
             )
         return None
 
     async def _refresh_completed(self, request_id: str, headers: dict[str, str]) -> None:
-        result_json = await self._fetch_generation_result(request_id, headers)
-        if not result_json:
+        # A button callback never raises, so failures are shown in the status text.
+        try:
+            result_json = await self._fetch_generation_result(request_id, headers)
+        except NodeError as e:
             self._set_status_results(
                 was_successful=False,
-                result_details=f"Generation `{request_id}` is COMPLETED, but fetching the result failed. See node logs.",
+                result_details=f"Generation `{request_id}` is COMPLETED, but fetching the result failed: {e}",
             )
             return
         if "provider_response" in self.parameter_output_values:
@@ -545,7 +568,8 @@ class FalQueueNode(SuccessFailureNode, ABC):
         try:
             await self._parse_result(result_json, request_id)
         except Exception as e:
-            self._handle_result_parsing_error(e)
+            self._log(f"Error parsing result: {e}")
+            self._set_safe_defaults()
             self._set_status_results(
                 was_successful=False,
                 result_details=f"Generation `{request_id}` completed, but parsing the result failed: {e}",

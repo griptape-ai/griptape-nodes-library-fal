@@ -27,6 +27,13 @@ def uploads(monkeypatch: pytest.MonkeyPatch) -> list[bytes]:
     monkeypatch.setattr(
         public_artifact_url_parameter.PublicArtifactUrlParameter, "_get_bucket_id", classmethod(lambda *_, **__: "b")
     )
+    # Newer engines resolve the bucket through this method on the async upload path.
+    monkeypatch.setattr(
+        public_artifact_url_parameter.PublicArtifactUrlParameter,
+        "_resolve_bucket_id",
+        classmethod(lambda *_, **__: "b"),
+        raising=False,
+    )
     monkeypatch.setattr(GriptapeCloudStorageDriver, "upload_file", upload_file)
     monkeypatch.setattr(GriptapeCloudStorageDriver, "delete_file", lambda *_: None)
     return uploaded

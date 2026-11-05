@@ -5,7 +5,7 @@ from typing import Any
 
 from griptape.artifacts import ImageArtifact
 from griptape.artifacts.image_url_artifact import ImageUrlArtifact
-from griptape_nodes.exe_types.core_types import Parameter, ParameterGroup, ParameterMode
+from griptape_nodes.exe_types.core_types import NodeError, Parameter, ParameterGroup, ParameterMode
 from griptape_nodes.exe_types.param_components.artifact_url.public_artifact_url_parameter import (
     PublicArtifactUrlParameter,
 )
@@ -23,6 +23,10 @@ from griptape_nodes_library_fal.fal_queue_node import FalQueueNode
 logger = logging.getLogger("griptape_nodes")
 
 __all__ = ["FalSeedVRImageUpscale"]
+
+
+def _missing_input_error() -> NodeError:
+    return NodeError("Connect an image to 'image_url' and run the node again.", fields={"parameter": "image_url"})
 
 
 class FalSeedVRImageUpscale(FalQueueNode):
@@ -137,10 +141,13 @@ class FalSeedVRImageUpscale(FalQueueNode):
         )
 
     def validate_before_node_run(self) -> list[Exception] | None:
+        # Nothing can run without a key, so report it first and alone.
+        if missing_key := self._missing_key_errors():
+            return missing_key
         exceptions = super().validate_before_node_run() or []
         image_url = self.get_parameter_value("image_url")
         if not image_url:
-            exceptions.append(ValueError("Image URL must be provided"))
+            exceptions.append(_missing_input_error())
         return exceptions if exceptions else None
 
     def after_value_set(self, parameter: Parameter, value: Any) -> None:
@@ -182,8 +189,7 @@ class FalSeedVRImageUpscale(FalQueueNode):
 
         public_image_url = self._public_image_url_parameter.get_public_url_for_parameter()
         if not public_image_url:
-            msg = "Image URL must be provided"
-            raise ValueError(msg)
+            raise _missing_input_error()
 
         upscale_mode = self.get_parameter_value("upscale_mode")
         payload: dict[str, Any] = {
@@ -201,15 +207,11 @@ class FalSeedVRImageUpscale(FalQueueNode):
 
         return payload
 
-    async def _parse_result(self, result_json: dict[str, Any], request_id: str) -> None:  # noqa: ARG002
+    async def _parse_result(self, result_json: dict[str, Any], request_id: str) -> None:
         extracted_url = self._extract_image_url(result_json)
         if not extracted_url:
-            self.parameter_output_values["image"] = None
-            self._set_status_results(
-                was_successful=False,
-                result_details="Generation completed but no image URL was found in the response.",
-            )
-            return
+            msg = "The generation finished, but fal's response has no image file."
+            raise NodeError(msg, fields={"generation_id": request_id}, response=result_json)
 
         image_bytes = await self._download_bytes_from_url(extracted_url)
 

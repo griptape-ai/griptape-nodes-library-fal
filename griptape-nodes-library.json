@@ -16,8 +16,8 @@
     "metadata": {
         "author": "Griptape, Inc",
         "description": "Griptape Nodes that call fal.ai models directly.",
-        "library_version": "0.1.0",
-        "engine_version": "0.82.0",
+        "library_version": "0.2.0",
+        "engine_version": "0.105.0",
         "tags": [
             "Griptape",
             "AI",
