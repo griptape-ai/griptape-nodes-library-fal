@@ -39,6 +39,8 @@ def _completed() -> httpx.Response:
 @pytest.fixture(autouse=True)
 def _fal_env(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("FAL_KEY", "test-key")
+    # The SeedVR nodes look up a Griptape Cloud credential when they are built.
+    monkeypatch.setenv("GT_CLOUD_API_KEY", "test-cloud-key")
     monkeypatch.setattr(FalQueueNode, "DEFAULT_POLL_INTERVAL", 1)
 
     async def no_sleep(_seconds: float) -> None:
