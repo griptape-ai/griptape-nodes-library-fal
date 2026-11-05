@@ -65,7 +65,6 @@ class FalQueueNode(SuccessFailureNode, ABC):
     """
 
     SERVICE_NAME = "fal"
-    API_KEY_NAME = "FAL_KEY"
 
     # Subclasses must override these.
     QUEUE_MODEL_ID = ""
@@ -170,7 +169,7 @@ class FalQueueNode(SuccessFailureNode, ABC):
         await self._process_generation()
 
     def _get_api_key(self) -> str | None:
-        return os.getenv(self.API_KEY_NAME) or GriptapeNodes.SecretsManager().get_secret(self.API_KEY_NAME)
+        return os.getenv(API_KEY_NAME) or GriptapeNodes.SecretsManager().get_secret(API_KEY_NAME)
 
     def _missing_key_errors(self) -> list[Exception]:
         """Validation errors for a missing key. Nothing can run without one, so callers return it alone."""
