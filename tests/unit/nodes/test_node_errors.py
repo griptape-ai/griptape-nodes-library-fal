@@ -224,6 +224,40 @@ def test_result_without_media_file(fal: Callable[[Handler], None]) -> None:
     assert caught.value.response == result
 
 
+BAD_2XX_BODIES = {
+    "html": lambda: httpx.Response(200, text="<html>Bad gateway</html>"),
+    "empty": lambda: httpx.Response(200, text=""),
+    "list": lambda: _json(200, ["not", "an", "object"]),
+}
+
+
+@pytest.mark.parametrize("body", BAD_2XX_BODIES)
+@pytest.mark.parametrize("stage", ["submit", "result"])
+@pytest.mark.parametrize("failed_wired", [False, True], ids=["unwired", "wired"])
+def test_2xx_without_a_json_object_is_a_node_error(
+    fal: Callable[[Handler], None], body: str, stage: str, failed_wired: bool
+) -> None:
+    bad = BAD_2XX_BODIES[body]
+    fal(_route(bad if stage == "submit" else _submitted, _completed, bad))
+    node = _node(failed_wired=failed_wired)
+
+    if failed_wired:
+        _run(node)
+        assert node.parameter_output_values["was_successful"] is False
+        assert (
+            "not JSON" in node.parameter_output_values["result_details"]
+            or "not a JSON object" in (node.parameter_output_values["result_details"])
+        )
+        return
+
+    with pytest.raises(NodeError) as caught:
+        _run(node)
+
+    assert "fal's" in str(caught.value)
+    assert caught.value.fields["status_code"] == 200
+    assert caught.value.response is not None or body == "empty"
+
+
 def test_failed_output_wired_follows_failed_without_raising(fal: Callable[[Handler], None]) -> None:
     fal(_route(lambda: _json(422, {"detail": "bad"}), _completed, _completed))
     node = _node(failed_wired=True)

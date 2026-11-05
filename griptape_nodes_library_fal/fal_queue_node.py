@@ -245,6 +245,29 @@ class FalQueueNode(SuccessFailureNode, ABC):
             self.parameter_output_values["generation_status"] = status
         return error
 
+    @staticmethod
+    def _read_json_object(
+        response: httpx.Response, what: str, fields: dict[str, str | int | float | bool] | None = None
+    ) -> dict[str, Any]:
+        """The JSON object in a 2xx response, or a NodeError saying what fal sent instead."""
+        all_fields = {"status_code": response.status_code, **(fields or {})}
+        try:
+            body = response.json()
+        except ValueError as e:
+            text = (response.text or "").strip()
+            raise NodeError(
+                f"fal's {what} is not JSON. Run the node again.",
+                fields=all_fields,
+                response={"text": text[:2000]} if text else None,
+            ) from e
+        if not isinstance(body, dict):
+            raise NodeError(
+                f"fal's {what} is not a JSON object. Run the node again.",
+                fields=all_fields,
+                response={"body": body},
+            )
+        return body
+
     async def _submit_generation(self, payload: dict[str, Any], headers: dict[str, str]) -> str:
         submit_url = self._submit_url()
         self._log(f"Submitting request to {submit_url}")
@@ -253,7 +276,6 @@ class FalQueueNode(SuccessFailureNode, ABC):
             async with httpx.AsyncClient() as client:
                 response = await client.post(submit_url, json=payload, headers=headers, timeout=60)
                 response.raise_for_status()
-                response_json = response.json()
         except httpx.HTTPStatusError as e:
             self._log(f"HTTP error: {e.response.status_code} - {e.response.text}")
             raise NodeError.from_http_response(
@@ -262,10 +284,11 @@ class FalQueueNode(SuccessFailureNode, ABC):
                 secret_name=API_KEY_NAME,
                 key_refused=e.response.status_code == HTTP_UNAUTHORIZED,
             ) from e
-        except httpx.HTTPError as e:
+        except Exception as e:
             self._log(f"Request failed: {e}")
             raise NodeError.from_request_exception(e, provider=PROVIDER, secret_name=API_KEY_NAME) from e
 
+        response_json = self._read_json_object(response, "reply to the request")
         request_id = response_json.get("request_id")
         if request_id:
             self._log(f"Submitted. request_id={request_id}")
@@ -380,25 +403,21 @@ class FalQueueNode(SuccessFailureNode, ABC):
                 fields={"generation_id": request_id},
             )
             raise self._generation_error(error) from e
-        except httpx.HTTPError as e:
+        except Exception as e:
             self._log(f"Error fetching result: {e}")
             error = NodeError.from_request_exception(
                 e, provider=PROVIDER, secret_name=API_KEY_NAME, fields={"generation_id": request_id}
             )
             raise self._generation_error(error) from e
 
+        fields: dict[str, str | int | float | bool] = {"generation_id": request_id}
         try:
-            result_json = response.json()
-        except ValueError as e:
-            msg = "fal returned a result that is not valid JSON."
-            raise self._generation_error(
-                NodeError(msg, fields={"generation_id": request_id, "status_code": response.status_code}),
-            ) from e
-        if not isinstance(result_json, dict) or not result_json:
+            result_json = self._read_json_object(response, "result", fields)
+        except NodeError as e:
+            raise self._generation_error(e) from e.__cause__
+        if not result_json:
             msg = "fal returned an empty result."
-            raise self._generation_error(
-                NodeError(msg, fields={"generation_id": request_id, "status_code": response.status_code}),
-            )
+            raise self._generation_error(NodeError(msg, fields={**fields, "status_code": response.status_code}))
         self._log("Result fetched successfully")
         return result_json
 
@@ -519,8 +538,12 @@ class FalQueueNode(SuccessFailureNode, ABC):
             async with httpx.AsyncClient() as client:
                 response = await client.get(status_url, headers=headers, timeout=60)
                 response.raise_for_status()
-                return response.json()
-        except httpx.HTTPError as e:
+            return self._read_json_object(response, "status reply")
+        except NodeError as e:
+            self._set_status_results(
+                was_successful=False, result_details=f"Failed to fetch status for `{request_id}`: {e}"
+            )
+        except Exception as e:
             status_code = getattr(getattr(e, "response", None), "status_code", None)
             error = NodeError.from_request_exception(
                 e, provider=PROVIDER, secret_name=API_KEY_NAME, key_refused=status_code == HTTP_UNAUTHORIZED
