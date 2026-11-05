@@ -18,10 +18,10 @@ from griptape_nodes.exe_types.param_types.parameter_string import ParameterStrin
 from griptape_nodes.retained_mode.griptape_nodes import GriptapeNodes
 
 from griptape_nodes_library_fal.fal_node_errors import (
-    error_from_failed_status,
-    error_from_http_response,
-    error_from_request_exception,
-    missing_key_error,
+    API_KEY_NAME,
+    API_KEY_URL,
+    PROVIDER,
+    failed_status_error,
 )
 
 logger = logging.getLogger("griptape_nodes")
@@ -174,13 +174,13 @@ class FalQueueNode(SuccessFailureNode, ABC):
 
     def _missing_key_errors(self) -> list[Exception]:
         """Validation errors for a missing key. Nothing can run without one, so callers return it alone."""
-        return [] if self._get_api_key() else [missing_key_error()]
+        return [] if self._get_api_key() else [NodeError.from_missing_secret(API_KEY_NAME, key_url=API_KEY_URL)]
 
     def _validate_api_key(self) -> str:
         api_key = self._get_api_key()
         if not api_key:
             self._set_safe_defaults()
-            raise missing_key_error()
+            raise NodeError.from_missing_secret(API_KEY_NAME, key_url=API_KEY_URL)
         return api_key
 
     def _headers(self, api_key: str) -> dict[str, str]:
@@ -231,7 +231,7 @@ class FalQueueNode(SuccessFailureNode, ABC):
             logger.info("%s: %s", self.name, message)
 
     def _extract_error_message(self, response_json: dict[str, Any] | None) -> str:
-        return str(error_from_failed_status("", response_json, request_id=""))
+        return str(failed_status_error("", response_json or {}, request_id=""))
 
     def _generation_error(self, error: NodeError, *, request_id: str = "", status: str = "") -> NodeError:
         """Clear the outputs for a failed generation and return the error to raise.
@@ -255,10 +255,10 @@ class FalQueueNode(SuccessFailureNode, ABC):
                 response_json = response.json()
         except httpx.HTTPStatusError as e:
             self._log(f"HTTP error: {e.response.status_code} - {e.response.text}")
-            raise error_from_http_response(e.response) from e
+            raise NodeError.from_http_response(e.response, provider=PROVIDER, secret_name=API_KEY_NAME) from e
         except httpx.HTTPError as e:
             self._log(f"Request failed: {e}")
-            raise error_from_request_exception(e) from e
+            raise NodeError.from_request_exception(e, provider=PROVIDER, secret_name=API_KEY_NAME) from e
 
         request_id = response_json.get("request_id")
         if request_id:
@@ -279,7 +279,7 @@ class FalQueueNode(SuccessFailureNode, ABC):
             request_id = self.parameter_output_values.get("generation_id", "") or ""
             logger.error("%s: Generation failed with status: %s", self.name, status)
             logger.error("%s: Error response: %s", self.name, status_json)
-            error = error_from_failed_status(status, status_json, request_id=request_id)
+            error = failed_status_error(status, status_json, request_id=request_id)
             raise self._generation_error(error, request_id=request_id, status=status)
 
         return False
@@ -321,8 +321,11 @@ class FalQueueNode(SuccessFailureNode, ABC):
                     consecutive_errors += 1
                     # A client error such as 400, 401, 403 or 404 cannot succeed on retry.
                     if status_code in NON_RETRYABLE_HTTP_STATUSES or consecutive_errors >= MAX_CONSECUTIVE_POLL_ERRORS:
-                        error = error_from_http_response(
-                            e.response, fields={"generation_id": request_id, "status_url": status_url}
+                        error = NodeError.from_http_response(
+                            e.response,
+                            provider=PROVIDER,
+                            secret_name=API_KEY_NAME,
+                            fields={"generation_id": request_id, "status_url": status_url},
                         )
                         raise self._generation_error(error, request_id=request_id, status=STATUS_ERROR) from e
                     attempt += 1
@@ -333,7 +336,9 @@ class FalQueueNode(SuccessFailureNode, ABC):
                     self._log(f"Error while polling: {e}")
                     consecutive_errors += 1
                     if consecutive_errors >= MAX_CONSECUTIVE_POLL_ERRORS:
-                        error = error_from_request_exception(e, fields={"generation_id": request_id})
+                        error = NodeError.from_request_exception(
+                            e, provider=PROVIDER, secret_name=API_KEY_NAME, fields={"generation_id": request_id}
+                        )
                         raise self._generation_error(error, request_id=request_id, status=STATUS_ERROR) from e
                     attempt += 1
                     if max_attempts is not None and attempt >= max_attempts:
@@ -360,11 +365,15 @@ class FalQueueNode(SuccessFailureNode, ABC):
                 response.raise_for_status()
         except httpx.HTTPStatusError as e:
             self._log(f"HTTP error fetching result: {e.response.status_code} - {e.response.text}")
-            error = error_from_http_response(e.response, fields={"generation_id": request_id})
+            error = NodeError.from_http_response(
+                e.response, provider=PROVIDER, secret_name=API_KEY_NAME, fields={"generation_id": request_id}
+            )
             raise self._generation_error(error) from e
         except httpx.HTTPError as e:
             self._log(f"Error fetching result: {e}")
-            error = error_from_request_exception(e, fields={"generation_id": request_id})
+            error = NodeError.from_request_exception(
+                e, provider=PROVIDER, secret_name=API_KEY_NAME, fields={"generation_id": request_id}
+            )
             raise self._generation_error(error) from e
 
         try:
@@ -501,7 +510,7 @@ class FalQueueNode(SuccessFailureNode, ABC):
                 response.raise_for_status()
                 return response.json()
         except httpx.HTTPError as e:
-            error = error_from_request_exception(e)
+            error = NodeError.from_request_exception(e, provider=PROVIDER, secret_name=API_KEY_NAME)
             self._set_status_results(
                 was_successful=False, result_details=f"Failed to fetch status for `{request_id}`: {error}"
             )
