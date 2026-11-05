@@ -160,14 +160,14 @@ Outputs the upscaled **Image** artifact, plus the verbatim **Provider Response**
 
 ## Troubleshooting
 
-**"API key not found"**
-- Ensure your `FAL_KEY` secret is configured in the Griptape Nodes IDE Settings → API Keys & Secrets, or set the `FAL_KEY` environment variable.
+**"FAL_KEY is not set. Add it in Settings → API Keys & Secrets, then run the node again."**
+- Add your `FAL_KEY` secret in the Griptape Nodes IDE Settings → API Keys & Secrets, or set the `FAL_KEY` environment variable. The error links to the secret and to fal's key page. A key that fal refuses (a 401) reads "fal refused the API key" and links to the secret.
 
 **Job appears to hang**
 - Video, 3D, and large upscale jobs can take several minutes. The node polls fal's queue until the job completes or the **Timeout** is reached. If it times out, the job may still be running on fal. Use the refresh button in the Status group to pull the result onto the node.
 
 **The run fails right away with an HTTP error**
-- A 400-level error means fal rejected the request, and the node stops at once and shows fal's message. A 401 or 403 usually means a wrong or revoked `FAL_KEY`. A 422 means a value is out of range or missing. Other errors stop after five failed polls in a row.
+- Most 400-level errors mean fal rejected the request, and the node stops at once and shows fal's message. A 401 means a wrong or revoked `FAL_KEY`. A 403 means fal refused the request for another reason, such as a permission or an exhausted balance, and the message shows fal's own explanation. A 422 means a value is out of range or missing. A 408, 425, 429 or server error is retried, and the node stops after five failed polls in a row.
 
 **Media upload fails**
 - Nodes with image, video, or audio inputs need `GT_CLOUD_API_KEY` to publish the file for fal. See [Griptape Cloud key for media inputs](#griptape-cloud-key-for-media-inputs).
